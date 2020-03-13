@@ -65,7 +65,7 @@ PEP8EXCLUDE=pydev,resources.py,conf.py,third_party,ui
 #	* Windows:
 #	  AppData\Roaming\QGIS\QGIS3\profiles\default\python\plugins'
 
-QGISDIR=/home/amorvan/.local/share/QGIS/QGIS3/profiles/default/python/plugins/
+QGISDIR=.local/share/QGIS/QGIS3/profiles/default
 
 #################################################
 # Normally you would not need to edit below here
@@ -77,14 +77,14 @@ PLUGIN_UPLOAD = $(c)/plugin_upload.py
 
 RESOURCE_SRC=$(shell grep '^ *<file' resources.qrc | sed 's@</file>@@g;s/.*>//g' | tr '\n' ' ')
 
-.PHONY: default
-default:
-	@echo While you can use make to build and deploy your plugin, pb_tool
-	@echo is a much better solution.
-	@echo A Python script, pb_tool provides platform independent management of
-	@echo your plugins and runs anywhere.
-	@echo You can install pb_tool using: pip install pb_tool
-	@echo See https://g-sherman.github.io/plugin_build_tool/ for info. 
+default: help
+
+.PHONY: help
+help: ## Display this help message
+	@echo "Usage: make <target>"
+	@echo
+	@echo "Possible targets:"
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "    %-20s%s\n", $$1, $$2}'
 
 compile: $(COMPILED_RESOURCE_FILES)
 
@@ -242,3 +242,14 @@ pep8:
 	@echo "-----------"
 	@echo "Ignored in PEP8 check:"
 	@echo $(PEP8EXCLUDE)
+
+.PHONY: link
+link: ## Create symbolic link to this folder in your QGIS plugins folder
+link: derase
+	ln -s $(shell pwd) $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)
+
+.PHONY: unlink
+unlink: ## Unlink $(PLUGINNAME) in your QGIS plugins folder
+ifneq ("$(wildcard $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME))","")
+	rm -RI $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)
+endif
