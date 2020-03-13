@@ -21,15 +21,16 @@
  *                                                                         *
  ***************************************************************************/
 """
+import os.path
+
 from PyQt5.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QAction
 
 # Initialize Qt resources from file resources.py
-from .resources import *
+from PreCourlis.ui.resources_rc import *
 # Import the code for the dialog
-from .PreCourlis_dialog import PreCourlisPluginDialog
-import os.path
+from PreCourlis.widgets.PreCourlis_dialog import PreCourlisPluginDialog
 
 
 class PreCourlisPlugin:
