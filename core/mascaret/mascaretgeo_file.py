@@ -22,7 +22,7 @@ class MascaretGeoFile:
     """
     OUTPUT_FLOAT_FMT = '%.6f'
 
-    def __init__(self, file_name, fformat=None, mode='read'):
+    def __init__(self, file_name, load_file=True, fformat=None, mode='read'):
         """
         @param file_name (str) file name
         @param fformat (str) file format ('opt' or 'rub')
@@ -50,8 +50,11 @@ class MascaretGeoFile:
             # Layers for sediments (Courlis)
             self.has_layers = self.fformat.endswith('C')
 
-            # Load file content
-            self.load()
+
+
+            if load_file:
+                # Load file content
+                self.load()
 
     def load(self):
         """
