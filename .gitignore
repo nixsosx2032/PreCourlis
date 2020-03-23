@@ -1,5 +1,5 @@
 *.pyc
 help/build
-ui/resources_rc.py
+PreCourlis/ui/resources_rc.py
 local.mk
 PreCourlis.zip

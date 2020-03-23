@@ -64,7 +64,7 @@ help: ## Display this help message
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "    %-20s%s\n", $$1, $$2}'
 
 compile:
-	make -C resources
+	make -C $(PLUGINNAME)/resources
 	make -C help html
 
 test: compile transcompile
@@ -95,31 +95,7 @@ derase: ## Remove deployed plugin from your QGIS plugin directory
 package: ## Create a zip package of the plugin named $(PLUGINNAME).zip.
 package: compile
 	rm -f $(PLUGINNAME).zip
-	git archive --prefix=$(PLUGINNAME)/ -o $(PLUGINNAME).zip HEAD
-
-	# remove not needed source files
-	zip -d $(PLUGINNAME).zip $(PLUGINNAME)/\*Makefile
-	zip -d $(PLUGINNAME).zip $(PLUGINNAME)/\*.gitignore
-	zip -d $(PLUGINNAME).zip $(PLUGINNAME)/help/\*
-	zip -d $(PLUGINNAME).zip $(PLUGINNAME)/test/\*
-	zip -d $(PLUGINNAME).zip $(PLUGINNAME)/pylintrc
-	zip -d $(PLUGINNAME).zip $(PLUGINNAME)/README.rst
-	#zip -d $(PLUGINNAME).zip $(PLUGINNAME)/dev-requirements.txt
-
-	# create folder for non source files
-	rm -rf $(PLUGINNAME)/
-	# add user doc
-	mkdir -p $(PLUGINNAME)/help/build
-	cp -r help/build/html/ $(PLUGINNAME)/help/build/
-	# add resource_rc.py
-	mkdir -p $(PLUGINNAME)/ui/
-	cp ui/*.py $(PLUGINNAME)/ui/
-	# add non source files to zip archive
-	zip -g $(PLUGINNAME).zip $(PLUGINNAME)/*/*
-	zip -g $(PLUGINNAME).zip `find $(PLUGINNAME)/help/build/html`
-	# delete non source files temporary folder
-	rm -rf $(PLUGINNAME)/
-
+	git archive -o $(PLUGINNAME).zip HEAD $(PLUGINNAME)
 	echo "Created package: $(PLUGINNAME).zip"
 
 .PHONY: upload
@@ -139,8 +115,8 @@ transcompile: ## Compile translation files to .qm files
 
 .PHONY: clean
 clean: ## Delete generated files
-	rm -f i18n/*.qm
-	rm ui/resources.py
+	rm -f $(PLUGINNAME)/i18n/*.qm
+	rm $(PLUGINNAME)/ui/resources.py
 
 .PHONY: doc
 doc: ## Build documentation using sphinx
@@ -163,10 +139,8 @@ pep8: ## Check the code with pep8
 .PHONY: link
 link: ## Create symbolic link to this folder in your QGIS plugins folder
 link: derase
-	ln -s $(shell pwd) $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)
+	ln -s $(shell pwd)/$(PLUGINNAME) $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)
 
 .PHONY: unlink
 unlink: ## Unlink $(PLUGINNAME) in your QGIS plugins folder
-ifneq ("$(wildcard $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME))","")
-	rm -RI $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)
-endif
+unlink: derase
