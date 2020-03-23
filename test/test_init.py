@@ -8,15 +8,14 @@ __license__ = "GPL"
 __copyright__ = 'Copyright 2012, Australia Indonesia Facility for '
 __copyright__ += 'Disaster Reduction'
 
-import os
-import unittest
 import logging
 import configparser
+from pkg_resources import resource_filename
 
 LOGGER = logging.getLogger('QGIS')
 
 
-class TestInit(unittest.TestCase):
+class TestInit():
     """Test that the plugin init is usable for QGIS.
 
     Based heavily on the validator class by Alessandro
@@ -42,9 +41,7 @@ class TestInit(unittest.TestCase):
             'email',
             'author']
 
-        file_path = os.path.abspath(os.path.join(
-            os.path.dirname(__file__), os.pardir,
-            'metadata.txt'))
+        file_path = resource_filename("PreCourlis", 'metadata.txt')
         LOGGER.info(file_path)
         metadata = []
         parser = configparser.ConfigParser()
@@ -58,7 +55,4 @@ class TestInit(unittest.TestCase):
             message = ('Cannot find metadata "%s" in metadata source (%s).' % (
                 expectation, file_path))
 
-            self.assertIn(expectation, dict(metadata), message)
-
-if __name__ == '__main__':
-    unittest.main()
+            assert expectation in dict(metadata), message

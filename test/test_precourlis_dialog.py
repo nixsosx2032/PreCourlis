@@ -14,42 +14,29 @@ __copyright__ = 'Copyright 2020, EDF Hydro, DeltaCAD, Camptocamp'
 
 import unittest
 
-from PyQt5.QtGui import QDialogButtonBox, QDialog
+from PyQt5.QtWidgets import QDialogButtonBox, QDialog
 
-from PreCourlis_dialog import PreCourlisPluginDialog
-
-from utilities import get_qgis_app
-QGIS_APP = get_qgis_app()
+from PreCourlis.widgets.PreCourlis_dialog import PreCourlisPluginDialog
 
 
-class PreCourlisPluginDialogTest(unittest.TestCase):
+class TestPreCourlisPluginDialog():
     """Test dialog works."""
 
-    def setUp(self):
-        """Runs before each test."""
-        self.dialog = PreCourlisPluginDialog(None)
-
-    def tearDown(self):
-        """Runs after each test."""
-        self.dialog = None
+    def create_dialog(self):
+        return PreCourlisPluginDialog(None)
 
     def test_dialog_ok(self):
         """Test we can click OK."""
-
+        self.dialog = self.create_dialog()
         button = self.dialog.button_box.button(QDialogButtonBox.Ok)
         button.click()
         result = self.dialog.result()
-        self.assertEqual(result, QDialog.Accepted)
+        assert result == QDialog.Accepted
 
     def test_dialog_cancel(self):
         """Test we can click cancel."""
+        self.dialog = self.create_dialog()
         button = self.dialog.button_box.button(QDialogButtonBox.Cancel)
         button.click()
         result = self.dialog.result()
-        self.assertEqual(result, QDialog.Rejected)
-
-if __name__ == "__main__":
-    suite = unittest.makeSuite(PreCourlisPluginDialogTest)
-    runner = unittest.TextTestRunner(verbosity=2)
-    runner.run(suite)
-
+        assert result == QDialog.Rejected

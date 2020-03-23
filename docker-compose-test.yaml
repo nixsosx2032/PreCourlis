@@ -1,0 +1,18 @@
+---
+
+version: '2'
+
+services:
+
+  test:
+    image: camptocamp/edf-precourlis-test:latest
+    volumes:
+      - ${PWD}:/app
+    environment:
+      - PYTHONPATH=/usr/local/share/qgis/python:/app
+      - QGIS_DEBUG=0
+      - QGIS_LOG_FILE=/dev/null
+      - QGIS_PLUGINPATH=/app
+      - DISPLAY=:0
+    command:
+      pytest --cov=/app/PreCourlis --verbose --color=yes test

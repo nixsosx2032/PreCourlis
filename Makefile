@@ -67,23 +67,12 @@ compile:
 	make -C $(PLUGINNAME)/resources
 	make -C help html
 
-test: compile transcompile
-	@echo
-	@echo "----------------------"
-	@echo "Regression Test Suite"
-	@echo "----------------------"
+docker-build-test:
+	docker build --target test --tag camptocamp/edf-precourlis-test ./docker
 
-	@# Preceding dash means that make will continue in case of errors
-	@-export PYTHONPATH=`pwd`:$(PYTHONPATH); \
-		export QGIS_DEBUG=0; \
-		export QGIS_LOG_FILE=/dev/null; \
-		nosetests -v --with-id --with-coverage --cover-package=. \
-		3>&1 1>&2 2>&3 3>&- || true
-	@echo "----------------------"
-	@echo "If you get a 'no module named qgis.core error, try sourcing"
-	@echo "the helper script we have provided first then run make test."
-	@echo "e.g. source run-env-linux.sh <path to qgis install>; make test"
-	@echo "----------------------"
+test: ## Run the automated tests suite
+test: compile transcompile docker-build-test
+	docker-compose -f docker-compose-test.yaml run --rm --user `id -u` test
 
 deploy: ## Deploy plugin to your QGIS plugin directory
 deploy: package derase

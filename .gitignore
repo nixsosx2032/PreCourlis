@@ -1,5 +1,6 @@
 *.pyc
 help/build
 PreCourlis/ui/resources_rc.py
+.coverage
 local.mk
 PreCourlis.zip
