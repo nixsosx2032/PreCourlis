@@ -10,8 +10,10 @@ from math import sqrt
 import traceback
 import sys
 
-from utils.exceptions import MascaretException
 import numpy as np
+
+class MascaretException(Exception):
+    pass
 
 
 class Reach:
