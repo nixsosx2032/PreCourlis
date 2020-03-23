@@ -25,10 +25,10 @@ import os.path
 
 from PyQt5.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QAction
+from PyQt5.QtWidgets import QAction, QMenu
 
 # Initialize Qt resources from file resources.py
-from PreCourlis.ui.resources_rc import *
+from PreCourlis.ui import resources_rc
 # Import the code for the dialog
 from PreCourlis.widgets.PreCourlis_dialog import PreCourlisPluginDialog
 
@@ -65,10 +65,6 @@ class PreCourlisPlugin:
         # Declare instance attributes
         self.actions = []
         self.menu = self.tr(u'&PreCourlis')
-
-        # Check if plugin was started the first time in current QGIS session
-        # Must be set in initGui() to survive plugin reloads
-        self.first_start = None
 
     # noinspection PyMethodMayBeStatic
     def tr(self, message):
@@ -163,16 +159,64 @@ class PreCourlisPlugin:
     def initGui(self):
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
 
-        icon_path = ':/plugins/PreCourlis/icon.png'
-        self.add_action(
-            icon_path,
-            text=self.tr(u'Visualize profils'),
-            callback=self.run,
-            parent=self.iface.mainWindow())
+        self.action = QAction(QIcon(":/plugins/PreCourlis/icon.png"), "PreCourlis", self.iface.mainWindow())
 
-        # will be set False in run()
-        self.first_start = True
+        # self.actionBief = QAction("&Bief", self.iface.mainWindow())
+        self.actionGeoRef = QAction("Importer un fichier .georef", self.iface.mainWindow())
+        self.actionVisuProfils = QAction("Visualiser les profils", self.iface.mainWindow())
+        self.actionInterpProfils = QAction("Interpoler des profils", self.iface.mainWindow())
+        self.actionConverTrace = QAction("Convertir les traces en profils", self.iface.mainWindow())
+        self.actionProjZ = QAction("Projeter un semis de point sur les profils", self.iface.mainWindow())
+        self.actionProjRive = QAction("Projeter les berges", self.iface.mainWindow())
+        self.actionAbout = QAction(
+            QIcon(":/plugins/precourlis/icon.png"), "A propos", self.iface.mainWindow()
+        )
 
+        self.actionAddBief = QAction("Ajouter un bief", self.iface.mainWindow())
+        self.actionRenaBief = QAction("Renommer un bief", self.iface.mainWindow())
+        self.actionDelBief = QAction("Supprimmer un bief", self.iface.mainWindow())
+        self.actionAddLayer = QAction("Ajouter une couche vectorielle", self.iface.mainWindow())
+
+        self.menuBief = QMenu(self.iface.mainWindow())
+        self.menuBief.setTitle("&Biefs")
+
+        self.menuBief.addAction(self.actionAddBief)
+        self.menuBief.addAction(self.actionRenaBief)
+        self.menuBief.addAction(self.actionDelBief)
+        self.menuBief.addAction(self.actionAddLayer)
+
+        self.menuToolBar = QMenu(self.iface.mainWindow())
+        self.menuToolBar.addAction(self.actionGeoRef)
+        self.menuToolBar.addAction(self.actionVisuProfils)
+        self.menuToolBar.addAction(self.actionConverTrace)
+        self.menuToolBar.addAction(self.actionProjZ)
+        self.menuToolBar.addAction(self.actionProjRive)
+        self.menuToolBar.addAction(self.actionInterpProfils)
+        self.menuToolBar.addAction(self.actionAbout)
+
+        self.action.setMenu(self.menuToolBar)
+
+        self.iface.addToolBarIcon(self.action)
+
+        # self.iface.addPluginToMenu("&PreCourlis", self.actionBief)
+        self.iface.addPluginToMenu("&PreCourlis", self.actionGeoRef)
+        self.iface.addPluginToMenu("&PreCourlis", self.actionVisuProfils)
+        self.iface.addPluginToMenu("&PreCourlis", self.actionConverTrace)
+        self.iface.addPluginToMenu("&PreCourlis", self.actionProjZ)
+        self.iface.addPluginToMenu("&PreCourlis", self.actionProjRive)
+        self.iface.addPluginToMenu("&PreCourlis", self.actionInterpProfils)
+        self.iface.addPluginToMenu("&PreCourlis", self.actionAbout)
+
+        '''
+        self.actionAddBief.triggered.connect(self.ajoutBief)
+        self.actionAddLayer.triggered.connect(self.ajoutLayer)
+        self.actionGeoRef.triggered.connect(self.importGeoRef)
+        self.actionConverTrace.triggered.connect(self.convertirTrace)
+        self.actionVisuProfils.triggered.connect(self.openEditor)
+        self.actionProjZ.triggered.connect(self.projZProfil)
+        self.actionProjRive.triggered.connect(self.projAxeBerge)
+        self.actionInterpProfils.triggered.connect(self.interpProfils)
+        '''
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
@@ -182,22 +226,14 @@ class PreCourlisPlugin:
                 action)
             self.iface.removeToolBarIcon(action)
 
+        # Remove the plugin menu item and icon
+        self.iface.removePluginMenu("&PreCourlis", self.action)
+        self.iface.removePluginMenu("&PreCourlis", self.actionGeoRef)
+        self.iface.removePluginMenu("&PreCourlis", self.actionVisuProfils)
+        self.iface.removePluginMenu("&PreCourlis", self.actionInterpProfils)
+        self.iface.removePluginMenu("&PreCourlis", self.actionConverTrace)
+        self.iface.removePluginMenu("&PreCourlis", self.actionProjZ)
+        self.iface.removePluginMenu("&PreCourlis", self.actionProjRive)
+        self.iface.removePluginMenu("&PreCourlis", self.actionAbout)
 
-    def run(self):
-        """Run method that performs all the real work"""
-
-        # Create the dialog with elements (after translation) and keep reference
-        # Only create GUI ONCE in callback, so that it will only load when the plugin is started
-        if self.first_start == True:
-            self.first_start = False
-            self.dlg = PreCourlisPluginDialog()
-
-        # show the dialog
-        self.dlg.show()
-        # Run the dialog event loop
-        result = self.dlg.exec_()
-        # See if OK was pressed
-        if result:
-            # Do something useful here - delete the line containing pass and
-            # substitute with your code.
-            pass
+        self.iface.removeToolBarIcon(self.action)
