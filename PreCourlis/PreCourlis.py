@@ -27,10 +27,10 @@ from PyQt5.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QAction, QMenu
 
+from PreCourlis.core import Reach
+
 # Initialize Qt resources from file resources.py
-from PreCourlis.ui import resources_rc
-# Import the code for the dialog
-from PreCourlis.widgets.PreCourlis_dialog import PreCourlisPluginDialog
+from PreCourlis.ui import resources_rc  # noqa
 
 
 class PreCourlisPlugin:
@@ -49,22 +49,21 @@ class PreCourlisPlugin:
         # initialize plugin directory
         self.plugin_dir = os.path.dirname(__file__)
         # initialize locale
-        locale = QSettings().value('locale/userLocale')[0:2]
+        locale = QSettings().value("locale/userLocale")[0:2]
         locale_path = os.path.join(
-            self.plugin_dir,
-            'i18n',
-            'PreCourlisPlugin_{}.qm'.format(locale))
+            self.plugin_dir, "i18n", "PreCourlisPlugin_{}.qm".format(locale)
+        )
 
         if os.path.exists(locale_path):
             self.translator = QTranslator()
             self.translator.load(locale_path)
 
-            if qVersion() > '4.3.3':
+            if qVersion() > "4.3.3":
                 QCoreApplication.installTranslator(self.translator)
 
         # Declare instance attributes
         self.actions = []
-        self.menu = self.tr(u'&PreCourlis')
+        self.menu = self.tr(u"&PreCourlis")
 
     # noinspection PyMethodMayBeStatic
     def tr(self, message):
@@ -79,94 +78,33 @@ class PreCourlisPlugin:
         :rtype: QString
         """
         # noinspection PyTypeChecker,PyArgumentList,PyCallByClass
-        return QCoreApplication.translate('PreCourlisPlugin', message)
-
-
-    def add_action(
-        self,
-        icon_path,
-        text,
-        callback,
-        enabled_flag=True,
-        add_to_menu=True,
-        add_to_toolbar=True,
-        status_tip=None,
-        whats_this=None,
-        parent=None):
-        """Add a toolbar icon to the toolbar.
-
-        :param icon_path: Path to the icon for this action. Can be a resource
-            path (e.g. ':/plugins/foo/bar.png') or a normal file system path.
-        :type icon_path: str
-
-        :param text: Text that should be shown in menu items for this action.
-        :type text: str
-
-        :param callback: Function to be called when the action is triggered.
-        :type callback: function
-
-        :param enabled_flag: A flag indicating if the action should be enabled
-            by default. Defaults to True.
-        :type enabled_flag: bool
-
-        :param add_to_menu: Flag indicating whether the action should also
-            be added to the menu. Defaults to True.
-        :type add_to_menu: bool
-
-        :param add_to_toolbar: Flag indicating whether the action should also
-            be added to the toolbar. Defaults to True.
-        :type add_to_toolbar: bool
-
-        :param status_tip: Optional text to show in a popup when mouse pointer
-            hovers over the action.
-        :type status_tip: str
-
-        :param parent: Parent widget for the new action. Defaults None.
-        :type parent: QWidget
-
-        :param whats_this: Optional text to show in the status bar when the
-            mouse pointer hovers over the action.
-
-        :returns: The action that was created. Note that the action is also
-            added to self.actions list.
-        :rtype: QAction
-        """
-
-        icon = QIcon(icon_path)
-        action = QAction(icon, text, parent)
-        action.triggered.connect(callback)
-        action.setEnabled(enabled_flag)
-
-        if status_tip is not None:
-            action.setStatusTip(status_tip)
-
-        if whats_this is not None:
-            action.setWhatsThis(whats_this)
-
-        if add_to_toolbar:
-            # Adds plugin icon to Plugins toolbar
-            self.iface.addToolBarIcon(action)
-
-        if add_to_menu:
-            self.iface.addPluginToMenu(
-                self.menu,
-                action)
-
-        self.actions.append(action)
-
-        return action
+        return QCoreApplication.translate("PreCourlisPlugin", message)
 
     def initGui(self):
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
 
-        self.action = QAction(QIcon(":/plugins/PreCourlis/icon.png"), "PreCourlis", self.iface.mainWindow())
+        self.action = QAction(
+            QIcon(":/plugins/PreCourlis/icon.png"),
+            "PreCourlis",
+            self.iface.mainWindow(),
+        )
 
         # self.actionBief = QAction("&Bief", self.iface.mainWindow())
-        self.actionGeoRef = QAction("Importer un fichier .georef", self.iface.mainWindow())
-        self.actionVisuProfils = QAction("Visualiser les profils", self.iface.mainWindow())
-        self.actionInterpProfils = QAction("Interpoler des profils", self.iface.mainWindow())
-        self.actionConverTrace = QAction("Convertir les traces en profils", self.iface.mainWindow())
-        self.actionProjZ = QAction("Projeter un semis de point sur les profils", self.iface.mainWindow())
+        self.actionGeoRef = QAction(
+            "Importer un fichier .georef", self.iface.mainWindow()
+        )
+        self.actionVisuProfils = QAction(
+            "Visualiser les profils", self.iface.mainWindow()
+        )
+        self.actionInterpProfils = QAction(
+            "Interpoler des profils", self.iface.mainWindow()
+        )
+        self.actionConverTrace = QAction(
+            "Convertir les traces en profils", self.iface.mainWindow()
+        )
+        self.actionProjZ = QAction(
+            "Projeter un semis de point sur les profils", self.iface.mainWindow()
+        )
         self.actionProjRive = QAction("Projeter les berges", self.iface.mainWindow())
         self.actionAbout = QAction(
             QIcon(":/plugins/precourlis/icon.png"), "A propos", self.iface.mainWindow()
@@ -175,7 +113,9 @@ class PreCourlisPlugin:
         self.actionAddBief = QAction("Ajouter un bief", self.iface.mainWindow())
         self.actionRenaBief = QAction("Renommer un bief", self.iface.mainWindow())
         self.actionDelBief = QAction("Supprimmer un bief", self.iface.mainWindow())
-        self.actionAddLayer = QAction("Ajouter une couche vectorielle", self.iface.mainWindow())
+        self.actionAddLayer = QAction(
+            "Ajouter une couche vectorielle", self.iface.mainWindow()
+        )
 
         self.menuBief = QMenu(self.iface.mainWindow())
         self.menuBief.setTitle("&Biefs")
@@ -207,23 +147,23 @@ class PreCourlisPlugin:
         self.iface.addPluginToMenu("&PreCourlis", self.actionInterpProfils)
         self.iface.addPluginToMenu("&PreCourlis", self.actionAbout)
 
-        '''
+        """
         self.actionAddBief.triggered.connect(self.ajoutBief)
         self.actionAddLayer.triggered.connect(self.ajoutLayer)
         self.actionGeoRef.triggered.connect(self.importGeoRef)
+        """
         self.actionConverTrace.triggered.connect(self.convertirTrace)
+        """
         self.actionVisuProfils.triggered.connect(self.openEditor)
         self.actionProjZ.triggered.connect(self.projZProfil)
         self.actionProjRive.triggered.connect(self.projAxeBerge)
         self.actionInterpProfils.triggered.connect(self.interpProfils)
-        '''
+        """
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
         for action in self.actions:
-            self.iface.removePluginMenu(
-                self.tr(u'&PreCourlis'),
-                action)
+            self.iface.removePluginMenu(self.tr(u"&PreCourlis"), action)
             self.iface.removeToolBarIcon(action)
 
         # Remove the plugin menu item and icon
@@ -237,3 +177,48 @@ class PreCourlisPlugin:
         self.iface.removePluginMenu("&PreCourlis", self.actionAbout)
 
         self.iface.removeToolBarIcon(self.action)
+
+    def convertirTrace(self):
+        from qgis.core import (
+            QgsVectorLayer,
+            QgsRasterLayer,
+            QgsProject,
+            QgsCoordinateReferenceSystem,
+        )
+        from PreCourlis.core.reach_from_tracks import reach_from_tracks
+
+        data_path = "/home/amorvan/dev/edf_precourlis/PreCourlis/test/data"
+        crs = QgsCoordinateReferenceSystem.fromEpsgId(27563)
+
+        tracks = QgsVectorLayer(
+            os.path.join(data_path, "cas1", "tracesBief1.shp"), "tracks", "ogr"
+        )
+        tracks.setCrs(crs)
+        assert tracks.isValid()
+
+        dem = QgsRasterLayer(
+            os.path.join(data_path, "cas1", "cas2Mnt.asc"), "dem", "gdal"
+        )
+        dem.setCrs(crs)
+        assert dem.isValid()
+
+        axis = QgsVectorLayer(
+            os.path.join(data_path, "cas1", "axeHydroBief1.shp"), "axis", "ogr"
+        )
+        axis.setCrs(crs)
+        assert axis.isValid()
+
+        reach = reach_from_tracks(
+            name="test",
+            tracks=tracks,
+            dem=dem,
+            axis=axis,
+            name_field=None,
+            step=100,
+            first_pos=0,
+        )
+
+        assert isinstance(reach, Reach)
+
+        QgsProject.instance().addMapLayer(reach.to_point_layer())
+        QgsProject.instance().addMapLayer(reach.to_line_layer())

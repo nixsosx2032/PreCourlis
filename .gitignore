@@ -1,6 +1,9 @@
+*.qm
 *.pyc
 help/build
 PreCourlis/ui/resources_rc.py
 .coverage
+.noseids
+docker-compose.override.yaml
 local.mk
 PreCourlis.zip

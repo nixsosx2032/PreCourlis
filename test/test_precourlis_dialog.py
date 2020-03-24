@@ -8,9 +8,9 @@
 
 """
 
-__author__ = 'matthieu.secher@edf.fr'
-__date__ = '2020-03-13'
-__copyright__ = 'Copyright 2020, EDF Hydro, DeltaCAD, Camptocamp'
+__author__ = "matthieu.secher@edf.fr"
+__date__ = "2020-03-13"
+__copyright__ = "Copyright 2020, EDF Hydro, DeltaCAD, Camptocamp"
 
 import unittest
 
@@ -19,7 +19,7 @@ from PyQt5.QtWidgets import QDialogButtonBox, QDialog
 from PreCourlis.widgets.PreCourlis_dialog import PreCourlisPluginDialog
 
 
-class TestPreCourlisPluginDialog():
+class TestPreCourlisPluginDialog(unittest.TestCase):
     """Test dialog works."""
 
     def create_dialog(self):

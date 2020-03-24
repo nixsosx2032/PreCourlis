@@ -1,21 +1,12 @@
-# coding=utf-8
-"""Tests QGIS plugin init."""
-
-__author__ = 'Tim Sutton <tim@linfiniti.com>'
-__revision__ = '$Format:%H$'
-__date__ = '17/10/2010'
-__license__ = "GPL"
-__copyright__ = 'Copyright 2012, Australia Indonesia Facility for '
-__copyright__ += 'Disaster Reduction'
-
+import unittest
 import logging
 import configparser
 from pkg_resources import resource_filename
 
-LOGGER = logging.getLogger('QGIS')
+LOGGER = logging.getLogger("QGIS")
 
 
-class TestInit():
+class TestInit(unittest.TestCase):
     """Test that the plugin init is usable for QGIS.
 
     Based heavily on the validator class by Alessandro
@@ -34,25 +25,28 @@ class TestInit():
         #        plugins/validator.py
 
         required_metadata = [
-            'name',
-            'description',
-            'version',
-            'qgisMinimumVersion',
-            'email',
-            'author']
+            "name",
+            "description",
+            "version",
+            "qgisMinimumVersion",
+            "email",
+            "author",
+        ]
 
-        file_path = resource_filename("PreCourlis", 'metadata.txt')
+        file_path = resource_filename("PreCourlis", "metadata.txt")
         LOGGER.info(file_path)
         metadata = []
         parser = configparser.ConfigParser()
         parser.optionxform = str
         parser.read(file_path)
         message = 'Cannot find a section named "general" in %s' % file_path
-        assert parser.has_section('general'), message
-        metadata.extend(parser.items('general'))
+        assert parser.has_section("general"), message
+        metadata.extend(parser.items("general"))
 
         for expectation in required_metadata:
-            message = ('Cannot find metadata "%s" in metadata source (%s).' % (
-                expectation, file_path))
+            message = 'Cannot find metadata "%s" in metadata source (%s).' % (
+                expectation,
+                file_path,
+            )
 
             assert expectation in dict(metadata), message

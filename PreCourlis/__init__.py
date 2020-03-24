@@ -32,5 +32,6 @@ def classFactory(iface):  # pylint: disable=invalid-name
     :type iface: QgsInterface
     """
     #
-    from .PreCourlis import PreCourlisPlugin
+    from .PreCourlis import PreCourlisPlugin  # pylint: disable=import-outside-toplevel
+
     return PreCourlisPlugin(iface)

@@ -1,0 +1,17 @@
+---
+
+version: '2'
+
+services:
+
+  builder:
+    image: camptocamp/edf-precourlis-builder:latest
+    volumes:
+      - ${PWD}:/app
+    environment:
+      - PYTHONPATH=/app:/usr/share/qgis/python/plugins/
+      - QGIS_DEBUG=0
+      - QGIS_LOG_FILE=/dev/null
+      - QGIS_PLUGINPATH=/app
+      - DISPLAY=:0
+    command: make -f docker.mk build

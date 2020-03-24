@@ -22,14 +22,15 @@
  ***************************************************************************/
 """
 
-import os
 from pkg_resources import resource_filename
 
 from PyQt5 import uic
 from PyQt5 import QtWidgets
 
 # This loads your .ui file so that PyQt can populate your plugin with the elements from Qt Designer
-FORM_CLASS, _ = uic.loadUiType(resource_filename('PreCourlis', 'ui/PreCourlis_dialog_base.ui'))
+FORM_CLASS, _ = uic.loadUiType(
+    resource_filename("PreCourlis", "ui/PreCourlis_dialog_base.ui")
+)
 
 
 class PreCourlisPluginDialog(QtWidgets.QDialog, FORM_CLASS):

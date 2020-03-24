@@ -46,13 +46,10 @@ QGISDIR ?= .local/share/QGIS/QGIS3/profiles/default
 PLUGINNAME = PreCourlis
 LOCALES = fr
 
-PACKAGES_NO_UI = widgets
-PACKAGES = $(PACKAGES_NO_UI) ui
+DOCKER_RUN_CMD = docker-compose run --rm --user `id -u` builder
 
-PACKAGES_SOURCES := $(shell find $(PACKAGES) -name "*.py")
-SOURCES := PreCourlis.py $(PACKAGES_SOURCES)
-
-PEP8EXCLUDE=pydev,resources.py,conf.py,third_party,ui
+toto:
+	@echo $(SOURCES)
 
 default: help
 
@@ -63,18 +60,47 @@ help: ## Display this help message
 	@echo "Possible targets:"
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "    %-20s%s\n", $$1, $$2}'
 
-compile:
-	make -C $(PLUGINNAME)/resources
-	make -C help html
+.PHONY: docker-build
+docker-build:
+	docker build --target test --tag camptocamp/edf-precourlis-builder ./docker
 
-docker-build-test:
-	docker build --target test --tag camptocamp/edf-precourlis-test ./docker
+.PHONY: build
+build: ## Compile resources and help files
+build: docker-build
+	$(DOCKER_RUN_CMD) make -f docker.mk build
 
+.PHONY: clean
+clean: ## Delete generated files
+	rm -rf .pytest_cache
+	rm -rf help/build
+	rm -f $(PLUGINNAME)/i18n/*.qm
+	rm -f $(PLUGINNAME)/ui/resources_rc.py
+	rm -f .coverage .noseids
+	rm -f PreCoulis.zip
+
+.PHONY: check
+check: ## Run linters
+	$(DOCKER_RUN_CMD) make -f docker.mk check
+
+.PHONY: black
+black: ## Run black formatter
+	$(DOCKER_RUN_CMD) make -f docker.mk black
+
+.PHONY: test
 test: ## Run the automated tests suite
-test: compile transcompile docker-build-test
-	docker-compose -f docker-compose-test.yaml run --rm --user `id -u` test
+test:
+	$(DOCKER_RUN_CMD) make -f docker.mk pytest
 
-deploy: ## Deploy plugin to your QGIS plugin directory
+.PHONY: bash
+bash: ## Run bash in tests container
+	$(DOCKER_RUN_CMD) bash
+
+.PHONY: transup
+transup: ## Update translation files with any new strings.
+	$(DOCKER_RUN_CMD) make -f docker.mk transup
+
+
+deploy: ## Deploy plugin to your QGIS plugin directory (to test zip archive)
 deploy: package derase
 	unzip PreCourlis.zip -d $(HOME)/$(QGISDIR)/python/plugins/
 
@@ -92,41 +118,9 @@ upload: ## Upload plugin to QGIS Plugin repo
 upload: package
 	$(PLUGIN_UPLOAD) $(PLUGINNAME).zip
 
-.PHONY: transup
-transup: ## Update translation files with any new strings.
-	chmod +x scripts/update-strings.sh
-	scripts/update-strings.sh $(LOCALES)
-
-.PHONY: transcompile
-transcompile: ## Compile translation files to .qm files
-	chmod +x scripts/compile-strings.sh
-	scripts/compile-strings.sh $(LRELEASE) $(LOCALES)
-
-.PHONY: clean
-clean: ## Delete generated files
-	rm -f $(PLUGINNAME)/i18n/*.qm
-	rm $(PLUGINNAME)/ui/resources.py
-
-.PHONY: doc
-doc: ## Build documentation using sphinx
-	make -C help html
-
-.PHONY: pylint
-pylint: ## Check the code with pylint
-	pylint --reports=n --rcfile=pylintrc . || true
-	@echo
-	@echo "----------------------"
-	@echo "If you get a 'no module named qgis.core' error, try sourcing"
-	@echo "the helper script we have provided first then run make pylint."
-	@echo "e.g. source run-env-linux.sh <path to qgis install>; make pylint"
-	@echo "----------------------"
-
-.PHONY: pylint
-pep8: ## Check the code with pep8
-	pep8 --repeat --ignore=E203,E121,E122,E123,E124,E125,E126,E127,E128 --exclude $(PEP8EXCLUDE) . || true
 
 .PHONY: link
-link: ## Create symbolic link to this folder in your QGIS plugins folder
+link: ## Create symbolic link to this folder in your QGIS plugins folder (for development)
 link: derase
 	ln -s $(shell pwd)/$(PLUGINNAME) $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)
 
