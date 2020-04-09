@@ -54,11 +54,11 @@ check: black-check flake8
 
 .PHONY: black
 black:
-	black --exclude core/mascaret $(PLUGINNAME) test
+	black --exclude lib $(PLUGINNAME) test
 
 .PHONY: black-check
 black-check:
-	black --exclude core/mascaret --check $(PLUGINNAME) test
+	black --exclude lib --check $(PLUGINNAME) test
 
 .PHONY: flake8
 flake8:

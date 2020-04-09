@@ -12,7 +12,7 @@ from qgis.core import (
 )
 from qgis.PyQt.QtCore import QVariant
 
-from PreCourlis.core.mascaret.mascaret_file import (
+from PreCourlis.lib.mascaret.mascaret_file import (
     Section as SectionBase,
     Reach as ReachBase,
 )
