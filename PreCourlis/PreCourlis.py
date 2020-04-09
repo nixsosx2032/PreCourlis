@@ -26,7 +26,7 @@ import os.path
 from qgis.core import QgsApplication, QgsProject
 from qgis.PyQt.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
 from qgis.PyQt.QtGui import QIcon
-from qgis.PyQt.QtWidgets import QAction, QMenu, QFileDialog
+from qgis.PyQt.QtWidgets import QAction, QMenu
 
 from processing import execAlgorithmDialog
 
@@ -164,7 +164,7 @@ class PreCourlisPlugin:
         self.actionAddLayer.triggered.connect(self.ajoutLayer)
         """
         self.actionGeoRef.triggered.connect(self.import_georef)
-        self.actionConverTrace.triggered.connect(self.convertirTrace)
+        self.actionConverTrace.triggered.connect(self.import_tracks)
         """
         self.actionVisuProfils.triggered.connect(self.openEditor)
         self.actionProjZ.triggered.connect(self.projZProfil)
@@ -196,20 +196,9 @@ class PreCourlisPlugin:
         execAlgorithmDialog(
             "precourlis:import_georef", {"CRS": QgsProject.instance().crs().authid()}
         )
-        return
 
-        filename, _ = QFileDialog.getOpenFileName(
-            self.iface.mainWindow(), "Ouvrir un fichier .geoRef"
-        )
-        if not filename:
-            return
-
-        from PreCourlis.lib.mascaret.mascaretgeo_file import MascaretGeoFile
-
-        file = MascaretGeoFile(filename)
-        import pprint
-
-        pprint.pprint(file.reaches)
+    def import_tracks(self):
+        execAlgorithmDialog("precourlis:import_tracks", {})
 
     def convertirTrace(self):
         from qgis.core import (
