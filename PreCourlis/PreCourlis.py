@@ -23,11 +23,15 @@
 """
 import os.path
 
-from PyQt5.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
-from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QAction, QMenu
+from qgis.core import QgsApplication, QgsProject
+from qgis.PyQt.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
+from qgis.PyQt.QtGui import QIcon
+from qgis.PyQt.QtWidgets import QAction, QMenu, QFileDialog
+
+from processing import execAlgorithmDialog
 
 from PreCourlis.core import Reach
+from PreCourlis.processing.precourlis_provider import PreCourlisProvider
 
 # Initialize Qt resources from file resources.py
 from PreCourlis.ui import resources_rc  # noqa
@@ -62,6 +66,7 @@ class PreCourlisPlugin:
                 QCoreApplication.installTranslator(self.translator)
 
         # Declare instance attributes
+        self.provider = None
         self.actions = []
         self.menu = self.tr(u"&PreCourlis")
 
@@ -80,8 +85,15 @@ class PreCourlisPlugin:
         # noinspection PyTypeChecker,PyArgumentList,PyCallByClass
         return QCoreApplication.translate("PreCourlisPlugin", message)
 
+    def initProcessing(self):
+        """Init Processing provider for QGIS >= 3.8."""
+        self.provider = PreCourlisProvider()
+        QgsApplication.processingRegistry().addProvider(self.provider)
+
     def initGui(self):
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
+
+        self.initProcessing()
 
         self.action = QAction(
             QIcon(":/plugins/PreCourlis/icon.png"),
@@ -150,8 +162,8 @@ class PreCourlisPlugin:
         """
         self.actionAddBief.triggered.connect(self.ajoutBief)
         self.actionAddLayer.triggered.connect(self.ajoutLayer)
-        self.actionGeoRef.triggered.connect(self.importGeoRef)
         """
+        self.actionGeoRef.triggered.connect(self.import_georef)
         self.actionConverTrace.triggered.connect(self.convertirTrace)
         """
         self.actionVisuProfils.triggered.connect(self.openEditor)
@@ -162,6 +174,8 @@ class PreCourlisPlugin:
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
+        QgsApplication.processingRegistry().removeProvider(self.provider)
+
         for action in self.actions:
             self.iface.removePluginMenu(self.tr(u"&PreCourlis"), action)
             self.iface.removeToolBarIcon(action)
@@ -177,6 +191,25 @@ class PreCourlisPlugin:
         self.iface.removePluginMenu("&PreCourlis", self.actionAbout)
 
         self.iface.removeToolBarIcon(self.action)
+
+    def import_georef(self):
+        execAlgorithmDialog(
+            "precourlis:import_georef", {"CRS": QgsProject.instance().crs().authid()}
+        )
+        return
+
+        filename, _ = QFileDialog.getOpenFileName(
+            self.iface.mainWindow(), "Ouvrir un fichier .geoRef"
+        )
+        if not filename:
+            return
+
+        from PreCourlis.lib.mascaret.mascaretgeo_file import MascaretGeoFile
+
+        file = MascaretGeoFile(filename)
+        import pprint
+
+        pprint.pprint(file.reaches)
 
     def convertirTrace(self):
         from qgis.core import (

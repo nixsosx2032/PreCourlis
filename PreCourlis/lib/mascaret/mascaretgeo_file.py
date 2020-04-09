@@ -1,8 +1,8 @@
 from collections import OrderedDict
 import os.path
 
-from data_manip.formats.mascaret_file import Reach, Section
-from utils.exceptions import MascaretException
+from PreCourlis.core import Reach, Section
+from .mascaret_file import MascaretException
 
 
 class MascaretGeoFile:

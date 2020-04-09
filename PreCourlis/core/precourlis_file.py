@@ -22,6 +22,19 @@ class PreCourlisFileBase:
         self._layer = layer  # Layer is supposed to be the unique storage
 
     @staticmethod
+    def basefields():
+        fields = QgsFields()
+        # Section fields
+        fields.append(QgsField("sec_id", QVariant.Int))
+        fields.append(QgsField("sec_name", QVariant.String))
+        fields.append(QgsField("sec_pos", QVariant.Double))
+        # Point fields
+        fields.append(QgsField("p_id", QVariant.String))
+        fields.append(QgsField("p_pos", QVariant.String))
+        fields.append(QgsField("p_z", QVariant.String))
+        return fields
+
+    @staticmethod
     def create_layer(self, name, source=None, crs_id=None, type_="LineString"):
         if source is None:
             source = "{}?index=yes".format(type_)
@@ -32,16 +45,7 @@ class PreCourlisFileBase:
             layer.setCrs(crs)
 
         pr = layer.dataProvider()
-        fields = QgsFields()
-        # Section fields
-        fields.append(QgsField("sec_id", QVariant.Int))
-        fields.append(QgsField("sec_name", QVariant.String))
-        fields.append(QgsField("sec_pos", QVariant.Double))
-        # Point fields
-        fields.append(QgsField("p_id", QVariant.String))
-        fields.append(QgsField("p_pos", QVariant.String))
-        fields.append(QgsField("p_z", QVariant.String))
-        assert pr.addAttributes(fields)
+        assert pr.addAttributes(self.basefields())
         layer.updateFields()
 
         return layer
@@ -148,7 +152,8 @@ class PreCourlisFileLine(PreCourlisFileBase):
 
             yield section
 
-    def add_section(self, section):
+    @staticmethod
+    def feature_from_section(section):
         points = section.get_points()
         f = QgsFeature()
         f.setAttributes(
@@ -173,7 +178,10 @@ class PreCourlisFileLine(PreCourlisFileBase):
                 )
             )
         )
-        self._layer.dataProvider().addFeature(f)
+        return f
+
+    def add_section(self, section):
+        self._layer.dataProvider().addFeature(self.feature_from_section(section))
         self.reload()
 
     """

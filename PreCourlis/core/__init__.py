@@ -69,8 +69,7 @@ class Section(SectionBase):
 
 class Reach(ReachBase):
     def __init__(self, *args, **kwargs):
-        if "crs_id" in kwargs:
-            self.crs_id = kwargs.pop("crs_id")
+        self.crs_id = kwargs.pop("crs_id", None)
         super().__init__(*args, **kwargs)
 
     def __eq__(self, other):
