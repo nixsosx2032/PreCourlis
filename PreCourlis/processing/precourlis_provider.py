@@ -2,6 +2,8 @@ from qgis.core import QgsProcessingProvider
 from qgis.PyQt.QtGui import QIcon
 
 from PreCourlis.processing.import_georef_algorithm import ImportGeorefAlgorithm
+from PreCourlis.processing.import_tracks_algorithm import ImportTracksAlgorithm
+from PreCourlis.processing.points_to_lines_algorithm import PointsToLinesAlgorithm
 from PreCourlis.processing.prepare_tracks_algorithm import PrepareTracksAlgorithm
 
 
@@ -24,6 +26,8 @@ class PreCourlisProvider(QgsProcessingProvider):
         Loads all algorithms belonging to this provider.
         """
         self.addAlgorithm(ImportGeorefAlgorithm())
+        self.addAlgorithm(ImportTracksAlgorithm())
+        self.addAlgorithm(PointsToLinesAlgorithm())
         self.addAlgorithm(PrepareTracksAlgorithm())
 
     def id(self):

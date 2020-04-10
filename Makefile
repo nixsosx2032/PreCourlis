@@ -88,8 +88,11 @@ black: ## Run black formatter
 
 .PHONY: test
 test: ## Run the automated tests suite
-test:
 	$(DOCKER_RUN_CMD) make -f docker.mk pytest
+
+.PHONY: test-overwrite-results
+test-overwrite-results: ## Overwrite the automated tests results
+	docker-compose run --rm --user `id -u` -e OVERWRITE_EXPECTED=TRUE builder make -f docker.mk pytest
 
 .PHONY: bash
 bash: ## Run bash in tests container

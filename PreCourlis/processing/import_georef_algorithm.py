@@ -1,4 +1,3 @@
-from qgis.PyQt.QtCore import QCoreApplication
 from qgis.core import (
     QgsFeatureSink,
     QgsProcessingAlgorithm,
@@ -8,6 +7,7 @@ from qgis.core import (
     QgsProcessingParameterFile,
     QgsWkbTypes,
 )
+from qgis.PyQt.QtCore import QCoreApplication
 
 from PreCourlis.core.precourlis_file import PreCourlisFileBase, PreCourlisFileLine
 from PreCourlis.lib.mascaret.mascaretgeo_file import MascaretGeoFile

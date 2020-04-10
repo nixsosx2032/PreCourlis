@@ -76,7 +76,6 @@ class PrepareTracksAlgorithm(QgsProcessingAlgorithm):
         self.name_field = self.parameterAsString(parameters, self.NAME_FIELD, context)
         self.axis = next(axis.getFeatures())
         self.name_field_index = source.fields().indexFromName(self.name_field)
-        self.id_ = 0
 
         (sink, dest_id) = self.parameterAsSink(
             parameters,
@@ -118,10 +117,10 @@ class PrepareTracksAlgorithm(QgsProcessingAlgorithm):
             out = QgsFeature()
             out.setAttributes(
                 [
-                    self.id_,
+                    None,
                     feature.attribute(self.name_field_index)
                     if self.name_field
-                    else "P_{:.3}".format(sec_pos),
+                    else "P_{:04.3f}".format(sec_pos),
                     self.first_pos + sec_pos,
                     # intersection_point.x(),
                     # intersection_point.y(),
@@ -144,10 +143,10 @@ class PrepareTracksAlgorithm(QgsProcessingAlgorithm):
         return {self.OUTPUT: dest_id}
 
     def name(self):
-        return "import_tracks"
+        return "prepare_tracks"
 
     def displayName(self):
-        return self.tr("Import tracks")
+        return self.tr("Prepare tracks")
 
     def group(self):
         return self.tr(self.groupId())
