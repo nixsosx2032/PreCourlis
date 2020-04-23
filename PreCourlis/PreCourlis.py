@@ -30,7 +30,6 @@ from qgis.PyQt.QtWidgets import QAction, QMenu
 
 from processing import execAlgorithmDialog
 
-from PreCourlis.core import Reach
 from PreCourlis.processing.precourlis_provider import PreCourlisProvider
 
 # Initialize Qt resources from file resources.py
@@ -199,48 +198,3 @@ class PreCourlisPlugin:
 
     def import_tracks(self):
         execAlgorithmDialog("precourlis:import_tracks", {})
-
-    def convertirTrace(self):
-        from qgis.core import (
-            QgsVectorLayer,
-            QgsRasterLayer,
-            QgsProject,
-            QgsCoordinateReferenceSystem,
-        )
-        from PreCourlis.core.reach_from_tracks import reach_from_tracks
-
-        data_path = "/home/amorvan/dev/edf_precourlis/PreCourlis/test/data"
-        crs = QgsCoordinateReferenceSystem.fromEpsgId(27563)
-
-        tracks = QgsVectorLayer(
-            os.path.join(data_path, "cas1", "tracesBief1.shp"), "tracks", "ogr"
-        )
-        tracks.setCrs(crs)
-        assert tracks.isValid()
-
-        dem = QgsRasterLayer(
-            os.path.join(data_path, "cas1", "cas2Mnt.asc"), "dem", "gdal"
-        )
-        dem.setCrs(crs)
-        assert dem.isValid()
-
-        axis = QgsVectorLayer(
-            os.path.join(data_path, "cas1", "axeHydroBief1.shp"), "axis", "ogr"
-        )
-        axis.setCrs(crs)
-        assert axis.isValid()
-
-        reach = reach_from_tracks(
-            name="test",
-            tracks=tracks,
-            dem=dem,
-            axis=axis,
-            name_field=None,
-            step=100,
-            first_pos=0,
-        )
-
-        assert isinstance(reach, Reach)
-
-        QgsProject.instance().addMapLayer(reach.to_point_layer())
-        QgsProject.instance().addMapLayer(reach.to_line_layer())
