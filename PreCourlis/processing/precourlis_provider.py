@@ -3,6 +3,7 @@ from qgis.PyQt.QtGui import QIcon
 
 from PreCourlis.processing.import_georef_algorithm import ImportGeorefAlgorithm
 from PreCourlis.processing.import_tracks_algorithm import ImportTracksAlgorithm
+from PreCourlis.processing.lines_to_points_algorithm import LinesToPointsAlgorithm
 from PreCourlis.processing.points_to_lines_algorithm import PointsToLinesAlgorithm
 from PreCourlis.processing.prepare_tracks_algorithm import PrepareTracksAlgorithm
 
@@ -27,6 +28,7 @@ class PreCourlisProvider(QgsProcessingProvider):
         """
         self.addAlgorithm(ImportGeorefAlgorithm())
         self.addAlgorithm(ImportTracksAlgorithm())
+        self.addAlgorithm(LinesToPointsAlgorithm())
         self.addAlgorithm(PointsToLinesAlgorithm())
         self.addAlgorithm(PrepareTracksAlgorithm())
 

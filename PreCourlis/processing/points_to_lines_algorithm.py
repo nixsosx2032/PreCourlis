@@ -13,7 +13,7 @@ from qgis.core import (
 )
 from qgis.PyQt.QtCore import QCoreApplication
 
-from PreCourlis.core.precourlis_file import PreCourlisFileBase
+from PreCourlis.core.precourlis_file import PreCourlisFileLine
 
 
 class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
@@ -62,7 +62,7 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
             parameters,
             self.OUTPUT,
             context,
-            PreCourlisFileBase.basefields(),
+            PreCourlisFileLine.base_fields(),
             QgsWkbTypes.LineString,
             source.sourceCrs(),
         )

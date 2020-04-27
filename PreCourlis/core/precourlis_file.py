@@ -22,16 +22,12 @@ class PreCourlisFileBase:
         self._layer = layer  # Layer is supposed to be the unique storage
 
     @staticmethod
-    def basefields():
+    def section_fields():
         fields = QgsFields()
         # Section fields
         fields.append(QgsField("sec_id", QVariant.Int))
         fields.append(QgsField("sec_name", QVariant.String))
         fields.append(QgsField("sec_pos", QVariant.Double))
-        # Point fields
-        fields.append(QgsField("p_id", QVariant.String))
-        fields.append(QgsField("p_pos", QVariant.String))
-        fields.append(QgsField("p_z", QVariant.String))
         return fields
 
     @staticmethod
@@ -52,6 +48,15 @@ class PreCourlisFileBase:
 
 
 class PreCourlisFileLine(PreCourlisFileBase):
+    @staticmethod
+    def base_fields():
+        fields = PreCourlisFileBase.section_fields()
+        # Point fields
+        fields.append(QgsField("p_id", QVariant.String))
+        fields.append(QgsField("p_pos", QVariant.String))
+        fields.append(QgsField("p_z", QVariant.String))
+        return fields
+
     @staticmethod
     def create_layer(self, name, source=None, crs_id=None):
         return super().create_layer(self, name, source, crs_id, "LineString")
@@ -204,6 +209,15 @@ class PreCourlisFileLine(PreCourlisFileBase):
 
 
 class PreCourlisFilePoint(PreCourlisFileBase):
+    @staticmethod
+    def base_fields():
+        fields = PreCourlisFileBase.section_fields()
+        # Point fields
+        fields.append(QgsField("p_id", QVariant.Int))
+        fields.append(QgsField("p_pos", QVariant.Double))
+        fields.append(QgsField("p_z", QVariant.Double))
+        return fields
+
     @staticmethod
     def create_layer(self, name, source, crs_id):
         return super().create_layer(name, source, crs_id, "Point")

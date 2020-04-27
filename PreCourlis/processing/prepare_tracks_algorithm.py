@@ -15,7 +15,7 @@ from qgis.core import (
 )
 from qgis.PyQt.QtCore import QCoreApplication, QVariant
 
-from PreCourlis.core.precourlis_file import PreCourlisFileBase
+from PreCourlis.core.precourlis_file import PreCourlisFileLine
 from PreCourlis.core.utils import qgslinestring_angle
 
 
@@ -81,7 +81,7 @@ class PrepareTracksAlgorithm(QgsProcessingAlgorithm):
             parameters,
             self.OUTPUT,
             context,
-            PreCourlisFileBase.basefields(),
+            PreCourlisFileLine.base_fields(),
             QgsWkbTypes.LineString,
             source.sourceCrs(),
         )
