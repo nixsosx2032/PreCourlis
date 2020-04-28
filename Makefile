@@ -78,6 +78,11 @@ clean: ## Delete generated files
 	rm -f .coverage .noseids
 	rm -f PreCoulis.zip
 
+.PHONY: cleanall
+cleanall: ## Clean all files including installed libraries
+cleanall: clean
+	make -C PreCourlis/lib clean
+
 .PHONY: check
 check: ## Run linters
 	$(DOCKER_RUN_CMD) make -f docker.mk check

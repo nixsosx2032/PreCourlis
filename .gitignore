@@ -1,6 +1,7 @@
 *.qm
 *.pyc
 help/build
+PreCourlis/lib/TatooineMesher
 PreCourlis/ui/resources_rc.py
 .coverage
 .noseids

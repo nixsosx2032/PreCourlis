@@ -27,6 +27,7 @@ help: ## Display this help message
 build: ## Build all runtime files
 build: transcompile
 	make -C $(PLUGINNAME)/resources
+	make -C $(PLUGINNAME)/lib
 	# make -C help html
 
 .PHONY: transcompile

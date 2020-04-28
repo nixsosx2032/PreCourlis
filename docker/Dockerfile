@@ -4,7 +4,9 @@ FROM qgis/qgis:release-3_10 as test
 
 RUN apt update \
      && apt remove -y python3-coverage \
-     && apt install -y vim
+     && apt install -y \
+        python3-venv \
+        vim
 
 RUN pip3 install \
     black \
