@@ -5,7 +5,6 @@ from qgis.core import (
     QgsFeatureSink,
     QgsGeometry,
     QgsLineString,
-    QgsPoint,
     QgsProcessingException,
     QgsProcessingParameterFeatureSink,
     QgsProcessingParameterFeatureSource,
@@ -33,10 +32,10 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
         )
 
     def line_feature_from_points(self, point_features):
-        points = []
-        for point_feature in point_features:
-            point = point_feature.geometry().constGet()
-            points.append(QgsPoint(x=point.x(), y=point.y(), z=point.z(),))
+        points = [
+            point_feature.geometry().constGet().clone()
+            for point_feature in point_features
+        ]
         line = QgsGeometry(QgsLineString(points))
 
         line_feature = QgsFeature()
