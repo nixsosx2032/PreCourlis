@@ -8,6 +8,7 @@ from qgis.core import (
     QgsProcessingException,
     QgsProcessingParameterFeatureSink,
     QgsProcessingParameterFeatureSource,
+    QgsProcessingParameterField,
     QgsWkbTypes,
 )
 from qgis.PyQt.QtCore import QCoreApplication
@@ -18,12 +19,23 @@ from PreCourlis.core.precourlis_file import PreCourlisFileLine
 class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
 
     INPUT = "INPUT"
+    GROUP_FIELD = "GROUP_FIELD"
     OUTPUT = "OUTPUT"
 
     def initAlgorithm(self, config):
         self.addParameter(
             QgsProcessingParameterFeatureSource(
                 self.INPUT, self.tr("Input"), [QgsProcessing.TypeVectorPoint],
+            )
+        )
+        self.addParameter(
+            QgsProcessingParameterField(
+                self.GROUP_FIELD,
+                self.tr("Group field"),
+                optional=True,
+                parentLayerParameterName=self.INPUT,
+                allowMultiple=False,
+                defaultValue="sec_id",
             )
         )
         self.addParameter(
@@ -56,6 +68,7 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
 
     def processAlgorithm(self, parameters, context, feedback):
         source = self.parameterAsSource(parameters, self.INPUT, context)
+        group_field = self.parameterAsString(parameters, self.GROUP_FIELD, context)
 
         (sink, dest_id) = self.parameterAsSink(
             parameters,
@@ -71,32 +84,32 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
         total = 100.0 / source.featureCount() if source.featureCount() else 0
         features = source.getFeatures()
 
-        sec_id = None
+        group = None
         point_features = []
         for current, point_feature in enumerate(features):
             # Stop the algorithm if cancel button has been clicked
             if feedback.isCanceled():
                 break
 
-            if sec_id is not None and point_feature.attribute("sec_id") != sec_id:
+            if group is not None and point_feature.attribute(group_field) != group:
                 sink.addFeature(
                     self.line_feature_from_points(point_features),
                     QgsFeatureSink.FastInsert,
                 )
-                sec_id = None
+                group = None
                 point_features = []
 
-            sec_id = point_feature.attribute("sec_id")
+            group = point_feature.attribute(group_field)
             point_features.append(point_feature)
 
             # Update the progress bar
             feedback.setProgress(int(current * total))
 
-        if sec_id is not None:
+        if group is not None:
             sink.addFeature(
                 self.line_feature_from_points(point_features), QgsFeatureSink.FastInsert
             )
-            sec_id = None
+            group = None
 
         return {self.OUTPUT: dest_id}
 
