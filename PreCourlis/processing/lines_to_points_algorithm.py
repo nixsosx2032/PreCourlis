@@ -74,7 +74,7 @@ class LinesToPointsAlgorithm(QgsProcessingAlgorithm):
                     ]
                 )
                 if p_z != "NULL":
-                    point.setZ(float(p_z))
+                    point.addZValue(float(p_z))
                 point_feature.setGeometry(QgsGeometry(point))
                 sink.addFeature(point_feature, QgsFeatureSink.FastInsert)
 
