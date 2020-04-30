@@ -18,6 +18,12 @@ RUN pip3 install \
     pytest-cov
 
 RUN mkdir -p /app /home/user && chmod 777 /home/user
+
+# Keep QGIS settings in a volume
+RUN mkdir -p /home/user/.local/share/QGIS/QGIS3/profiles/default \
+    && chmod -R 777 /home/user/.local
+VOLUME /home/user/.local/share/QGIS/QGIS3/profiles/default
+
 WORKDIR /app
 
 ENV DISPLAY=:99 \

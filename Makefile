@@ -69,6 +69,10 @@ build: ## Compile resources and help files
 build: docker-build
 	$(DOCKER_RUN_CMD) make -f docker.mk build
 
+.PHONY: qgis
+qgis: ## Run QGIS desktop
+	docker-compose run --rm --user `id -u` qgis
+
 .PHONY: clean
 clean: ## Delete generated files
 	rm -rf .pytest_cache

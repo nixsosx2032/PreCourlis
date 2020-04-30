@@ -2,7 +2,25 @@
 
 version: '2'
 
+volumes:
+  qgis-settings:
+
 services:
+
+  qgis:
+    image: camptocamp/edf-precourlis-builder:latest
+    volumes:
+      - ${PWD}:/app
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - qgis-settings:/home/user/.local/share/QGIS/QGIS3/profiles/default
+    environment:
+      - PYTHONPATH=/app:/usr/share/qgis/python/plugins/
+      - QGIS_DEBUG=0
+      - QGIS_LOG_FILE=/dev/null
+      - QGIS_PLUGINPATH=/app
+      - DISPLAY=unix${DISPLAY}
+    entrypoint: ""
+    command: qgis
 
   builder:
     image: camptocamp/edf-precourlis-builder:latest
