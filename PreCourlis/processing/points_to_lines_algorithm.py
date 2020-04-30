@@ -43,7 +43,7 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
             [
                 point_features[0].attribute("sec_id"),
                 point_features[0].attribute("sec_name"),
-                point_features[0].attribute("sec_id"),
+                point_features[0].attribute("sec_pos"),
                 ",".join([str(id_ + 1) for id_ in range(0, len(points))]),
                 ",".join(
                     [str(line.lineLocatePoint(f.geometry())) for f in point_features]
