@@ -43,7 +43,7 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
             True,
         )
 
-    def line_feature_from_points(self, point_features):
+    def line_feature_from_points(self, point_features, sec_id):
         points = [
             point_feature.geometry().constGet().clone()
             for point_feature in point_features
@@ -53,8 +53,11 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
         line_feature = QgsFeature()
         line_feature.setAttributes(
             [
-                point_features[0].attribute("sec_id"),
-                point_features[0].attribute("sec_name"),
+                point_features[0].attribute("sec_id") or sec_id,
+                (
+                    point_features[0].attribute("sec_name")
+                    or "P_{:04.3f}".format(point_features[0].attribute("sec_pos"))
+                ),
                 point_features[0].attribute("sec_pos"),
                 ",".join([str(id_ + 1) for id_ in range(0, len(points))]),
                 ",".join(
@@ -86,14 +89,16 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
 
         group = None
         point_features = []
+        sec_id = 0
         for current, point_feature in enumerate(features):
             # Stop the algorithm if cancel button has been clicked
             if feedback.isCanceled():
                 break
 
             if group is not None and point_feature.attribute(group_field) != group:
+                sec_id += 1
                 sink.addFeature(
-                    self.line_feature_from_points(point_features),
+                    self.line_feature_from_points(point_features, sec_id),
                     QgsFeatureSink.FastInsert,
                 )
                 group = None
@@ -106,8 +111,10 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
             feedback.setProgress(int(current * total))
 
         if group is not None:
+            sec_id += 1
             sink.addFeature(
-                self.line_feature_from_points(point_features), QgsFeatureSink.FastInsert
+                self.line_feature_from_points(point_features, sec_id),
+                QgsFeatureSink.FastInsert,
             )
             group = None
 
