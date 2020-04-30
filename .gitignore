@@ -3,6 +3,7 @@
 help/build
 PreCourlis/lib/TatooineMesher
 PreCourlis/ui/resources_rc.py
+test/data/expected/*.xsd
 .coverage
 .noseids
 docker-compose.override.yaml
