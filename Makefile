@@ -113,16 +113,18 @@ transup: ## Update translation files with any new strings.
 
 
 deploy: ## Deploy plugin to your QGIS plugin directory (to test zip archive)
-deploy: package derase
-	unzip PreCourlis.zip -d $(HOME)/$(QGISDIR)/python/plugins/
+deploy: derase
+	mkdir -p $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)
+	rsync -avF ./ $(HOME)/$(QGISDIR)/python/plugins/
 
 derase: ## Remove deployed plugin from your QGIS plugin directory
 	rm -Rf $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)
 
 package: ## Create a zip package of the plugin named $(PLUGINNAME).zip.
-package: compile
+package: deploy
 	rm -f $(PLUGINNAME).zip
-	git archive -o $(PLUGINNAME).zip HEAD $(PLUGINNAME)
+	cd $(HOME)/$(QGISDIR)/python/plugins \
+		&& zip -9r $(CURDIR)/$(PLUGINNAME).zip $(PLUGINNAME)
 	echo "Created package: $(PLUGINNAME).zip"
 
 .PHONY: upload

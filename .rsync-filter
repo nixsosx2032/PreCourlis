@@ -1,0 +1,12 @@
+- **/__pycache__
++ PreCourlis/
++ PreCourlis/lib/TatooineMesher/.venv
++ PreCourlis/lib/TatooineMesher/.venv/lib
++ PreCourlis/lib/TatooineMesher/.venv/lib/python3.6
++ PreCourlis/lib/TatooineMesher/.venv/lib/python3.6/site-packages
+- PreCourlis/lib/TatooineMesher/.venv/*
++ PreCourlis/lib/TatooineMesher/cli
++ PreCourlis/lib/TatooineMesher/tatooinemesher
+- PreCourlis/lib/TatooineMesher/*
++ PreCourlis/**
+- *
