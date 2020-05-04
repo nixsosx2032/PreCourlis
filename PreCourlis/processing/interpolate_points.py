@@ -4,6 +4,7 @@ from pkg_resources import resource_filename
 from qgis.core import (
     QgsProcessing,
     QgsProcessingAlgorithm,
+    QgsProcessingException,
     QgsProcessingParameterFeatureSource,
     QgsProcessingParameterField,
     QgsProcessingParameterNumber,
@@ -98,23 +99,39 @@ class InterpolatePointsAlgorithm(QgsProcessingAlgorithm):
         )
         output_path = self.parameterAsOutputLayer(parameters, self.OUTPUT, context)
 
-        subprocess.run(
-            [
-                COMMAND_PATH,
-                "-v",
-                "--long_step",
-                long_step,
-                "--lat_step",
-                lat_step,
-                "--attr_cross_sections",
-                attr_cross_sections,
-                axis_path,
-                sections_path,
-                output_path,
-            ],
+        command = [
+            COMMAND_PATH,
+            "-v",
+            "--long_step",
+            long_step,
+            "--lat_step",
+            lat_step,
+            "--attr_cross_sections",
+            attr_cross_sections,
+            axis_path,
+            sections_path,
+            output_path,
+        ]
+
+        feedback.pushCommandInfo(" ".join(command))
+
+        with subprocess.Popen(
+            command,
+            stdout=subprocess.PIPE,
+            stdin=subprocess.DEVNULL,
+            stderr=subprocess.STDOUT,
             env={"PYTHONPATH": PYTHONPATH},
-            check=True,
-        )
+            encoding="utf-8",
+        ) as proc:
+            while proc.poll() is None:
+                for line in iter(proc.stdout.readline, ""):
+                    feedback.pushConsoleInfo(line.strip())
+            for line in iter(proc.stdout.readline, ""):
+                feedback.pushConsoleInfo(line.strip())
+            if proc.returncode != 0:
+                raise QgsProcessingException(
+                    "Failed to execute command {}".format(" ".join(command))
+                )
 
         processing.run(
             "qgis:definecurrentprojection",
