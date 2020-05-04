@@ -168,8 +168,8 @@ class PreCourlisPlugin:
         self.actionVisuProfils.triggered.connect(self.openEditor)
         self.actionProjZ.triggered.connect(self.projZProfil)
         self.actionProjRive.triggered.connect(self.projAxeBerge)
-        self.actionInterpProfils.triggered.connect(self.interpProfils)
         """
+        self.actionInterpProfils.triggered.connect(self.interpolate_profiles)
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
@@ -198,3 +198,6 @@ class PreCourlisPlugin:
 
     def import_tracks(self):
         execAlgorithmDialog("precourlis:import_tracks", {})
+
+    def interpolate_profiles(self):
+        execAlgorithmDialog("precourlis:interpolate_lines", {})
