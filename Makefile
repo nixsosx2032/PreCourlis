@@ -122,10 +122,10 @@ derase: ## Remove deployed plugin from your QGIS plugin directory
 
 package: ## Create a zip package of the plugin named $(PLUGINNAME).zip.
 package: deploy
-	rm -f $(PLUGINNAME).zip
+	rm -f dist/$(PLUGINNAME).zip
 	cd $(HOME)/$(QGISDIR)/python/plugins \
-		&& zip -9r $(CURDIR)/$(PLUGINNAME).zip $(PLUGINNAME)
-	echo "Created package: $(PLUGINNAME).zip"
+		&& zip -9r $(CURDIR)/dist/$(PLUGINNAME).zip $(PLUGINNAME)
+	echo "Created package: dist/$(PLUGINNAME).zip"
 
 .PHONY: upload
 upload: ## Upload plugin to QGIS Plugin repo
