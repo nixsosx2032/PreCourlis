@@ -169,10 +169,6 @@ class InterpolateLinesAlgorithm(QgsProcessingAlgorithm):
         )
         current = outputs["PointsToLines"]["OUTPUT"]
 
-        import pprint
-
-        pprint.pprint(outputs)
-
         results["OUTPUT"] = current
         return results
 
