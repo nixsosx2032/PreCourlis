@@ -15,7 +15,8 @@ RUN pip3 install \
     nose \
     pydevd \
     pytest \
-    pytest-cov
+    pytest-cov \
+    scipy
 
 RUN mkdir -p /app /home/user && chmod 777 /home/user
 
