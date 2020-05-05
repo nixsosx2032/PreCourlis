@@ -4,6 +4,9 @@
 + PreCourlis/lib/TatooineMesher/.venv/lib
 + PreCourlis/lib/TatooineMesher/.venv/lib/python3.6
 + PreCourlis/lib/TatooineMesher/.venv/lib/python3.6/site-packages
+- PreCourlis/lib/TatooineMesher/.venv/lib/python3.6/site-packages/setuptools
+- PreCourlis/lib/TatooineMesher/.venv/lib/python3.6/site-packages/pip
+- PreCourlis/lib/TatooineMesher/.venv/lib/python3.6/site-packages/pkg_resources
 - PreCourlis/lib/TatooineMesher/.venv/*
 + PreCourlis/lib/TatooineMesher/cli
 + PreCourlis/lib/TatooineMesher/tatooinemesher
