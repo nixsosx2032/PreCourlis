@@ -75,7 +75,7 @@ class ImportTracksAlgorithm(QgsProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterVectorDestination(
                 self.OUTPUT,
-                self.tr("Reach"),
+                self.tr("Sections"),
                 type=QgsProcessing.TypeVectorAnyGeometry,
                 createByDefault=True,
                 defaultValue=None,
@@ -83,7 +83,7 @@ class ImportTracksAlgorithm(QgsProcessingAlgorithm):
         )
 
     def processAlgorithm(self, parameters, context, model_feedback):
-        feedback = QgsProcessingMultiStepFeedback(9, model_feedback)
+        feedback = QgsProcessingMultiStepFeedback(8, model_feedback)
         results = {}
         outputs = {}
 
@@ -186,53 +186,23 @@ class ImportTracksAlgorithm(QgsProcessingAlgorithm):
         if feedback.isCanceled():
             return {}
 
-        # AddZField
+        # rastersampling
         alg_params = {
             "INPUT": current,
-            "FIELD_NAME": "z",
-            "FIELD_TYPE": 1,
-            "FIELD_LENGTH": 10,
-            "FIELD_PRECISION": 2,
+            "RASTERCOPY": parameters[self.DEM],
+            "COLUMN_PREFIX": "z",
             "OUTPUT": QgsProcessing.TEMPORARY_OUTPUT,
         }
-        outputs["AddZField"] = processing.run(
-            "qgis:addfieldtoattributestable",
+        outputs["RasterSampling"] = processing.run(
+            "qgis:rastersampling",
             alg_params,
             context=context,
             feedback=feedback,
             is_child_algorithm=True,
         )
-        current = outputs["AddZField"]["OUTPUT"]
+        current = outputs["RasterSampling"]["OUTPUT"]
 
         feedback.setCurrentStep(5)
-        if feedback.isCanceled():
-            return {}
-
-        # v.what.rast
-        v_what_raster = QgsApplication.processingRegistry().createAlgorithmById(
-            "grass7:v.what.rast"
-        )
-        alg_params = {
-            "-i": False,
-            "column": "z",
-            "map": current,
-            "raster": parameters[self.DEM],
-            "type": 0,
-            "where": "",
-            "output": v_what_raster.parameterDefinition(
-                "output"
-            ).generateTemporaryDestination(),
-        }
-        outputs["Vwhatrast"] = processing.run(
-            "grass7:v.what.rast",
-            alg_params,
-            context=context,
-            feedback=feedback,
-            is_child_algorithm=True,
-        )
-        current = outputs["Vwhatrast"]["output"]
-
-        feedback.setCurrentStep(6)
         if feedback.isCanceled():
             return {}
 
@@ -244,7 +214,7 @@ class ImportTracksAlgorithm(QgsProcessingAlgorithm):
             "FIELD_LENGTH": 10,
             "FIELD_PRECISION": 3,
             "NEW_FIELD": False,
-            "FORMULA": ' "z" ',
+            "FORMULA": ' "z_1" ',
             "OUTPUT": QgsProcessing.TEMPORARY_OUTPUT,
         }
         outputs["FieldCalculator"] = processing.run(
@@ -256,7 +226,7 @@ class ImportTracksAlgorithm(QgsProcessingAlgorithm):
         )
         current = outputs["FieldCalculator"]["OUTPUT"]
 
-        feedback.setCurrentStep(7)
+        feedback.setCurrentStep(6)
         if feedback.isCanceled():
             return {}
 
@@ -275,7 +245,7 @@ class ImportTracksAlgorithm(QgsProcessingAlgorithm):
         )
         current = outputs["AssignProjection"]["OUTPUT"]
 
-        feedback.setCurrentStep(8)
+        feedback.setCurrentStep(7)
         if feedback.isCanceled():
             return {}
 
