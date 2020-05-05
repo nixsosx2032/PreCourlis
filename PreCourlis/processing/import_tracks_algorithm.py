@@ -252,6 +252,8 @@ class ImportTracksAlgorithm(QgsProcessingAlgorithm):
         # point_to_lines
         alg_params = {
             "INPUT": current,
+            "GROUP_FIELD": "cat",
+            "ORDER_FIELD": "fid",
             "OUTPUT": parameters[self.OUTPUT],
         }
         outputs["PointsToLines"] = processing.run(

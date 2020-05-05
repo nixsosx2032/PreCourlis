@@ -9,6 +9,7 @@ from qgis.core import (
     QgsProcessingParameterFeatureSink,
     QgsProcessingParameterFeatureSource,
     QgsProcessingParameterField,
+    QgsFeatureRequest,
     QgsWkbTypes,
 )
 from qgis.PyQt.QtCore import QCoreApplication
@@ -20,6 +21,7 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
 
     INPUT = "INPUT"
     GROUP_FIELD = "GROUP_FIELD"
+    ORDER_FIELD = "ORDER_FIELD"
     OUTPUT = "OUTPUT"
 
     def initAlgorithm(self, config):
@@ -31,11 +33,21 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterField(
                 self.GROUP_FIELD,
-                self.tr("Group field"),
+                self.tr("Group by field"),
                 optional=True,
                 parentLayerParameterName=self.INPUT,
                 allowMultiple=False,
                 defaultValue="sec_id",
+            )
+        )
+        self.addParameter(
+            QgsProcessingParameterField(
+                self.ORDER_FIELD,
+                self.tr("Order by field"),
+                optional=True,
+                parentLayerParameterName=self.INPUT,
+                allowMultiple=False,
+                defaultValue="p_id",
             )
         )
         self.addParameter(
@@ -72,6 +84,10 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
     def processAlgorithm(self, parameters, context, feedback):
         source = self.parameterAsSource(parameters, self.INPUT, context)
         group_field = self.parameterAsString(parameters, self.GROUP_FIELD, context)
+        order_field = self.parameterAsString(parameters, self.ORDER_FIELD, context)
+
+        request = QgsFeatureRequest()
+        request.addOrderBy('"{}"'.format(group_field), True, True)
 
         (sink, dest_id) = self.parameterAsSink(
             parameters,
@@ -85,7 +101,7 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
             raise QgsProcessingException(self.invalidSinkError(parameters, self.OUTPUT))
 
         total = 100.0 / source.featureCount() if source.featureCount() else 0
-        features = source.getFeatures()
+        features = source.getFeatures(request)
 
         group = None
         point_features = []
@@ -98,7 +114,10 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
             if group is not None and point_feature.attribute(group_field) != group:
                 sec_id += 1
                 sink.addFeature(
-                    self.line_feature_from_points(point_features, sec_id),
+                    self.line_feature_from_points(
+                        sorted(point_features, key=lambda f: f.attribute(order_field)),
+                        sec_id,
+                    ),
                     QgsFeatureSink.FastInsert,
                 )
                 group = None
