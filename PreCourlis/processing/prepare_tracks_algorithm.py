@@ -120,7 +120,7 @@ class PrepareTracksAlgorithm(QgsProcessingAlgorithm):
                     None,
                     feature.attribute(self.name_field_index)
                     if self.name_field
-                    else "P_{:04.3f}".format(sec_pos),
+                    else "P_{:04.3f}".format(self.first_pos + sec_pos),
                     self.first_pos + sec_pos,
                     # intersection_point.x(),
                     # intersection_point.y(),
