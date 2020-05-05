@@ -94,33 +94,17 @@ class PreCourlisPlugin:
 
         self.initProcessing()
 
-        self.action = QAction(
-            QIcon(":/plugins/PreCourlis/icon.png"),
-            "PreCourlis",
-            self.iface.mainWindow(),
-        )
+        self.menuToolBar = QMenu(self.iface.mainWindow())
+        self.add_action("Importer un fichier .georef", self.import_georef)
+        # self.add_action("Visualiser les profils", self.openEditor)
+        self.add_action("Convertir les traces en profils", self.import_tracks)
+        # self.add_action("Projeter un semis de point sur les profils", self.projZProfil)
+        # self.add_action("Projeter les berges", self.projAxeBerge)
+        self.add_action("Interpoler des profils", self.interpolate_profiles)
+        # self.add_action("A propos", slot, QIcon(":/plugins/precourlis/icon.png"))
 
-        # self.actionBief = QAction("&Bief", self.iface.mainWindow())
-        self.actionGeoRef = QAction(
-            "Importer un fichier .georef", self.iface.mainWindow()
-        )
-        self.actionVisuProfils = QAction(
-            "Visualiser les profils", self.iface.mainWindow()
-        )
-        self.actionInterpProfils = QAction(
-            "Interpoler des profils", self.iface.mainWindow()
-        )
-        self.actionConverTrace = QAction(
-            "Convertir les traces en profils", self.iface.mainWindow()
-        )
-        self.actionProjZ = QAction(
-            "Projeter un semis de point sur les profils", self.iface.mainWindow()
-        )
-        self.actionProjRive = QAction("Projeter les berges", self.iface.mainWindow())
-        self.actionAbout = QAction(
-            QIcon(":/plugins/precourlis/icon.png"), "A propos", self.iface.mainWindow()
-        )
-
+        """
+        self.actionBief = QAction("&Bief", self.iface.mainWindow())
         self.actionAddBief = QAction("Ajouter un bief", self.iface.mainWindow())
         self.actionRenaBief = QAction("Renommer un bief", self.iface.mainWindow())
         self.actionDelBief = QAction("Supprimmer un bief", self.iface.mainWindow())
@@ -128,67 +112,46 @@ class PreCourlisPlugin:
             "Ajouter une couche vectorielle", self.iface.mainWindow()
         )
 
+        self.actionAddBief.triggered.connect(self.ajoutBief)
+        self.actionAddLayer.triggered.connect(self.ajoutLayer)
+
         self.menuBief = QMenu(self.iface.mainWindow())
         self.menuBief.setTitle("&Biefs")
-
         self.menuBief.addAction(self.actionAddBief)
         self.menuBief.addAction(self.actionRenaBief)
         self.menuBief.addAction(self.actionDelBief)
         self.menuBief.addAction(self.actionAddLayer)
+        """
 
-        self.menuToolBar = QMenu(self.iface.mainWindow())
-        self.menuToolBar.addAction(self.actionGeoRef)
-        self.menuToolBar.addAction(self.actionVisuProfils)
-        self.menuToolBar.addAction(self.actionConverTrace)
-        self.menuToolBar.addAction(self.actionProjZ)
-        self.menuToolBar.addAction(self.actionProjRive)
-        self.menuToolBar.addAction(self.actionInterpProfils)
-        self.menuToolBar.addAction(self.actionAbout)
-
+        # Add toolbar icon
+        self.action = QAction(
+            QIcon(":/plugins/PreCourlis/icon.png"),
+            "PreCourlis",
+            self.iface.mainWindow(),
+        )
         self.action.setMenu(self.menuToolBar)
-
         self.iface.addToolBarIcon(self.action)
 
-        # self.iface.addPluginToMenu("&PreCourlis", self.actionBief)
-        self.iface.addPluginToMenu("&PreCourlis", self.actionGeoRef)
-        self.iface.addPluginToMenu("&PreCourlis", self.actionVisuProfils)
-        self.iface.addPluginToMenu("&PreCourlis", self.actionConverTrace)
-        self.iface.addPluginToMenu("&PreCourlis", self.actionProjZ)
-        self.iface.addPluginToMenu("&PreCourlis", self.actionProjRive)
-        self.iface.addPluginToMenu("&PreCourlis", self.actionInterpProfils)
-        self.iface.addPluginToMenu("&PreCourlis", self.actionAbout)
-
-        """
-        self.actionAddBief.triggered.connect(self.ajoutBief)
-        self.actionAddLayer.triggered.connect(self.ajoutLayer)
-        """
-        self.actionGeoRef.triggered.connect(self.import_georef)
-        self.actionConverTrace.triggered.connect(self.import_tracks)
-        """
-        self.actionVisuProfils.triggered.connect(self.openEditor)
-        self.actionProjZ.triggered.connect(self.projZProfil)
-        self.actionProjRive.triggered.connect(self.projAxeBerge)
-        """
-        self.actionInterpProfils.triggered.connect(self.interpolate_profiles)
+    def add_action(self, text, slot, icon=None):
+        action = QAction(self.iface.mainWindow())
+        action.setText(text)
+        if icon is not None:
+            action.setIcon(icon)
+        action.triggered.connect(slot)
+        self.menuToolBar.addAction(action)
+        self.iface.addPluginToMenu("&PreCourlis", action)
+        self.actions.append(action)
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
         QgsApplication.processingRegistry().removeProvider(self.provider)
 
+        # Remove the plugin menu item and icon
         for action in self.actions:
-            self.iface.removePluginMenu(self.tr(u"&PreCourlis"), action)
+            self.iface.removePluginMenu("&PreCourlis", action)
             self.iface.removeToolBarIcon(action)
 
-        # Remove the plugin menu item and icon
         self.iface.removePluginMenu("&PreCourlis", self.action)
-        self.iface.removePluginMenu("&PreCourlis", self.actionGeoRef)
-        self.iface.removePluginMenu("&PreCourlis", self.actionVisuProfils)
-        self.iface.removePluginMenu("&PreCourlis", self.actionInterpProfils)
-        self.iface.removePluginMenu("&PreCourlis", self.actionConverTrace)
-        self.iface.removePluginMenu("&PreCourlis", self.actionProjZ)
-        self.iface.removePluginMenu("&PreCourlis", self.actionProjRive)
-        self.iface.removePluginMenu("&PreCourlis", self.actionAbout)
-
         self.iface.removeToolBarIcon(self.action)
 
     def import_georef(self):
