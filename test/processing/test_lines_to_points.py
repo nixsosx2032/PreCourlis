@@ -7,7 +7,7 @@ import processing
 from .. import DATA_PATH, EXPECTED_PATH, TEMP_PATH
 from . import TestCase, OVERWRITE_EXPECTED
 
-INPUT_PATH = os.path.join(DATA_PATH, "profiles_lines.shp")
+INPUT_PATH = os.path.join(DATA_PATH, "input", "profiles_lines.shp")
 
 
 class TestLinesToPointsAlgorithm(TestCase):

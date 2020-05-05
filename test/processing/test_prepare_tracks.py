@@ -7,9 +7,9 @@ import processing
 from .. import DATA_PATH, EXPECTED_PATH, TEMP_PATH
 from . import TestCase, OVERWRITE_EXPECTED
 
-AXIS_PATH = os.path.join(DATA_PATH, "cas1", "axeHydroBief1.shp")
-TRACKS_PATH = os.path.join(DATA_PATH, "cas1", "tracesBief1.shp")
-DEM_PATH = os.path.join(DATA_PATH, "cas1", "cas2Mnt.asc")
+AXIS_PATH = os.path.join(DATA_PATH, "input", "axeHydroBief1.shp")
+TRACKS_PATH = os.path.join(DATA_PATH, "input", "tracesBief1.shp")
+DEM_PATH = os.path.join(DATA_PATH, "input", "cas2Mnt.asc")
 
 
 class TestPrepareTracksAlgorithm(TestCase):

@@ -7,8 +7,8 @@ import processing
 from .. import DATA_PATH, EXPECTED_PATH, TEMP_PATH
 from . import TestCase, OVERWRITE_EXPECTED
 
-SECTIONS_PATH = os.path.join(DATA_PATH, "profiles_lines.shp")
-AXIS_PATH = os.path.join(DATA_PATH, "cas1", "axeHydroBief1.shp")
+SECTIONS_PATH = os.path.join(DATA_PATH, "input", "profiles_lines.shp")
+AXIS_PATH = os.path.join(DATA_PATH, "input", "axeHydroBief1.shp")
 
 
 class TestInterpolateLinesAlgorithm(TestCase):
