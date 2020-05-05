@@ -1,3 +1,4 @@
+import os
 import subprocess
 from pkg_resources import resource_filename
 
@@ -14,14 +15,21 @@ from qgis.PyQt.QtCore import QCoreApplication
 
 import processing
 
-COMMAND_PATH = resource_filename(
+PYTHON_INTERPRETER = "python3"
+ENCODING = "utf-8"
+
+if os.name == "nt":
+    PYTHON_INTERPRETER = "pythonw.exe"
+    ENCODING = "cp1252"
+
+PYTHON_SCRIPT = resource_filename(
     "PreCourlis", "lib/TatooineMesher/cli/densify_cross_sections.py"
 )
-PYTHONPATH = ":".join(
+PYTHONPATH = os.pathsep.join(
     [
         resource_filename("PreCourlis", "lib/TatooineMesher"),
         resource_filename(
-            "PreCourlis", "lib/TatooineMesher/.venv/lib/python3.6/site-packages"
+            "PreCourlis", "lib/TatooineMesher/.venv/lib/python3.6/site-packages",
         ),
     ]
 )
@@ -100,7 +108,8 @@ class InterpolatePointsAlgorithm(QgsProcessingAlgorithm):
         output_path = self.parameterAsOutputLayer(parameters, self.OUTPUT, context)
 
         command = [
-            COMMAND_PATH,
+            PYTHON_INTERPRETER,
+            PYTHON_SCRIPT,
             "-v",
             "--long_step",
             long_step,
@@ -115,13 +124,16 @@ class InterpolatePointsAlgorithm(QgsProcessingAlgorithm):
 
         feedback.pushCommandInfo(" ".join(command))
 
+        env = {key: value for key, value in os.environ.items()}
+        env["PYTHONPATH"] = os.pathsep.join([env["PYTHONPATH"], PYTHONPATH])
+
         with subprocess.Popen(
             command,
             stdout=subprocess.PIPE,
             stdin=subprocess.DEVNULL,
             stderr=subprocess.STDOUT,
-            env={"PYTHONPATH": PYTHONPATH},
-            encoding="utf-8",
+            env=env,
+            encoding=ENCODING,
         ) as proc:
             while proc.poll() is None:
                 for line in iter(proc.stdout.readline, ""):
