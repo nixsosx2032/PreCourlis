@@ -9,7 +9,7 @@ from qgis.core import (
 )
 from qgis.PyQt.QtCore import QCoreApplication
 
-from PreCourlis.core.precourlis_file import PreCourlisFileBase, PreCourlisFileLine
+from PreCourlis.core.precourlis_file import PreCourlisFileLine
 from PreCourlis.lib.mascaret.mascaretgeo_file import MascaretGeoFile
 
 
@@ -43,7 +43,7 @@ class ImportGeorefAlgorithm(QgsProcessingAlgorithm):
             parameters,
             self.OUTPUT,
             context,
-            PreCourlisFileBase.basefields(),
+            PreCourlisFileLine.base_fields(),
             QgsWkbTypes.LineString,
             crs,
         )
