@@ -143,6 +143,7 @@ class PreCourlisFileLine(PreCourlisFileBase):
                 name=f.attribute("sec_name"),
                 pk=f.attribute("sec_pos"),
             )
+            section.axis = [f.attribute("axis_x"), f.attribute("axis_y")]
 
             # Take only the first parts (QgsMultiLineString => QgsLineString)
             line = next(f.geometry().constParts())
