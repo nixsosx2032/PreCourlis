@@ -14,6 +14,10 @@ from . import TestCase, OVERWRITE_EXPECTED
 
 SECTIONS_PATH = os.path.join(DATA_PATH, "input", "profiles_points.shp")
 AXIS_PATH = os.path.join(DATA_PATH, "input", "axeHydroBief1.shp")
+CONSTRAINT_LINES = [
+    os.path.join(DATA_PATH, "input", "riveDroiteBief1.shp"),
+    os.path.join(DATA_PATH, "input", "riveGaucheBief1.shp"),
+]
 
 
 class TestInterpolatePointsAlgorithm(TestCase):
@@ -29,6 +33,7 @@ class TestInterpolatePointsAlgorithm(TestCase):
             {
                 "SECTIONS": SECTIONS_PATH,
                 "AXIS": AXIS_PATH,
+                "CONSTRAINT_LINES": CONSTRAINT_LINES,
                 "LONG_STEP": 200,
                 "LAT_STEP": 50,
                 "ATTR_CROSS_SECTION": "sec_id",

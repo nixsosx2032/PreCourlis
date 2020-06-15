@@ -2,10 +2,11 @@ from qgis.core import (
     QgsProcessing,
     QgsProcessingAlgorithm,
     QgsProcessingMultiStepFeedback,
-    QgsProcessingParameterFeatureSource,
-    QgsProcessingParameterNumber,
-    QgsProcessingParameterField,
     QgsProcessingParameterFeatureSink,
+    QgsProcessingParameterFeatureSource,
+    QgsProcessingParameterField,
+    QgsProcessingParameterMultipleLayers,
+    QgsProcessingParameterNumber,
     QgsProcessingUtils,
 )
 from qgis.PyQt.QtCore import QCoreApplication, QVariant
@@ -16,6 +17,7 @@ class InterpolateLinesAlgorithm(QgsProcessingAlgorithm):
 
     SECTIONS = "SECTIONS"
     AXIS = "AXIS"
+    CONSTRAINT_LINES = "CONSTRAINT_LINES"
     LONG_STEP = "LONG_STEP"
     LAT_STEP = "LAT_STEP"
     ATTR_CROSS_SECTION = "ATTR_CROSS_SECTION"
@@ -36,6 +38,15 @@ class InterpolateLinesAlgorithm(QgsProcessingAlgorithm):
                 self.tr("Axis"),
                 types=[QgsProcessing.TypeVectorLine],
                 defaultValue=None,
+            )
+        )
+        self.addParameter(
+            QgsProcessingParameterMultipleLayers(
+                self.CONSTRAINT_LINES,
+                self.tr("Contraint lines"),
+                layerType=QgsProcessing.TypeVectorLine,
+                defaultValue=None,
+                optional=True,
             )
         )
         self.addParameter(
@@ -91,8 +102,9 @@ class InterpolateLinesAlgorithm(QgsProcessingAlgorithm):
         alg_params = {
             "SECTIONS": current,
             "AXIS": parameters[self.AXIS],
-            "LONG_STEP": 200,
-            "LAT_STEP": 50,
+            "CONSTRAINT_LINES": parameters[self.CONSTRAINT_LINES],
+            "LONG_STEP": parameters[self.LONG_STEP],
+            "LAT_STEP": parameters[self.LAT_STEP],
             "ATTR_CROSS_SECTION": "sec_id",
             "OUTPUT": QgsProcessingUtils.generateTempFilename("interpolate_points.shp"),
         }

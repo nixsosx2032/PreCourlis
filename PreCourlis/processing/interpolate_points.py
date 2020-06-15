@@ -8,8 +8,10 @@ from qgis.core import (
     QgsProcessingException,
     QgsProcessingParameterFeatureSource,
     QgsProcessingParameterField,
+    QgsProcessingParameterMultipleLayers,
     QgsProcessingParameterNumber,
     QgsProcessingParameterVectorDestination,
+    QgsProcessingUtils,
 )
 from qgis.PyQt.QtCore import QCoreApplication
 
@@ -47,6 +49,7 @@ class InterpolatePointsAlgorithm(QgsProcessingAlgorithm):
 
     SECTIONS = "SECTIONS"
     AXIS = "AXIS"
+    CONSTRAINT_LINES = "CONSTRAINT_LINES"
     LONG_STEP = "LONG_STEP"
     LAT_STEP = "LAT_STEP"
     ATTR_CROSS_SECTION = "ATTR_CROSS_SECTION"
@@ -67,6 +70,15 @@ class InterpolatePointsAlgorithm(QgsProcessingAlgorithm):
                 self.tr("Axis"),
                 types=[QgsProcessing.TypeVectorLine],
                 defaultValue=None,
+            )
+        )
+        self.addParameter(
+            QgsProcessingParameterMultipleLayers(
+                self.CONSTRAINT_LINES,
+                self.tr("Contraint lines"),
+                layerType=QgsProcessing.TypeVectorLine,
+                defaultValue=None,
+                optional=True,
             )
         )
         self.addParameter(
@@ -92,13 +104,16 @@ class InterpolatePointsAlgorithm(QgsProcessingAlgorithm):
         self.addParameter(ParameterShapefileDestination(self.OUTPUT, self.tr("Output")))
 
     def processAlgorithm(self, parameters, context, feedback):
-        section = self.parameterAsSource(parameters, self.SECTIONS, context)
+        sections = self.parameterAsSource(parameters, self.SECTIONS, context)
 
         sections_path = self.parameterAsCompatibleSourceLayerPath(
             parameters, self.SECTIONS, context, compatibleFormats=["shp"],
         )
         axis_path = self.parameterAsCompatibleSourceLayerPath(
             parameters, self.AXIS, context, compatibleFormats=["shp"],
+        )
+        constraint_lines = self.parameterAsLayerList(
+            parameters, self.CONSTRAINT_LINES, context,
         )
         long_step = self.parameterAsString(parameters, self.LONG_STEP, context)
         lat_step = self.parameterAsString(parameters, self.LAT_STEP, context)
@@ -107,10 +122,31 @@ class InterpolatePointsAlgorithm(QgsProcessingAlgorithm):
         )
         output_path = self.parameterAsOutputLayer(parameters, self.OUTPUT, context)
 
+        # Merge constraint lines files
+        if constraint_lines:
+            constraint_lines = QgsProcessingUtils.generateTempFilename(
+                "constraint_lines.shp"
+            )
+            processing.run(
+                "native:mergevectorlayers",
+                {
+                    "LAYERS": parameters[self.CONSTRAINT_LINES],
+                    "CRS": sections.sourceCrs(),
+                    "OUTPUT": constraint_lines,
+                },
+            )
+
         command = [
             PYTHON_INTERPRETER,
             PYTHON_SCRIPT,
             "-v",
+        ]
+        if constraint_lines:
+            command += [
+                "--infile_constraint_lines",
+                constraint_lines,
+            ]
+        command += [
             "--long_step",
             long_step,
             "--lat_step",
@@ -147,7 +183,7 @@ class InterpolatePointsAlgorithm(QgsProcessingAlgorithm):
 
         processing.run(
             "qgis:definecurrentprojection",
-            {"INPUT": output_path, "CRS": section.sourceCrs()},
+            {"INPUT": output_path, "CRS": sections.sourceCrs()},
         )
 
         return {self.OUTPUT: output_path}
