@@ -122,8 +122,8 @@ class PrepareTracksAlgorithm(QgsProcessingAlgorithm):
                     if self.name_field
                     else "P_{:04.3f}".format(self.first_pos + sec_pos),
                     self.first_pos + sec_pos,
-                    # intersection_point.x(),
-                    # intersection_point.y(),
+                    intersection_point.x(),
+                    intersection_point.y(),
                     QVariant(),
                     QVariant(),
                     QVariant(),

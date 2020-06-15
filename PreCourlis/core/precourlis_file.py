@@ -28,6 +28,8 @@ class PreCourlisFileBase:
         fields.append(QgsField("sec_id", QVariant.Int))
         fields.append(QgsField("sec_name", QVariant.String))
         fields.append(QgsField("sec_pos", QVariant.Double))
+        fields.append(QgsField("axis_x", QVariant.Double))
+        fields.append(QgsField("axis_y", QVariant.Double))
         return fields
 
     @staticmethod
@@ -117,8 +119,8 @@ class PreCourlisFileLine(PreCourlisFileBase):
                     if name_field
                     else "P_{:.3}".format(sec_pos),
                     first_pos + sec_pos,
-                    # intersection_point.x(),
-                    # intersection_point.y(),
+                    intersection_point.x(),
+                    intersection_point.y(),
                     QVariant(),
                     QVariant(),
                     QVariant(),
@@ -166,6 +168,8 @@ class PreCourlisFileLine(PreCourlisFileBase):
                 section.id,
                 section.name,
                 section.pk,
+                section.axis[0],
+                section.axis[1],
                 ",".join([str(i) for i in range(0, len(points))]),
                 ",".join([str(p.d) for p in points]),
                 ",".join([str(p.z) for p in points]),

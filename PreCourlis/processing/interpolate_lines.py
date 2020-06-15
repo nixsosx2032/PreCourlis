@@ -146,6 +146,8 @@ class InterpolateLinesAlgorithm(QgsProcessingAlgorithm):
                 {"name": "sec_id", "type": QVariant.Int, "expression": ""},
                 {"name": "sec_name", "type": QVariant.String, "expression": ""},
                 {"name": "sec_pos", "type": QVariant.Double, "expression": '"Xl"'},
+                {"name": "axis_x", "type": QVariant.Double, "expression": ""},
+                {"name": "axis_y", "type": QVariant.Double, "expression": ""},
                 {"name": "p_id", "type": QVariant.Int, "expression": ""},
                 {"name": "xt", "type": QVariant.Int, "expression": "xt"},
                 {"name": "p_pos", "type": QVariant.Double, "expression": ""},
@@ -170,6 +172,7 @@ class InterpolateLinesAlgorithm(QgsProcessingAlgorithm):
         # Points to lines
         alg_params = {
             "INPUT": current,
+            "AXIS": parameters[self.AXIS],
             "GROUP_FIELD": "sec_pos",
             "ORDER_FIELD": "xt",
             "OUTPUT": parameters[self.OUTPUT],

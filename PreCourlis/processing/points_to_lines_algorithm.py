@@ -20,6 +20,7 @@ from PreCourlis.core.precourlis_file import PreCourlisFileLine
 class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
 
     INPUT = "INPUT"
+    AXIS = "AXIS"
     GROUP_FIELD = "GROUP_FIELD"
     ORDER_FIELD = "ORDER_FIELD"
     OUTPUT = "OUTPUT"
@@ -28,6 +29,17 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterFeatureSource(
                 self.INPUT, self.tr("Input"), [QgsProcessing.TypeVectorPoint],
+            )
+        )
+        self.addParameter(
+            QgsProcessingParameterFeatureSource(
+                self.AXIS,
+                self.tr(
+                    "Axis (needed to calculate axis_x and axis_y if not already set in source)"
+                ),
+                types=[QgsProcessing.TypeVectorLine],
+                defaultValue=None,
+                optional=True,
             )
         )
         self.addParameter(
@@ -62,6 +74,12 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
         ]
         line = QgsGeometry(QgsLineString(points))
 
+        # Take only the first parts (QgsMultiLineString => QgsLineString)
+        intersection_point = None
+        if self.axis:
+            intersection = line.intersection(self.axis.geometry())
+            intersection_point = intersection.constGet()
+
         line_feature = QgsFeature()
         line_feature.setAttributes(
             [
@@ -71,6 +89,12 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
                     or "P_{:04.3f}".format(point_features[0].attribute("sec_pos"))
                 ),
                 point_features[0].attribute("sec_pos"),
+                intersection_point.x()
+                if self.axis
+                else point_features[0].attribute("axis_x"),
+                intersection_point.y()
+                if self.axis
+                else point_features[0].attribute("axis_y"),
                 ",".join([str(id_ + 1) for id_ in range(0, len(points))]),
                 ",".join(
                     [str(line.lineLocatePoint(f.geometry())) for f in point_features]
@@ -83,8 +107,11 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
 
     def processAlgorithm(self, parameters, context, feedback):
         source = self.parameterAsSource(parameters, self.INPUT, context)
+        axis = self.parameterAsSource(parameters, self.AXIS, context)
         group_field = self.parameterAsString(parameters, self.GROUP_FIELD, context)
         order_field = self.parameterAsString(parameters, self.ORDER_FIELD, context)
+
+        self.axis = next(axis.getFeatures()) if axis else None
 
         request = QgsFeatureRequest()
         request.addOrderBy('"{}"'.format(group_field), True, True)
