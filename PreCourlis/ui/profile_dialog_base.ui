@@ -18,6 +18,9 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
+    <widget class="QgsMapLayerComboBox" name="layerComboBox"/>
+   </item>
+   <item>
     <layout class="QHBoxLayout" name="tableGraphLayout">
      <item>
       <layout class="QVBoxLayout" name="tableLayout">
@@ -68,6 +71,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QgsMapLayerComboBox</class>
+   <extends>QComboBox</extends>
+   <header>qgsmaplayercombobox.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
