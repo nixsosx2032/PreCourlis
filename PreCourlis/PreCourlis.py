@@ -31,6 +31,7 @@ from qgis.PyQt.QtWidgets import QAction, QMenu
 from processing import execAlgorithmDialog
 
 from PreCourlis.processing.precourlis_provider import PreCourlisProvider
+from PreCourlis.widgets.profile_dialog import ProfileDialog
 
 # Initialize Qt resources from file resources.py
 from PreCourlis.ui import resources_rc  # noqa
@@ -96,7 +97,7 @@ class PreCourlisPlugin:
 
         self.menuToolBar = QMenu(self.iface.mainWindow())
         self.add_action("Importer un fichier .georef", self.import_georef)
-        # self.add_action("Visualiser les profils", self.openEditor)
+        self.add_action("Visualiser les profils", self.open_editor)
         self.add_action("Convertir les traces en profils", self.import_tracks)
         # self.add_action("Projeter un semis de point sur les profils", self.projZProfil)
         # self.add_action("Projeter les berges", self.projAxeBerge)
@@ -162,6 +163,10 @@ class PreCourlisPlugin:
 
     def import_tracks(self):
         execAlgorithmDialog("precourlis:import_tracks", {})
+
+    def open_editor(self):
+        dlg = ProfileDialog(self.iface.mainWindow())
+        dlg.show()
 
     def interpolate_profiles(self):
         execAlgorithmDialog("precourlis:interpolate_lines", {})
