@@ -5,6 +5,7 @@ FROM qgis/qgis:release-3_10 as test
 RUN apt update \
      && apt remove -y python3-coverage \
      && apt install -y \
+        python3-matplotlib \
         python3-venv \
         vim
 

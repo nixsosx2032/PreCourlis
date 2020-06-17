@@ -138,27 +138,31 @@ class PreCourlisFileLine(PreCourlisFileBase):
 
     def get_sections(self):
         for f in self._layer.getFeatures():
-            section = Section(
-                my_id=f.attribute("sec_id"),
-                name=f.attribute("sec_name"),
-                pk=f.attribute("sec_pos"),
-            )
-            section.axis = [f.attribute("axis_x"), f.attribute("axis_y")]
+            yield self.section_from_feature(f)
 
-            # Take only the first parts (QgsMultiLineString => QgsLineString)
-            line = next(f.geometry().constParts())
-            section.set_points(
-                [
-                    Point(x=p[0].x(), y=p[0].y(), z=p[1], d=p[2],)
-                    for p in zip(
-                        line.points(),
-                        f.attribute("p_z").split(","),
-                        f.attribute("p_pos").split(","),
-                    )
-                ]
-            )
+    @staticmethod
+    def section_from_feature(f):
+        section = Section(
+            my_id=f.attribute("sec_id"),
+            name=f.attribute("sec_name"),
+            pk=f.attribute("sec_pos"),
+        )
+        section.axis = [f.attribute("axis_x"), f.attribute("axis_y")]
 
-            yield section
+        # Take only the first parts (QgsMultiLineString => QgsLineString)
+        line = next(f.geometry().constParts())
+        points = line.points()
+        section.set_points(
+            [
+                Point(x=p[0].x(), y=p[0].y(), z=p[1], d=p[2],)
+                for p in zip(
+                    points,
+                    f.attribute("p_z").split(","),
+                    f.attribute("p_pos").split(","),
+                )
+            ]
+        )
+        return section
 
     @staticmethod
     def feature_from_section(section):

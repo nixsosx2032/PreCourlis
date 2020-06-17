@@ -25,10 +25,10 @@
      <item>
       <layout class="QVBoxLayout" name="tableLayout">
        <item>
-        <widget class="QComboBox" name="profileComboBox"/>
+        <widget class="QComboBox" name="sectionComboBox"/>
        </item>
        <item>
-        <widget class="QTableView" name="profileTableView">
+        <widget class="QTableView" name="pointsTableView">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -40,7 +40,7 @@
       </layout>
      </item>
      <item>
-      <widget class="QWidget" name="graphWidget" native="true">
+      <widget class="GraphWidget" name="graphWidget" native="true">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
          <horstretch>0</horstretch>
@@ -76,6 +76,12 @@
    <class>QgsMapLayerComboBox</class>
    <extends>QComboBox</extends>
    <header>qgsmaplayercombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>GraphWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">PreCourlis/widgets/graph_widget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>
