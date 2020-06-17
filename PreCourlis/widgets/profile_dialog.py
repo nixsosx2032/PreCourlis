@@ -30,6 +30,8 @@ class SectionItem(QtGui.QStandardItem):
 
 class SectionItemModel(QtGui.QStandardItemModel):
     def setLayer(self, layer):
+        self.beginResetModel()
+
         self.clear()
         if layer is None:
             return
@@ -50,6 +52,8 @@ class SectionItemModel(QtGui.QStandardItemModel):
 
             previous_f_id = f.id()
             previous_item = item
+
+        self.endResetModel()
 
 
 class PointsTableModel(QtCore.QAbstractTableModel):
@@ -109,9 +113,8 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         return self.layerComboBox.currentLayer()
 
     def layer_changed(self, layer):
-        self.sectionItemModel = SectionItemModel()
         self.sectionItemModel.setLayer(layer)
-        self.sectionComboBox.setModel(self.sectionItemModel)
+        self.sectionComboBox.setCurrentIndex(0)
 
     def section_from_feature_id(self, f_id):
         if f_id is None:
@@ -120,6 +123,10 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         return PreCourlisFileLine.section_from_feature(f)
 
     def section_changed(self, index):
+        if index == -1:
+            self.graphWidget.clear()
+            return
+
         item = self.sectionItemModel.item(index)
         self.graphWidget.set_sections(
             self.section_from_feature_id(item.previous_f_id),
