@@ -1,3 +1,8 @@
+from qgis.core import (
+    QgsPoint,
+    QgsGeometry,
+)
+
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
 
@@ -19,32 +24,46 @@ class GraphWidget(FigureCanvas):
         self.next_section = next_section
         self.refresh()
 
-    def refresh(self):
+    def clear(self):
         self.graph.clear()
 
-        if self.current_section is not None:
-            self.graph.plot(
-                self.current_section.distances,
-                self.current_section.z,
-                color="red",
-                label=self.current_section.name,
-            )
+    def axis_position(self, section):
+        """
+        Return linear referencing of axis intersection for passed section.
+        """
+        f = section.feature
+        intersection = QgsGeometry(
+            QgsPoint(f.attribute("axis_x"), f.attribute("axis_y"))
+        )
+        return f.geometry().lineLocatePoint(intersection)
 
-        if self.previous_section is not None:
-            self.graph.plot(
-                self.previous_section.distances,
-                self.previous_section.z,
-                color="green",
-                label=self.previous_section.name,
-            )
+    def refresh(self):
+        self.clear()
 
-        if self.next_section is not None:
-            self.graph.plot(
-                self.next_section.distances,
-                self.next_section.z,
-                color="blue",
-                label=self.next_section.name,
-            )
+        axis_pos = self.axis_position(self.current_section)
+
+        for section, color in (
+            (self.previous_section, "green"),
+            (self.next_section, "blue"),
+        ):
+            if section is not None:
+                offset = axis_pos - self.axis_position(section)
+                self.graph.plot(
+                    [d + offset for d in section.distances],
+                    section.z,
+                    color=color,
+                    label=section.name,
+                )
+
+        self.graph.plot(
+            self.current_section.distances,
+            self.current_section.z,
+            color="red",
+            label=self.current_section.name,
+        )
+
+        # Draw axis position
+        self.graph.axvline(axis_pos, color="black")
 
         self.graph.grid(True)
         self.graph.set_ylabel("Z (m)")

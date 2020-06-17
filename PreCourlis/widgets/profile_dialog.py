@@ -120,7 +120,9 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         if f_id is None:
             return None
         f = self.layer().getFeature(f_id)
-        return PreCourlisFileLine.section_from_feature(f)
+        section = PreCourlisFileLine.section_from_feature(f)
+        section.feature = f
+        return section
 
     def section_changed(self, index):
         if index == -1:
