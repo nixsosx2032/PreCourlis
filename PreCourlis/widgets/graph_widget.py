@@ -37,30 +37,42 @@ class GraphWidget(FigureCanvas):
         )
         return f.geometry().lineLocatePoint(intersection)
 
+    def draw_section(self, section, offset, **kwargs):
+        self.graph.plot(
+            [d + offset for d in section.distances],
+            section.z,
+            label=section.name,
+            **kwargs,
+        )
+
     def refresh(self):
         self.clear()
 
         axis_pos = self.axis_position(self.current_section)
 
-        for section, color in (
-            (self.previous_section, "green"),
-            (self.next_section, "blue"),
-        ):
-            if section is not None:
-                offset = axis_pos - self.axis_position(section)
-                self.graph.plot(
-                    [d + offset for d in section.distances],
-                    section.z,
-                    color=color,
-                    label=section.name,
-                )
+        if self.previous_section:
+            self.draw_section(
+                self.previous_section,
+                axis_pos - self.axis_position(self.previous_section),
+                color="green",
+                linewidth=0.5,
+            )
 
-        self.graph.plot(
-            self.current_section.distances,
-            self.current_section.z,
+        self.draw_section(
+            self.current_section,
+            0,
             color="red",
-            label=self.current_section.name,
+            marker=".",
+            zorder=10,
         )
+
+        if self.next_section:
+            self.draw_section(
+                self.next_section,
+                axis_pos - self.axis_position(self.next_section),
+                color="blue",
+                linewidth=0.5,
+            )
 
         # Draw axis position
         self.graph.axvline(axis_pos, color="black")
@@ -68,4 +80,10 @@ class GraphWidget(FigureCanvas):
         self.graph.grid(True)
         self.graph.set_ylabel("Z (m)")
         self.graph.set_xlabel("Abscisse en travers (m)")
+
+        lines, labels = self.graph.get_legend_handles_labels()
+        self.graph.legend(
+            lines, labels, loc="upper center", fancybox=True, shadow=True, ncol=4, prop={"size": 10}
+        )
+
         self.draw()
