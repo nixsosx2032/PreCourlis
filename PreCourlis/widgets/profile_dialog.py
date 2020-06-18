@@ -108,6 +108,8 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
     def init_sections_combo_box(self):
         self.sectionComboBox.setModel(self.sectionItemModel)
         self.sectionComboBox.currentIndexChanged.connect(self.section_changed)
+        self.previousSectionButton.clicked.connect(self.previous_section)
+        self.nextSectionButton.clicked.connect(self.next_section)
 
     def layer(self):
         return self.layerComboBox.currentLayer()
@@ -135,3 +137,13 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
             self.section_from_feature_id(item.current_f_id),
             self.section_from_feature_id(item.next_f_id),
         )
+
+    def previous_section(self):
+        if self.sectionComboBox.currentIndex() < 1:
+            return
+        self.sectionComboBox.setCurrentIndex(self.sectionComboBox.currentIndex() - 1)
+
+    def next_section(self):
+        if self.sectionComboBox.currentIndex() > self.sectionItemModel.rowCount() - 2:
+            return
+        self.sectionComboBox.setCurrentIndex(self.sectionComboBox.currentIndex() + 1)
