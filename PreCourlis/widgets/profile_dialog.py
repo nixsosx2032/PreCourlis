@@ -132,6 +132,9 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
             return
 
         item = self.sectionItemModel.item(index)
+
+        self.layer().selectByIds([item.current_f_id])
+
         self.graphWidget.set_sections(
             self.section_from_feature_id(item.previous_f_id),
             self.section_from_feature_id(item.current_f_id),
