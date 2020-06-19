@@ -158,9 +158,6 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
 
     def current_row_changed(self, current, previous):
         position = self.pointsTableModel.data(
-            self.pointsTableModel.index(
-                current.row(), 0
-            ),
-            QtCore.Qt.EditRole,
+            self.pointsTableModel.index(current.row(), 0), QtCore.Qt.EditRole,
         )
         self.graphWidget.set_position(position)

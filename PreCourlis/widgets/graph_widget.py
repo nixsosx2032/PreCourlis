@@ -68,11 +68,7 @@ class GraphWidget(FigureCanvas):
             )
 
         self.draw_section(
-            self.current_section,
-            0,
-            color="red",
-            marker=".",
-            zorder=10,
+            self.current_section, 0, color="red", marker=".", zorder=10,
         )
 
         if self.next_section:
@@ -92,13 +88,19 @@ class GraphWidget(FigureCanvas):
 
         lines, labels = self.graph.get_legend_handles_labels()
         self.graph.legend(
-            lines, labels, loc="upper center", fancybox=True, shadow=True, ncol=4, prop={"size": 10}
+            lines,
+            labels,
+            loc="upper center",
+            fancybox=True,
+            shadow=True,
+            ncol=4,
+            prop={"size": 10},
         )
 
         self.draw()
 
     def refresh_pointing_line(self):
-        if self.pointing_line != None:
+        if self.pointing_line is not None:
             self.pointing_line.remove()
             self.pointing_line = None
         if self.position is not None:
