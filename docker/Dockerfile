@@ -1,5 +1,4 @@
 # Might be replaced by qgis/qgis:3.10
-#FROM camptocamp/qgis-server:3.4 as test
 FROM qgis/qgis:release-3_10 as test
 
 RUN apt update \
