@@ -6,10 +6,11 @@ from qgis.core import (
     QgsProject,
     QgsWkbTypes,
 )
-from qgis.PyQt import QtCore, QtGui, QtWidgets, uic
+from qgis.PyQt import QtGui, QtWidgets, uic
 from qgis.utils import iface
 
 from PreCourlis.core.precourlis_file import PreCourlisFileLine
+from PreCourlis.widgets.points_table_model import PointsTableModel
 
 # This loads your .ui file so that PyQt can populate your plugin with the elements from Qt Designer
 FORM_CLASS, _ = uic.loadUiType(
@@ -56,14 +57,6 @@ class SectionItemModel(QtGui.QStandardItemModel):
         self.endResetModel()
 
 
-class PointsTableModel(QtCore.QAbstractTableModel):
-    def set_section(self, section):
-        self.section = section
-
-    def rowCount(self):
-        return len(self.section.x)
-
-
 class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
     def __init__(self, parent=None):
         """Constructor."""
@@ -76,9 +69,11 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         self.setupUi(self)
 
         self.sectionItemModel = SectionItemModel(self)
+        self.pointsTableModel = PointsTableModel(self)
 
         self.init_layer_combo_box()
         self.init_sections_combo_box()
+        self.init_points_table_view()
 
         self.layer_changed(self.layer())
 
@@ -111,6 +106,9 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         self.previousSectionButton.clicked.connect(self.previous_section)
         self.nextSectionButton.clicked.connect(self.next_section)
 
+    def init_points_table_view(self):
+        self.pointsTableView.setModel(self.pointsTableModel)
+
     def layer(self):
         return self.layerComboBox.currentLayer()
 
@@ -135,9 +133,13 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
 
         self.layer().selectByIds([item.current_f_id])
 
+        current_section = self.section_from_feature_id(item.current_f_id)
+
+        self.pointsTableModel.set_section(current_section)
+
         self.graphWidget.set_sections(
             self.section_from_feature_id(item.previous_f_id),
-            self.section_from_feature_id(item.current_f_id),
+            current_section,
             self.section_from_feature_id(item.next_f_id),
         )
 
