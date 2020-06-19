@@ -18,11 +18,19 @@ class GraphWidget(FigureCanvas):
         self.current_section = None
         self.next_section = None
 
+        self.position = None
+        self.pointing_line = None
+
     def set_sections(self, previous_section, current_section, next_section):
+        self.position = None
         self.previous_section = previous_section
         self.current_section = current_section
         self.next_section = next_section
         self.refresh()
+
+    def set_position(self, position):
+        self.position = position
+        self.refresh_pointing_line()
 
     def clear(self):
         self.graph.clear()
@@ -47,6 +55,7 @@ class GraphWidget(FigureCanvas):
 
     def refresh(self):
         self.clear()
+        self.pointing_line = None
 
         axis_pos = self.axis_position(self.current_section)
 
@@ -86,4 +95,12 @@ class GraphWidget(FigureCanvas):
             lines, labels, loc="upper center", fancybox=True, shadow=True, ncol=4, prop={"size": 10}
         )
 
+        self.draw()
+
+    def refresh_pointing_line(self):
+        if self.pointing_line != None:
+            self.pointing_line.remove()
+            self.pointing_line = None
+        if self.position is not None:
+            self.pointing_line = self.graph.axvline(self.position, color="purple")
         self.draw()

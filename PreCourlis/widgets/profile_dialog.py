@@ -6,7 +6,7 @@ from qgis.core import (
     QgsProject,
     QgsWkbTypes,
 )
-from qgis.PyQt import QtGui, QtWidgets, uic
+from qgis.PyQt import QtCore, QtGui, QtWidgets, uic
 from qgis.utils import iface
 
 from PreCourlis.core.precourlis_file import PreCourlisFileLine
@@ -108,6 +108,9 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
 
     def init_points_table_view(self):
         self.pointsTableView.setModel(self.pointsTableModel)
+        self.pointsTableView.selectionModel().currentRowChanged.connect(
+            self.current_row_changed
+        )
 
     def layer(self):
         return self.layerComboBox.currentLayer()
@@ -152,3 +155,12 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         if self.sectionComboBox.currentIndex() > self.sectionItemModel.rowCount() - 2:
             return
         self.sectionComboBox.setCurrentIndex(self.sectionComboBox.currentIndex() + 1)
+
+    def current_row_changed(self, current, previous):
+        position = self.pointsTableModel.data(
+            self.pointsTableModel.index(
+                current.row(), 0
+            ),
+            QtCore.Qt.EditRole,
+        )
+        self.graphWidget.set_position(position)
