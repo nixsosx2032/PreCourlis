@@ -24,7 +24,7 @@
 import os.path
 
 from qgis.core import QgsApplication, QgsProject
-from qgis.PyQt.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
+from qgis.PyQt.QtCore import Qt, QSettings, QTranslator, qVersion, QCoreApplication
 from qgis.PyQt.QtGui import QIcon
 from qgis.PyQt.QtWidgets import QAction, QMenu
 
@@ -158,6 +158,9 @@ class PreCourlisPlugin:
         self.iface.removePluginMenu("&PreCourlis", self.action)
         self.iface.removeToolBarIcon(self.action)
 
+        if self.profile_dialog is not None:
+            self.profile_dialog.deleteLater()
+
     def import_georef(self):
         execAlgorithmDialog(
             "precourlis:import_georef", {"CRS": QgsProject.instance().crs().authid()}
@@ -167,8 +170,15 @@ class PreCourlisPlugin:
         execAlgorithmDialog("precourlis:import_tracks", {})
 
     def open_editor(self):
-        self.profile_dialog = ProfileDialog(self.iface.mainWindow())
+        if self.profile_dialog is None:
+            self.profile_dialog = ProfileDialog(self.iface.mainWindow())
+            self.profile_dialog.setAttribute(Qt.WA_DeleteOnClose)
+            self.profile_dialog.destroyed.connect(self.profile_dialog_destroyed)
         self.profile_dialog.show()
+
+    def profile_dialog_destroyed(self):
+        self.profile_dialog.graphWidget.close_figure()
+        self.profile_dialog = None
 
     def interpolate_profiles(self):
         execAlgorithmDialog("precourlis:interpolate_lines", {})

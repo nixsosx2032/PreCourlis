@@ -9,8 +9,8 @@ from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
 
 class GraphWidget(FigureCanvas):
     def __init__(self, parent=None):
-        figure = plt.figure(figsize=(15, 7))
-        super().__init__(figure)
+        self.figure = plt.figure(figsize=(15, 7))
+        super().__init__(self.figure)
 
         self.graph = plt.subplot(111)
 
@@ -20,6 +20,9 @@ class GraphWidget(FigureCanvas):
 
         self.position = None
         self.pointing_line = None
+
+    def close_figure(self):
+        plt.close(self.figure)
 
     def set_sections(self, previous_section, current_section, next_section):
         self.position = None
