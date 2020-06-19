@@ -66,9 +66,11 @@ class PreCourlisPlugin:
                 QCoreApplication.installTranslator(self.translator)
 
         # Declare instance attributes
-        self.provider = None
+        self.action = None
         self.actions = []
         self.menu = self.tr(u"&PreCourlis")
+        self.profile_dialog = None
+        self.provider = None
 
     # noinspection PyMethodMayBeStatic
     def tr(self, message):
@@ -165,8 +167,8 @@ class PreCourlisPlugin:
         execAlgorithmDialog("precourlis:import_tracks", {})
 
     def open_editor(self):
-        dlg = ProfileDialog(self.iface.mainWindow())
-        dlg.show()
+        self.profile_dialog = ProfileDialog(self.iface.mainWindow())
+        self.profile_dialog.show()
 
     def interpolate_profiles(self):
         execAlgorithmDialog("precourlis:interpolate_lines", {})
