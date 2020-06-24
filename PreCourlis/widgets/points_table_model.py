@@ -54,5 +54,5 @@ class PointsTableModel(QtCore.QAbstractTableModel):
         if index.isValid() and role == QtCore.Qt.EditRole:
             prop = getattr(self.section, self.property_list[index.column()])
             prop[index.row()] = value if not is_null(value) else None
-            print("setData", index.row(), index.column(), value, prop[index.row()])
+            self.dataChanged.emit(index, index, [QtCore.Qt.EditRole])
         return False

@@ -71,6 +71,7 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
 
         self.sectionItemModel = SectionItemModel(self)
         self.pointsTableModel = PointsTableModel(self)
+        self.pointsTableModel.dataChanged.connect(self.data_changed)
 
         self.init_layer_combo_box()
         self.init_sections_combo_box()
@@ -163,3 +164,6 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
             self.pointsTableModel.index(current.row(), 0), QtCore.Qt.EditRole,
         )
         self.graphWidget.set_position(position)
+
+    def data_changed(self, topLeft, bottomRight, roles):
+        self.graphWidget.refresh_current_section()

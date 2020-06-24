@@ -20,6 +20,7 @@ class GraphWidget(FigureCanvas):
 
         self.position = None
         self.pointing_line = None
+        self.current_section_line = None
 
     def close_figure(self):
         plt.close(self.figure)
@@ -51,7 +52,7 @@ class GraphWidget(FigureCanvas):
     def draw_section(self, section, offset, **kwargs):
         if section.distances[0] is None:
             return
-        self.graph.plot(
+        return self.graph.plot(
             [d + offset for d in section.distances],
             section.z,
             label=section.name,
@@ -61,6 +62,7 @@ class GraphWidget(FigureCanvas):
     def refresh(self):
         self.clear()
         self.pointing_line = None
+        self.current_section_line = None
 
         axis_pos = self.axis_position(self.current_section)
 
@@ -72,9 +74,7 @@ class GraphWidget(FigureCanvas):
                 linewidth=0.5,
             )
 
-        self.draw_section(
-            self.current_section, 0, color="red", marker=".", zorder=10,
-        )
+        self.refresh_current_section(False)
 
         if self.next_section:
             self.draw_section(
@@ -104,10 +104,24 @@ class GraphWidget(FigureCanvas):
 
         self.draw()
 
-    def refresh_pointing_line(self):
+    def refresh_current_section(self, draw=True):
+        if self.current_section_line is not None:
+            for line in self.current_section_line:
+                line.remove()
+            self.current_section_line = None
+        if self.current_section is None:
+            return
+        self.current_section_line = self.draw_section(
+            self.current_section, 0, color="red", marker=".", zorder=10,
+        )
+        if draw:
+            self.draw()
+
+    def refresh_pointing_line(self, draw=True):
         if self.pointing_line is not None:
             self.pointing_line.remove()
             self.pointing_line = None
         if self.position is not None:
             self.pointing_line = self.graph.axvline(self.position, color="purple")
-        self.draw()
+        if draw:
+            self.draw()
