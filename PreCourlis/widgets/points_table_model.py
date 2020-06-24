@@ -33,6 +33,7 @@ class PointsTableModel(QtCore.QAbstractTableModel):
     def data(self, index, role=QtCore.Qt.DisplayRole):
         prop = getattr(self.section, self.property_list[index.column()])
         if role == QtCore.Qt.DisplayRole:
-            return str(round(prop[index.row()], 3))
+            v = prop[index.row()]
+            return str(round(v, 3)) if v is not None else None
         if role == QtCore.Qt.EditRole:
             return prop[index.row()]

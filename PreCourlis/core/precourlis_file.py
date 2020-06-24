@@ -12,7 +12,7 @@ from qgis.core import (
 )
 from qgis.PyQt.QtCore import QVariant
 
-from PreCourlis.core import Point, Reach, Section
+from PreCourlis.core import is_null, Point, Reach, Section
 from PreCourlis.core.utils import qgslinestring_angle
 from qgis._core import QgsCoordinateReferenceSystem
 
@@ -149,6 +149,11 @@ class PreCourlisFileLine(PreCourlisFileBase):
         )
         section.axis = [f.attribute("axis_x"), f.attribute("axis_y")]
 
+        def split_attribute(v, length):
+            if is_null(v):
+                return [None] * length
+            return v.split(",")
+
         # Take only the first parts (QgsMultiLineString => QgsLineString)
         line = next(f.geometry().constParts())
         points = line.points()
@@ -157,8 +162,8 @@ class PreCourlisFileLine(PreCourlisFileBase):
                 Point(x=p[0].x(), y=p[0].y(), z=p[1], d=p[2],)
                 for p in zip(
                     points,
-                    f.attribute("p_z").split(","),
-                    f.attribute("p_pos").split(","),
+                    split_attribute(f.attribute("p_z"), len(points)),
+                    split_attribute(f.attribute("p_pos"), len(points)),
                 )
             ]
         )

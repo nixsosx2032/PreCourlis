@@ -20,6 +20,14 @@ from PreCourlis.lib.mascaret.mascaret_file import (
 TEMP_FOLDER = "/tmp/PreCourlis"
 
 
+def is_null(v):
+    if v is None:
+        return True
+    if isinstance(v, QVariant) and v.isNull():
+        return True
+    return False
+
+
 def to_float(v):
     if v is None:
         return None

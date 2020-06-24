@@ -49,6 +49,8 @@ class GraphWidget(FigureCanvas):
         return f.geometry().lineLocatePoint(intersection)
 
     def draw_section(self, section, offset, **kwargs):
+        if section.distances[0] is None:
+            return
         self.graph.plot(
             [d + offset for d in section.distances],
             section.z,
