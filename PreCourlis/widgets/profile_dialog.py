@@ -10,6 +10,7 @@ from qgis.PyQt import QtCore, QtGui, QtWidgets, uic
 from qgis.utils import iface
 
 from PreCourlis.core.precourlis_file import PreCourlisFileLine
+from PreCourlis.widgets.delegates import FloatDelegate
 from PreCourlis.widgets.points_table_model import PointsTableModel
 
 # This loads your .ui file so that PyQt can populate your plugin with the elements from Qt Designer
@@ -107,6 +108,7 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         self.nextSectionButton.clicked.connect(self.next_section)
 
     def init_points_table_view(self):
+        self.pointsTableView.setItemDelegate(FloatDelegate(self))
         self.pointsTableView.setModel(self.pointsTableModel)
         self.pointsTableView.selectionModel().currentRowChanged.connect(
             self.current_row_changed
