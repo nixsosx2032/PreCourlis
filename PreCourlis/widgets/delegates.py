@@ -2,7 +2,6 @@ from qgis.PyQt import QtCore, QtWidgets
 
 
 class FloatDelegate(QtWidgets.QStyledItemDelegate):
-
     def createEditor(self, parent, option, index):
         editor = QtWidgets.QDoubleSpinBox(parent)
         editor.setDecimals(3)

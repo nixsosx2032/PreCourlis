@@ -35,7 +35,11 @@ class PointsTableModel(QtCore.QAbstractTableModel):
     def flags(self, index):
         if index.isValid():
             if index.column() >= 1:
-                return QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEditable
+                return (
+                    QtCore.Qt.ItemIsEnabled
+                    | QtCore.Qt.ItemIsSelectable
+                    | QtCore.Qt.ItemIsEditable
+                )
                 print(True)
             else:
                 return QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable
