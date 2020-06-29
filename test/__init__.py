@@ -10,3 +10,5 @@ QGIS_APP = start_app()
 DATA_PATH = os.path.join(os.path.dirname(__file__), "data")
 EXPECTED_PATH = os.path.join(os.path.dirname(__file__), "data", "expected")
 TEMP_PATH = "/tmp"
+
+OVERWRITE_EXPECTED = os.environ.get("OVERWRITE_EXPECTED", False)

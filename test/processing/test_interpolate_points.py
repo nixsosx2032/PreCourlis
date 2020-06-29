@@ -2,15 +2,13 @@ import os
 
 from qgis.core import (
     QgsProcessingUtils,
-    QgsProject,
-    QgsVectorFileWriter,
     QgsVectorLayer,
 )
 
 import processing
 
-from .. import DATA_PATH, EXPECTED_PATH, TEMP_PATH
-from . import TestCase, OVERWRITE_EXPECTED
+from .. import DATA_PATH, EXPECTED_PATH, TEMP_PATH, OVERWRITE_EXPECTED, utils
+from . import TestCase
 
 SECTIONS_PATH = os.path.join(DATA_PATH, "input", "profiles_points.shp")
 AXIS_PATH = os.path.join(DATA_PATH, "input", "axeHydroBief1.shp")
@@ -45,16 +43,7 @@ class TestInterpolatePointsAlgorithm(TestCase):
         output = QgsVectorLayer(outputs["OUTPUT"], "output", "ogr")
         assert output.isValid()
 
-        transform_context = QgsProject.instance().transformContext()
-        save_options = QgsVectorFileWriter.SaveVectorOptions()
-        save_options.driverName = QgsVectorFileWriter.driverForExtension("gml")
-        save_options.fileEncoding = "UTF-8"
-        QgsVectorFileWriter.writeAsVectorFormatV2(
-            output, output_path, transform_context, save_options,
-        )
-
-        output = QgsVectorLayer(output_path, "output", "ogr")
-        assert output.isValid()
+        output = utils.save_as_gml(output, output_path)
 
         expected = QgsVectorLayer(expected_path, "expected", "ogr")
         assert expected.isValid()

@@ -221,6 +221,41 @@ class PreCourlisFileLine(PreCourlisFileBase):
             self.add_section(section)
         self._layer.reload()
 
+    def layers_count(self):
+        i = 1
+        while self._layer.fields().indexFromName("layer_{}".format(i)) != -1:
+            i += 1
+        return i - 1
+
+    def add_sedimental_layer(self, name, color, thickness=0):
+        layers_count = self.layers_count()
+        field_name = "layer_{}".format(layers_count + 1)
+
+        self._layer.beginEditCommand("Add sedimental layer {}".format(name))
+
+        # Add new attribute
+        self._layer.addAttribute(QgsField(field_name, QVariant.String))
+        self._layer.updateFields()
+        self._layer.setCustomProperty("PreCoulis_{}_Name".format(field_name), name)
+        self._layer.setCustomProperty(
+            "PreCoulis_{}_Color".format(field_name), color.rgb()
+        )
+
+        # Set value of new attribute
+        source_field_name = "p_z"
+        if layers_count > 0:
+            source_field_name = "layer_{}".format(layers_count)
+        source_field_index = self._layer.fields().indexFromName(source_field_name)
+        dest_field_index = self._layer.fields().indexFromName(field_name)
+        for f in self._layer.getFeatures():
+            value = f.attribute(source_field_index)
+            if not is_null(value):
+                values = value.split(",")
+                value = ",".join([str(float(v) - thickness) for v in values])
+            self._layer.changeAttributeValue(f.id(), dest_field_index, value)
+
+        self._layer.endEditCommand()
+
 
 class PreCourlisFilePoint(PreCourlisFileBase):
     @staticmethod

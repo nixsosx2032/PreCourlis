@@ -4,8 +4,8 @@ from qgis.core import QgsVectorLayer
 
 import processing
 
-from .. import DATA_PATH, EXPECTED_PATH, TEMP_PATH
-from . import TestCase, OVERWRITE_EXPECTED
+from .. import DATA_PATH, EXPECTED_PATH, TEMP_PATH, OVERWRITE_EXPECTED
+from . import TestCase
 
 AXIS_PATH = os.path.join(DATA_PATH, "input", "axeHydroBief1.shp")
 TRACKS_PATH = os.path.join(DATA_PATH, "input", "tracesBief1.shp")

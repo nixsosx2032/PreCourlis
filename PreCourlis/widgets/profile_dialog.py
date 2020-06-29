@@ -69,6 +69,10 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         # #widgets-and-dialogs-with-auto-connect
         self.setupUi(self)
 
+        self.current_section = None
+        self.selected_color = QtGui.QColor(127, 127, 127, 255)
+        self.splitter.setSizes([200, 400])
+
         self.sectionItemModel = SectionItemModel(self)
         self.pointsTableModel = PointsTableModel(self)
         self.pointsTableModel.dataChanged.connect(self.data_changed)
@@ -76,6 +80,7 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         self.init_layer_combo_box()
         self.init_sections_combo_box()
         self.init_points_table_view()
+        self.init_edition_panel()
 
         self.layer_changed(self.layer())
 
@@ -115,6 +120,11 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
             self.current_row_changed
         )
 
+    def init_edition_panel(self):
+        self.set_new_layer_color(self.selected_color)
+        self.addLayerColorButton.clicked.connect(self.add_layer_select_color)
+        self.addLayerButton.clicked.connect(self.add_layer)
+
     def layer(self):
         return self.layerComboBox.currentLayer()
 
@@ -139,13 +149,13 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
 
         self.layer().selectByIds([item.current_f_id])
 
-        current_section = self.section_from_feature_id(item.current_f_id)
+        self.current_section = self.section_from_feature_id(item.current_f_id)
 
-        self.pointsTableModel.set_section(current_section)
+        self.pointsTableModel.set_section(self.current_section)
 
         self.graphWidget.set_sections(
             self.section_from_feature_id(item.previous_f_id),
-            current_section,
+            self.current_section,
             self.section_from_feature_id(item.next_f_id),
         )
 
@@ -167,3 +177,23 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
 
     def data_changed(self, topLeft, bottomRight, roles):
         self.graphWidget.refresh_current_section()
+
+    def add_layer_select_color(self):
+        self.set_new_layer_color(QtWidgets.QColorDialog.getColor(self.selected_color))
+
+    def set_new_layer_color(self, color):
+        self.selected_color = color
+        self.addLayerColorButton.setStyleSheet(
+            "background-color: rgba({}, {}, {}, 1);".format(
+                self.selected_color.red(),
+                self.selected_color.green(),
+                self.selected_color.blue(),
+            )
+        )
+
+    def add_layer(self):
+        name = self.addLayerNameLineEdit.text()
+        color = self.selected_color
+
+        self.layer().startEditing()
+        PreCourlisFileLine(self.layer()).add_sedimental_layer(name, color)

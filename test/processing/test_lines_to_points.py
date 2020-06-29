@@ -4,8 +4,8 @@ from qgis.core import QgsVectorLayer
 
 import processing
 
-from .. import DATA_PATH, EXPECTED_PATH, TEMP_PATH
-from . import TestCase, OVERWRITE_EXPECTED
+from .. import DATA_PATH, EXPECTED_PATH, TEMP_PATH, OVERWRITE_EXPECTED
+from . import TestCase
 
 INPUT_PATH = os.path.join(DATA_PATH, "input", "profiles_lines.shp")
 
