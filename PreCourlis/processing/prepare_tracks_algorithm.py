@@ -124,6 +124,7 @@ class PrepareTracksAlgorithm(QgsProcessingAlgorithm):
                     self.first_pos + sec_pos,
                     intersection_point.x(),
                     intersection_point.y(),
+                    "",
                     QVariant(),
                     QVariant(),
                     QVariant(),

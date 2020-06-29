@@ -70,6 +70,7 @@ class LinesToPointsAlgorithm(QgsProcessingAlgorithm):
                         line_feature.attribute("sec_pos"),
                         line_feature.attribute("axis_x"),
                         line_feature.attribute("axis_y"),
+                        "",
                         int(p_id),
                         self.to_float(p_pos),
                         self.to_float(p_z),

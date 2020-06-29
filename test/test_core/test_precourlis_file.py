@@ -27,7 +27,7 @@ class TestPreCourlisFileLine(unittest.TestCase):
 
         layer.startEditing()
         PreCourlisFileLine(layer).add_sedimental_layer(
-            "Layer1", QtGui.QColor(127, 127, 127, 255), 1
+            "Layer2", QtGui.QColor(127, 127, 127, 255), 1
         )
 
         output = utils.save_as_gml(layer, output_path)

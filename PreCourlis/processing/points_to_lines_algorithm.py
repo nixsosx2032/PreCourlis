@@ -95,6 +95,7 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
                 intersection_point.y()
                 if self.axis
                 else point_features[0].attribute("axis_y"),
+                "",
                 ",".join([str(id_ + 1) for id_ in range(0, len(points))]),
                 ",".join(
                     [str(line.lineLocatePoint(f.geometry())) for f in point_features]

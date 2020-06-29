@@ -2,6 +2,7 @@ import math
 
 from qgis.core import (
     QgsFeature,
+    QgsFeatureRequest,
     QgsField,
     QgsFields,
     QgsGeometry,
@@ -30,6 +31,7 @@ class PreCourlisFileBase:
         fields.append(QgsField("sec_pos", QVariant.Double))
         fields.append(QgsField("axis_x", QVariant.Double))
         fields.append(QgsField("axis_y", QVariant.Double))
+        fields.append(QgsField("layers", QVariant.String))
         return fields
 
     @staticmethod
@@ -121,6 +123,7 @@ class PreCourlisFileLine(PreCourlisFileBase):
                     first_pos + sec_pos,
                     intersection_point.x(),
                     intersection_point.y(),
+                    "",
                     QVariant(),
                     QVariant(),
                     QVariant(),
@@ -167,6 +170,7 @@ class PreCourlisFileLine(PreCourlisFileBase):
                 )
             ]
         )
+
         return section
 
     @staticmethod
@@ -180,6 +184,7 @@ class PreCourlisFileLine(PreCourlisFileBase):
                 section.pk,
                 section.axis[0],
                 section.axis[1],
+                "",
                 ",".join([str(i) for i in range(0, len(points))]),
                 ",".join([str(p.d) for p in points]),
                 ",".join([str(p.z) for p in points]),
@@ -227,10 +232,22 @@ class PreCourlisFileLine(PreCourlisFileBase):
             i += 1
         return i - 1
 
-    def add_sedimental_layer(self, name, color, thickness=0):
-        layers_count = self.layers_count()
-        field_name = "layer_{}".format(layers_count + 1)
+    def layers(self, feature=None):
+        if feature is None:
+            request = QgsFeatureRequest()
+            request.setLimit(1)
+            feature = next(self._layer.getFeatures(request))
+        value = feature.attribute("layers")
+        if is_null(value):
+            return []
+        return value.split(",")
 
+    def add_sedimental_layer(self, name, color, thickness=0):
+        layers = self.layers()
+        if name in layers:
+            raise KeyError("Layer {} already exists".format(name))
+
+        field_name = name
         self._layer.beginEditCommand("Add sedimental layer {}".format(name))
 
         # Add new attribute
@@ -243,11 +260,15 @@ class PreCourlisFileLine(PreCourlisFileBase):
 
         # Set value of new attribute
         source_field_name = "p_z"
-        if layers_count > 0:
-            source_field_name = "layer_{}".format(layers_count)
+        if len(layers) > 0:
+            layers[-1]
+        layers.append(name)
+        layers_list = ",".join(layers)
+        layers_field_index = self._layer.fields().indexFromName("layers")
         source_field_index = self._layer.fields().indexFromName(source_field_name)
         dest_field_index = self._layer.fields().indexFromName(field_name)
         for f in self._layer.getFeatures():
+            self._layer.changeAttributeValue(f.id(), layers_field_index, layers_list)
             value = f.attribute(source_field_index)
             if not is_null(value):
                 values = value.split(",")
