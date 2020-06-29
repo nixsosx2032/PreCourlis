@@ -105,7 +105,8 @@ class PreCourlisPlugin:
         # self.add_action("Projeter les berges", self.projAxeBerge)
         self.add_action("Interpoler des profils", self.interpolate_profiles)
         # self.add_action("A propos", slot, QIcon(":/plugins/precourlis/icon.png"))
-        self.add_action("Exporter un fichier .georef", self.export_georef)
+        self.add_action("Exporter un fichier Courlis", self.export_courlis)
+        self.add_action("Exporter un fichier Mascaret", self.export_mascaret)
 
         """
         self.actionBief = QAction("&Bief", self.iface.mainWindow())
@@ -183,5 +184,8 @@ class PreCourlisPlugin:
     def interpolate_profiles(self):
         execAlgorithmDialog("precourlis:interpolate_lines", {})
 
-    def export_georef(self):
-        execAlgorithmDialog("precourlis:export_georef")
+    def export_courlis(self):
+        execAlgorithmDialog("precourlis:export_courlis")
+
+    def export_mascaret(self):
+        execAlgorithmDialog("precourlis:export_mascaret")

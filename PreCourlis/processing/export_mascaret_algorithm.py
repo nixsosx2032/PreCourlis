@@ -1,3 +1,5 @@
+import os
+
 from qgis.core import (
     QgsProcessing,
     QgsProcessingAlgorithm,
@@ -10,9 +12,9 @@ from PreCourlis.core.precourlis_file import PreCourlisFileLine
 from PreCourlis.lib.mascaret.mascaretgeo_file import MascaretGeoFile
 
 
-class ExportGeorefAlgorithm(QgsProcessingAlgorithm):
+class ExportMascaretAlgorithm(QgsProcessingAlgorithm):
     """
-    This algorithm export a PreCourlis structured line layer to a .georef file.
+    This algorithm export a PreCourlis structured line layer to a .georef or .geo file.
     """
 
     INPUT = "INPUT"
@@ -32,12 +34,7 @@ class ExportGeorefAlgorithm(QgsProcessingAlgorithm):
             QgsProcessingParameterFileDestination(
                 self.OUTPUT,
                 self.tr("Output file"),
-                fileFilter=(
-                    "Geo file (*.geo)"
-                    ";;GeoC file (*.geoC)"
-                    ";; Georef file (*.georef)"
-                    ";;GeorefC file (*.georefC)"
-                ),
+                fileFilter="Georef file (*.georef);;Geo file (*.geo)",
             )
         )
 
@@ -46,20 +43,20 @@ class ExportGeorefAlgorithm(QgsProcessingAlgorithm):
         output_path = self.parameterAsString(parameters, self.OUTPUT, context)
 
         precourlis_file = PreCourlisFileLine(input_layer)
+        reach = precourlis_file.get_reach()
 
-        output_file = MascaretGeoFile(output_path, mode="read", load_file=False,)
-
-        output_file.add_reach(precourlis_file.get_reach())
-
+        output_file = MascaretGeoFile(output_path, mode="write")
+        output_file.has_ref = "ref" in os.path.splitext(output_path)[1][1:]
+        output_file.add_reach(reach)
         output_file.save(output_path)
 
         return {self.OUTPUT: output_path}
 
     def name(self):
-        return "export_georef"
+        return "export_mascaret"
 
     def displayName(self):
-        return self.tr("Export Georef")
+        return self.tr("Export Mascaret")
 
     def group(self):
         return self.tr(self.groupId())
@@ -71,4 +68,4 @@ class ExportGeorefAlgorithm(QgsProcessingAlgorithm):
         return QCoreApplication.translate("Processing", string)
 
     def createInstance(self):
-        return ExportGeorefAlgorithm()
+        return ExportMascaretAlgorithm()
