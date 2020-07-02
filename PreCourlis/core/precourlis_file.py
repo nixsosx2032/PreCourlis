@@ -170,11 +170,13 @@ class PreCourlisFileLine(PreCourlisFileBase):
             ]
         )
 
-        section.layer_names = self.layers()
-        section.layers_elev = [
-            split_attribute(f.attribute(layer), len(points))
-            for layer in section.layer_names
-        ]
+        section.set_layers(
+            self.layers(),
+            [
+                split_attribute(f.attribute(layer), len(points))
+                for layer in self.layers()
+            ],
+        )
 
         return section
 

@@ -57,14 +57,35 @@ class GraphWidget(FigureCanvas):
         )
         return f.geometry().lineLocatePoint(intersection)
 
-    def draw_section(self, section, offset, layer=None, **kwargs):
+    def draw_section(self, section, offset, **kwargs):
         if section.distances[0] is None:
             return
         return self.graph.plot(
             [d + offset for d in section.distances],
             section.z,
-            label=layer or section.name,
+            label=section.name,
             **kwargs,
+        )
+
+    def draw_layer(self, section, layer, **kwargs):
+        if section.distances[0] is None:
+            return
+        layer_index = section.layer_names.index(layer)
+
+        """
+        previous_z = self.current_section.z
+        self.graph.fill_between(
+            section.distances
+            z0,
+            z1,
+            where=z1 <= z0,
+            facecolor=(colorR, colorG, colorB),
+            alpha=0.3,
+        )
+        """
+
+        return self.graph.plot(
+            section.distances, section.layers_elev[layer_index], label=layer, **kwargs,
         )
 
     def refresh(self):
@@ -85,10 +106,9 @@ class GraphWidget(FigureCanvas):
         self.refresh_current_section(False)
 
         for layer in self.file.layers():
-            self.draw_section(
-                self.file.section_from_feature(self.feature),
-                0,
-                layer=layer,
+            self.draw_layer(
+                self.current_section,
+                layer,
                 color=self.file.layer_color(layer),
                 zorder=1,
             )

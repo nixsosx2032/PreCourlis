@@ -74,6 +74,12 @@ class Section(SectionBase):
         self.nb_points = len(points)
         return self
 
+    def set_layers(self, layer_names, layers_elev):
+        self.layer_names = layer_names
+        self.layers_elev = [
+            np.array([to_float(v) for v in values]) for values in layers_elev
+        ]
+
 
 class Reach(ReachBase):
     def __init__(self, *args, **kwargs):
