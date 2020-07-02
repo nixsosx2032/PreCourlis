@@ -3,6 +3,8 @@ from qgis.core import (
     QgsGeometry,
 )
 
+from PreCourlis.core.precourlis_file import PreCourlisFileLine
+
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
 
@@ -14,6 +16,8 @@ class GraphWidget(FigureCanvas):
 
         self.graph = plt.subplot(111)
 
+        self.file = None
+        self.feature = None
         self.previous_section = None
         self.current_section = None
         self.next_section = None
@@ -25,8 +29,12 @@ class GraphWidget(FigureCanvas):
     def close_figure(self):
         plt.close(self.figure)
 
-    def set_sections(self, previous_section, current_section, next_section):
+    def set_sections(
+        self, layer, feature, previous_section, current_section, next_section
+    ):
         self.position = None
+        self.file = PreCourlisFileLine(layer)
+        self.feature = feature
         self.previous_section = previous_section
         self.current_section = current_section
         self.next_section = next_section
@@ -49,13 +57,13 @@ class GraphWidget(FigureCanvas):
         )
         return f.geometry().lineLocatePoint(intersection)
 
-    def draw_section(self, section, offset, **kwargs):
+    def draw_section(self, section, offset, layer=None, **kwargs):
         if section.distances[0] is None:
             return
         return self.graph.plot(
             [d + offset for d in section.distances],
             section.z,
-            label=section.name,
+            label=layer or section.name,
             **kwargs,
         )
 
@@ -75,6 +83,15 @@ class GraphWidget(FigureCanvas):
             )
 
         self.refresh_current_section(False)
+
+        for layer in self.file.layers():
+            self.draw_section(
+                self.file.section_from_feature(self.feature),
+                0,
+                layer=layer,
+                color=self.file.layer_color(layer),
+                zorder=1,
+            )
 
         if self.next_section:
             self.draw_section(

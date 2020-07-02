@@ -154,6 +154,8 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         self.pointsTableModel.set_section(self.current_section)
 
         self.graphWidget.set_sections(
+            self.layer(),
+            self.layer().getFeature(item.current_f_id),
             self.section_from_feature_id(item.previous_f_id),
             self.current_section,
             self.section_from_feature_id(item.next_f_id),

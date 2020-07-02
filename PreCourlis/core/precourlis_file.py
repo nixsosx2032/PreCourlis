@@ -14,7 +14,7 @@ from qgis.core import (
 from qgis.PyQt.QtCore import QVariant
 
 from PreCourlis.core import is_null, Point, Reach, Section
-from PreCourlis.core.utils import qgslinestring_angle
+from PreCourlis.core.utils import qgslinestring_angle, color_to_hex
 from qgis._core import QgsCoordinateReferenceSystem
 
 
@@ -143,8 +143,7 @@ class PreCourlisFileLine(PreCourlisFileBase):
         for f in self._layer.getFeatures():
             yield self.section_from_feature(f)
 
-    @staticmethod
-    def section_from_feature(f):
+    def section_from_feature(self, f):
         section = Section(
             my_id=f.attribute("sec_id"),
             name=f.attribute("sec_name"),
@@ -170,6 +169,12 @@ class PreCourlisFileLine(PreCourlisFileBase):
                 )
             ]
         )
+
+        section.layer_names = self.layers()
+        section.layers_elev = [
+            split_attribute(f.attribute(layer), len(points))
+            for layer in section.layer_names
+        ]
 
         return section
 
@@ -242,6 +247,14 @@ class PreCourlisFileLine(PreCourlisFileBase):
             return []
         return value.split(",")
 
+    def layer_color(self, layer):
+        return self._layer.customProperty("PreCoulis_{}_Color".format(layer))
+
+    def set_layer_color(self, layer, color):
+        self._layer.setCustomProperty(
+            "PreCoulis_{}_Color".format(layer), color_to_hex(color)
+        )
+
     def add_sedimental_layer(self, name, color, thickness=0):
         layers = self.layers()
         if name in layers:
@@ -253,10 +266,7 @@ class PreCourlisFileLine(PreCourlisFileBase):
         # Add new attribute
         self._layer.addAttribute(QgsField(field_name, QVariant.String))
         self._layer.updateFields()
-        self._layer.setCustomProperty("PreCoulis_{}_Name".format(field_name), name)
-        self._layer.setCustomProperty(
-            "PreCoulis_{}_Color".format(field_name), color.rgb()
-        )
+        self.set_layer_color(self._layer, color)
 
         # Set value of new attribute
         source_field_name = "p_z"

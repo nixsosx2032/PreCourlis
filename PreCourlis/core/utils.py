@@ -3,6 +3,15 @@ import math
 from qgis.core import QgsLineString, QgsPoint
 
 
+def color_to_hex(color):
+    def to_hex(v):
+        return hex(v)[2:].zfill(2)
+
+    return "#{}{}{}".format(
+        to_hex(color.red()), to_hex(color.green()), to_hex(color.blue()),
+    )
+
+
 def vector_angle(p1, p2):
     """
     Calculate vector angle.
