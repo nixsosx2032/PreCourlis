@@ -72,20 +72,23 @@ class GraphWidget(FigureCanvas):
             return
         layer_index = section.layer_names.index(layer)
 
-        """
-        previous_z = self.current_section.z
+        if layer_index == 0:
+            previous_values = self.current_section.z
+        else:
+            previous_values = section.layers_elev[layer_index]
+        current_values = section.layers_elev[layer_index]
+
         self.graph.fill_between(
-            section.distances
-            z0,
-            z1,
-            where=z1 <= z0,
-            facecolor=(colorR, colorG, colorB),
+            section.distances,
+            previous_values,
+            current_values,
+            where=current_values <= previous_values,
+            facecolor=kwargs.get("color"),
             alpha=0.3,
         )
-        """
 
         return self.graph.plot(
-            section.distances, section.layers_elev[layer_index], label=layer, **kwargs,
+            section.distances, current_values, label=layer, **kwargs,
         )
 
     def refresh(self):
