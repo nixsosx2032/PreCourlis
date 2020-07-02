@@ -131,6 +131,7 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         self.addLayerColorButton.clicked.connect(self.add_layer_select_color)
         self.addLayerButton.clicked.connect(self.add_layer)
         self.applyLayerButton.clicked.connect(self.apply_layer)
+        self.deleteLayerButton.clicked.connect(self.delete_layer)
 
     def layer(self):
         return self.layerComboBox.currentLayer()
@@ -157,6 +158,7 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
 
         item = self.sectionItemModel.item(index)
 
+        # Select current feature in vector layer
         self.layer().selectByIds([item.current_f_id])
 
         self.current_section = self.section_from_feature_id(item.current_f_id)
@@ -221,10 +223,22 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
 
     def add_layer(self):
         name = self.addLayerNameLineEdit.text()
-        color = self.selected_color
 
         self.layer().startEditing()
-        self.file.add_sedimental_layer(name, color)
+        self.file.add_sedimental_layer(name)
+        self.layer.set_layer_color(name, self.selected_color)
+
+        self.section_changed(self.sectionComboBox.currentIndex())
 
     def apply_layer(self):
         self.file.set_layer_color(self.sedimental_layer(), self.selected_color)
+        self.graphWidget.refresh()
+
+    def delete_layer(self):
+        self.layer().startEditing()
+        layer = self.sedimental_layer()
+        self.sedimentalLayerComboBox.setCurrentIndex(
+            self.sedimentalLayerComboBox.currentIndex() - 1
+        )
+        self.file.delete_sedimental_layer(layer)
+        self.section_changed(self.sectionComboBox.currentIndex())

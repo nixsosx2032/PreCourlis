@@ -2,7 +2,6 @@ import os
 import unittest
 
 from qgis.core import QgsVectorLayer
-from qgis.PyQt import QtGui
 
 from PreCourlis.core.precourlis_file import PreCourlisFileLine
 
@@ -26,9 +25,7 @@ class TestPreCourlisFileLine(unittest.TestCase):
         assert layer.isValid()
 
         layer.startEditing()
-        PreCourlisFileLine(layer).add_sedimental_layer(
-            "Layer2", QtGui.QColor(127, 127, 127, 255), 1
-        )
+        PreCourlisFileLine(layer).add_sedimental_layer("Layer2", 1)
 
         output = utils.save_as_gml(layer, output_path)
         expected = QgsVectorLayer(expected_path, "expected", "ogr")

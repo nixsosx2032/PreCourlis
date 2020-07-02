@@ -169,7 +169,6 @@ class PreCourlisFileLine(PreCourlisFileBase):
                 )
             ]
         )
-
         section.set_layers(
             self.layers(),
             [
@@ -239,7 +238,7 @@ class PreCourlisFileLine(PreCourlisFileBase):
             request.setLimit(1)
             feature = next(self._layer.getFeatures(request))
         value = feature.attribute("layers")
-        if is_null(value):
+        if is_null(value) or value == "":
             return []
         return value.split(",")
 
@@ -251,7 +250,7 @@ class PreCourlisFileLine(PreCourlisFileBase):
             "PreCoulis_{}_Color".format(layer), color_to_hex(color)
         )
 
-    def add_sedimental_layer(self, name, color, thickness=0):
+    def add_sedimental_layer(self, name, thickness=0):
         layers = self.layers()
         if name in layers:
             raise KeyError("Layer {} already exists".format(name))
@@ -262,12 +261,11 @@ class PreCourlisFileLine(PreCourlisFileBase):
         # Add new attribute
         self._layer.addAttribute(QgsField(field_name, QVariant.String))
         self._layer.updateFields()
-        self.set_layer_color(self._layer, color)
 
-        # Set value of new attribute
+        # Update layers list and set value of new attribute
         source_field_name = "p_z"
         if len(layers) > 0:
-            layers[-1]
+            source_field_name = layers[-1]
         layers.append(name)
         layers_list = ",".join(layers)
         layers_field_index = self._layer.fields().indexFromName("layers")
@@ -280,6 +278,25 @@ class PreCourlisFileLine(PreCourlisFileBase):
                 values = value.split(",")
                 value = ",".join([str(float(v) - thickness) for v in values])
             self._layer.changeAttributeValue(f.id(), dest_field_index, value)
+
+        self._layer.endEditCommand()
+
+    def delete_sedimental_layer(self, name):
+        self._layer.beginEditCommand("Remove sedimental layer {}".format(name))
+
+        # Remove attribute
+        field_index = self._layer.fields().indexFromName(name)
+        self._layer.deleteAttribute(field_index)
+
+        # Update layers list
+        layers = self.layers()
+        print(layers)
+        layers.pop(layers.index(name))
+        print(layers)
+        layers_list = ",".join(layers)
+        layers_field_index = self._layer.fields().indexFromName("layers")
+        for f in self._layer.getFeatures():
+            self._layer.changeAttributeValue(f.id(), layers_field_index, layers_list)
 
         self._layer.endEditCommand()
 

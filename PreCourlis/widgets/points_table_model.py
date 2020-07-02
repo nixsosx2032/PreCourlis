@@ -47,10 +47,7 @@ class PointsTableModel(QtCore.QAbstractTableModel):
             return QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable
 
     def data(self, index, role=QtCore.Qt.DisplayRole):
-        if role in (
-            QtCore.Qt.DisplayRole,
-            QtCore.Qt.EditRole,
-        ):
+        if role in (QtCore.Qt.DisplayRole, QtCore.Qt.EditRole,):
             column = self.columns[index.column()]
             if column == "distances":
                 v = self.section.distances[index.row()]
