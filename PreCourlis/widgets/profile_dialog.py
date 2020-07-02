@@ -12,6 +12,7 @@ from qgis.utils import iface
 from PreCourlis.core.precourlis_file import PreCourlisFileLine
 from PreCourlis.widgets.delegates import FloatDelegate
 from PreCourlis.widgets.points_table_model import PointsTableModel
+from PreCourlis.widgets.sedimental_layer_model import SedimentalLayerModel
 
 # This loads your .ui file so that PyQt can populate your plugin with the elements from Qt Designer
 FORM_CLASS, _ = uic.loadUiType(
@@ -69,13 +70,15 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         # #widgets-and-dialogs-with-auto-connect
         self.setupUi(self)
 
+        self.file = None
         self.current_section = None
-        self.selected_color = QtGui.QColor(127, 127, 127, 255)
+        self.selected_color = None
         self.splitter.setSizes([200, 400])
 
         self.sectionItemModel = SectionItemModel(self)
         self.pointsTableModel = PointsTableModel(self)
         self.pointsTableModel.dataChanged.connect(self.data_changed)
+        self.sedimentalLayerModel = SedimentalLayerModel(self)
 
         self.init_layer_combo_box()
         self.init_sections_combo_box()
@@ -121,22 +124,29 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         )
 
     def init_edition_panel(self):
-        self.set_new_layer_color(self.selected_color)
+        self.sedimentalLayerComboBox.setModel(self.sedimentalLayerModel)
+        self.sedimentalLayerComboBox.currentIndexChanged.connect(
+            self.sedimental_layer_changed
+        )
         self.addLayerColorButton.clicked.connect(self.add_layer_select_color)
         self.addLayerButton.clicked.connect(self.add_layer)
+        self.applyLayerButton.clicked.connect(self.apply_layer)
 
     def layer(self):
         return self.layerComboBox.currentLayer()
 
     def layer_changed(self, layer):
+        self.file = PreCourlisFileLine(layer)
         self.sectionItemModel.setLayer(layer)
         self.sectionComboBox.setCurrentIndex(0)
+        self.sedimentalLayerModel.setLayer(layer)
+        self.sedimentalLayerComboBox.setCurrentIndex(0)
 
     def section_from_feature_id(self, f_id):
         if f_id is None:
             return None
         f = self.layer().getFeature(f_id)
-        section = PreCourlisFileLine.section_from_feature(f)
+        section = self.file.section_from_feature(f)
         section.feature = f
         return section
 
@@ -180,22 +190,41 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
     def data_changed(self, topLeft, bottomRight, roles):
         self.graphWidget.refresh_current_section()
 
-    def add_layer_select_color(self):
-        self.set_new_layer_color(QtWidgets.QColorDialog.getColor(self.selected_color))
+    def sedimental_layer(self):
+        return self.sedimentalLayerComboBox.currentText()
 
-    def set_new_layer_color(self, color):
-        self.selected_color = color
-        self.addLayerColorButton.setStyleSheet(
-            "background-color: rgba({}, {}, {}, 1);".format(
-                self.selected_color.red(),
-                self.selected_color.green(),
-                self.selected_color.blue(),
+    def sedimental_layer_changed(self, index):
+        layer = self.sedimental_layer()
+        self.addLayerNameLineEdit.setText(layer)
+        if index == 0:
+            self.set_new_layer_color("#ff0000")
+        else:
+            self.set_new_layer_color(self.file.layer_color(layer))
+
+    def add_layer_select_color(self):
+        self.set_new_layer_color(
+            QtWidgets.QColorDialog.getColor(
+                self.selected_color or QtGui.QColor("#7f7f7f")
             )
         )
+
+    def set_new_layer_color(self, color):
+        stylesheet = ""
+        if color is not None:
+            if isinstance(color, str):
+                color = QtGui.QColor(color)
+            stylesheet = "background-color: rgba({}, {}, {}, 1);".format(
+                color.red(), color.green(), color.blue(),
+            )
+        self.selected_color = color
+        self.addLayerColorButton.setStyleSheet(stylesheet)
 
     def add_layer(self):
         name = self.addLayerNameLineEdit.text()
         color = self.selected_color
 
         self.layer().startEditing()
-        PreCourlisFileLine(self.layer()).add_sedimental_layer(name, color)
+        self.file.add_sedimental_layer(name, color)
+
+    def apply_layer(self):
+        self.file.set_layer_color(self.sedimental_layer(), self.selected_color)

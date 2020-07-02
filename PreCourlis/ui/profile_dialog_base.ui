@@ -18,10 +18,17 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <widget class="QgsMapLayerComboBox" name="layerComboBox"/>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="sectionSelectionLayout" stretch="0,1,0">
+    <layout class="QHBoxLayout" name="sectionSelectionLayout" stretch="0,0,0,0,0">
+     <item>
+      <widget class="QgsMapLayerComboBox" name="layerComboBox">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </item>
      <item>
       <widget class="QToolButton" name="previousSectionButton">
        <property name="text">
@@ -37,6 +44,9 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="sizeAdjustPolicy">
+        <enum>QComboBox::AdjustToContents</enum>
+       </property>
       </widget>
      </item>
      <item>
@@ -45,6 +55,19 @@
         <string>&gt;&gt;</string>
        </property>
       </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
      </item>
     </layout>
    </item>
@@ -142,13 +165,6 @@
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QPushButton" name="deleteLayerButton">
-            <property name="text">
-             <string>Delete</string>
-            </property>
-           </widget>
-          </item>
          </layout>
         </item>
         <item>
@@ -163,10 +179,28 @@
             </property>
            </widget>
           </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
            <widget class="QPushButton" name="addLayerButton">
             <property name="text">
              <string>Add</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="applyLayerButton">
+            <property name="text">
+             <string>Apply</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="deleteLayerButton">
+            <property name="text">
+             <string>Delete</string>
             </property>
            </widget>
           </item>
