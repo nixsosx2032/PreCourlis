@@ -231,12 +231,6 @@ class PreCourlisFileLine(PreCourlisFileBase):
             self.add_section(section)
         self._layer.reload()
 
-    def layers_count(self):
-        i = 1
-        while self._layer.fields().indexFromName("layer_{}".format(i)) != -1:
-            i += 1
-        return i - 1
-
     def layers(self, feature=None):
         if feature is None:
             request = QgsFeatureRequest()
