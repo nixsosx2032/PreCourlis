@@ -308,6 +308,8 @@ class PreCourlisFilePoint(PreCourlisFileBase):
         # Point fields
         fields.append(QgsField("p_id", QVariant.Int))
         fields.append(QgsField("abs_lat", QVariant.Double))
+        fields.append(QgsField("x", QVariant.Double))
+        fields.append(QgsField("y", QVariant.Double))
         fields.append(QgsField("zfond", QVariant.Double))
         return fields
 
@@ -320,7 +322,16 @@ class PreCourlisFilePoint(PreCourlisFileBase):
         for section in self.sections.values():
             for index, point in enumerate(section.get_points()):
                 f.setAttributes(
-                    [section.id, section.name, section.pk, index, point.d, point.z]
+                    [
+                        section.id,
+                        section.name,
+                        section.pk,
+                        index,
+                        point.d,
+                        point.x,
+                        point.y,
+                        point.z,
+                    ]
                 )
                 if str(point.z) == "NULL":
                     f.setGeometry(QgsGeometry(QgsPoint(point.x, point.y,)))

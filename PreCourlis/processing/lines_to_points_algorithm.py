@@ -73,6 +73,8 @@ class LinesToPointsAlgorithm(QgsProcessingAlgorithm):
                         "",
                         int(p_id),
                         self.to_float(abs_lat),
+                        self.to_float(point.x()),
+                        self.to_float(point.y()),
                         self.to_float(zfond),
                     ]
                 )
