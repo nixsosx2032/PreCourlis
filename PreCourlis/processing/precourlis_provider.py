@@ -1,5 +1,8 @@
+from pkg_resources import resource_filename
+
 from qgis.core import QgsProcessingProvider
 from qgis.PyQt.QtGui import QIcon
+from processing.gui.RenderingStyles import RenderingStyles
 
 from PreCourlis.processing.export_courlis_algorithm import ExportCourlisAlgorithm
 from PreCourlis.processing.export_mascaret_algorithm import ExportMascaretAlgorithm
@@ -10,6 +13,10 @@ from PreCourlis.processing.interpolate_points import InterpolatePointsAlgorithm
 from PreCourlis.processing.lines_to_points_algorithm import LinesToPointsAlgorithm
 from PreCourlis.processing.points_to_lines_algorithm import PointsToLinesAlgorithm
 from PreCourlis.processing.prepare_tracks_algorithm import PrepareTracksAlgorithm
+
+PROFILE_LINE_STYLE = resource_filename(
+    "PreCourlis", "resources/styles/profile_line.qml"
+)
 
 
 class PreCourlisProvider(QgsProcessingProvider):
@@ -39,6 +46,25 @@ class PreCourlisProvider(QgsProcessingProvider):
         self.addAlgorithm(LinesToPointsAlgorithm())
         self.addAlgorithm(PointsToLinesAlgorithm())
         self.addAlgorithm(PrepareTracksAlgorithm())
+
+        # Set default style for some outputs
+        RenderingStyles.loadStyles()
+        RenderingStyles.styles[
+            "{}:{}".format(self.id(), ImportGeorefAlgorithm().id())
+        ] = {
+            "OUTPUT": PROFILE_LINE_STYLE,
+        }
+        RenderingStyles.styles[
+            "{}:{}".format(self.id(), ImportTracksAlgorithm().id())
+        ] = {
+            "OUTPUT": PROFILE_LINE_STYLE,
+        }
+        RenderingStyles.styles[
+            "{}:{}".format(self.id(), InterpolatePointsAlgorithm().id())
+        ] = {
+            "OUTPUT": PROFILE_LINE_STYLE,
+        }
+        RenderingStyles.saveSettings()
 
     def id(self):
         """
