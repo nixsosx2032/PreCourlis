@@ -22,6 +22,7 @@
  ***************************************************************************/
 """
 import os.path
+from pkg_resources import resource_filename
 
 from qgis.core import QgsApplication, QgsProject
 from qgis.PyQt.QtCore import Qt, QSettings, QTranslator, qVersion, QCoreApplication
@@ -162,13 +163,30 @@ class PreCourlisPlugin:
         if self.profile_dialog is not None:
             self.profile_dialog.deleteLater()
 
+    def _set_outputs_styles(self, results, styles):
+        for output_name, style_file in styles.items():
+            if output_name not in results:
+                return
+            layer = QgsProject.instance().mapLayer(results[output_name])
+            msg, ok = layer.loadNamedStyle(
+                resource_filename(
+                    "PreCourlis", "resources/styles/{}".format(style_file)
+                ),
+                True,
+            )
+            if not ok:
+                raise Exception(msg)
+            layer.triggerRepaint()
+
     def import_georef(self):
-        execAlgorithmDialog(
+        results = execAlgorithmDialog(
             "precourlis:import_georef", {"CRS": QgsProject.instance().crs().authid()}
         )
+        self._set_outputs_styles(results, {"OUTPUT": "profile_line.qml"})
 
     def import_tracks(self):
-        execAlgorithmDialog("precourlis:import_tracks", {})
+        results = execAlgorithmDialog("precourlis:import_tracks", {})
+        self._set_outputs_styles(results, {"OUTPUT": "profile_line.qml"})
 
     def open_editor(self):
         if self.profile_dialog is None:
@@ -182,7 +200,8 @@ class PreCourlisPlugin:
         self.profile_dialog = None
 
     def interpolate_profiles(self):
-        execAlgorithmDialog("precourlis:interpolate_lines", {})
+        results = execAlgorithmDialog("precourlis:interpolate_lines", {})
+        self._set_outputs_styles(results, {"OUTPUT": "profile_line.qml"})
 
     def export_courlis(self):
         execAlgorithmDialog("precourlis:export_courlis")
