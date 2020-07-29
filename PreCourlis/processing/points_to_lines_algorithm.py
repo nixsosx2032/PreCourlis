@@ -74,11 +74,11 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
         ]
         line = QgsGeometry(QgsLineString(points))
 
-        # Take only the first parts (QgsMultiLineString => QgsLineString)
         intersection_point = None
         if self.axis:
             intersection = line.intersection(self.axis.geometry())
-            intersection_point = intersection.constGet()
+            # Take only the first parts (QgsMultiPoint => QgsPoint)
+            intersection_point = next(intersection.constParts())
 
         line_feature = QgsFeature()
         line_feature.setAttributes(
