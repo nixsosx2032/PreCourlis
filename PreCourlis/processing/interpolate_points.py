@@ -161,7 +161,7 @@ class InterpolatePointsAlgorithm(QgsProcessingAlgorithm):
         feedback.pushCommandInfo(" ".join(command))
 
         env = {key: value for key, value in os.environ.items()}
-        env["PYTHONPATH"] = os.pathsep.join([env["PYTHONPATH"], PYTHONPATH])
+        env["PYTHONPATH"] = os.pathsep.join([env.get("PYTHONPATH", ""), PYTHONPATH])
 
         with subprocess.Popen(
             command,
