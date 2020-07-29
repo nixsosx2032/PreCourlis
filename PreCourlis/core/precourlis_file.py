@@ -58,7 +58,7 @@ class PreCourlisFileLine(PreCourlisFileBase):
         # Point fields
         fields.append(QgsField("p_id", QVariant.String))
         fields.append(QgsField("abs_lat", QVariant.String))
-        fields.append(QgsField("p_z", QVariant.String))
+        fields.append(QgsField("zfond", QVariant.String))
         return fields
 
     @staticmethod
@@ -164,7 +164,7 @@ class PreCourlisFileLine(PreCourlisFileBase):
                 Point(x=p[0].x(), y=p[0].y(), z=p[1], d=p[2],)
                 for p in zip(
                     points,
-                    split_attribute(f.attribute("p_z"), len(points)),
+                    split_attribute(f.attribute("zfond"), len(points)),
                     split_attribute(f.attribute("abs_lat"), len(points)),
                 )
             ]
@@ -263,7 +263,7 @@ class PreCourlisFileLine(PreCourlisFileBase):
         self._layer.updateFields()
 
         # Update layers list and set value of new attribute
-        source_field_name = "p_z"
+        source_field_name = "zfond"
         if len(layers) > 0:
             source_field_name = layers[-1]
         layers.append(name)
@@ -308,7 +308,7 @@ class PreCourlisFilePoint(PreCourlisFileBase):
         # Point fields
         fields.append(QgsField("p_id", QVariant.Int))
         fields.append(QgsField("abs_lat", QVariant.Double))
-        fields.append(QgsField("p_z", QVariant.Double))
+        fields.append(QgsField("zfond", QVariant.Double))
         return fields
 
     @staticmethod
@@ -354,7 +354,7 @@ class PreCourlisFilePoint(PreCourlisFileBase):
                 Point(
                     x=f.geometry().constGet().x(),
                     y=f.geometry().constGet().y(),
-                    z=f.attribute("p_z"),
+                    z=f.attribute("zfond"),
                     d=f.attribute("abs_lat"),
                 )
             )

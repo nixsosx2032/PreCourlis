@@ -100,7 +100,7 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
                 ",".join(
                     [str(line.lineLocatePoint(f.geometry())) for f in point_features]
                 ),
-                ",".join([str(f.attribute("p_z")) for f in point_features]),
+                ",".join([str(f.attribute("zfond")) for f in point_features]),
             ]
         )
         line_feature.setGeometry(line)

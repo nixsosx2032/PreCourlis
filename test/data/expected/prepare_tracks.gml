@@ -22,7 +22,7 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id xsi:nil="true"/>
       <ogr:abs_lat xsi:nil="true"/>
-      <ogr:p_z xsi:nil="true"/>
+      <ogr:zfond xsi:nil="true"/>
     </ogr:prepare_tracks>
   </gml:featureMember>
   <gml:featureMember>
@@ -36,7 +36,7 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id xsi:nil="true"/>
       <ogr:abs_lat xsi:nil="true"/>
-      <ogr:p_z xsi:nil="true"/>
+      <ogr:zfond xsi:nil="true"/>
     </ogr:prepare_tracks>
   </gml:featureMember>
   <gml:featureMember>
@@ -50,7 +50,7 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id xsi:nil="true"/>
       <ogr:abs_lat xsi:nil="true"/>
-      <ogr:p_z xsi:nil="true"/>
+      <ogr:zfond xsi:nil="true"/>
     </ogr:prepare_tracks>
   </gml:featureMember>
   <gml:featureMember>
@@ -64,7 +64,7 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id xsi:nil="true"/>
       <ogr:abs_lat xsi:nil="true"/>
-      <ogr:p_z xsi:nil="true"/>
+      <ogr:zfond xsi:nil="true"/>
     </ogr:prepare_tracks>
   </gml:featureMember>
   <gml:featureMember>
@@ -78,7 +78,7 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id xsi:nil="true"/>
       <ogr:abs_lat xsi:nil="true"/>
-      <ogr:p_z xsi:nil="true"/>
+      <ogr:zfond xsi:nil="true"/>
     </ogr:prepare_tracks>
   </gml:featureMember>
   <gml:featureMember>
@@ -92,7 +92,7 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id xsi:nil="true"/>
       <ogr:abs_lat xsi:nil="true"/>
-      <ogr:p_z xsi:nil="true"/>
+      <ogr:zfond xsi:nil="true"/>
     </ogr:prepare_tracks>
   </gml:featureMember>
 </ogr:FeatureCollection>

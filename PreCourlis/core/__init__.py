@@ -112,7 +112,7 @@ class Reach(ReachBase):
         # Point fields
         fields.append(QgsField("p_id", QVariant.Int))
         fields.append(QgsField("abs_lat", QVariant.Double))
-        fields.append(QgsField("p_z", QVariant.Double))
+        fields.append(QgsField("zfond", QVariant.Double))
 
         assert pr.addAttributes(fields)
 
@@ -156,7 +156,7 @@ class Reach(ReachBase):
                 Point(
                     x=f.geometry().constGet().x(),
                     y=f.geometry().constGet().y(),
-                    z=f.attribute("p_z"),
+                    z=f.attribute("zfond"),
                     d=f.attribute("abs_lat"),
                 )
             )
@@ -180,7 +180,7 @@ class Reach(ReachBase):
         # Point fields
         fields.append(QgsField("p_id", QVariant.String))
         fields.append(QgsField("abs_lat", QVariant.String))
-        fields.append(QgsField("p_z", QVariant.String))
+        fields.append(QgsField("zfond", QVariant.String))
 
         assert pr.addAttributes(fields)
 
@@ -236,7 +236,7 @@ class Reach(ReachBase):
                     Point(x=p[0].x(), y=p[0].y(), z=p[1], d=p[2],)
                     for p in zip(
                         line.points(),
-                        f.attribute("p_z").split(","),
+                        f.attribute("zfond").split(","),
                         f.attribute("abs_lat").split(","),
                     )
                 ]

@@ -151,7 +151,7 @@ class InterpolateLinesAlgorithm(QgsProcessingAlgorithm):
                 {"name": "p_id", "type": QVariant.Int, "expression": ""},
                 {"name": "xt", "type": QVariant.Int, "expression": "xt"},
                 {"name": "abs_lat", "type": QVariant.Double, "expression": ""},
-                {"name": "p_z", "type": QVariant.Double, "expression": '"Z"'},
+                {"name": "zfond", "type": QVariant.Double, "expression": '"Z"'},
             ],
             "OUTPUT": QgsProcessing.TEMPORARY_OUTPUT,
             # "OUTPUT": parameters[self.OUTPUT],

@@ -209,7 +209,7 @@ class ImportTracksAlgorithm(QgsProcessingAlgorithm):
         # fieldcalculator
         alg_params = {
             "INPUT": current,
-            "FIELD_NAME": "p_z",
+            "FIELD_NAME": "zfond",
             "FIELD_TYPE": 0,
             "FIELD_LENGTH": 10,
             "FIELD_PRECISION": 3,
