@@ -35,4 +35,5 @@ class TestPrepareTracksAlgorithm(TestCase):
 
         expected = QgsVectorLayer(expected_path, "expected", "ogr")
         assert expected.isValid()
-        self.assertLayersEqual(output, expected)
+
+        self.assertLayersEqual(expected, output)

@@ -22,7 +22,7 @@ class TestExportGeorefAlgorithm(TestCase):
         )
         assert os.path.isfile(outputs["OUTPUT"])
 
-        assert filecmp.cmp(output_path, expected_path)
+        assert filecmp.cmp(expected_path, output_path)
 
     def test_export_georefc(self):
         self._test_export("georefC")
