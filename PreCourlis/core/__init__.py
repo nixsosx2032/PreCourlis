@@ -111,7 +111,7 @@ class Reach(ReachBase):
 
         # Point fields
         fields.append(QgsField("p_id", QVariant.Int))
-        fields.append(QgsField("p_pos", QVariant.Double))
+        fields.append(QgsField("abs_lat", QVariant.Double))
         fields.append(QgsField("p_z", QVariant.Double))
 
         assert pr.addAttributes(fields)
@@ -157,7 +157,7 @@ class Reach(ReachBase):
                     x=f.geometry().constGet().x(),
                     y=f.geometry().constGet().y(),
                     z=f.attribute("p_z"),
-                    d=f.attribute("p_pos"),
+                    d=f.attribute("abs_lat"),
                 )
             )
         if section is not None:
@@ -179,7 +179,7 @@ class Reach(ReachBase):
 
         # Point fields
         fields.append(QgsField("p_id", QVariant.String))
-        fields.append(QgsField("p_pos", QVariant.String))
+        fields.append(QgsField("abs_lat", QVariant.String))
         fields.append(QgsField("p_z", QVariant.String))
 
         assert pr.addAttributes(fields)
@@ -237,7 +237,7 @@ class Reach(ReachBase):
                     for p in zip(
                         line.points(),
                         f.attribute("p_z").split(","),
-                        f.attribute("p_pos").split(","),
+                        f.attribute("abs_lat").split(","),
                     )
                 ]
             )

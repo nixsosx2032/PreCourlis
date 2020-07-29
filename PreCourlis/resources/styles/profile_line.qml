@@ -167,7 +167,7 @@
         </config>
       </editWidget>
     </field>
-    <field name="p_pos">
+    <field name="abs_lat">
       <editWidget type="TextEdit">
         <config>
           <Option/>
@@ -190,7 +190,7 @@
     <alias index="4" field="axis_y" name=""/>
     <alias index="5" field="layers" name=""/>
     <alias index="6" field="p_id" name=""/>
-    <alias index="7" field="p_pos" name=""/>
+    <alias index="7" field="abs_lat" name=""/>
     <alias index="8" field="p_z" name=""/>
   </aliases>
   <excludeAttributesWMS/>
@@ -203,7 +203,7 @@
     <default expression="" applyOnUpdate="0" field="axis_y"/>
     <default expression="" applyOnUpdate="0" field="layers"/>
     <default expression="" applyOnUpdate="0" field="p_id"/>
-    <default expression="" applyOnUpdate="0" field="p_pos"/>
+    <default expression="" applyOnUpdate="0" field="abs_lat"/>
     <default expression="" applyOnUpdate="0" field="p_z"/>
   </defaults>
   <constraints>
@@ -214,7 +214,7 @@
     <constraint constraints="0" field="axis_y" exp_strength="0" notnull_strength="0" unique_strength="0"/>
     <constraint constraints="0" field="layers" exp_strength="0" notnull_strength="0" unique_strength="0"/>
     <constraint constraints="0" field="p_id" exp_strength="0" notnull_strength="0" unique_strength="0"/>
-    <constraint constraints="0" field="p_pos" exp_strength="0" notnull_strength="0" unique_strength="0"/>
+    <constraint constraints="0" field="abs_lat" exp_strength="0" notnull_strength="0" unique_strength="0"/>
     <constraint constraints="0" field="p_z" exp_strength="0" notnull_strength="0" unique_strength="0"/>
   </constraints>
   <constraintExpressions>
@@ -225,7 +225,7 @@
     <constraint field="axis_y" exp="" desc=""/>
     <constraint field="layers" exp="" desc=""/>
     <constraint field="p_id" exp="" desc=""/>
-    <constraint field="p_pos" exp="" desc=""/>
+    <constraint field="abs_lat" exp="" desc=""/>
     <constraint field="p_z" exp="" desc=""/>
   </constraintExpressions>
   <expressionfields/>
@@ -241,7 +241,7 @@
       <column hidden="0" width="-1" name="axis_y" type="field"/>
       <column hidden="0" width="-1" name="layers" type="field"/>
       <column hidden="0" width="-1" name="p_id" type="field"/>
-      <column hidden="0" width="-1" name="p_pos" type="field"/>
+      <column hidden="0" width="-1" name="abs_lat" type="field"/>
       <column hidden="0" width="-1" name="p_z" type="field"/>
       <column hidden="1" width="-1" type="actions"/>
     </columns>
@@ -279,7 +279,7 @@ def my_form_open(dialog, layer, feature):
     <field editable="1" name="axis_y"/>
     <field editable="1" name="layers"/>
     <field editable="1" name="p_id"/>
-    <field editable="1" name="p_pos"/>
+    <field editable="1" name="abs_lat"/>
     <field editable="1" name="p_z"/>
     <field editable="1" name="sec_id"/>
     <field editable="1" name="sec_name"/>
@@ -290,7 +290,7 @@ def my_form_open(dialog, layer, feature):
     <field labelOnTop="0" name="axis_y"/>
     <field labelOnTop="0" name="layers"/>
     <field labelOnTop="0" name="p_id"/>
-    <field labelOnTop="0" name="p_pos"/>
+    <field labelOnTop="0" name="abs_lat"/>
     <field labelOnTop="0" name="p_z"/>
     <field labelOnTop="0" name="sec_id"/>
     <field labelOnTop="0" name="sec_name"/>

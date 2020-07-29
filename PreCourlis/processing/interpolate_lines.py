@@ -150,7 +150,7 @@ class InterpolateLinesAlgorithm(QgsProcessingAlgorithm):
                 {"name": "axis_y", "type": QVariant.Double, "expression": ""},
                 {"name": "p_id", "type": QVariant.Int, "expression": ""},
                 {"name": "xt", "type": QVariant.Int, "expression": "xt"},
-                {"name": "p_pos", "type": QVariant.Double, "expression": ""},
+                {"name": "abs_lat", "type": QVariant.Double, "expression": ""},
                 {"name": "p_z", "type": QVariant.Double, "expression": '"Z"'},
             ],
             "OUTPUT": QgsProcessing.TEMPORARY_OUTPUT,

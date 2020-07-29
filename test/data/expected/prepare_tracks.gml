@@ -21,7 +21,7 @@
       <ogr:axis_y>245812.88488748</ogr:axis_y>
       <ogr:layers></ogr:layers>
       <ogr:p_id xsi:nil="true"/>
-      <ogr:p_pos xsi:nil="true"/>
+      <ogr:abs_lat xsi:nil="true"/>
       <ogr:p_z xsi:nil="true"/>
     </ogr:prepare_tracks>
   </gml:featureMember>
@@ -35,7 +35,7 @@
       <ogr:axis_y>245160.350730384</ogr:axis_y>
       <ogr:layers></ogr:layers>
       <ogr:p_id xsi:nil="true"/>
-      <ogr:p_pos xsi:nil="true"/>
+      <ogr:abs_lat xsi:nil="true"/>
       <ogr:p_z xsi:nil="true"/>
     </ogr:prepare_tracks>
   </gml:featureMember>
@@ -49,7 +49,7 @@
       <ogr:axis_y>245013.889115853</ogr:axis_y>
       <ogr:layers></ogr:layers>
       <ogr:p_id xsi:nil="true"/>
-      <ogr:p_pos xsi:nil="true"/>
+      <ogr:abs_lat xsi:nil="true"/>
       <ogr:p_z xsi:nil="true"/>
     </ogr:prepare_tracks>
   </gml:featureMember>
@@ -63,7 +63,7 @@
       <ogr:axis_y>245061.876468527</ogr:axis_y>
       <ogr:layers></ogr:layers>
       <ogr:p_id xsi:nil="true"/>
-      <ogr:p_pos xsi:nil="true"/>
+      <ogr:abs_lat xsi:nil="true"/>
       <ogr:p_z xsi:nil="true"/>
     </ogr:prepare_tracks>
   </gml:featureMember>
@@ -77,7 +77,7 @@
       <ogr:axis_y>246725.243670677</ogr:axis_y>
       <ogr:layers></ogr:layers>
       <ogr:p_id xsi:nil="true"/>
-      <ogr:p_pos xsi:nil="true"/>
+      <ogr:abs_lat xsi:nil="true"/>
       <ogr:p_z xsi:nil="true"/>
     </ogr:prepare_tracks>
   </gml:featureMember>
@@ -91,7 +91,7 @@
       <ogr:axis_y>246854.039836183</ogr:axis_y>
       <ogr:layers></ogr:layers>
       <ogr:p_id xsi:nil="true"/>
-      <ogr:p_pos xsi:nil="true"/>
+      <ogr:abs_lat xsi:nil="true"/>
       <ogr:p_z xsi:nil="true"/>
     </ogr:prepare_tracks>
   </gml:featureMember>

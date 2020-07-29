@@ -1,6 +1,7 @@
 import math
 
 from qgis.core import (
+    QgsCoordinateReferenceSystem,
     QgsFeature,
     QgsFeatureRequest,
     QgsField,
@@ -15,7 +16,6 @@ from qgis.PyQt.QtCore import QVariant
 
 from PreCourlis.core import is_null, Point, Reach, Section
 from PreCourlis.core.utils import qgslinestring_angle, color_to_hex
-from qgis._core import QgsCoordinateReferenceSystem
 
 
 class PreCourlisFileBase:
@@ -57,7 +57,7 @@ class PreCourlisFileLine(PreCourlisFileBase):
         fields = PreCourlisFileBase.section_fields()
         # Point fields
         fields.append(QgsField("p_id", QVariant.String))
-        fields.append(QgsField("p_pos", QVariant.String))
+        fields.append(QgsField("abs_lat", QVariant.String))
         fields.append(QgsField("p_z", QVariant.String))
         return fields
 
@@ -165,7 +165,7 @@ class PreCourlisFileLine(PreCourlisFileBase):
                 for p in zip(
                     points,
                     split_attribute(f.attribute("p_z"), len(points)),
-                    split_attribute(f.attribute("p_pos"), len(points)),
+                    split_attribute(f.attribute("abs_lat"), len(points)),
                 )
             ]
         )
@@ -307,7 +307,7 @@ class PreCourlisFilePoint(PreCourlisFileBase):
         fields = PreCourlisFileBase.section_fields()
         # Point fields
         fields.append(QgsField("p_id", QVariant.Int))
-        fields.append(QgsField("p_pos", QVariant.Double))
+        fields.append(QgsField("abs_lat", QVariant.Double))
         fields.append(QgsField("p_z", QVariant.Double))
         return fields
 
@@ -355,7 +355,7 @@ class PreCourlisFilePoint(PreCourlisFileBase):
                     x=f.geometry().constGet().x(),
                     y=f.geometry().constGet().y(),
                     z=f.attribute("p_z"),
-                    d=f.attribute("p_pos"),
+                    d=f.attribute("abs_lat"),
                 )
             )
         if section is not None:

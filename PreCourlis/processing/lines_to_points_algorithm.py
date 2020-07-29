@@ -56,10 +56,10 @@ class LinesToPointsAlgorithm(QgsProcessingAlgorithm):
 
             # Take only the first parts (QgsMultiLineString => QgsLineString)
             line = next(line_feature.geometry().constParts())
-            for point, p_id, p_pos, p_z in zip(
+            for point, p_id, abs_lat, p_z in zip(
                 line.points(),
                 line_feature.attribute("p_id").split(","),
-                line_feature.attribute("p_pos").split(","),
+                line_feature.attribute("abs_lat").split(","),
                 line_feature.attribute("p_z").split(","),
             ):
                 point_feature = QgsFeature()
@@ -72,7 +72,7 @@ class LinesToPointsAlgorithm(QgsProcessingAlgorithm):
                         line_feature.attribute("axis_y"),
                         "",
                         int(p_id),
-                        self.to_float(p_pos),
+                        self.to_float(abs_lat),
                         self.to_float(p_z),
                     ]
                 )
