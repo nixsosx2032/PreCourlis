@@ -107,7 +107,7 @@ class Reach(ReachBase):
         # Section fields
         fields.append(QgsField("sec_id", QVariant.Int))
         fields.append(QgsField("sec_name", QVariant.String))
-        fields.append(QgsField("sec_pos", QVariant.Double))
+        fields.append(QgsField("abs_long", QVariant.Double))
 
         # Point fields
         fields.append(QgsField("p_id", QVariant.Int))
@@ -148,7 +148,7 @@ class Reach(ReachBase):
             if section is None:
                 section = Section(
                     my_id=f.attribute("sec_id"),
-                    pk=f.attribute("sec_pos"),
+                    pk=f.attribute("abs_long"),
                     name=f.attribute("sec_name"),
                 )
 
@@ -175,7 +175,7 @@ class Reach(ReachBase):
         # Section fields
         fields.append(QgsField("sec_id", QVariant.Int))
         fields.append(QgsField("sec_name", QVariant.String))
-        fields.append(QgsField("sec_pos", QVariant.Double))
+        fields.append(QgsField("abs_long", QVariant.Double))
 
         # Point fields
         fields.append(QgsField("p_id", QVariant.String))
@@ -225,7 +225,7 @@ class Reach(ReachBase):
             section = Section(
                 my_id=f.attribute("sec_id"),
                 name=f.attribute("sec_name"),
-                pk=f.attribute("sec_pos"),
+                pk=f.attribute("abs_long"),
             )
 
             # Take only the first parts (QgsMultiLineString => QgsLineString)

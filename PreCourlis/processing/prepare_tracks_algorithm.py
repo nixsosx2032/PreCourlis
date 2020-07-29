@@ -27,7 +27,7 @@ class PrepareTracksAlgorithm(QgsProcessingAlgorithm):
         - Populate attributes:
             - sec_id
             - sec_name
-            - sec_pos
+            - abs_long
     """
 
     TRACKS = "TRACKS"
@@ -99,7 +99,7 @@ class PrepareTracksAlgorithm(QgsProcessingAlgorithm):
             intersection = feature.geometry().intersection(self.axis.geometry())
             assert not intersection.isNull()
 
-            sec_pos = self.axis.geometry().lineLocatePoint(intersection)
+            abs_long = self.axis.geometry().lineLocatePoint(intersection)
 
             # Take only the first parts (QgsMultiLineString => QgsLineString)
             axis_line = next(self.axis.geometry().constParts())
@@ -120,8 +120,8 @@ class PrepareTracksAlgorithm(QgsProcessingAlgorithm):
                     None,
                     feature.attribute(self.name_field_index)
                     if self.name_field
-                    else "P_{:04.3f}".format(self.first_pos + sec_pos),
-                    self.first_pos + sec_pos,
+                    else "P_{:04.3f}".format(self.first_pos + abs_long),
+                    self.first_pos + abs_long,
                     intersection_point.x(),
                     intersection_point.y(),
                     "",

@@ -116,7 +116,7 @@ class ImportTracksAlgorithm(QgsProcessingAlgorithm):
             "FIELD_NAME": "sec_index",
             "START": 1,
             "GROUP_FIELDS": [],
-            "SORT_EXPRESSION": '"sec_pos"',
+            "SORT_EXPRESSION": '"abs_long"',
             "SORT_ASCENDING": True,
             "SORT_NULLS_FIRST": False,
             "OUTPUT": QgsProcessing.TEMPORARY_OUTPUT,

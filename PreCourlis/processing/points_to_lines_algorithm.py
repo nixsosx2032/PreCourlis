@@ -86,9 +86,9 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
                 point_features[0].attribute("sec_id") or sec_id,
                 (
                     point_features[0].attribute("sec_name")
-                    or "P_{:04.3f}".format(point_features[0].attribute("sec_pos"))
+                    or "P_{:04.3f}".format(point_features[0].attribute("abs_long"))
                 ),
-                point_features[0].attribute("sec_pos"),
+                point_features[0].attribute("abs_long"),
                 intersection_point.x()
                 if self.axis
                 else point_features[0].attribute("axis_x"),

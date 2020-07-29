@@ -145,7 +145,7 @@ class InterpolateLinesAlgorithm(QgsProcessingAlgorithm):
             "FIELDS_MAPPING": [
                 {"name": "sec_id", "type": QVariant.Int, "expression": ""},
                 {"name": "sec_name", "type": QVariant.String, "expression": ""},
-                {"name": "sec_pos", "type": QVariant.Double, "expression": '"Xl"'},
+                {"name": "abs_long", "type": QVariant.Double, "expression": '"Xl"'},
                 {"name": "axis_x", "type": QVariant.Double, "expression": ""},
                 {"name": "axis_y", "type": QVariant.Double, "expression": ""},
                 {"name": "p_id", "type": QVariant.Int, "expression": ""},
@@ -173,7 +173,7 @@ class InterpolateLinesAlgorithm(QgsProcessingAlgorithm):
         alg_params = {
             "INPUT": current,
             "AXIS": parameters[self.AXIS],
-            "GROUP_FIELD": "sec_pos",
+            "GROUP_FIELD": "abs_long",
             "ORDER_FIELD": "xt",
             "OUTPUT": parameters[self.OUTPUT],
         }

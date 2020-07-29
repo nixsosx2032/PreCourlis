@@ -67,7 +67,7 @@ class LinesToPointsAlgorithm(QgsProcessingAlgorithm):
                     [
                         line_feature.attribute("sec_id"),
                         line_feature.attribute("sec_name"),
-                        line_feature.attribute("sec_pos"),
+                        line_feature.attribute("abs_long"),
                         line_feature.attribute("axis_x"),
                         line_feature.attribute("axis_y"),
                         "",

@@ -16,7 +16,7 @@
       <ogr:geometryProperty><gml:MultiLineString srsName="EPSG:27563"><gml:lineStringMember><gml:LineString><gml:coordinates>427843.745398773,244648.444785276 427847.113880368,244745.457055215 427850.482361963,244842.469325153 427853.850843558,244939.481595092 427857.219325153,245036.493865031 427860.587806749,245133.506134969 427863.956288344,245230.518404908 427867.324769939,245327.530674847 427870.693251534,245424.542944785</gml:coordinates></gml:LineString></gml:lineStringMember></gml:MultiLineString></ogr:geometryProperty>
       <ogr:sec_id>1</ogr:sec_id>
       <ogr:sec_name>P1</ogr:sec_name>
-      <ogr:sec_pos>202.299902947602988</ogr:sec_pos>
+      <ogr:abs_long>202.299902947602988</ogr:abs_long>
       <ogr:axis_x>427858.100665553007275</ogr:axis_x>
       <ogr:axis_y>245061.876468527014367</ogr:axis_y>
       <ogr:layers>Layer1,Layer2</ogr:layers>
@@ -32,7 +32,7 @@
       <ogr:geometryProperty><gml:MultiLineString srsName="EPSG:27563"><gml:lineStringMember><gml:LineString><gml:coordinates>427353.294478528,244691.561349693 427369.463190184,244783.95398773 427385.631901841,244876.346625767 427401.800613497,244968.739263804 427417.969325153,245061.13190184 427434.13803681,245153.524539877 427450.306748466,245245.917177914 427466.475460123,245338.309815951</gml:coordinates></gml:LineString></gml:lineStringMember></gml:MultiLineString></ogr:geometryProperty>
       <ogr:sec_id>2</ogr:sec_id>
       <ogr:sec_name>P2</ogr:sec_name>
-      <ogr:sec_pos>653.608474466787015</ogr:sec_pos>
+      <ogr:abs_long>653.608474466787015</ogr:abs_long>
       <ogr:axis_x>427409.701837605971377</ogr:axis_x>
       <ogr:axis_y>245013.889115853002295</ogr:axis_y>
       <ogr:layers>Layer1,Layer2</ogr:layers>
@@ -48,7 +48,7 @@
       <ogr:geometryProperty><gml:MultiLineString srsName="EPSG:27563"><gml:lineStringMember><gml:LineString><gml:coordinates>426641.871165644,244934.09202454 426706.54601227,245007.749488753 426771.220858896,245081.406952965 426835.895705522,245155.064417178 426850.71702454,245241.297546012 426865.538343558,245327.530674847 426880.359662577,245413.763803681 426895.180981595,245499.996932515</gml:coordinates></gml:LineString></gml:lineStringMember></gml:MultiLineString></ogr:geometryProperty>
       <ogr:sec_id>3</ogr:sec_id>
       <ogr:sec_name>P3</ogr:sec_name>
-      <ogr:sec_pos>1266.165854252430108</ogr:sec_pos>
+      <ogr:abs_long>1266.165854252430108</ogr:abs_long>
       <ogr:axis_x>426836.804290604020935</ogr:axis_x>
       <ogr:axis_y>245160.350730384001508</ogr:axis_y>
       <ogr:layers>Layer1,Layer2</ogr:layers>
@@ -64,7 +64,7 @@
       <ogr:geometryProperty><gml:MultiLineString srsName="EPSG:27563"><gml:lineStringMember><gml:LineString><gml:coordinates>425952.006134969,245607.788343558 426018.836809816,245651.982822086 426085.667484663,245696.177300613 426152.498159509,245740.371779141 426219.328834356,245784.566257669 426286.159509202,245828.760736196 426375.626380368,245822.293251534 426465.093251534,245815.825766871 426554.560122699,245809.358282209 426644.026993865,245802.890797546 426733.493865031,245796.423312883 426788.73696319,245854.361196319 426843.98006135,245912.299079755 426899.223159509,245970.23696319 426954.466257669,246028.174846626</gml:coordinates></gml:LineString></gml:lineStringMember></gml:MultiLineString></ogr:geometryProperty>
       <ogr:sec_id>4</ogr:sec_id>
       <ogr:sec_name>P4</ogr:sec_name>
-      <ogr:sec_pos>2043.044436112510084</ogr:sec_pos>
+      <ogr:abs_long>2043.044436112510084</ogr:abs_long>
       <ogr:axis_x>426505.775416439981200</ogr:axis_x>
       <ogr:axis_y>245812.884887480002362</ogr:axis_y>
       <ogr:layers>Layer1,Layer2</ogr:layers>
@@ -80,7 +80,7 @@
       <ogr:geometryProperty><gml:MultiLineString srsName="EPSG:27563"><gml:lineStringMember><gml:LineString><gml:coordinates>425993.233373578,246286.349743189 426066.077550244,246352.950133284 426138.92172691,246419.550523378 426211.765903576,246486.150913473 426284.610080242,246552.751303568 426357.454256908,246619.351693662 426430.298433574,246685.952083757 426503.14261024,246752.552473851 426575.986786906,246819.152863946 426648.830963572,246885.753254041 426721.675140238,246952.353644135 426794.519316904,247018.95403423 426867.36349357,247085.554424324 426940.207670236,247152.154814419 427013.051846902,247218.755204514 427085.896023568,247285.355594608 427158.740200234,247351.955984703</gml:coordinates></gml:LineString></gml:lineStringMember></gml:MultiLineString></ogr:geometryProperty>
       <ogr:sec_id>5</ogr:sec_id>
       <ogr:sec_name>P5</ogr:sec_name>
-      <ogr:sec_pos>3029.046703388049991</ogr:sec_pos>
+      <ogr:abs_long>3029.046703388049991</ogr:abs_long>
       <ogr:axis_x>426473.273606767994352</ogr:axis_x>
       <ogr:axis_y>246725.243670677009504</ogr:axis_y>
       <ogr:layers>Layer1,Layer2</ogr:layers>
@@ -96,7 +96,7 @@
       <ogr:geometryProperty><gml:MultiLineString srsName="EPSG:27563"><gml:lineStringMember><gml:LineString><gml:coordinates>426109.784056244,246611.0266449 426170.140659767,246689.420854074 426230.49726329,246767.815063248 426290.853866813,246846.209272422 426351.210470337,246924.603481596 426411.56707386,247002.99769077 426471.923677383,247081.391899944</gml:coordinates></gml:LineString></gml:lineStringMember></gml:MultiLineString></ogr:geometryProperty>
       <ogr:sec_id>6</ogr:sec_id>
       <ogr:sec_name>P6</ogr:sec_name>
-      <ogr:sec_pos>3247.455039856050007</ogr:sec_pos>
+      <ogr:abs_long>3247.455039856050007</ogr:abs_long>
       <ogr:axis_x>426296.882707939017564</ogr:axis_x>
       <ogr:axis_y>246854.039836182986619</ogr:axis_y>
       <ogr:layers>Layer1,Layer2</ogr:layers>

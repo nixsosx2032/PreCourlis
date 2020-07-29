@@ -28,7 +28,7 @@ class PreCourlisFileBase:
         # Section fields
         fields.append(QgsField("sec_id", QVariant.Int))
         fields.append(QgsField("sec_name", QVariant.String))
-        fields.append(QgsField("sec_pos", QVariant.Double))
+        fields.append(QgsField("abs_long", QVariant.Double))
         fields.append(QgsField("axis_x", QVariant.Double))
         fields.append(QgsField("axis_y", QVariant.Double))
         fields.append(QgsField("layers", QVariant.String))
@@ -82,7 +82,7 @@ class PreCourlisFileLine(PreCourlisFileBase):
             - Populate attributes:
                 - sec_id
                 - sec_name
-                - sec_pos
+                - abs_long
         """
         if self._layer is None:
             self._layer = self.create_layer(name, tracks.crs().authid())
@@ -98,7 +98,7 @@ class PreCourlisFileLine(PreCourlisFileBase):
             intersection = track.geometry().intersection(axis.geometry())
             assert not intersection.isNull()
 
-            sec_pos = axis.geometry().lineLocatePoint(intersection)
+            abs_long = axis.geometry().lineLocatePoint(intersection)
 
             # Take only the first parts (QgsMultiLineString => QgsLineString)
             axis_line = next(axis.geometry().constParts())
@@ -119,8 +119,8 @@ class PreCourlisFileLine(PreCourlisFileBase):
                     id_,
                     track.attribute(name_field_index)
                     if name_field
-                    else "P_{:.3}".format(sec_pos),
-                    first_pos + sec_pos,
+                    else "P_{:.3}".format(abs_long),
+                    first_pos + abs_long,
                     intersection_point.x(),
                     intersection_point.y(),
                     "",
@@ -147,7 +147,7 @@ class PreCourlisFileLine(PreCourlisFileBase):
         section = Section(
             my_id=f.attribute("sec_id"),
             name=f.attribute("sec_name"),
-            pk=f.attribute("sec_pos"),
+            pk=f.attribute("abs_long"),
         )
         section.axis = [f.attribute("axis_x"), f.attribute("axis_y")]
 
@@ -346,7 +346,7 @@ class PreCourlisFilePoint(PreCourlisFileBase):
             if section is None:
                 section = Section(
                     my_id=f.attribute("sec_id"),
-                    pk=f.attribute("sec_pos"),
+                    pk=f.attribute("abs_long"),
                     name=f.attribute("sec_name"),
                 )
 

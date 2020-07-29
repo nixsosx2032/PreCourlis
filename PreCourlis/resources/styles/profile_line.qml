@@ -132,7 +132,7 @@
         </config>
       </editWidget>
     </field>
-    <field name="sec_pos">
+    <field name="abs_long">
       <editWidget type="TextEdit">
         <config>
           <Option/>
@@ -185,7 +185,7 @@
   <aliases>
     <alias index="0" field="sec_id" name=""/>
     <alias index="1" field="sec_name" name=""/>
-    <alias index="2" field="sec_pos" name=""/>
+    <alias index="2" field="abs_long" name=""/>
     <alias index="3" field="axis_x" name=""/>
     <alias index="4" field="axis_y" name=""/>
     <alias index="5" field="layers" name=""/>
@@ -198,7 +198,7 @@
   <defaults>
     <default expression="" applyOnUpdate="0" field="sec_id"/>
     <default expression="" applyOnUpdate="0" field="sec_name"/>
-    <default expression="" applyOnUpdate="0" field="sec_pos"/>
+    <default expression="" applyOnUpdate="0" field="abs_long"/>
     <default expression="" applyOnUpdate="0" field="axis_x"/>
     <default expression="" applyOnUpdate="0" field="axis_y"/>
     <default expression="" applyOnUpdate="0" field="layers"/>
@@ -209,7 +209,7 @@
   <constraints>
     <constraint constraints="0" field="sec_id" exp_strength="0" notnull_strength="0" unique_strength="0"/>
     <constraint constraints="0" field="sec_name" exp_strength="0" notnull_strength="0" unique_strength="0"/>
-    <constraint constraints="0" field="sec_pos" exp_strength="0" notnull_strength="0" unique_strength="0"/>
+    <constraint constraints="0" field="abs_long" exp_strength="0" notnull_strength="0" unique_strength="0"/>
     <constraint constraints="0" field="axis_x" exp_strength="0" notnull_strength="0" unique_strength="0"/>
     <constraint constraints="0" field="axis_y" exp_strength="0" notnull_strength="0" unique_strength="0"/>
     <constraint constraints="0" field="layers" exp_strength="0" notnull_strength="0" unique_strength="0"/>
@@ -220,7 +220,7 @@
   <constraintExpressions>
     <constraint field="sec_id" exp="" desc=""/>
     <constraint field="sec_name" exp="" desc=""/>
-    <constraint field="sec_pos" exp="" desc=""/>
+    <constraint field="abs_long" exp="" desc=""/>
     <constraint field="axis_x" exp="" desc=""/>
     <constraint field="axis_y" exp="" desc=""/>
     <constraint field="layers" exp="" desc=""/>
@@ -236,7 +236,7 @@
     <columns>
       <column hidden="0" width="-1" name="sec_id" type="field"/>
       <column hidden="0" width="-1" name="sec_name" type="field"/>
-      <column hidden="0" width="-1" name="sec_pos" type="field"/>
+      <column hidden="0" width="-1" name="abs_long" type="field"/>
       <column hidden="0" width="-1" name="axis_x" type="field"/>
       <column hidden="0" width="-1" name="axis_y" type="field"/>
       <column hidden="0" width="-1" name="layers" type="field"/>
@@ -283,7 +283,7 @@ def my_form_open(dialog, layer, feature):
     <field editable="1" name="p_z"/>
     <field editable="1" name="sec_id"/>
     <field editable="1" name="sec_name"/>
-    <field editable="1" name="sec_pos"/>
+    <field editable="1" name="abs_long"/>
   </editable>
   <labelOnTop>
     <field labelOnTop="0" name="axis_x"/>
@@ -294,7 +294,7 @@ def my_form_open(dialog, layer, feature):
     <field labelOnTop="0" name="p_z"/>
     <field labelOnTop="0" name="sec_id"/>
     <field labelOnTop="0" name="sec_name"/>
-    <field labelOnTop="0" name="sec_pos"/>
+    <field labelOnTop="0" name="abs_long"/>
   </labelOnTop>
   <widgets/>
   <previewExpression>sec_name</previewExpression>
