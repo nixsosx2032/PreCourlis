@@ -11,6 +11,7 @@ from qgis.core import (
 )
 from qgis.PyQt.QtCore import QCoreApplication
 import processing
+from qgis._core import QgsProcessingParameterBoolean
 
 
 class ImportTracksAlgorithm(QgsProcessingAlgorithm):
@@ -20,6 +21,7 @@ class ImportTracksAlgorithm(QgsProcessingAlgorithm):
     FIRST_POS = "FIRST_POS"
     NAME_FIELD = "NAME_FIELD"
     DISTANCE = "DISTANCE"
+    STRICT_DISTANCE = "STRICT_DISTANCE"
     DEM = "DEM"
     OUTPUT = "OUTPUT"
 
@@ -65,6 +67,13 @@ class ImportTracksAlgorithm(QgsProcessingAlgorithm):
                 self.tr("Maximum distance between two points"),
                 type=QgsProcessingParameterNumber.Double,
                 defaultValue=100,
+            )
+        )
+        self.addParameter(
+            QgsProcessingParameterBoolean(
+                self.STRICT_DISTANCE,
+                self.tr("Apply strict distance (do not keep initial points)"),
+                defaultValue=False,
             )
         )
         self.addParameter(
@@ -158,29 +167,52 @@ class ImportTracksAlgorithm(QgsProcessingAlgorithm):
         if feedback.isCanceled():
             return {}
 
-        # v.to.points
-        v_to_points = QgsApplication.processingRegistry().createAlgorithmById(
-            "grass7:v.to.points"
+        strict_distance = self.parameterAsBool(
+            parameters, self.STRICT_DISTANCE, context
         )
-        alg_params = {
-            "-i": True,
-            "-t": False,
-            "dmax": parameters[self.DISTANCE],
-            "input": current,
-            "type": [1],
-            "use": 1,
-            "output": v_to_points.parameterDefinition(
-                "output"
-            ).generateTemporaryDestination(),
-        }
-        outputs["Vtopoints"] = processing.run(
-            "grass7:v.to.points",
-            alg_params,
-            context=context,
-            feedback=feedback,
-            is_child_algorithm=True,
-        )
-        current = outputs["Vtopoints"]["output"]
+        if strict_distance:
+            # pointsalonglines
+            alg_params = {
+                "INPUT": current,
+                "DISTANCE": parameters[self.DISTANCE],
+                "START_OFFSET": 0,
+                "END_OFFSET": 0,
+                "OUTPUT": QgsProcessing.TEMPORARY_OUTPUT,
+            }
+            outputs["PointsAlongLines"] = processing.run(
+                "native:pointsalonglines",
+                alg_params,
+                context=context,
+                feedback=feedback,
+                is_child_algorithm=True,
+            )
+            current = outputs["PointsAlongLines"]["OUTPUT"]
+            points_order_field = "distance"
+        else:
+            # v.to.points
+            v_to_points = QgsApplication.processingRegistry().createAlgorithmById(
+                "grass7:v.to.points"
+            )
+            alg_params = {
+                "-i": True,
+                "-t": False,
+                "dmax": parameters[self.DISTANCE],
+                "input": current,
+                "type": [1],
+                "use": 1,
+                "output": v_to_points.parameterDefinition(
+                    "output"
+                ).generateTemporaryDestination(),
+            }
+            outputs["Vtopoints"] = processing.run(
+                "grass7:v.to.points",
+                alg_params,
+                context=context,
+                feedback=feedback,
+                is_child_algorithm=True,
+            )
+            current = outputs["Vtopoints"]["output"]
+            points_order_field = "fid"
 
         feedback.setCurrentStep(4)
         if feedback.isCanceled():
@@ -252,8 +284,8 @@ class ImportTracksAlgorithm(QgsProcessingAlgorithm):
         # point_to_lines
         alg_params = {
             "INPUT": current,
-            "GROUP_FIELD": "cat",
-            "ORDER_FIELD": "fid",
+            "GROUP_FIELD": "sec_id",
+            "ORDER_FIELD": points_order_field,
             "OUTPUT": parameters[self.OUTPUT],
         }
         outputs["PointsToLines"] = processing.run(

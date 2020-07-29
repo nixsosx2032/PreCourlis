@@ -38,3 +38,30 @@ class TestImportTracksAlgorithm(TestCase):
         expected = QgsVectorLayer(expected_path, "expected", "ogr")
         assert expected.isValid()
         self.assertLayersEqual(output, expected)
+
+    def test_strict_distance(self):
+        output_path = os.path.join(TEMP_PATH, "import_tracks_strict_distance.gml")
+        expected_path = os.path.join(EXPECTED_PATH, "import_tracks_strict_distance.gml")
+
+        if OVERWRITE_EXPECTED:
+            output_path = expected_path
+
+        outputs = processing.run(
+            "precourlis:import_tracks",
+            {
+                "TRACKS": TRACKS_PATH,
+                "AXIS": AXIS_PATH,
+                "FIRST_POS": 0.0,
+                "NAME_FIELD": "nom_profil",
+                "DISTANCE": 100.0,
+                "STRICT_DISTANCE": True,
+                "DEM": DEM_PATH,
+                "OUTPUT": output_path,
+            },
+        )
+        output = QgsVectorLayer(outputs["OUTPUT"], "output", "ogr")
+        assert output.isValid()
+
+        expected = QgsVectorLayer(expected_path, "expected", "ogr")
+        assert expected.isValid()
+        self.assertLayersEqual(output, expected)
