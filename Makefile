@@ -95,6 +95,10 @@ check: ## Run linters
 black: ## Run black formatter
 	$(DOCKER_RUN_CMD) make -f docker.mk black
 
+.PHONY: prepare-test-data
+prepare-test-data: ## Prepare tests input datasets from examples datasets
+	docker-compose run --rm --user `id -u` builder ./scripts/prepare_profiles.py
+
 .PHONY: test
 test: ## Run the automated tests suite
 	$(DOCKER_RUN_CMD) make -f docker.mk pytest

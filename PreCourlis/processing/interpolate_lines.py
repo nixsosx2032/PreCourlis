@@ -84,7 +84,9 @@ class InterpolateLinesAlgorithm(QgsProcessingAlgorithm):
         # Retreive first section longitudinal abscissa
         request = (
             QgsFeatureRequest()
-            .setFlags(QgsFeatureRequest.NoGeometry | QgsFeatureRequest.SubsetOfAttributes)
+            .setFlags(
+                QgsFeatureRequest.NoGeometry | QgsFeatureRequest.SubsetOfAttributes
+            )
             .setSubsetOfAttributes(["abs_long"], sections.fields())
             .addOrderBy('"sec_id"', True, True)
             .setLimit(1)
