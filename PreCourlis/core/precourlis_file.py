@@ -27,11 +27,11 @@ class PreCourlisFileBase:
         fields = QgsFields()
         # Section fields
         fields.append(QgsField("sec_id", QVariant.Int))
-        fields.append(QgsField("sec_name", QVariant.String))
+        fields.append(QgsField("sec_name", QVariant.String, len=80))
         fields.append(QgsField("abs_long", QVariant.Double))
         fields.append(QgsField("axis_x", QVariant.Double))
         fields.append(QgsField("axis_y", QVariant.Double))
-        fields.append(QgsField("layers", QVariant.String))
+        fields.append(QgsField("layers", QVariant.String, len=254))
         return fields
 
     @staticmethod
@@ -56,9 +56,9 @@ class PreCourlisFileLine(PreCourlisFileBase):
     def base_fields():
         fields = PreCourlisFileBase.section_fields()
         # Point fields
-        fields.append(QgsField("p_id", QVariant.String))
-        fields.append(QgsField("abs_lat", QVariant.String))
-        fields.append(QgsField("zfond", QVariant.String))
+        fields.append(QgsField("p_id", QVariant.String, len=100000))
+        fields.append(QgsField("abs_lat", QVariant.String, len=100000))
+        fields.append(QgsField("zfond", QVariant.String, len=100000))
         return fields
 
     @staticmethod
