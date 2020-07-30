@@ -158,6 +158,8 @@ class PreCourlisFileLine(PreCourlisFileBase):
     def layers(self, feature=None):
         if feature is None:
             request = QgsFeatureRequest()
+            request.setFlags(QgsFeatureRequest.NoGeometry)
+            request.setSubsetOfAttributes(["layers"], self._layer.fields())
             request.setLimit(1)
             feature = next(self._layer.getFeatures(request))
         value = feature.attribute("layers")
