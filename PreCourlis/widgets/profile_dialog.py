@@ -202,6 +202,7 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
             self.set_new_layer_color("#ff0000")
         else:
             self.set_new_layer_color(self.file.layer_color(layer))
+        self.graphWidget.set_current_layer(layer)
 
     def add_layer_select_color(self):
         self.set_new_layer_color(

@@ -22,7 +22,7 @@ class SedimentalLayerModel(QtCore.QAbstractListModel):
         if role == QtCore.Qt.DisplayRole:
             if index.row() == 0:
                 if index.column() == 0:
-                    return "Z"
+                    return "zfond"
             layer = self.file.layers()[index.row() - 1]
             if index.column() == 0:
                 return layer

@@ -12,7 +12,7 @@ class PointsTableModel(QtCore.QAbstractTableModel):
     def set_section(self, section):
         self.beginResetModel()
         self.section = section
-        self.columns = ["distances", "z"] + section.layer_names
+        self.columns = ["abs_lat", "zfond"] + section.layer_names
         self.endResetModel()
 
     def rowCount(self, parent=QtCore.QModelIndex()):
@@ -49,9 +49,9 @@ class PointsTableModel(QtCore.QAbstractTableModel):
     def data(self, index, role=QtCore.Qt.DisplayRole):
         if role in (QtCore.Qt.DisplayRole, QtCore.Qt.EditRole,):
             column = self.columns[index.column()]
-            if column == "distances":
+            if column == "abs_lat":
                 v = self.section.distances[index.row()]
-            elif column == "z":
+            elif column == "zfond":
                 v = self.section.z[index.row()]
             else:
                 v = self.section.layers_elev[index.column() - 2][index.row()]

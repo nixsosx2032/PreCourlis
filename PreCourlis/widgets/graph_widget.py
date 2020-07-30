@@ -27,6 +27,7 @@ class GraphWidget(FigureCanvas):
         self.current_section_line = None
         self.layers_lines = []
         self.layers_fills = []
+        self.current_layer = None
 
     def close_figure(self):
         plt.close(self.figure)
@@ -45,6 +46,10 @@ class GraphWidget(FigureCanvas):
     def set_position(self, position):
         self.position = position
         self.refresh_pointing_line()
+
+    def set_current_layer(self, layer_name):
+        self.current_layer = layer_name
+        self.refresh_current_section()
 
     def axis_position(self, section):
         """
@@ -156,7 +161,11 @@ class GraphWidget(FigureCanvas):
         if self.current_section is None:
             return
         self.current_section_line = self.draw_section(
-            self.current_section, 0, color="red", marker=".", zorder=10,
+            self.current_section,
+            0,
+            color="red",
+            marker="." if self.current_layer == "zfond" else None,
+            zorder=10 if self.current_layer == "zfond" else 1,
         )
 
         for layer in self.file.layers():
@@ -165,7 +174,8 @@ class GraphWidget(FigureCanvas):
                     self.current_section,
                     layer,
                     color=self.file.layer_color(layer),
-                    zorder=1,
+                    marker="." if self.current_layer == layer else None,
+                    zorder=10 if self.current_layer == layer else 1,
                 )
             )
 
