@@ -276,7 +276,9 @@ class PreCourlisFileLine(PreCourlisFileBase):
             value = f.attribute(source_field_index)
             if not is_null(value):
                 values = value.split(",")
-                value = ",".join([str(float(v) - thickness) for v in values])
+                value = ",".join(
+                    [str(v if v == "NULL" else float(v) - thickness) for v in values]
+                )
             self._layer.changeAttributeValue(f.id(), dest_field_index, value)
 
         self._layer.endEditCommand()

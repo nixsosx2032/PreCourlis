@@ -33,6 +33,8 @@ def to_float(v):
         return None
     if isinstance(v, QVariant) and v.isNull():
         return None
+    if v == "NULL":
+        return None
     return float(v)
 
 
@@ -69,7 +71,7 @@ class Section(SectionBase):
     def set_points(self, points):
         self.x = np.array([p.x for p in points])
         self.y = np.array([p.y for p in points])
-        self.z = np.array([p.z for p in points])
+        self.z = np.array([np.nan if is_null(p.z) else p.z for p in points])
         self.distances = np.array([p.d for p in points])
         self.nb_points = len(points)
         return self
@@ -77,7 +79,8 @@ class Section(SectionBase):
     def set_layers(self, layer_names, layers_elev):
         self.layer_names = layer_names
         self.layers_elev = [
-            np.array([to_float(v) for v in values]) for values in layers_elev
+            np.array([np.nan if is_null(v) else to_float(v) for v in values])
+            for values in layers_elev
         ]
 
 
