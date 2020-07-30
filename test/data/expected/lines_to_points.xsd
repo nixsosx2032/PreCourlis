@@ -26,6 +26,7 @@
         <xs:element name="sec_name" nillable="true" minOccurs="0" maxOccurs="1">
           <xs:simpleType>
             <xs:restriction base="xs:string">
+              <xs:maxLength value="80"/>
             </xs:restriction>
           </xs:simpleType>
         </xs:element>
@@ -50,6 +51,7 @@
         <xs:element name="layers" nillable="true" minOccurs="0" maxOccurs="1">
           <xs:simpleType>
             <xs:restriction base="xs:string">
+              <xs:maxLength value="254"/>
             </xs:restriction>
           </xs:simpleType>
         </xs:element>
@@ -61,6 +63,18 @@
           </xs:simpleType>
         </xs:element>
         <xs:element name="abs_lat" nillable="true" minOccurs="0" maxOccurs="1">
+          <xs:simpleType>
+            <xs:restriction base="xs:decimal">
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="x" nillable="true" minOccurs="0" maxOccurs="1">
+          <xs:simpleType>
+            <xs:restriction base="xs:decimal">
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="y" nillable="true" minOccurs="0" maxOccurs="1">
           <xs:simpleType>
             <xs:restriction base="xs:decimal">
             </xs:restriction>

@@ -26,6 +26,7 @@
         <xs:element name="sec_name" nillable="true" minOccurs="0" maxOccurs="1">
           <xs:simpleType>
             <xs:restriction base="xs:string">
+              <xs:maxLength value="80"/>
             </xs:restriction>
           </xs:simpleType>
         </xs:element>
@@ -50,24 +51,28 @@
         <xs:element name="layers" nillable="true" minOccurs="0" maxOccurs="1">
           <xs:simpleType>
             <xs:restriction base="xs:string">
+              <xs:maxLength value="254"/>
             </xs:restriction>
           </xs:simpleType>
         </xs:element>
         <xs:element name="p_id" nillable="true" minOccurs="0" maxOccurs="1">
           <xs:simpleType>
             <xs:restriction base="xs:string">
+              <xs:maxLength value="100000"/>
             </xs:restriction>
           </xs:simpleType>
         </xs:element>
         <xs:element name="abs_lat" nillable="true" minOccurs="0" maxOccurs="1">
           <xs:simpleType>
             <xs:restriction base="xs:string">
+              <xs:maxLength value="100000"/>
             </xs:restriction>
           </xs:simpleType>
         </xs:element>
         <xs:element name="zfond" nillable="true" minOccurs="0" maxOccurs="1">
           <xs:simpleType>
             <xs:restriction base="xs:string">
+              <xs:maxLength value="100000"/>
             </xs:restriction>
           </xs:simpleType>
         </xs:element>
