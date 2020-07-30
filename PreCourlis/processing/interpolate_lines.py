@@ -1,6 +1,7 @@
 from qgis.core import (
     QgsProcessing,
     QgsProcessingAlgorithm,
+    QgsFeatureRequest,
     QgsProcessingMultiStepFeedback,
     QgsProcessingParameterFeatureSink,
     QgsProcessingParameterFeatureSource,
@@ -80,6 +81,17 @@ class InterpolateLinesAlgorithm(QgsProcessingAlgorithm):
 
         sections = self.parameterAsSource(parameters, self.SECTIONS, context)
 
+        # Retreive first section longitudinal abscissa
+        request = (
+            QgsFeatureRequest()
+            .setFlags(QgsFeatureRequest.NoGeometry | QgsFeatureRequest.SubsetOfAttributes)
+            .setSubsetOfAttributes(["abs_long"], sections.fields())
+            .addOrderBy('"sec_id"', True, True)
+            .setLimit(1)
+        )
+        first_section = next(sections.getFeatures(request))
+        first_abs_long = first_section.attribute("abs_long")
+
         # Lines to points
         alg_params = {
             "INPUT": parameters[self.SECTIONS],
@@ -154,7 +166,6 @@ class InterpolateLinesAlgorithm(QgsProcessingAlgorithm):
                 {"name": "zfond", "type": QVariant.Double, "expression": '"Z"'},
             ],
             "OUTPUT": QgsProcessing.TEMPORARY_OUTPUT,
-            # "OUTPUT": parameters[self.OUTPUT],
         }
         outputs["RefactorFields"] = processing.run(
             "qgis:refactorfields",
@@ -173,6 +184,7 @@ class InterpolateLinesAlgorithm(QgsProcessingAlgorithm):
         alg_params = {
             "INPUT": current,
             "AXIS": parameters[self.AXIS],
+            "FIRST_SECTION_ABS_LONG": first_abs_long,
             "GROUP_FIELD": "abs_long",
             "ORDER_FIELD": "xt",
             "OUTPUT": parameters[self.OUTPUT],

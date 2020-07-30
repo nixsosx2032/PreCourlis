@@ -10,7 +10,6 @@ from qgis.core import (
     QgsProcessingParameterFeatureSink,
     QgsProcessingParameterFeatureSource,
     QgsProcessingParameterField,
-    QgsProcessingParameterNumber,
     QgsWkbTypes,
 )
 from qgis.PyQt.QtCore import QCoreApplication, QVariant
@@ -32,7 +31,6 @@ class PrepareTracksAlgorithm(QgsProcessingAlgorithm):
 
     TRACKS = "TRACKS"
     AXIS = "AXIS"
-    FIRST_POS = "FIRST_POS"
     NAME_FIELD = "NAME_FIELD"
     OUTPUT = "OUTPUT"
 
@@ -45,14 +43,6 @@ class PrepareTracksAlgorithm(QgsProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterFeatureSource(
                 self.AXIS, self.tr("Axis"), [QgsProcessing.TypeVectorLine],
-            )
-        )
-        self.addParameter(
-            QgsProcessingParameterNumber(
-                self.FIRST_POS,
-                self.tr("Abscissa of first section"),
-                type=QgsProcessingParameterNumber.Double,
-                defaultValue=0,
             )
         )
         self.addParameter(
@@ -72,7 +62,6 @@ class PrepareTracksAlgorithm(QgsProcessingAlgorithm):
     def processAlgorithm(self, parameters, context, feedback):
         source = self.parameterAsSource(parameters, self.TRACKS, context)
         axis = self.parameterAsSource(parameters, self.AXIS, context)
-        self.first_pos = self.parameterAsDouble(parameters, self.FIRST_POS, context)
         self.name_field = self.parameterAsString(parameters, self.NAME_FIELD, context)
         self.axis = next(axis.getFeatures())
         self.name_field_index = source.fields().indexFromName(self.name_field)
@@ -117,16 +106,25 @@ class PrepareTracksAlgorithm(QgsProcessingAlgorithm):
             out = QgsFeature()
             out.setAttributes(
                 [
+                    # sec_id
                     None,
+                    # sec_name
                     feature.attribute(self.name_field_index)
                     if self.name_field
-                    else "P_{:04.3f}".format(self.first_pos + abs_long),
-                    self.first_pos + abs_long,
+                    else "P_{:04.3f}".format(abs_long),
+                    # abs_long
+                    abs_long,
+                    # axis_x
                     intersection_point.x(),
+                    # axis_y
                     intersection_point.y(),
+                    # layers
                     "",
+                    # p_id
                     QVariant(),
+                    # abs_lat
                     QVariant(),
+                    # zfond
                     QVariant(),
                 ]
             )

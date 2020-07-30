@@ -18,7 +18,8 @@ class ImportTracksAlgorithm(QgsProcessingAlgorithm):
 
     TRACKS = "TRACKS"
     AXIS = "AXIS"
-    FIRST_POS = "FIRST_POS"
+    FIRST_SECTION_ABS_LONG = "FIRST_SECTION_ABS_LONG"
+    FIRST_AXIS_POINT_ABS_LONG = "FIRST_AXIS_POINT_ABS_LONG"
     NAME_FIELD = "NAME_FIELD"
     DISTANCE = "DISTANCE"
     STRICT_DISTANCE = "STRICT_DISTANCE"
@@ -44,10 +45,22 @@ class ImportTracksAlgorithm(QgsProcessingAlgorithm):
         )
         self.addParameter(
             QgsProcessingParameterNumber(
-                self.FIRST_POS,
-                self.tr("Position of first section"),
+                self.FIRST_SECTION_ABS_LONG,
+                self.tr("Abscissa of first section"),
                 type=QgsProcessingParameterNumber.Double,
                 defaultValue=0,
+                optional=True,
+            )
+        )
+        self.addParameter(
+            QgsProcessingParameterNumber(
+                self.FIRST_AXIS_POINT_ABS_LONG,
+                self.tr(
+                    "Abscissa of axis first point"
+                    " (take precedence over abscissa of first section when set)"
+                ),
+                type=QgsProcessingParameterNumber.Double,
+                optional=True,
             )
         )
         self.addParameter(
@@ -98,11 +111,10 @@ class ImportTracksAlgorithm(QgsProcessingAlgorithm):
 
         tracks = self.parameterAsSource(parameters, self.TRACKS, context)
 
-        # Import tracks
+        # prepare_tracks
         alg_params = {
             "TRACKS": parameters[self.TRACKS],
             "AXIS": parameters[self.AXIS],
-            "FIRST_POS": parameters[self.FIRST_POS],
             "NAME_FIELD": parameters[self.NAME_FIELD],
             "OUTPUT": QgsProcessing.TEMPORARY_OUTPUT,
         }
@@ -284,6 +296,10 @@ class ImportTracksAlgorithm(QgsProcessingAlgorithm):
         # point_to_lines
         alg_params = {
             "INPUT": current,
+            "FIRST_SECTION_ABS_LONG": parameters.get(self.FIRST_SECTION_ABS_LONG, None),
+            "FIRST_AXIS_POINT_ABS_LONG": parameters.get(
+                self.FIRST_AXIS_POINT_ABS_LONG, None
+            ),
             "GROUP_FIELD": "sec_id",
             "ORDER_FIELD": points_order_field,
             "OUTPUT": parameters[self.OUTPUT],

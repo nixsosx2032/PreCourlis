@@ -9,6 +9,7 @@ from qgis.core import (
     QgsProcessingParameterFeatureSink,
     QgsProcessingParameterFeatureSource,
     QgsProcessingParameterField,
+    QgsProcessingParameterNumber,
     QgsFeatureRequest,
     QgsWkbTypes,
 )
@@ -21,6 +22,8 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
 
     INPUT = "INPUT"
     AXIS = "AXIS"
+    FIRST_SECTION_ABS_LONG = "FIRST_SECTION_ABS_LONG"
+    FIRST_AXIS_POINT_ABS_LONG = "FIRST_AXIS_POINT_ABS_LONG"
     GROUP_FIELD = "GROUP_FIELD"
     ORDER_FIELD = "ORDER_FIELD"
     OUTPUT = "OUTPUT"
@@ -39,6 +42,26 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
                 ),
                 types=[QgsProcessing.TypeVectorLine],
                 defaultValue=None,
+                optional=True,
+            )
+        )
+        self.addParameter(
+            QgsProcessingParameterNumber(
+                self.FIRST_SECTION_ABS_LONG,
+                self.tr("Abscissa of first section"),
+                type=QgsProcessingParameterNumber.Double,
+                defaultValue=0,
+                optional=True,
+            )
+        )
+        self.addParameter(
+            QgsProcessingParameterNumber(
+                self.FIRST_AXIS_POINT_ABS_LONG,
+                self.tr(
+                    "Abscissa of axis first point"
+                    " (take precedence over abscissa of first section when set)"
+                ),
+                type=QgsProcessingParameterNumber.Double,
                 optional=True,
             )
         )
@@ -67,7 +90,7 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
             True,
         )
 
-    def line_feature_from_points(self, point_features, sec_id):
+    def line_feature_from_points(self, point_features, sec_id, abs_long):
         points = [
             point_feature.geometry().constGet().clone()
             for point_feature in point_features
@@ -83,23 +106,32 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
         line_feature = QgsFeature()
         line_feature.setAttributes(
             [
+                # sec_id
                 point_features[0].attribute("sec_id") or sec_id,
+                # sec_name
                 (
                     point_features[0].attribute("sec_name")
-                    or "P_{:04.3f}".format(point_features[0].attribute("abs_long"))
+                    or "P_{:04.3f}".format(abs_long)
                 ),
-                point_features[0].attribute("abs_long"),
+                # abs_long
+                abs_long,
+                # axis_x
                 intersection_point.x()
                 if self.axis
                 else point_features[0].attribute("axis_x"),
+                # axis_y
                 intersection_point.y()
                 if self.axis
                 else point_features[0].attribute("axis_y"),
+                # layers
                 "",
+                # p_id
                 ",".join([str(id_ + 1) for id_ in range(0, len(points))]),
+                # abs_lat
                 ",".join(
                     [str(line.lineLocatePoint(f.geometry())) for f in point_features]
                 ),
+                # zfond
                 ",".join([str(f.attribute("zfond")) for f in point_features]),
             ]
         )
@@ -109,6 +141,15 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
     def processAlgorithm(self, parameters, context, feedback):
         source = self.parameterAsSource(parameters, self.INPUT, context)
         axis = self.parameterAsSource(parameters, self.AXIS, context)
+        self.first_section_abs_long = self.parameterAsDouble(
+            parameters, self.FIRST_SECTION_ABS_LONG, context
+        )
+        if parameters.get(self.FIRST_AXIS_POINT_ABS_LONG, None) is None:
+            self.first_axis_point_abs_long = None
+        else:
+            self.first_axis_point_abs_long = self.parameterAsDouble(
+                parameters, self.FIRST_AXIS_POINT_ABS_LONG, context
+            )
         group_field = self.parameterAsString(parameters, self.GROUP_FIELD, context)
         order_field = self.parameterAsString(parameters, self.ORDER_FIELD, context)
 
@@ -134,10 +175,20 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
         group = None
         point_features = []
         sec_id = 0
+        abs_long_offset = 0
         for current, point_feature in enumerate(features):
             # Stop the algorithm if cancel button has been clicked
             if feedback.isCanceled():
                 break
+
+            if current == 0:
+                if self.first_axis_point_abs_long is not None:
+                    abs_long_offset = self.first_axis_point_abs_long
+                else:
+                    abs_long_offset = (
+                        self.first_section_abs_long
+                        - point_feature.attribute("abs_long")
+                    )
 
             if group is not None and point_feature.attribute(group_field) != group:
                 sec_id += 1
@@ -145,6 +196,7 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
                     self.line_feature_from_points(
                         sorted(point_features, key=lambda f: f.attribute(order_field)),
                         sec_id,
+                        point_features[0].attribute("abs_long") + abs_long_offset,
                     ),
                     QgsFeatureSink.FastInsert,
                 )
@@ -160,7 +212,11 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
         if group is not None:
             sec_id += 1
             sink.addFeature(
-                self.line_feature_from_points(point_features, sec_id),
+                self.line_feature_from_points(
+                    sorted(point_features, key=lambda f: f.attribute(order_field)),
+                    sec_id,
+                    point_features[0].attribute("abs_long") + abs_long_offset,
+                ),
                 QgsFeatureSink.FastInsert,
             )
             group = None
