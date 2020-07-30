@@ -1,4 +1,3 @@
-import os
 import unittest
 from unittest.mock import patch
 
@@ -7,14 +6,14 @@ from qgis.testing.mocked import get_iface as get_iface_base
 
 from PreCourlis.widgets.profile_dialog import ProfileDialog
 
-from .. import DATA_PATH
-
-PROFILES_PATH = os.path.join(DATA_PATH, "input", "profiles_lines.shp")
+from .. import PROFILE_LINES_PATH
 
 
 def get_iface():
+    layer = QgsVectorLayer(PROFILE_LINES_PATH, "profiles_lines", "ogr")
+    assert layer.isValid()
+
     project = QgsProject.instance()
-    layer = QgsVectorLayer(PROFILES_PATH, "profiles_lines", "ogr")
     project.addMapLayer(layer)
 
     iface = get_iface_base()

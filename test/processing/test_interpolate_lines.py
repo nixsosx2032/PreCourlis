@@ -4,10 +4,15 @@ from qgis.core import QgsVectorLayer
 
 import processing
 
-from .. import DATA_PATH, EXPECTED_PATH, TEMP_PATH, OVERWRITE_EXPECTED
+from .. import (
+    DATA_PATH,
+    PROFILE_LINES_PATH,
+    EXPECTED_PATH,
+    TEMP_PATH,
+    OVERWRITE_EXPECTED,
+)
 from . import TestCase
 
-SECTIONS_PATH = os.path.join(DATA_PATH, "input", "profiles_lines.shp")
 AXIS_PATH = os.path.join(DATA_PATH, "input", "axeHydroBief1.shp")
 CONSTRAINT_LINES = [
     os.path.join(DATA_PATH, "input", "riveDroiteBief1.shp"),
@@ -26,7 +31,7 @@ class TestInterpolateLinesAlgorithm(TestCase):
         outputs = processing.run(
             "precourlis:interpolate_lines",
             {
-                "SECTIONS": SECTIONS_PATH,
+                "SECTIONS": PROFILE_LINES_PATH,
                 "AXIS": AXIS_PATH,
                 "CONSTRAINT_LINES": CONSTRAINT_LINES,
                 "LONG_STEP": 200,

@@ -4,10 +4,8 @@ from qgis.core import QgsVectorLayer
 
 import processing
 
-from .. import DATA_PATH, EXPECTED_PATH, TEMP_PATH, OVERWRITE_EXPECTED
+from .. import PROFILE_LINES_PATH, EXPECTED_PATH, TEMP_PATH, OVERWRITE_EXPECTED
 from . import TestCase
-
-INPUT_PATH = os.path.join(DATA_PATH, "input", "profiles_lines.shp")
 
 
 class TestLinesToPointsAlgorithm(TestCase):
@@ -19,7 +17,8 @@ class TestLinesToPointsAlgorithm(TestCase):
             output_path = expected_path
 
         outputs = processing.run(
-            "precourlis:lines_to_points", {"INPUT": INPUT_PATH, "OUTPUT": output_path}
+            "precourlis:lines_to_points",
+            {"INPUT": PROFILE_LINES_PATH, "OUTPUT": output_path},
         )
         output = QgsVectorLayer(outputs["OUTPUT"], "output", "ogr")
         assert output.isValid()

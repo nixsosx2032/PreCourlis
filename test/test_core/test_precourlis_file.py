@@ -5,15 +5,10 @@ from qgis.core import QgsVectorLayer
 
 from PreCourlis.core.precourlis_file import PreCourlisFileLine
 
-from .. import DATA_PATH, EXPECTED_PATH, TEMP_PATH, OVERWRITE_EXPECTED, utils
-
-SECTIONS_PATH = os.path.join(DATA_PATH, "input", "profiles_lines.shp")
+from .. import PROFILE_LINES_PATH, EXPECTED_PATH, TEMP_PATH, OVERWRITE_EXPECTED, utils
 
 
 class TestPreCourlisFileLine(unittest.TestCase):
-    def layer(self):
-        return QgsVectorLayer(SECTIONS_PATH, "profiles", "ogr")
-
     def test_add_sedimental_layer(self):
         output_path = os.path.join(TEMP_PATH, "add_sedimental_layer.gml")
         expected_path = os.path.join(EXPECTED_PATH, "add_sedimental_layer.gml")
@@ -21,7 +16,7 @@ class TestPreCourlisFileLine(unittest.TestCase):
         if OVERWRITE_EXPECTED:
             output_path = expected_path
 
-        layer = QgsVectorLayer(SECTIONS_PATH, "profiles", "ogr")
+        layer = QgsVectorLayer(PROFILE_LINES_PATH, "profiles", "ogr")
         assert layer.isValid()
 
         layer.startEditing()

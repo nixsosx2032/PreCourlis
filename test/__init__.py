@@ -11,4 +11,6 @@ DATA_PATH = os.path.join(os.path.dirname(__file__), "data")
 EXPECTED_PATH = os.path.join(os.path.dirname(__file__), "data", "expected")
 TEMP_PATH = "/tmp"
 
+PROFILE_LINES_PATH = os.path.join(DATA_PATH, "input", "profiles_lines.geojson")
+
 OVERWRITE_EXPECTED = os.environ.get("OVERWRITE_EXPECTED", False)
