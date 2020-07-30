@@ -1,5 +1,3 @@
-import math
-
 from qgis.core import (
     QgsCoordinateReferenceSystem,
     QgsFeature,
@@ -9,13 +7,12 @@ from qgis.core import (
     QgsGeometry,
     QgsLineString,
     QgsPoint,
-    QgsRasterLayer,
     QgsVectorLayer,
 )
 from qgis.PyQt.QtCore import QVariant
 
 from PreCourlis.core import is_null, Point, Reach, Section
-from PreCourlis.core.utils import qgslinestring_angle, color_to_hex
+from PreCourlis.core.utils import color_to_hex
 
 
 class PreCourlisFileBase:
@@ -64,80 +61,6 @@ class PreCourlisFileLine(PreCourlisFileBase):
     @staticmethod
     def create_layer(self, name, source=None, crs_id=None):
         return super().create_layer(self, name, source, crs_id, "LineString")
-
-    def import_tracks(
-        self,
-        name: str,
-        axis: QgsVectorLayer,
-        tracks: QgsVectorLayer,
-        first_pos: int,
-        name_field: str,
-        step: int,
-        dem: QgsRasterLayer,
-    ):
-        """"
-        Construct standard line layer from tracks:
-            - Construct a standard reach line layer
-            - Reverse geometry if needed (depending on axis direction)
-            - Populate attributes:
-                - sec_id
-                - sec_name
-                - abs_long
-        """
-        if self._layer is None:
-            self._layer = self.create_layer(name, tracks.crs().authid())
-
-        axis = next(axis.getFeatures())
-
-        pr = self._layer.dataProvider()
-
-        id_ = 0
-        name_field_index = tracks.fields().indexFromName(name_field)
-        for track in tracks.getFeatures():
-
-            intersection = track.geometry().intersection(axis.geometry())
-            assert not intersection.isNull()
-
-            abs_long = axis.geometry().lineLocatePoint(intersection)
-
-            # Take only the first parts (QgsMultiLineString => QgsLineString)
-            axis_line = next(axis.geometry().constParts())
-            track_line = next(track.geometry().constParts())
-
-            intersection_point = intersection.constGet()
-            track_angle = qgslinestring_angle(track_line, intersection_point) * (
-                180 / math.pi
-            )
-            axis_angle = qgslinestring_angle(axis_line, intersection_point) * (
-                180 / math.pi
-            )
-            d_angle = (track_angle - axis_angle) % 360
-
-            feature = QgsFeature()
-            feature.setAttributes(
-                [
-                    id_,
-                    track.attribute(name_field_index)
-                    if name_field
-                    else "P_{:.3}".format(abs_long),
-                    first_pos + abs_long,
-                    intersection_point.x(),
-                    intersection_point.y(),
-                    "",
-                    QVariant(),
-                    QVariant(),
-                    QVariant(),
-                ]
-            )
-            if d_angle < 180:
-                feature.setGeometry(QgsGeometry(track_line.reversed()))
-            else:
-                feature.setGeometry(QgsGeometry(track.geometry()))
-
-            pr.addFeature(feature)
-            id_ += 1
-
-        self._layer.reload()
 
     def get_sections(self):
         for f in self._layer.getFeatures():
