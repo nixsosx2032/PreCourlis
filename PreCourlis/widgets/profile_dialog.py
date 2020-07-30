@@ -226,7 +226,7 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
 
         self.layer().startEditing()
         self.file.add_sedimental_layer(name)
-        self.layer.set_layer_color(name, self.selected_color)
+        self.file.set_layer_color(name, self.selected_color)
 
         self.section_changed(self.sectionComboBox.currentIndex())
 
