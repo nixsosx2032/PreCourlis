@@ -1,5 +1,4 @@
 from qgis.core import (
-    QgsCoordinateReferenceSystem,
     QgsFeature,
     QgsFeatureRequest,
     QgsField,
@@ -31,22 +30,6 @@ class PreCourlisFileBase:
         fields.append(QgsField("layers", QVariant.String, len=254))
         return fields
 
-    @staticmethod
-    def create_layer(self, name, source=None, crs_id=None, type_="LineString"):
-        if source is None:
-            source = "{}?index=yes".format(type_)
-        layer = QgsVectorLayer(source, name, "memory")
-        if crs_id is not None:
-            crs = QgsCoordinateReferenceSystem()
-            crs.createFromString(crs_id)
-            layer.setCrs(crs)
-
-        pr = layer.dataProvider()
-        assert pr.addAttributes(self.basefields())
-        layer.updateFields()
-
-        return layer
-
     def layer(self):
         return self._layer
 
@@ -60,10 +43,6 @@ class PreCourlisFileLine(PreCourlisFileBase):
         fields.append(QgsField("abs_lat", QVariant.String, len=100000))
         fields.append(QgsField("zfond", QVariant.String, len=100000))
         return fields
-
-    @staticmethod
-    def create_layer(self, name, source=None, crs_id=None):
-        return super().create_layer(self, name, source, crs_id, "LineString")
 
     def get_sections(self):
         for f in self._layer.getFeatures():
@@ -136,15 +115,6 @@ class PreCourlisFileLine(PreCourlisFileBase):
         )
         return f
 
-    def add_section(self, section):
-        self._layer.dataProvider().addFeature(self.feature_from_section(section))
-        self.reload()
-
-    """
-    def sections(self):
-        return OrderedDict([(s.id, s) for s in self.get_section()])
-    """
-
     def get_reach(self):
         reach = Reach(
             my_id=0, name=self._layer.name(), crs_id=self._layer.crs().authid(),
@@ -152,11 +122,6 @@ class PreCourlisFileLine(PreCourlisFileBase):
         for section in self.get_sections():
             reach.add_section(section)
         return reach
-
-    def set_reach(self, reach):
-        for section in reach.values():
-            self.add_section(section)
-        self._layer.reload()
 
     def layers(self, feature=None):
         if feature is None:
@@ -246,64 +211,3 @@ class PreCourlisFilePoint(PreCourlisFileBase):
         fields.append(QgsField("y", QVariant.Double))
         fields.append(QgsField("zfond", QVariant.Double))
         return fields
-
-    @staticmethod
-    def create_layer(self, name, source, crs_id):
-        return super().create_layer(name, source, crs_id, "Point")
-
-    def add_reach(self):
-        f = QgsFeature()
-        for section in self.sections.values():
-            for index, point in enumerate(section.get_points()):
-                f.setAttributes(
-                    [
-                        section.id,
-                        section.name,
-                        section.pk,
-                        index,
-                        point.d,
-                        point.x,
-                        point.y,
-                        point.z,
-                    ]
-                )
-                if str(point.z) == "NULL":
-                    f.setGeometry(QgsGeometry(QgsPoint(point.x, point.y,)))
-                else:
-                    f.setGeometry(QgsGeometry(QgsPoint(point.x, point.y, point.z,)))
-                self._layer.dataProvider().addFeature(f)
-        self._layer.reload()
-
-    def get_reach(self):
-        reach = Reach(
-            my_id=0, name=self._layer.name(), crs_id=self._layer.crs().authid(),
-        )
-
-        section = None
-        points = []
-        for f in self._layer.getFeatures():
-            if section is not None:
-                if f.attribute("sec_id") != section.id:
-                    reach.add_section(section.set_points(points))
-                    section = None
-                    points = []
-
-            if section is None:
-                section = Section(
-                    my_id=f.attribute("sec_id"),
-                    pk=f.attribute("abs_long"),
-                    name=f.attribute("sec_name"),
-                )
-
-            points.append(
-                Point(
-                    x=f.geometry().constGet().x(),
-                    y=f.geometry().constGet().y(),
-                    z=f.attribute("zfond"),
-                    d=f.attribute("abs_lat"),
-                )
-            )
-        if section is not None:
-            reach.add_section(section.set_points(points))
-
-        return reach
