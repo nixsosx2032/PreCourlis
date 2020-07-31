@@ -26,3 +26,21 @@ class TestPreCourlisFileLine(unittest.TestCase):
         expected = QgsVectorLayer(expected_path, "expected", "ogr")
         assert expected.isValid()
         self.assertLayersEqual(output, expected)
+
+    def test_delete_sedimental_layer(self):
+        output_path = os.path.join(TEMP_PATH, "remove_sedimental_layer.gml")
+        expected_path = os.path.join(EXPECTED_PATH, "remove_sedimental_layer.gml")
+
+        if OVERWRITE_EXPECTED:
+            output_path = expected_path
+
+        layer = QgsVectorLayer(PROFILE_LINES_PATH, "profiles", "ogr")
+        assert layer.isValid()
+
+        layer.startEditing()
+        PreCourlisFileLine(layer).delete_sedimental_layer("Layer1")
+
+        output = utils.save_as_gml(layer, output_path)
+        expected = QgsVectorLayer(expected_path, "expected", "ogr")
+        assert expected.isValid()
+        self.assertLayersEqual(output, expected)
