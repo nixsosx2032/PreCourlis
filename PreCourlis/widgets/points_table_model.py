@@ -30,7 +30,7 @@ class PointsTableModel(QtCore.QAbstractTableModel):
             if orientation == QtCore.Qt.Horizontal:
                 return self.columns[section]
             if orientation == QtCore.Qt.Vertical:
-                return section
+                return str(section)
 
     def flags(self, index):
         if index.isValid():
@@ -40,7 +40,6 @@ class PointsTableModel(QtCore.QAbstractTableModel):
                     | QtCore.Qt.ItemIsSelectable
                     | QtCore.Qt.ItemIsEditable
                 )
-                print(True)
             else:
                 return QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable
         else:
@@ -67,12 +66,14 @@ class PointsTableModel(QtCore.QAbstractTableModel):
             v = value if not is_null(value) else None
 
             column = self.columns[index.column()]
-            if column == "distances":
+            if column == "abs_lat":
                 self.section.distances[index.row()] = v
-            elif column == "z":
+            elif column == "zfond":
                 self.section.z[index.row()] = v
             else:
                 self.section.layers_elev[index.column() - 2][index.row()] = v
 
             self.dataChanged.emit(index, index, [QtCore.Qt.EditRole])
+            return True
+
         return False
