@@ -198,7 +198,9 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
 
     def point_selected(self, index):
         column = 0
-        if self.sedimental_layer() != "zfond":
+        if self.sedimental_layer() == "zfond":
+            column = 1
+        else:
             layer_index = self.sedimentalLayerComboBox.currentText()
             column = self.current_section.layer_names.index(layer_index) + 1
         self.pointsTableView.selectionModel().select(
