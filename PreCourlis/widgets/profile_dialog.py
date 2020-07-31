@@ -209,10 +209,7 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
     def sedimental_layer_changed(self, index):
         layer = self.sedimental_layer()
         self.addLayerNameLineEdit.setText(layer)
-        if index == 0:
-            self.set_new_layer_color("#ff0000")
-        else:
-            self.set_new_layer_color(self.file.layer_color(layer))
+        self.set_new_layer_color(self.file.layer_color(layer))
         self.graphWidget.set_current_layer(layer)
 
     def add_layer_select_color(self):

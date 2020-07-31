@@ -47,6 +47,9 @@ class PreCourlisFileBase:
 
         return layer
 
+    def layer(self):
+        return self._layer
+
 
 class PreCourlisFileLine(PreCourlisFileBase):
     @staticmethod
@@ -168,6 +171,10 @@ class PreCourlisFileLine(PreCourlisFileBase):
         return value.split(",")
 
     def layer_color(self, layer):
+        if self._layer is None:
+            return "#7f7f7f"
+        if layer == "zfond":
+            return "#ff0000"
         return self._layer.customProperty("PreCoulis_{}_Color".format(layer))
 
     def set_layer_color(self, layer, color):

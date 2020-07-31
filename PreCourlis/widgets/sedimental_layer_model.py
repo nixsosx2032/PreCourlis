@@ -16,6 +16,8 @@ class SedimentalLayerModel(QtCore.QAbstractListModel):
     def rowCount(self, parent=QtCore.QModelIndex()):
         if self.file is None:
             return 0
+        if self.file.layer() is None:
+            return 0
         return len(self.file.layers()) + 1
 
     def data(self, index, role=QtCore.Qt.DisplayRole):
