@@ -83,6 +83,7 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         self.init_layer_combo_box()
         self.init_sections_combo_box()
         self.init_points_table_view()
+        self.init_graph_widget()
         self.init_edition_panel()
 
         self.layer_changed(self.layer())
@@ -122,6 +123,9 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         self.pointsTableView.selectionModel().currentRowChanged.connect(
             self.current_row_changed
         )
+
+    def init_graph_widget(self):
+        self.graphWidget.point_selected.connect(self.point_selected)
 
     def init_edition_panel(self):
         self.sedimentalLayerComboBox.setModel(self.sedimentalLayerModel)
@@ -184,16 +188,23 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         self.sectionComboBox.setCurrentIndex(self.sectionComboBox.currentIndex() + 1)
 
     def current_row_changed(self, current, previous):
-        position = self.pointsTableModel.data(
-            self.pointsTableModel.index(current.row(), 0), QtCore.Qt.EditRole,
-        )
-        self.graphWidget.set_position(position)
+        self.graphWidget.set_current_point_index(current.row())
 
     def data_changed(self, topLeft, bottomRight, roles):
         self.graphWidget.refresh_current_section()
 
     def sedimental_layer(self):
         return self.sedimentalLayerComboBox.currentText()
+
+    def point_selected(self, index):
+        column = 0
+        if self.sedimental_layer() != "zfond":
+            layer_index = self.sedimentalLayerComboBox.currentText()
+            column = self.current_section.layer_names.index(layer_index) + 1
+        self.pointsTableView.selectionModel().select(
+            self.pointsTableModel.index(index, column),
+            QtCore.QItemSelectionModel.ClearAndSelect,
+        )
 
     def sedimental_layer_changed(self, index):
         layer = self.sedimental_layer()

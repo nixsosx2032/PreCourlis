@@ -2,14 +2,19 @@ from qgis.core import (
     QgsPoint,
     QgsGeometry,
 )
+from qgis.PyQt import QtCore, QtWidgets
 
 from PreCourlis.core.precourlis_file import PreCourlisFileLine
 
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
+import numpy as np
 
 
 class GraphWidget(FigureCanvas):
+
+    point_selected = QtCore.pyqtSignal(int)  # index
+
     def __init__(self, parent=None):
         self.figure = plt.figure(figsize=(15, 7))
         super().__init__(self.figure)
@@ -27,7 +32,8 @@ class GraphWidget(FigureCanvas):
         self.current_section_line = None
         self.layers_lines = []
         self.layers_fills = []
-        self.current_layer = None
+        self.current_layer_name = None
+        self.current_point_index = None
 
     def close_figure(self):
         plt.close(self.figure)
@@ -43,12 +49,12 @@ class GraphWidget(FigureCanvas):
         self.next_section = next_section
         self.refresh()
 
-    def set_position(self, position):
-        self.position = position
+    def set_current_point_index(self, point_index):
+        self.current_point_index = point_index
         self.refresh_pointing_line()
 
     def set_current_layer(self, layer_name):
-        self.current_layer = layer_name
+        self.current_layer_name = layer_name
         self.refresh_current_section()
 
     def axis_position(self, section):
@@ -164,8 +170,9 @@ class GraphWidget(FigureCanvas):
             self.current_section,
             0,
             color="red",
-            marker="." if self.current_layer == "zfond" else None,
-            zorder=10 if self.current_layer == "zfond" else 1,
+            marker="." if self.current_layer_name == "zfond" else None,
+            zorder=10 if self.current_layer_name == "zfond" else 1,
+            picker=self.line_picker if self.current_layer_name == "zfond" else None,
         )
 
         for layer in self.file.layers():
@@ -174,8 +181,11 @@ class GraphWidget(FigureCanvas):
                     self.current_section,
                     layer,
                     color=self.file.layer_color(layer),
-                    marker="." if self.current_layer == layer else None,
-                    zorder=10 if self.current_layer == layer else 1,
+                    marker="." if self.current_layer_name == layer else None,
+                    zorder=10 if self.current_layer_name == layer else 1,
+                    picker=self.line_picker
+                    if self.current_layer_name == layer
+                    else None,
                 )
             )
 
@@ -186,7 +196,30 @@ class GraphWidget(FigureCanvas):
         if self.pointing_line is not None:
             self.pointing_line.remove()
             self.pointing_line = None
-        if self.position is not None:
-            self.pointing_line = self.graph.axvline(self.position, color="purple")
+
+        if self.current_point_index is not None:
+            abs_lat = self.current_section.distances[self.current_point_index]
+            self.pointing_line = self.graph.axvline(abs_lat, color="purple")
         if draw:
             self.draw()
+
+    def line_picker(self, line, mouseevent):
+        if mouseevent.xdata is None or mouseevent.ydata is None:
+            return False, dict()
+
+        # Search for the closest point
+        xdata = line.get_xdata()
+        ydata = line.get_ydata()
+        d = np.sqrt(
+            (xdata - mouseevent.xdata) ** 2.0 + (ydata - mouseevent.ydata) ** 2.0
+        )
+        ind = np.argmin(d)
+        if ind is None:
+            return False, dict()
+
+        self.current_point_index = ind
+        self.refresh_pointing_line(draw=True)
+        self.point_selected.emit(self.current_point_index)
+
+        if QtWidgets.QApplication.keyboardModifiers() != QtCore.Qt.ControlModifier:
+            return False, dict()
