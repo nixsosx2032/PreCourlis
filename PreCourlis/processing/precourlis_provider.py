@@ -20,11 +20,11 @@ PROFILE_LINE_STYLE = resource_filename(
 
 
 class PreCourlisProvider(QgsProcessingProvider):
-    def __init__(self):
+    def __init__(self, parent=None):
         """
         Default constructor.
         """
-        QgsProcessingProvider.__init__(self)
+        QgsProcessingProvider.__init__(self, parent)
 
     def unload(self):
         """
