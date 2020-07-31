@@ -126,6 +126,7 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
 
     def init_graph_widget(self):
         self.graphWidget.point_selected.connect(self.point_selected)
+        self.graphWidget.set_selection_model(self.pointsTableView.selectionModel())
 
     def init_edition_panel(self):
         self.sedimentalLayerComboBox.setModel(self.sedimentalLayerModel)

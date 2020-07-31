@@ -2,13 +2,13 @@ from qgis.core import (
     QgsPoint,
     QgsGeometry,
 )
-from qgis.PyQt import QtCore, QtWidgets
+from qgis.PyQt import QtCore
 
 from PreCourlis.core.precourlis_file import PreCourlisFileLine
+from PreCourlis.widgets.selection_tool import SelectionTool
 
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
-import numpy as np
 
 
 class GraphWidget(FigureCanvas):
@@ -20,6 +20,9 @@ class GraphWidget(FigureCanvas):
         super().__init__(self.figure)
 
         self.graph = plt.subplot(111)
+
+        self.selection_tool = SelectionTool(self, self.graph)
+        self.selection_tool.activate()
 
         self.file = None
         self.feature = None
@@ -34,9 +37,13 @@ class GraphWidget(FigureCanvas):
         self.layers_fills = []
         self.current_layer_name = None
         self.current_point_index = None
+        self.current_selection_line = None
 
     def close_figure(self):
         plt.close(self.figure)
+
+    def set_selection_model(self, model):
+        self.selection_tool.set_selection_model(model)
 
     def set_sections(
         self, layer, feature, previous_section, current_section, next_section
@@ -46,6 +53,7 @@ class GraphWidget(FigureCanvas):
         self.feature = feature
         self.previous_section = previous_section
         self.current_section = current_section
+        self.selection_tool.set_section(current_section)
         self.next_section = next_section
         self.refresh()
 
@@ -56,6 +64,19 @@ class GraphWidget(FigureCanvas):
     def set_current_layer(self, layer_name):
         self.current_layer_name = layer_name
         self.refresh_current_section()
+
+        if layer_name == "":
+            ydata = None
+            column = None
+        elif layer_name == "zfond":
+            ydata = self.current_section.z
+            column = 1
+        else:
+            layer_index = self.current_section.layer_names.index(layer_name)
+            ydata = self.current_section.layers_elev[layer_index]
+            column = layer_index + 2
+
+        self.selection_tool.set_data(self.current_section.distances, ydata, column)
 
     def axis_position(self, section):
         """
@@ -172,7 +193,6 @@ class GraphWidget(FigureCanvas):
             color="red",
             marker="." if self.current_layer_name == "zfond" else None,
             zorder=10 if self.current_layer_name == "zfond" else 1,
-            picker=self.line_picker if self.current_layer_name == "zfond" else None,
         )
 
         for layer in self.file.layers():
@@ -182,7 +202,6 @@ class GraphWidget(FigureCanvas):
                 color=self.file.layer_color(layer),
                 marker="." if self.current_layer_name == layer else None,
                 zorder=10 if self.current_layer_name == layer else 1,
-                picker=self.line_picker if self.current_layer_name == layer else None,
             )
             self.layers_lines.append(line)
 
@@ -190,6 +209,8 @@ class GraphWidget(FigureCanvas):
             self.draw()
 
     def refresh_pointing_line(self, draw=True):
+        return
+
         if self.pointing_line is not None:
             self.pointing_line.remove()
             self.pointing_line = None
@@ -199,24 +220,3 @@ class GraphWidget(FigureCanvas):
             self.pointing_line = self.graph.axvline(abs_lat, color="purple")
         if draw:
             self.draw()
-
-    def line_picker(self, line, mouseevent):
-        if mouseevent.xdata is None or mouseevent.ydata is None:
-            return False, dict()
-
-        # Search for the closest point
-        xdata = line.get_xdata()
-        ydata = line.get_ydata()
-        d = np.sqrt(
-            (xdata - mouseevent.xdata) ** 2.0 + (ydata - mouseevent.ydata) ** 2.0
-        )
-        ind = np.argmin(d)
-        if ind is None:
-            return False, dict()
-
-        self.current_point_index = ind
-        self.refresh_pointing_line(draw=True)
-        self.point_selected.emit(self.current_point_index)
-
-        if QtWidgets.QApplication.keyboardModifiers() != QtCore.Qt.ControlModifier:
-            return False, dict()
