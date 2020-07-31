@@ -155,10 +155,10 @@ class GraphWidget(FigureCanvas):
 
     def refresh_current_section(self, draw=True):
         if self.current_section_line is not None:
-            [line.remove() for line in self.current_section_line]
+            self.current_section_line.remove()
             self.current_section_line = None
 
-            [line.remove() for col in self.layers_lines for line in col]
+            [line.remove() for line in self.layers_lines]
             self.layers_lines = []
 
             [poly.remove() for poly in self.layers_fills]
@@ -166,7 +166,7 @@ class GraphWidget(FigureCanvas):
 
         if self.current_section is None:
             return
-        self.current_section_line = self.draw_section(
+        (self.current_section_line,) = self.draw_section(
             self.current_section,
             0,
             color="red",
@@ -176,18 +176,15 @@ class GraphWidget(FigureCanvas):
         )
 
         for layer in self.file.layers():
-            self.layers_lines.append(
-                self.draw_layer(
-                    self.current_section,
-                    layer,
-                    color=self.file.layer_color(layer),
-                    marker="." if self.current_layer_name == layer else None,
-                    zorder=10 if self.current_layer_name == layer else 1,
-                    picker=self.line_picker
-                    if self.current_layer_name == layer
-                    else None,
-                )
+            (line,) = self.draw_layer(
+                self.current_section,
+                layer,
+                color=self.file.layer_color(layer),
+                marker="." if self.current_layer_name == layer else None,
+                zorder=10 if self.current_layer_name == layer else 1,
+                picker=self.line_picker if self.current_layer_name == layer else None,
             )
+            self.layers_lines.append(line)
 
         if draw:
             self.draw()

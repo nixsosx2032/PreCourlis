@@ -51,4 +51,4 @@ class TestProfileDialog(unittest.TestCase):
         mousevent.xdata = widget.current_section.distances[2] + 10
         mousevent.ydata = widget.current_section.z[2] + 10
 
-        widget.line_picker(widget.current_section_line[0], mousevent)
+        widget.line_picker(widget.current_section_line, mousevent)
