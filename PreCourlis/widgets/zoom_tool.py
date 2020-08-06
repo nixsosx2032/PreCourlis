@@ -1,11 +1,8 @@
-from qgis.PyQt import QtCore
-
 from matplotlib.transforms import Bbox
 
 
-class ZoomTool(QtCore.QObject):
+class ZoomTool:
     def __init__(self, canvas, graph):
-        super().__init__(canvas)
         self.canvas = canvas
         self.graph = graph
         self.drag_started_bbox = None

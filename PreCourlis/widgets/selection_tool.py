@@ -3,9 +3,8 @@ from qgis.PyQt import QtCore, QtWidgets
 import numpy as np
 
 
-class SelectionTool(QtCore.QObject):
+class SelectionTool:
     def __init__(self, canvas, graph):
-        super().__init__(canvas)
         self.canvas = canvas
         self.graph = graph
         self.selection_model = None
