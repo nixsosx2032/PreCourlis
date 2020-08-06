@@ -38,7 +38,7 @@ class ZoomTool(QtCore.QObject):
             self.graph.end_pan()
 
     def on_scroll(self, event):
-        self.zoom_by_factor(2 ** event.step, event.xdata, event.ydata)
+        self.zoom_by_factor(1.5 ** event.step, event.xdata, event.ydata)
 
     def center(self):
         xlim = self.graph.get_xlim()
