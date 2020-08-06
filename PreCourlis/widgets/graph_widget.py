@@ -6,9 +6,10 @@ from qgis.PyQt import QtCore
 
 from PreCourlis.core.precourlis_file import PreCourlisFileLine
 from PreCourlis.widgets.selection_tool import SelectionTool
+from PreCourlis.widgets.zoom_tool import ZoomTool
 
 import matplotlib.pyplot as plt
-from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 
 
 class GraphWidget(FigureCanvas):
@@ -23,6 +24,9 @@ class GraphWidget(FigureCanvas):
 
         self.selection_tool = SelectionTool(self, self.graph)
         self.selection_tool.activate()
+
+        self.zoom_tool = ZoomTool(self, self.graph)
+        self.zoom_tool.activate()
 
         self.file = None
         self.feature = None
