@@ -9,6 +9,8 @@ from qgis.core import (
 from qgis.PyQt import QtCore, QtGui, QtWidgets, uic
 from qgis.utils import iface
 
+from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
+
 from PreCourlis.core.precourlis_file import PreCourlisFileLine
 from PreCourlis.widgets.delegates import FloatDelegate
 from PreCourlis.widgets.points_table_model import PointsTableModel
@@ -74,6 +76,9 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         self.current_section = None
         self.selected_color = None
         self.splitter.setSizes([200, 400])
+
+        self.nav_toolbar = NavigationToolbar(self.graphWidget, self)
+        self.sectionSelectionLayout.insertWidget(4, self.nav_toolbar)
 
         self.sectionItemModel = SectionItemModel(self)
         self.pointsTableModel = PointsTableModel(self)
