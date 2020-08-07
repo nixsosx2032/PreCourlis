@@ -9,7 +9,7 @@ include Makefile
 upload: ## Deploy plugin on qgis.camptocamp.net
 upload: package
 	mkdir -p $(LOCAL_PLUGINS_PATH)
-	aws --profile qgis.camptocamp.net s3 sync --exclude "*" --include "*.txt" $(PLUGIN_REPO_PATH) $(LOCAL_PLUGINS_PATH)/
+	aws --profile qgis.camptocamp.net s3 sync --exact-timestamps --exclude "*" --include "*.txt" $(PLUGIN_REPO_PATH) $(LOCAL_PLUGINS_PATH)/
 	unzip -p $(LOCAL_PLUGINS_PATH)/$(PLUGINNAME).zip $(PLUGINNAME)/metadata.txt > $(LOCAL_PLUGINS_PATH)/$(PLUGINNAME).txt
 	qgis-plugins.xml $(LOCAL_PLUGINS_PATH)/ $(PLUGIN_REPO_URL)
 	aws --profile qgis.camptocamp.net s3 cp $(S3_CP_OPTIONS) $(LOCAL_PLUGINS_PATH)/$(PLUGINNAME).zip $(PLUGIN_REPO_PATH)/
