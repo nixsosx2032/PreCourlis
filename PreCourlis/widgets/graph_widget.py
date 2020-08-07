@@ -203,5 +203,7 @@ class GraphWidget(FigureCanvas):
             )
             self.layers_lines.append(line)
 
+        self.selection_tool.refresh_selection(draw=False)
+
         if draw:
             self.draw()

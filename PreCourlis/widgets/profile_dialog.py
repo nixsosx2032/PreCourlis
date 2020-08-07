@@ -74,6 +74,7 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
 
         self.file = None
         self.editing = False
+        self.interpolation = False
         self.current_section = None
         self.selected_color = None
         self.splitter.setSizes([200, 400])
@@ -128,7 +129,6 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         self.pointsTableView.setModel(self.pointsTableModel)
 
     def init_graph_widget(self):
-        self.graphWidget.point_selected.connect(self.point_selected)
         self.graphWidget.set_selection_model(self.pointsTableView.selectionModel())
 
     def init_edition_panel(self):
@@ -140,6 +140,8 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         self.addLayerButton.clicked.connect(self.add_layer)
         self.applyLayerButton.clicked.connect(self.apply_layer)
         self.deleteLayerButton.clicked.connect(self.delete_layer)
+
+        self.applyInterpolationButton.clicked.connect(self.apply_interpolation)
 
     def layer(self):
         return self.layerComboBox.currentLayer()
@@ -210,6 +212,8 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         self.graphWidget.refresh_current_section()
         if self.graphWidget.selection_tool.editing:
             self.update_feature("Profile dialog graph translation")
+        elif self.interpolation:
+            self.update_feature("Profile dialog interpolation")
         else:
             self.update_feature("Profile dialog table edit")
 
@@ -223,18 +227,6 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
 
     def sedimental_layer(self):
         return self.sedimentalLayerComboBox.currentText()
-
-    def point_selected(self, index):
-        column = 0
-        if self.sedimental_layer() == "zfond":
-            column = 1
-        else:
-            layer_index = self.sedimentalLayerComboBox.currentText()
-            column = self.current_section.layer_names.index(layer_index) + 1
-        self.pointsTableView.selectionModel().select(
-            self.pointsTableModel.index(index, column),
-            QtCore.QItemSelectionModel.ClearAndSelect,
-        )
 
     def sedimental_layer_changed(self, index):
         layer = self.sedimental_layer()
@@ -281,3 +273,48 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         )
         self.file.delete_sedimental_layer(layer)
         self.section_changed(self.sectionComboBox.currentIndex())
+
+    def apply_interpolation(self):
+        section = self.current_section
+
+        dz0 = self.leftSpinBox.value()
+        dz1 = self.leftSpinBox.value()
+
+        index0 = None
+        index1 = None
+        model = self.pointsTableModel
+        sel_model = self.pointsTableView.selectionModel()
+        for index in sel_model.selection().indexes():
+            if index0 is None:
+                index0 = index.row()
+            else:
+                index0 = min(index0, index.row())
+
+            if index1 is None:
+                index1 = index.row()
+            else:
+                index1 = max(index1, index.row())
+
+        x0 = section.distances[index0]
+        x1 = section.distances[index1]
+
+        columns = set([])
+        for index in sel_model.selection().indexes():
+            x = section.distances[index.row()]
+            dz = dz0 + (x - x0) * (dz1 - dz0) / (x1 - x0)
+            column = index.column()
+            if column == 0:
+                continue
+            if column == 1:
+                values = section.z
+            else:
+                values = section.layers_elev[column - 2]
+            values[index.row()] += dz
+            columns.add(column)
+
+        self.interpolation = True
+        self.pointsTableModel.dataChanged.emit(
+            model.index(0, min(columns)),
+            model.index(model.rowCount() - 1, max(columns)),
+        )
+        self.interpolation = False

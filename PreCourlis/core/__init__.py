@@ -83,6 +83,13 @@ class Section(SectionBase):
             for values in layers_elev
         ]
 
+    def get_layer(self, name):
+        if name == "zfond":
+            return self.z
+        else:
+            layer_index = self.layer_names.index(name)
+            return self.layers_elev[layer_index]
+
 
 class Reach(ReachBase):
     def __init__(self, *args, **kwargs):

@@ -1,9 +1,11 @@
 import unittest
 
 from qgis.core import QgsFeatureRequest, QgsVectorLayer
+from qgis.PyQt import QtCore
 
 from PreCourlis.core.precourlis_file import PreCourlisFileLine
 from PreCourlis.widgets.graph_widget import GraphWidget
+from PreCourlis.widgets.points_table_model import PointsTableModel
 
 from .. import PROFILE_LINES_PATH
 
@@ -24,6 +26,12 @@ class TestGraphWidget(unittest.TestCase):
         section.feature = feature
 
         widget = GraphWidget(None)
+
+        model = PointsTableModel(widget)
+        model.set_section(section)
+        sel_model = QtCore.QItemSelectionModel(model, widget)
+        widget.set_selection_model(sel_model)
+
         widget.set_sections(
             layer=self.layer,
             feature=feature,

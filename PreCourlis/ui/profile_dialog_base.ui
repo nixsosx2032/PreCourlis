@@ -268,14 +268,14 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="applyButton">
+         <widget class="QPushButton" name="applyInterpolationButton">
           <property name="text">
            <string>Apply</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="clearButton">
+         <widget class="QPushButton" name="clearInterpolationButton">
           <property name="text">
            <string>Clear</string>
           </property>
