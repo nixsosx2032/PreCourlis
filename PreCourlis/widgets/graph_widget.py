@@ -104,7 +104,7 @@ class GraphWidget(FigureCanvas):
         if layer_index == 0:
             previous_values = self.current_section.z
         else:
-            previous_values = section.layers_elev[layer_index]
+            previous_values = section.layers_elev[layer_index - 1]
         current_values = section.layers_elev[layer_index]
 
         self.layers_fills.append(
