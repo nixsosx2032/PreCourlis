@@ -126,9 +126,6 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
     def init_points_table_view(self):
         self.pointsTableView.setItemDelegate(FloatDelegate(self))
         self.pointsTableView.setModel(self.pointsTableModel)
-        self.pointsTableView.selectionModel().currentRowChanged.connect(
-            self.current_row_changed
-        )
 
     def init_graph_widget(self):
         self.graphWidget.point_selected.connect(self.point_selected)
@@ -208,9 +205,6 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         if self.sectionComboBox.currentIndex() > self.sectionItemModel.rowCount() - 2:
             return
         self.sectionComboBox.setCurrentIndex(self.sectionComboBox.currentIndex() + 1)
-
-    def current_row_changed(self, current, previous):
-        self.graphWidget.set_current_point_index(current.row())
 
     def data_changed(self, topLeft, bottomRight, roles):
         self.graphWidget.refresh_current_section()

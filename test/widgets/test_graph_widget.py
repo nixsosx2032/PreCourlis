@@ -35,8 +35,3 @@ class TestGraphWidget(unittest.TestCase):
 
     def test_init(self):
         self.create_widget()
-
-    def test_set_current_point_index(self):
-        widget = self.create_widget()
-        widget.set_current_point_index(0)
-        widget.set_current_point_index(1)

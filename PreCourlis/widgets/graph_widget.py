@@ -40,8 +40,6 @@ class GraphWidget(FigureCanvas):
         self.layers_lines = []
         self.layers_fills = []
         self.current_layer_name = None
-        self.current_point_index = None
-        self.current_selection_line = None
 
     def close_figure(self):
         plt.close(self.figure)
@@ -60,10 +58,6 @@ class GraphWidget(FigureCanvas):
         self.selection_tool.set_section(current_section)
         self.next_section = next_section
         self.refresh()
-
-    def set_current_point_index(self, point_index):
-        self.current_point_index = point_index
-        self.refresh_pointing_line()
 
     def set_current_layer(self, layer_name):
         self.current_layer_name = layer_name
@@ -209,18 +203,5 @@ class GraphWidget(FigureCanvas):
             )
             self.layers_lines.append(line)
 
-        if draw:
-            self.draw()
-
-    def refresh_pointing_line(self, draw=True):
-        return
-
-        if self.pointing_line is not None:
-            self.pointing_line.remove()
-            self.pointing_line = None
-
-        if self.current_point_index is not None:
-            abs_lat = self.current_section.distances[self.current_point_index]
-            self.pointing_line = self.graph.axvline(abs_lat, color="purple")
         if draw:
             self.draw()
