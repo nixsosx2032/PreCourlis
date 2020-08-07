@@ -194,6 +194,11 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
             self.section_from_feature_id(item.next_f_id),
         )
 
+        # Reset navigation history
+        self.nav_toolbar.update()
+        if self.nav_toolbar._nav_stack() is None:
+            self.nav_toolbar.push_current()  # set the home button to this view
+
     def previous_section(self):
         if self.sectionComboBox.currentIndex() < 1:
             return

@@ -33,12 +33,13 @@ class ZoomTool:
     def on_release(self, event):
         if event.button == 2:
             self.graph.end_pan()
-            # self.canvas.manager.toolmanager.get_tool('viewpos').push_current()
+            self.canvas.toolbar.push_current()
 
     def on_scroll(self, event):
         if event.xdata is None or event.ydata is None:
             return
         self.zoom_by_factor(1.5 ** event.step, event.xdata, event.ydata)
+        self.canvas.toolbar.push_current()
 
     def center(self):
         xlim = self.graph.get_xlim()
@@ -129,4 +130,3 @@ class ZoomTool:
         )
 
         self.apply_bbox(self.constrained_bbox(bbox, limits))
-        # self.canvas.manager.toolmanager.get_tool('viewpos').push_current()
