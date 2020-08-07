@@ -26,6 +26,8 @@ class TestSelectionTool(TestGraphWidget):
         event.button = 1
         event.xdata = self.section.distances[row] + 10
         event.ydata = self.section.z[row] + 10
+        event.x = 0
+        event.y = 0
         return event
 
     def test_on_press(self):
