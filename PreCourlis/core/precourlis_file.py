@@ -84,36 +84,50 @@ class PreCourlisFileLine(PreCourlisFileBase):
 
         return section
 
+    @classmethod
+    def feature_from_section(cls, section, fields):
+        feature = QgsFeature()
+        feature.setFields(fields)
+        for index, value in cls.attributes_from_section(section, fields).items():
+            feature.setAttribute(index, value)
+        feature.setGeometry(cls.geometry_from_section(section))
+        return feature
+
     @staticmethod
-    def feature_from_section(section):
-        points = section.get_points()
-        f = QgsFeature()
-        f.setAttributes(
-            [
-                section.id,
-                section.name,
-                section.pk,
-                section.axis[0],
-                section.axis[1],
-                "",
-                ",".join([str(i) for i in range(0, len(points))]),
-                ",".join([str(p.d) for p in points]),
-                ",".join([str(p.z) for p in points]),
-            ]
-        )
-        f.setGeometry(
-            QgsGeometry(
-                QgsLineString(
-                    [
-                        QgsPoint(point.x, point.y,)
-                        if str(point.z) == "NULL"
-                        else QgsPoint(point.x, point.y, point.z,)
-                        for point in points
-                    ]
-                )
+    def geometry_from_section(section):
+        return QgsGeometry(
+            QgsLineString(
+                [
+                    QgsPoint(x, y,) if str(z) == "NULL" else QgsPoint(x, y, z)
+                    for x, y, z in zip(section.x, section.y, section.z)
+                ]
             )
         )
-        return f
+
+    @staticmethod
+    def attributes_from_section(section, fields):
+        attributes = {
+            "sec_id": section.id,
+            "sec_name": section.name,
+            "abs_long": section.pk,
+            "axis_x": section.axis[0],
+            "axis_y": section.axis[1],
+            "layers": ",".join(section.layer_names),
+            "p_id": ",".join([str(i) for i in range(0, len(section.distances))]),
+            "abs_lat": ",".join([str(d) for d in section.distances]),
+            "zfond": ",".join([str(z) for z in section.z]),
+        }
+        for i, layer in enumerate(section.layer_names):
+            attributes[layer] = ",".join([str(z) for z in section.layers_elev[i]])
+        return {fields.indexFromName(name): value for name, value in attributes.items()}
+
+    def update_feature(self, fid, section, title):
+        self._layer.beginEditCommand(title)
+        self._layer.changeAttributeValues(
+            fid, self.attributes_from_section(section, self._layer.fields())
+        )
+        self._layer.changeGeometry(fid, self.geometry_from_section(section))
+        self._layer.endEditCommand()
 
     def get_reach(self):
         reach = Reach(
@@ -149,7 +163,7 @@ class PreCourlisFileLine(PreCourlisFileBase):
 
     def add_sedimental_layer(self, name, thickness=0):
         layers = self.layers()
-        if name in layers:
+        if name in layers + ["zfond"]:
             raise KeyError("Layer {} already exists".format(name))
 
         field_name = name

@@ -73,6 +73,7 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         self.setupUi(self)
 
         self.file = None
+        self.editing = False
         self.current_section = None
         self.selected_color = None
         self.splitter.setSizes([200, 400])
@@ -147,11 +148,21 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         return self.layerComboBox.currentLayer()
 
     def layer_changed(self, layer):
+        if self.file is not None and self.file.layer() is not None:
+            self.file.layer().layerModified.disconnect(self.layer_modified)
+
         self.file = PreCourlisFileLine(layer)
         self.sectionItemModel.setLayer(layer)
         self.sectionComboBox.setCurrentIndex(0)
         self.sedimentalLayerModel.setLayer(layer)
         self.sedimentalLayerComboBox.setCurrentIndex(0)
+
+        if layer is not None:
+            layer.layerModified.connect(self.layer_modified)
+
+    def layer_modified(self):
+        if not self.editing:
+            self.section_changed(self.sectionComboBox.currentIndex())
 
     def section_from_feature_id(self, f_id):
         if f_id is None:
@@ -198,6 +209,18 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
 
     def data_changed(self, topLeft, bottomRight, roles):
         self.graphWidget.refresh_current_section()
+        if self.graphWidget.selection_tool.editing:
+            self.update_feature("Profile dialog graph translation")
+        else:
+            self.update_feature("Profile dialog table edit")
+
+    def update_feature(self, title):
+        self.layer().startEditing()
+        self.editing = True
+        self.file.update_feature(
+            self.current_section.feature.id(), self.current_section, title,
+        )
+        self.editing = False
 
     def sedimental_layer(self):
         return self.sedimentalLayerComboBox.currentText()

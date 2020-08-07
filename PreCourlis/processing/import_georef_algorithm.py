@@ -39,13 +39,10 @@ class ImportGeorefAlgorithm(QgsProcessingAlgorithm):
 
         file = MascaretGeoFile(input_path)
 
+        fields = PreCourlisFileLine.base_fields()
+
         (sink, dest_id) = self.parameterAsSink(
-            parameters,
-            self.OUTPUT,
-            context,
-            PreCourlisFileLine.base_fields(),
-            QgsWkbTypes.LineString,
-            crs,
+            parameters, self.OUTPUT, context, fields, QgsWkbTypes.LineString, crs,
         )
         if sink is None:
             raise QgsProcessingException(self.invalidSinkError(parameters, self.OUTPUT))
@@ -61,7 +58,7 @@ class ImportGeorefAlgorithm(QgsProcessingAlgorithm):
                 if feedback.isCanceled():
                     break
 
-                feature = PreCourlisFileLine.feature_from_section(section)
+                feature = PreCourlisFileLine.feature_from_section(section, fields)
 
                 # Add a feature in the sink
                 sink.addFeature(feature, QgsFeatureSink.FastInsert)

@@ -7,7 +7,6 @@ class FloatDelegate(QtWidgets.QStyledItemDelegate):
         editor.setDecimals(3)
         editor.setSingleStep(0.001)
         editor.setAccelerated(True)
-        editor.valueChanged.connect(self.value_changed)
         return editor
 
     def setEditorData(self, editor, index):
@@ -20,7 +19,3 @@ class FloatDelegate(QtWidgets.QStyledItemDelegate):
         if not editor:
             return
         model.setData(index, editor.value(), QtCore.Qt.EditRole)
-
-    def value_changed(self, value):
-        """Update the model on each valueChanged signals"""
-        self.commitData.emit(self.sender())
