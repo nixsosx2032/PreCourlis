@@ -10,10 +10,10 @@ from PreCourlis.widgets.points_table_model import PointsTableModel
 from .. import PROFILE_LINES_PATH
 
 
-class TestGraphWidget(unittest.TestCase):
+class TestGraphWidgetBase(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        super(TestGraphWidget, cls).setUpClass()
+        super(TestGraphWidgetBase, cls).setUpClass()
         cls.layer = QgsVectorLayer(PROFILE_LINES_PATH, "profiles_lines", "ogr")
         assert cls.layer.isValid()
 
@@ -41,5 +41,7 @@ class TestGraphWidget(unittest.TestCase):
         )
         return widget
 
+
+class TestGraphWidget(TestGraphWidgetBase):
     def test_init(self):
         self.create_widget()

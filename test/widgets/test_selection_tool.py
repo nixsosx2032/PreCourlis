@@ -4,10 +4,10 @@ from qgis.PyQt import QtCore
 
 from PreCourlis.widgets.points_table_model import PointsTableModel
 
-from test.widgets.test_graph_widget import TestGraphWidget
+from test.widgets.test_graph_widget import TestGraphWidgetBase
 
 
-class TestSelectionTool(TestGraphWidget):
+class TestSelectionTool(TestGraphWidgetBase):
     def create_tool(self):
         self.widget = self.create_widget()
         self.section = self.widget.current_section
