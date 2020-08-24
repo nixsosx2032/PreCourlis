@@ -46,7 +46,9 @@ class SelectionTool:
 
     def refresh_selection(self, dy=0, draw=True):
         if self.line is not None:
-            self.line.remove()
+            # May already have been removed by clear
+            if self.line in self.graph.lines:
+                self.line.remove()
             self.line = None
 
         xdata = []
