@@ -172,6 +172,9 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         return section
 
     def section_changed(self, index):
+        self.set_section(index)
+
+    def set_section(self, index):
         if index == -1:
             self.graphWidget.clear()
             return
