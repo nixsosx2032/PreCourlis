@@ -9,12 +9,12 @@ from PreCourlis.widgets.points_table_model import PointsTableModel
 from .. import PROFILE_LINES_PATH
 
 
-class TestProfileDialog(unittest.TestCase):
+class TestPointsTableModel(unittest.TestCase):
     """Test dialog works."""
 
     @classmethod
     def setUpClass(cls):
-        super(TestProfileDialog, cls).setUpClass()
+        super(TestPointsTableModel, cls).setUpClass()
         cls.layer = QgsVectorLayer(PROFILE_LINES_PATH, "profiles_lines", "ogr")
         assert cls.layer.isValid()
 
