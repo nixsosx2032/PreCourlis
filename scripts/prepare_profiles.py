@@ -4,16 +4,20 @@ import os
 import sys
 from shutil import copyfile
 
-from qgis.core import QgsVectorLayer
-
-from PreCourlis.core.precourlis_file import PreCourlisFileLine
+from qgis.core import QgsApplication, QgsVectorLayer
+import processing
+from processing import Processing
 
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
+from PreCourlis.core.precourlis_file import PreCourlisFileLine
+from PreCourlis.processing.precourlis_provider import PreCourlisProvider
 from test import processing as processing_test  # noqa
 from test import DATA_PATH
 
-import processing
+precourlis_provider = PreCourlisProvider()
+QgsApplication.processingRegistry().addProvider(precourlis_provider)
+Processing.initialize()
 
 GEOREF_PATH = os.path.join(DATA_PATH, "input", "test.georef")
 
@@ -24,10 +28,10 @@ DEM_PATH = os.path.join(DATA_PATH, "input", "cas2Mnt.asc")
 PROFILE_LINES_PATH = os.path.join(DATA_PATH, "input", "profiles_lines.geojson")
 PROFILE_POINTS_PATH = os.path.join(DATA_PATH, "input", "profiles_points.shp")
 
-EXAMPLES_FOLDER = os.environ.get("/home/amorvan/dev/edf_precourlis/PreCourlis_v1.0f.edf/exemples", None)
+EXAMPLES_FOLDER = os.environ.get("EXAMPLES_FOLDER", None)
 if EXAMPLES_FOLDER is None:
     print("Set value of EXAMPLES_FOLDER environment variable and restart")
-    return
+    exit(1)
 
 copyfile(os.path.join(EXAMPLES_FOLDER, "cas0/test_fic_geo2d_masc_with_name.georef"), GEOREF_PATH)
 
