@@ -42,7 +42,12 @@ class ImportGeorefAlgorithm(QgsProcessingAlgorithm):
         fields = PreCourlisFileLine.base_fields()
 
         (sink, dest_id) = self.parameterAsSink(
-            parameters, self.OUTPUT, context, fields, QgsWkbTypes.LineString, crs,
+            parameters,
+            self.OUTPUT,
+            context,
+            fields,
+            QgsWkbTypes.LineString,
+            crs,
         )
         if sink is None:
             raise QgsProcessingException(self.invalidSinkError(parameters, self.OUTPUT))

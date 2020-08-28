@@ -37,12 +37,16 @@ class PrepareTracksAlgorithm(QgsProcessingAlgorithm):
     def initAlgorithm(self, config):
         self.addParameter(
             QgsProcessingParameterFeatureSource(
-                self.TRACKS, self.tr("Tracks"), [QgsProcessing.TypeVectorLine],
+                self.TRACKS,
+                self.tr("Tracks"),
+                [QgsProcessing.TypeVectorLine],
             )
         )
         self.addParameter(
             QgsProcessingParameterFeatureSource(
-                self.AXIS, self.tr("Axis"), [QgsProcessing.TypeVectorLine],
+                self.AXIS,
+                self.tr("Axis"),
+                [QgsProcessing.TypeVectorLine],
             )
         )
         self.addParameter(

@@ -50,7 +50,11 @@ class SectionItemModel(QtGui.QStandardItemModel):
         previous_item = None
 
         for f in layer.getFeatures(request):
-            item = SectionItem(f.attribute(sec_name_index), f.id(), previous_f_id,)
+            item = SectionItem(
+                f.attribute(sec_name_index),
+                f.id(),
+                previous_f_id,
+            )
             if previous_item is not None:
                 previous_item.set_next_f_id(f.id())
             self.appendRow(item)
@@ -224,7 +228,9 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         self.layer().startEditing()
         self.editing = True
         self.file.update_feature(
-            self.current_section.feature.id(), self.current_section, title,
+            self.current_section.feature.id(),
+            self.current_section,
+            title,
         )
         self.editing = False
 
@@ -250,7 +256,9 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
             if isinstance(color, str):
                 color = QtGui.QColor(color)
             stylesheet = "background-color: rgba({}, {}, {}, 1);".format(
-                color.red(), color.green(), color.blue(),
+                color.red(),
+                color.green(),
+                color.blue(),
             )
         self.selected_color = color
         self.addLayerColorButton.setStyleSheet(stylesheet)

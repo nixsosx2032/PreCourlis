@@ -66,7 +66,12 @@ class PreCourlisFileLine(PreCourlisFileBase):
         points = line.points()
         section.set_points(
             [
-                Point(x=p[0].x(), y=p[0].y(), z=p[1], d=p[2],)
+                Point(
+                    x=p[0].x(),
+                    y=p[0].y(),
+                    z=p[1],
+                    d=p[2],
+                )
                 for p in zip(
                     points,
                     split_attribute(f.attribute("zfond"), len(points)),
@@ -98,7 +103,12 @@ class PreCourlisFileLine(PreCourlisFileBase):
         return QgsGeometry(
             QgsLineString(
                 [
-                    QgsPoint(x, y,) if str(z) == "NULL" else QgsPoint(x, y, z)
+                    QgsPoint(
+                        x,
+                        y,
+                    )
+                    if str(z) == "NULL"
+                    else QgsPoint(x, y, z)
                     for x, y, z in zip(section.x, section.y, section.z)
                 ]
             )
@@ -131,7 +141,9 @@ class PreCourlisFileLine(PreCourlisFileBase):
 
     def get_reach(self):
         reach = Reach(
-            my_id=0, name=self._layer.name(), crs_id=self._layer.crs().authid(),
+            my_id=0,
+            name=self._layer.name(),
+            crs_id=self._layer.crs().authid(),
         )
         for section in self.get_sections():
             reach.add_section(section)

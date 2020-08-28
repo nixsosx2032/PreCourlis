@@ -87,7 +87,10 @@ class ZoomTool:
     def translated_bbox(self, bbox, dx, dy):
         """Translate bbox by dx and dy"""
         return Bbox.from_extents(
-            bbox.xmin + dx, bbox.ymin + dy, bbox.xmax + dx, bbox.ymax + dy,
+            bbox.xmin + dx,
+            bbox.ymin + dy,
+            bbox.xmax + dx,
+            bbox.ymax + dy,
         )
 
     def limits(self):
@@ -126,7 +129,10 @@ class ZoomTool:
 
         # Apply new sizes with same ratios around x,y
         bbox = Bbox.from_extents(
-            x - left * width, y - bottom * height, x + right * width, y + top * height,
+            x - left * width,
+            y - bottom * height,
+            x + right * width,
+            y + top * height,
         )
 
         self.apply_bbox(self.constrained_bbox(bbox, limits))

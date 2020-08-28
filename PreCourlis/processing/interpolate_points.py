@@ -31,7 +31,8 @@ PYTHONPATH = os.pathsep.join(
     [
         resource_filename("PreCourlis", "lib/TatooineMesher"),
         resource_filename(
-            "PreCourlis", "lib/TatooineMesher/.venv/lib/python3.6/site-packages",
+            "PreCourlis",
+            "lib/TatooineMesher/.venv/lib/python3.6/site-packages",
         ),
     ]
 )
@@ -90,7 +91,9 @@ class InterpolatePointsAlgorithm(QgsProcessingAlgorithm):
         )
         self.addParameter(
             QgsProcessingParameterNumber(
-                self.LAT_STEP, self.tr("Lateral space step (in m)"), defaultValue=None,
+                self.LAT_STEP,
+                self.tr("Lateral space step (in m)"),
+                defaultValue=None,
             )
         )
         self.addParameter(
@@ -107,13 +110,21 @@ class InterpolatePointsAlgorithm(QgsProcessingAlgorithm):
         sections = self.parameterAsSource(parameters, self.SECTIONS, context)
 
         sections_path = self.parameterAsCompatibleSourceLayerPath(
-            parameters, self.SECTIONS, context, compatibleFormats=["shp"],
+            parameters,
+            self.SECTIONS,
+            context,
+            compatibleFormats=["shp"],
         )
         axis_path = self.parameterAsCompatibleSourceLayerPath(
-            parameters, self.AXIS, context, compatibleFormats=["shp"],
+            parameters,
+            self.AXIS,
+            context,
+            compatibleFormats=["shp"],
         )
         constraint_lines = self.parameterAsLayerList(
-            parameters, self.CONSTRAINT_LINES, context,
+            parameters,
+            self.CONSTRAINT_LINES,
+            context,
         )
         long_step = self.parameterAsString(parameters, self.LONG_STEP, context)
         lat_step = self.parameterAsString(parameters, self.LAT_STEP, context)
