@@ -3,6 +3,7 @@ from qgis.core import (
     QgsProcessingAlgorithm,
     QgsFeature,
     QgsFeatureSink,
+    QgsField,
     QgsGeometry,
     QgsProcessingException,
     QgsProcessingParameterFeatureSink,
@@ -11,7 +12,7 @@ from qgis.core import (
 )
 from qgis.PyQt.QtCore import QCoreApplication, QVariant
 
-from PreCourlis.core.precourlis_file import PreCourlisFilePoint
+from PreCourlis.core.precourlis_file import PreCourlisFileLine, PreCourlisFilePoint
 
 
 class LinesToPointsAlgorithm(QgsProcessingAlgorithm):
@@ -40,11 +41,18 @@ class LinesToPointsAlgorithm(QgsProcessingAlgorithm):
     def processAlgorithm(self, parameters, context, feedback):
         source = self.parameterAsSource(parameters, self.INPUT, context)
 
+        fields = PreCourlisFilePoint.base_fields()
+
+        file = PreCourlisFileLine(source)
+        layers = file.layers()
+        for layer in layers:
+            fields.append(QgsField(layer, QVariant.Double))
+
         (sink, dest_id) = self.parameterAsSink(
             parameters,
             self.OUTPUT,
             context,
-            PreCourlisFilePoint.base_fields(),
+            fields,
             QgsWkbTypes.PointZ,
             source.sourceCrs(),
         )
@@ -53,16 +61,19 @@ class LinesToPointsAlgorithm(QgsProcessingAlgorithm):
 
         total = 100.0 / source.featureCount() if source.featureCount() else 0
         features = source.getFeatures()
-
         for current, line_feature in enumerate(features):
 
             # Take only the first parts (QgsMultiLineString => QgsLineString)
             line = next(line_feature.geometry().constParts())
-            for point, p_id, abs_lat, zfond in zip(
+            line_layers_values = [
+                line_feature.attribute(layer).split(",") for layer in layers
+            ]
+            for point, p_id, abs_lat, zfond, point_layers_values, in zip(
                 line.points(),
                 line_feature.attribute("p_id").split(","),
                 line_feature.attribute("abs_lat").split(","),
                 line_feature.attribute("zfond").split(","),
+                zip(*line_layers_values),
             ):
                 point_feature = QgsFeature()
                 point_feature.setAttributes(
@@ -72,13 +83,14 @@ class LinesToPointsAlgorithm(QgsProcessingAlgorithm):
                         line_feature.attribute("abs_long"),
                         line_feature.attribute("axis_x"),
                         line_feature.attribute("axis_y"),
-                        "",
+                        line_feature.attribute("layers"),
                         int(p_id),
                         self.to_float(abs_lat),
                         self.to_float(point.x()),
                         self.to_float(point.y()),
                         self.to_float(zfond),
                     ]
+                    + list(point_layers_values)
                 )
                 if zfond != "NULL":
                     point.addZValue(float(zfond))

@@ -10,8 +10,8 @@
     </xs:extension>
   </xs:complexContent>
 </xs:complexType>
-<xs:element name="lines_to_points" type="ogr:lines_to_points_Type" substitutionGroup="gml:_Feature"/>
-<xs:complexType name="lines_to_points_Type">
+<xs:element name="profiles_points" type="ogr:profiles_points_Type" substitutionGroup="gml:_Feature"/>
+<xs:complexType name="profiles_points_Type">
   <xs:complexContent>
     <xs:extension base="gml:AbstractFeatureType">
       <xs:sequence>
