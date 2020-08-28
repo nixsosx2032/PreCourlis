@@ -26,7 +26,7 @@ TRACKS_PATH = os.path.join(DATA_PATH, "input", "tracesBief1.shp")
 DEM_PATH = os.path.join(DATA_PATH, "input", "cas2Mnt.asc")
 
 PROFILE_LINES_PATH = os.path.join(DATA_PATH, "input", "profiles_lines.geojson")
-PROFILE_POINTS_PATH = os.path.join(DATA_PATH, "input", "profiles_points.shp")
+PROFILE_POINTS_PATH = os.path.join(DATA_PATH, "input", "profiles_points.gml")
 
 EXAMPLES_FOLDER = os.environ.get("EXAMPLES_FOLDER", None)
 if EXAMPLES_FOLDER is None:

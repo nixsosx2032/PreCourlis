@@ -10,7 +10,7 @@ import processing
 from .. import DATA_PATH, EXPECTED_PATH, TEMP_PATH, OVERWRITE_EXPECTED, utils
 from . import TestCase
 
-SECTIONS_PATH = os.path.join(DATA_PATH, "input", "profiles_points.shp")
+SECTIONS_PATH = os.path.join(DATA_PATH, "input", "profiles_points.gml")
 AXIS_PATH = os.path.join(DATA_PATH, "input", "axeHydroBief1.shp")
 CONSTRAINT_LINES = [
     os.path.join(DATA_PATH, "input", "riveDroiteBief1.shp"),
