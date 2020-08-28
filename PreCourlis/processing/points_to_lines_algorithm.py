@@ -3,6 +3,7 @@ from qgis.core import (
     QgsProcessingAlgorithm,
     QgsFeature,
     QgsFeatureSink,
+    QgsField,
     QgsGeometry,
     QgsLineString,
     QgsProcessingException,
@@ -13,7 +14,7 @@ from qgis.core import (
     QgsFeatureRequest,
     QgsWkbTypes,
 )
-from qgis.PyQt.QtCore import QCoreApplication
+from qgis.PyQt.QtCore import QCoreApplication, QVariant
 
 from PreCourlis.core.precourlis_file import PreCourlisFileLine
 
@@ -105,16 +106,16 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
             # Take only the first parts (QgsMultiPoint => QgsPoint)
             intersection_point = next(intersection.constParts())
 
+        layers = PreCourlisFileLine(None).layers(point_features[0])
+
         line_feature = QgsFeature()
         line_feature.setAttributes(
             [
                 # sec_id
                 point_features[0].attribute("sec_id") or sec_id,
                 # sec_name
-                (
-                    point_features[0].attribute("sec_name")
-                    or "P_{:04.3f}".format(abs_long)
-                ),
+                point_features[0].attribute("sec_name")
+                or "P_{:04.3f}".format(abs_long),
                 # abs_long
                 abs_long,
                 # axis_x
@@ -126,7 +127,7 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
                 if self.axis
                 else point_features[0].attribute("axis_y"),
                 # layers
-                "",
+                point_features[0].attribute("layers"),
                 # p_id
                 ",".join([str(id_ + 1) for id_ in range(0, len(points))]),
                 # abs_lat
@@ -135,6 +136,10 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
                 ),
                 # zfond
                 ",".join([str(f.attribute("zfond")) for f in point_features]),
+            ]
+            + [
+                ",".join([str(f.attribute(layer)) for f in point_features])
+                for layer in layers
             ]
         )
         line_feature.setGeometry(line)
@@ -160,11 +165,16 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
         request = QgsFeatureRequest()
         request.addOrderBy('"{}"'.format(group_field), True, True)
 
+        file = PreCourlisFileLine(source)
+        fields = PreCourlisFileLine.base_fields()
+        for layer in file.layers():
+            fields.append(QgsField(layer, QVariant.String, len=100000))
+
         (sink, dest_id) = self.parameterAsSink(
             parameters,
             self.OUTPUT,
             context,
-            PreCourlisFileLine.base_fields(),
+            fields,
             QgsWkbTypes.LineString,
             source.sourceCrs(),
         )
