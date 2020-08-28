@@ -6,6 +6,7 @@ from qgis.core import (
     QgsProcessing,
     QgsProcessingAlgorithm,
     QgsProcessingException,
+    QgsProcessingMultiStepFeedback,
     QgsProcessingParameterFeatureSource,
     QgsProcessingParameterField,
     QgsProcessingParameterMultipleLayers,
@@ -13,9 +14,11 @@ from qgis.core import (
     QgsProcessingParameterVectorDestination,
     QgsProcessingUtils,
 )
-from qgis.PyQt.QtCore import QCoreApplication
+from qgis.PyQt.QtCore import QCoreApplication, QVariant
 
 import processing
+
+from PreCourlis.core.precourlis_file import PreCourlisFileLine
 
 PYTHON_INTERPRETER = "python3"
 ENCODING = "utf-8"
@@ -106,15 +109,42 @@ class InterpolatePointsAlgorithm(QgsProcessingAlgorithm):
         )
         self.addParameter(ParameterShapefileDestination(self.OUTPUT, self.tr("Output")))
 
-    def processAlgorithm(self, parameters, context, feedback):
+    def processAlgorithm(self, parameters, context, model_feedback):
+        feedback = QgsProcessingMultiStepFeedback(2, model_feedback)
+        outputs = {}
+
         sections = self.parameterAsSource(parameters, self.SECTIONS, context)
 
-        sections_path = self.parameterAsCompatibleSourceLayerPath(
-            parameters,
-            self.SECTIONS,
-            context,
-            compatibleFormats=["shp"],
+        # Prefix layer fields by "Z" for TatooineMesher
+        file = PreCourlisFileLine(sections)
+        alg_params = {
+            "INPUT": parameters[self.SECTIONS],
+            "FIELDS_MAPPING": [
+                {"name": "sec_id", "type": QVariant.Int, "expression": '"sec_id"'}
+            ]
+            + [
+                {
+                    "name": "Z{}".format(layer),
+                    "type": QVariant.Double,
+                    "expression": '"{}"'.format(layer),
+                }
+                for layer in file.layers()
+            ],
+            "OUTPUT": QgsProcessingUtils.generateTempFilename("tatooine_input.shp"),
+        }
+        outputs["RefactorFields"] = processing.run(
+            "qgis:refactorfields",
+            alg_params,
+            context=context,
+            feedback=feedback,
+            is_child_algorithm=True,
         )
+        tatooine_input = outputs["RefactorFields"]["OUTPUT"]
+
+        feedback.setCurrentStep(1)
+        if feedback.isCanceled():
+            return {}
+
         axis_path = self.parameterAsCompatibleSourceLayerPath(
             parameters,
             self.AXIS,
@@ -135,17 +165,17 @@ class InterpolatePointsAlgorithm(QgsProcessingAlgorithm):
 
         # Merge constraint lines files
         if constraint_lines:
-            constraint_lines = QgsProcessingUtils.generateTempFilename(
-                "constraint_lines.shp"
-            )
-            processing.run(
+            outputs["MergeContraints"] = processing.run(
                 "native:mergevectorlayers",
                 {
                     "LAYERS": parameters[self.CONSTRAINT_LINES],
                     "CRS": sections.sourceCrs(),
-                    "OUTPUT": constraint_lines,
+                    "OUTPUT": QgsProcessingUtils.generateTempFilename(
+                        "constraint_lines.shp"
+                    ),
                 },
             )
+            constraint_lines = outputs["MergeContraints"]["OUTPUT"]
 
         command = [
             PYTHON_INTERPRETER,
@@ -165,7 +195,7 @@ class InterpolatePointsAlgorithm(QgsProcessingAlgorithm):
             "--attr_cross_sections",
             attr_cross_sections,
             axis_path,
-            sections_path,
+            tatooine_input,
             output_path,
         ]
 

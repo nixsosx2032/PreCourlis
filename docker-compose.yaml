@@ -32,4 +32,6 @@ services:
       - QGIS_LOG_FILE=/dev/null
       - QGIS_PLUGINPATH=/app
       - DISPLAY=:0
+      - PYTEST_ARGS=test
+      - NOSETESTS_ARGS=test
     command: make -f docker.mk build

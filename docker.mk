@@ -72,11 +72,11 @@ flake8:
 
 .PHONY: nosetests
 nosetests: ## Run tests using nose
-	nosetests -v --with-id --with-coverage --cover-package=. test
+	nosetests -v --with-id --with-coverage --cover-package=. ${NOSETESTS_ARGS}
 
 .PHONY: pytest
 pytest:  ## Run tests using pytest
-	pytest --cov --verbose --color=yes test ${PYTEST_ARGS}
+	pytest --cov --verbose --color=yes ${PYTEST_ARGS}
 
 .PHONY: coverage
 coverage: ## Display coverage report

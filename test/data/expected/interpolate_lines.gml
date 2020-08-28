@@ -19,10 +19,11 @@
       <ogr:abs_long>0</ogr:abs_long>
       <ogr:axis_x>427858.100665553</ogr:axis_x>
       <ogr:axis_y>245061.876468527</ogr:axis_y>
-      <ogr:layers></ogr:layers>
+      <ogr:layers>Layer1</ogr:layers>
       <ogr:p_id>1,2,3,4,5,6,7</ogr:p_id>
       <ogr:abs_lat>0.0,43.74547187327791,87.49094374655783,131.23641561986685,174.98188749314676,218.7273593664267,262.47283123970664</ogr:abs_lat>
       <ogr:zfond>18.627039,14.276766,11.520903,11.315101,11.597089,14.334775,17.072461</ogr:zfond>
+      <ogr:Layer1>17.627039,13.276766,10.520903,10.315101,10.597089,13.334775,16.072461</ogr:Layer1>
     </ogr:interpolate_lines>
   </gml:featureMember>
   <gml:featureMember>
@@ -33,10 +34,11 @@
       <ogr:abs_long>150.43619</ogr:abs_long>
       <ogr:axis_x>427704.453506304</ogr:axis_x>
       <ogr:axis_y>245042.840537292</ogr:axis_y>
-      <ogr:layers></ogr:layers>
+      <ogr:layers>Layer1</ogr:layers>
       <ogr:p_id>1,2,3,4,5,6,7</ogr:p_id>
       <ogr:abs_lat>0.0,42.20829267908102,84.41658535821043,126.62487803733015,168.83317071641116,211.04146339556473,253.24975607465547</ogr:abs_lat>
       <ogr:zfond>18.329272,14.232695,11.520634,11.396921,11.606805,13.791474,15.976142</ogr:zfond>
+      <ogr:Layer1>17.329272,13.232695,10.520634,10.396921,10.606805,12.791474,14.976142</ogr:Layer1>
     </ogr:interpolate_lines>
   </gml:featureMember>
   <gml:featureMember>
@@ -47,10 +49,11 @@
       <ogr:abs_long>300.872381</ogr:abs_long>
       <ogr:axis_x>427555.352595567</ogr:axis_x>
       <ogr:axis_y>245024.367858086</ogr:axis_y>
-      <ogr:layers></ogr:layers>
+      <ogr:layers>Layer1</ogr:layers>
       <ogr:p_id>1,2,3,4,5,6</ogr:p_id>
       <ogr:abs_lat>0.0,49.89047030693517,99.7809406138339,149.67141092079035,199.56188122766022,249.45235153459538</ogr:abs_lat>
       <ogr:zfond>18.031504,13.420048,11.503715,11.453767,12.921843,14.879823</ogr:zfond>
+      <ogr:Layer1>17.031504,12.420048,10.503715,10.453767,11.921843,13.879823</ogr:Layer1>
     </ogr:interpolate_lines>
   </gml:featureMember>
   <gml:featureMember>
@@ -61,10 +64,11 @@
       <ogr:abs_long>451.308571</ogr:abs_long>
       <ogr:axis_x>427409.701837606</ogr:axis_x>
       <ogr:axis_y>245013.889115853</ogr:axis_y>
-      <ogr:layers></ogr:layers>
+      <ogr:layers>Layer1</ogr:layers>
       <ogr:p_id>1,2,3,4,5,6,7</ogr:p_id>
       <ogr:abs_lat>0.0,41.845415628781176,83.69083125757238,125.53624688636359,167.38166251517345,209.22707814396466,251.07249377274584</ogr:abs_lat>
       <ogr:zfond>17.733737,14.144554,11.520096,11.560561,11.626239,12.704872,13.783505</ogr:zfond>
+      <ogr:Layer1>16.733737,13.144554,10.520096,10.560561,10.626239,11.704872,12.783505</ogr:Layer1>
     </ogr:interpolate_lines>
   </gml:featureMember>
   <gml:featureMember>
@@ -75,10 +79,11 @@
       <ogr:abs_long>655.494365</ogr:abs_long>
       <ogr:axis_x>427211.154726797</ogr:axis_x>
       <ogr:axis_y>245011.169292417</ogr:axis_y>
-      <ogr:layers></ogr:layers>
+      <ogr:layers>Layer1</ogr:layers>
       <ogr:p_id>1,2,3,4,5</ogr:p_id>
       <ogr:abs_lat>0.0,47.44196812131657,94.88393624263314,143.3316079105197,191.78663639438759</ogr:abs_lat>
       <ogr:zfond>18.20824,13.334054,11.522785,13.040226,15.242629</ogr:zfond>
+      <ogr:Layer1>17.20824,12.334054,10.522785,12.040226,14.242629</ogr:Layer1>
     </ogr:interpolate_lines>
   </gml:featureMember>
   <gml:featureMember>
@@ -89,10 +94,11 @@
       <ogr:abs_long>859.680158</ogr:abs_long>
       <ogr:axis_x>427010.876842079</ogr:axis_x>
       <ogr:axis_y>245061.961896942</ogr:axis_y>
-      <ogr:layers></ogr:layers>
+      <ogr:layers>Layer1</ogr:layers>
       <ogr:p_id>1,2,3,4</ogr:p_id>
       <ogr:abs_lat>0.0,49.64631309129489,98.87869171027103,149.5296482790232</ogr:abs_lat>
       <ogr:zfond>18.682742,13.184857,12.9848,16.701753</ogr:zfond>
+      <ogr:Layer1>17.682742,12.184857,11.9848,15.701753</ogr:Layer1>
     </ogr:interpolate_lines>
   </gml:featureMember>
   <gml:featureMember>
@@ -103,10 +109,11 @@
       <ogr:abs_long>1063.865951</ogr:abs_long>
       <ogr:axis_x>426836.716838581</ogr:axis_x>
       <ogr:axis_y>245160.400159788</ogr:axis_y>
-      <ogr:layers></ogr:layers>
+      <ogr:layers>Layer1</ogr:layers>
       <ogr:p_id>1,2,3,4,5</ogr:p_id>
       <ogr:abs_lat>0.0,43.89291054430443,87.78582108864725,131.64828076237382,175.54119130669537</ogr:abs_lat>
       <ogr:zfond>19.157244,15.302239,11.447233,14.789569,18.160877</ogr:zfond>
+      <ogr:Layer1>18.157244,14.302239,10.447233,13.789569,17.160877</ogr:Layer1>
     </ogr:interpolate_lines>
   </gml:featureMember>
   <gml:featureMember>
@@ -117,10 +124,11 @@
       <ogr:abs_long>1452.305242</ogr:abs_long>
       <ogr:axis_x>426583.693830812</ogr:axis_x>
       <ogr:axis_y>245442.562991274</ogr:axis_y>
-      <ogr:layers></ogr:layers>
+      <ogr:layers>Layer1</ogr:layers>
       <ogr:p_id>1,2,3,4,5</ogr:p_id>
       <ogr:abs_lat>0.0,44.635256004015936,89.27051200807438,125.72929475273946,162.15767451280945</ogr:abs_lat>
       <ogr:zfond>16.544884,12.449988,11.164834,13.478351,16.446656</ogr:zfond>
+      <ogr:Layer1>15.544884,11.449988,10.164834,12.478351,15.446656</ogr:Layer1>
     </ogr:interpolate_lines>
   </gml:featureMember>
   <gml:featureMember>
@@ -131,10 +139,11 @@
       <ogr:abs_long>1840.744533</ogr:abs_long>
       <ogr:axis_x>426505.77541644</ogr:axis_x>
       <ogr:axis_y>245812.88488748</ogr:axis_y>
-      <ogr:layers></ogr:layers>
+      <ogr:layers>Layer1</ogr:layers>
       <ogr:p_id>1,2,3,4</ogr:p_id>
       <ogr:abs_lat>0.0,49.850063515498206,99.70012703105446,149.55019054655267</ogr:abs_lat>
       <ogr:zfond>13.932523,10.02597,11.738901,14.732436</ogr:zfond>
+      <ogr:Layer1>12.932523,9.02597,10.738901,13.732436</ogr:Layer1>
     </ogr:interpolate_lines>
   </gml:featureMember>
   <gml:featureMember>
@@ -145,10 +154,11 @@
       <ogr:abs_long>2169.411956</ogr:abs_long>
       <ogr:axis_x>426537.910748149</ogr:axis_x>
       <ogr:axis_y>246141.379389391</ogr:axis_y>
-      <ogr:layers></ogr:layers>
+      <ogr:layers>Layer1</ogr:layers>
       <ogr:p_id>1,2,3,4,5</ogr:p_id>
       <ogr:abs_lat>0.0,42.06504106052195,84.13008212092899,126.19512318144629,168.2601642419108</ogr:abs_lat>
       <ogr:zfond>14.862549,10.919485,10.447827,11.924856,15.673267</ogr:zfond>
+      <ogr:Layer1>13.862549,9.919485,9.447827,10.924856,14.673267</ogr:Layer1>
     </ogr:interpolate_lines>
   </gml:featureMember>
   <gml:featureMember>
@@ -159,10 +169,11 @@
       <ogr:abs_long>2498.079378</ogr:abs_long>
       <ogr:axis_x>426622.909244479</ogr:axis_x>
       <ogr:axis_y>246474.175703647</ogr:axis_y>
-      <ogr:layers></ogr:layers>
+      <ogr:layers>Layer1</ogr:layers>
       <ogr:p_id>1,2,3,4,5</ogr:p_id>
       <ogr:abs_lat>0.0,46.51862028333728,93.0372405666097,139.55586084993615,186.07448113320856</ogr:abs_lat>
       <ogr:zfond>15.792574,12.241232,10.013219,11.682578,16.614098</ogr:zfond>
+      <ogr:Layer1>14.792574,11.241232,9.013219,10.682578,15.614098</ogr:Layer1>
     </ogr:interpolate_lines>
   </gml:featureMember>
   <gml:featureMember>
@@ -173,10 +184,11 @@
       <ogr:abs_long>2826.7468</ogr:abs_long>
       <ogr:axis_x>426473.273606768</ogr:axis_x>
       <ogr:axis_y>246725.243670677</ogr:axis_y>
-      <ogr:layers></ogr:layers>
+      <ogr:layers>Layer1</ogr:layers>
       <ogr:p_id>1,2,3,4,5</ogr:p_id>
       <ogr:abs_lat>0.0,49.92623219757203,99.85246439512073,149.7786965926498,199.70492879022183</ogr:abs_lat>
       <ogr:zfond>16.7226,13.56298,9.57861,11.4403,17.55493</ogr:zfond>
+      <ogr:Layer1>15.7226,12.56298,8.57861,10.4403,16.55493</ogr:Layer1>
     </ogr:interpolate_lines>
   </gml:featureMember>
   <gml:featureMember>
@@ -187,10 +199,11 @@
       <ogr:abs_long>3045.155137</ogr:abs_long>
       <ogr:axis_x>426296.882707939</ogr:axis_x>
       <ogr:axis_y>246854.039836183</ogr:axis_y>
-      <ogr:layers></ogr:layers>
+      <ogr:layers>Layer1</ogr:layers>
       <ogr:p_id>1,2,3,4,5,6</ogr:p_id>
       <ogr:abs_lat>0.0,46.69042869237035,93.38085738471764,140.0712860770525,186.7617147693998,233.45214346173464</ogr:abs_lat>
       <ogr:zfond>19.703151,14.949672,9.74871,9.238047,10.008203,14.261591</ogr:zfond>
+      <ogr:Layer1>18.703151,13.949672,8.74871,8.238047,9.008203,13.261591</ogr:Layer1>
     </ogr:interpolate_lines>
   </gml:featureMember>
 </ogr:FeatureCollection>

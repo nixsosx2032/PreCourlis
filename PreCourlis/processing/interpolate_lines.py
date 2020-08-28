@@ -10,7 +10,7 @@ from qgis.core import (
     QgsProcessingParameterNumber,
     QgsProcessingUtils,
 )
-from qgis.PyQt.QtCore import QCoreApplication, QVariant
+from qgis.PyQt.QtCore import QCoreApplication
 import processing
 
 
@@ -77,7 +77,7 @@ class InterpolateLinesAlgorithm(QgsProcessingAlgorithm):
         )
 
     def processAlgorithm(self, parameters, context, model_feedback):
-        feedback = QgsProcessingMultiStepFeedback(5, model_feedback)
+        feedback = QgsProcessingMultiStepFeedback(4, model_feedback)
         results = {}
         outputs = {}
 
@@ -153,34 +153,6 @@ class InterpolateLinesAlgorithm(QgsProcessingAlgorithm):
         current = outputs["AssignProjection"]["OUTPUT"]
 
         feedback.setCurrentStep(3)
-        if feedback.isCanceled():
-            return {}
-
-        alg_params = {
-            "INPUT": current,
-            "FIELDS_MAPPING": [
-                {"name": "sec_id", "type": QVariant.Int, "expression": ""},
-                {"name": "sec_name", "type": QVariant.String, "expression": ""},
-                {"name": "abs_long", "type": QVariant.Double, "expression": '"Xl"'},
-                {"name": "axis_x", "type": QVariant.Double, "expression": ""},
-                {"name": "axis_y", "type": QVariant.Double, "expression": ""},
-                {"name": "p_id", "type": QVariant.Int, "expression": ""},
-                {"name": "xt", "type": QVariant.Int, "expression": "xt"},
-                {"name": "abs_lat", "type": QVariant.Double, "expression": ""},
-                {"name": "zfond", "type": QVariant.Double, "expression": '"Z"'},
-            ],
-            "OUTPUT": QgsProcessing.TEMPORARY_OUTPUT,
-        }
-        outputs["RefactorFields"] = processing.run(
-            "qgis:refactorfields",
-            alg_params,
-            context=context,
-            feedback=feedback,
-            is_child_algorithm=True,
-        )
-        current = outputs["RefactorFields"]["OUTPUT"]
-
-        feedback.setCurrentStep(4)
         if feedback.isCanceled():
             return {}
 
