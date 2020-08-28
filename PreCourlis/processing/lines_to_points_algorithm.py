@@ -22,7 +22,9 @@ class LinesToPointsAlgorithm(QgsProcessingAlgorithm):
     def initAlgorithm(self, config):
         self.addParameter(
             QgsProcessingParameterFeatureSource(
-                self.INPUT, self.tr("Input"), [QgsProcessing.TypeVectorLine],
+                self.INPUT,
+                self.tr("Input"),
+                [QgsProcessing.TypeVectorLine],
             )
         )
         self.addParameter(

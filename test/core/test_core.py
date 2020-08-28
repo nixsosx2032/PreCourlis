@@ -28,7 +28,11 @@ class TestSection(unittest.TestCase):
     def test_set_get_points(self):
         points = [Point(v, v, v, v) for v in range(0, 10)]
 
-        section = Section(my_id=0, pk=0.0, name="test_section",)
+        section = Section(
+            my_id=0,
+            pk=0.0,
+            name="test_section",
+        )
         section.set_points(points)
         assert section.get_points() == points
 
@@ -36,9 +40,11 @@ class TestSection(unittest.TestCase):
 class TestReach(unittest.TestCase):
     def get_sections(self):
         return [
-            Section(my_id=s, pk=float(s), name="test_section_{}".format(s),).set_points(
-                [Point(v, v, v, v) for v in range(0, 10)]
-            )
+            Section(
+                my_id=s,
+                pk=float(s),
+                name="test_section_{}".format(s),
+            ).set_points([Point(v, v, v, v) for v in range(0, 10)])
             for s in range(0, 10)
         ]
 

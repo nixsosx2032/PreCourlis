@@ -66,7 +66,15 @@ class Section(SectionBase):
         return True
 
     def get_points(self):
-        return [Point(*p) for p in zip(self.x, self.y, self.z, self.distances,)]
+        return [
+            Point(*p)
+            for p in zip(
+                self.x,
+                self.y,
+                self.z,
+                self.distances,
+            )
+        ]
 
     def set_points(self, points):
         self.x = np.array([p.x for p in points])
@@ -133,9 +141,24 @@ class Reach(ReachBase):
                     [section.id, section.name, section.pk, index, point.d, point.z]
                 )
                 if str(point.z) == "NULL":
-                    f.setGeometry(QgsGeometry(QgsPoint(point.x, point.y,)))
+                    f.setGeometry(
+                        QgsGeometry(
+                            QgsPoint(
+                                point.x,
+                                point.y,
+                            )
+                        )
+                    )
                 else:
-                    f.setGeometry(QgsGeometry(QgsPoint(point.x, point.y, point.z,)))
+                    f.setGeometry(
+                        QgsGeometry(
+                            QgsPoint(
+                                point.x,
+                                point.y,
+                                point.z,
+                            )
+                        )
+                    )
                 pr.addFeature(f)
 
         layer.reload()
@@ -144,7 +167,11 @@ class Reach(ReachBase):
 
     @staticmethod
     def from_point_layer(layer: QgsVectorLayer):
-        reach = Reach(my_id=0, name=layer.name(), crs_id=layer.crs().authid(),)
+        reach = Reach(
+            my_id=0,
+            name=layer.name(),
+            crs_id=layer.crs().authid(),
+        )
 
         section = None
         points = []
@@ -211,9 +238,16 @@ class Reach(ReachBase):
                 QgsGeometry(
                     QgsLineString(
                         [
-                            QgsPoint(point.x, point.y,)
+                            QgsPoint(
+                                point.x,
+                                point.y,
+                            )
                             if str(point.z) == "NULL"
-                            else QgsPoint(point.x, point.y, point.z,)
+                            else QgsPoint(
+                                point.x,
+                                point.y,
+                                point.z,
+                            )
                             for point in points
                         ]
                     )
@@ -227,7 +261,11 @@ class Reach(ReachBase):
 
     @staticmethod
     def from_line_layer(layer: QgsVectorLayer):
-        reach = Reach(my_id=0, name=layer.name(), crs_id=layer.crs().authid(),)
+        reach = Reach(
+            my_id=0,
+            name=layer.name(),
+            crs_id=layer.crs().authid(),
+        )
 
         section = None
         for f in layer.getFeatures():
@@ -243,7 +281,12 @@ class Reach(ReachBase):
 
             section.set_points(
                 [
-                    Point(x=p[0].x(), y=p[0].y(), z=p[1], d=p[2],)
+                    Point(
+                        x=p[0].x(),
+                        y=p[0].y(),
+                        z=p[1],
+                        d=p[2],
+                    )
                     for p in zip(
                         line.points(),
                         f.attribute("zfond").split(","),

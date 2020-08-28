@@ -59,7 +59,9 @@ class InterpolateLinesAlgorithm(QgsProcessingAlgorithm):
         )
         self.addParameter(
             QgsProcessingParameterNumber(
-                self.LAT_STEP, self.tr("Lateral space step (in m)"), defaultValue=None,
+                self.LAT_STEP,
+                self.tr("Lateral space step (in m)"),
+                defaultValue=None,
             )
         )
         self.addParameter(

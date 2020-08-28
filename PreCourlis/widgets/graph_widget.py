@@ -119,7 +119,10 @@ class GraphWidget(FigureCanvas):
         )
 
         return self.graph.plot(
-            section.distances, current_values, label=layer, **kwargs,
+            section.distances,
+            current_values,
+            label=layer,
+            **kwargs,
         )
 
     def clear(self):

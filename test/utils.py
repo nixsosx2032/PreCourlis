@@ -33,7 +33,10 @@ def save_as_gml(layer, path):
     save_options.driverName = QgsVectorFileWriter.driverForExtension("gml")
     save_options.fileEncoding = "UTF-8"
     QgsVectorFileWriter.writeAsVectorFormatV2(
-        layer, path, transform_context, save_options,
+        layer,
+        path,
+        transform_context,
+        save_options,
     )
     output = QgsVectorLayer(path, "output", "ogr")
     assert output.isValid()

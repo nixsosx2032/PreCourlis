@@ -8,7 +8,9 @@ def color_to_hex(color):
         return hex(v)[2:].zfill(2)
 
     return "#{}{}{}".format(
-        to_hex(color.red()), to_hex(color.green()), to_hex(color.blue()),
+        to_hex(color.red()),
+        to_hex(color.green()),
+        to_hex(color.blue()),
     )
 
 
