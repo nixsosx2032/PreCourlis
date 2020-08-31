@@ -3,6 +3,10 @@ import subprocess
 from pkg_resources import resource_filename
 
 from qgis.core import (
+    QgsFeature,
+    QgsFeatureRequest,
+    QgsGeometry,
+    QgsLineString,
     QgsProcessing,
     QgsProcessingAlgorithm,
     QgsProcessingException,
@@ -13,6 +17,7 @@ from qgis.core import (
     QgsProcessingParameterNumber,
     QgsProcessingParameterVectorDestination,
     QgsProcessingUtils,
+    QgsVectorLayer,
 )
 from qgis.PyQt.QtCore import QCoreApplication, QVariant
 
@@ -109,10 +114,7 @@ class InterpolatePointsAlgorithm(QgsProcessingAlgorithm):
         )
         self.addParameter(ParameterShapefileDestination(self.OUTPUT, self.tr("Output")))
 
-    def processAlgorithm(self, parameters, context, model_feedback):
-        feedback = QgsProcessingMultiStepFeedback(2, model_feedback)
-        outputs = {}
-
+    def prepare_sections(self, parameters, context, feedback):
         sections = self.parameterAsSource(parameters, self.SECTIONS, context)
 
         # Prefix layer fields by "Z" for TatooineMesher
@@ -120,7 +122,8 @@ class InterpolatePointsAlgorithm(QgsProcessingAlgorithm):
         alg_params = {
             "INPUT": parameters[self.SECTIONS],
             "FIELDS_MAPPING": [
-                {"name": "sec_id", "type": QVariant.Int, "expression": '"sec_id"'}
+                {"name": "sec_id", "type": QVariant.Int, "expression": '"sec_id"'},
+                {"name": "p_id", "type": QVariant.Int, "expression": '"p_id"'},
             ]
             + [
                 {
@@ -132,18 +135,99 @@ class InterpolatePointsAlgorithm(QgsProcessingAlgorithm):
             ],
             "OUTPUT": QgsProcessingUtils.generateTempFilename("tatooine_input.shp"),
         }
-        outputs["RefactorFields"] = processing.run(
+        outputs = processing.run(
             "qgis:refactorfields",
             alg_params,
             context=context,
             feedback=feedback,
             is_child_algorithm=True,
         )
-        tatooine_input = outputs["RefactorFields"]["OUTPUT"]
+        return outputs["OUTPUT"]
+
+    def prepare_constraint_lines(self, parameters, context, feedback):
+        sections = self.parameterAsSource(parameters, self.SECTIONS, context)
+
+        # Merge constraint lines files
+        outputs = processing.run(
+            "native:mergevectorlayers",
+            {
+                "LAYERS": parameters[self.CONSTRAINT_LINES],
+                "CRS": sections.sourceCrs(),
+                "OUTPUT": QgsProcessingUtils.generateTempFilename(
+                    "constraint_lines.shp"
+                ),
+            },
+            context=context,
+            feedback=feedback,
+            is_child_algorithm=True,
+        )
+        constraint_lines = outputs["OUTPUT"]
+
+        feedback.setCurrentStep(2)
+        if feedback.isCanceled():
+            return {}
+
+        # Add lines with first and last points of sections
+        request = QgsFeatureRequest()
+        request.addOrderBy('"sec_id"', True, True)
+        request.addOrderBy('"p_id"', True, True)
+
+        previous_sec_id = None
+        previous_point = None
+        left_line = QgsLineString()
+        right_line = QgsLineString()
+        total = total = (
+            100.0 / sections.featureCount() if sections.featureCount() else 0
+        )
+        for current, f in enumerate(sections.getFeatures(request)):
+
+            if previous_sec_id is None or previous_sec_id != f.attribute("sec_id"):
+                if previous_sec_id is not None:
+                    right_line.addVertex(previous_point)
+                left_line.addVertex(f.geometry().constGet())
+            previous_sec_id = f.attribute("sec_id")
+            previous_point = f.geometry().constGet()
+
+            feedback.setProgress(int(current * total))
+
+        right_line.addVertex(previous_point)
+
+        constraint_lines_layer = QgsVectorLayer(
+            constraint_lines, "constraint_lines", "ogr"
+        )
+        dp = constraint_lines_layer.dataProvider()
+        left = QgsFeature()
+        left.setGeometry(QgsGeometry(left_line))
+        right = QgsFeature()
+        right.setGeometry(QgsGeometry(right_line))
+        dp.addFeatures([left, right])
+
+        return constraint_lines
+
+    def processAlgorithm(self, parameters, context, model_feedback):
+        constraint_lines = self.parameterAsLayerList(
+            parameters,
+            self.CONSTRAINT_LINES,
+            context,
+        )
+
+        feedback = QgsProcessingMultiStepFeedback(
+            4 if constraint_lines else 2, model_feedback
+        )
+
+        sections_prepared = self.prepare_sections(parameters, context, feedback)
 
         feedback.setCurrentStep(1)
         if feedback.isCanceled():
             return {}
+
+        if constraint_lines:
+            constraint_lines = self.prepare_constraint_lines(
+                parameters, context, feedback
+            )
+            feedback.setCurrentStep(3)
+            if feedback.isCanceled():
+                return {}
 
         axis_path = self.parameterAsCompatibleSourceLayerPath(
             parameters,
@@ -151,31 +235,12 @@ class InterpolatePointsAlgorithm(QgsProcessingAlgorithm):
             context,
             compatibleFormats=["shp"],
         )
-        constraint_lines = self.parameterAsLayerList(
-            parameters,
-            self.CONSTRAINT_LINES,
-            context,
-        )
         long_step = self.parameterAsString(parameters, self.LONG_STEP, context)
         lat_step = self.parameterAsString(parameters, self.LAT_STEP, context)
         attr_cross_sections = self.parameterAsString(
             parameters, self.ATTR_CROSS_SECTION, context
         )
         output_path = self.parameterAsOutputLayer(parameters, self.OUTPUT, context)
-
-        # Merge constraint lines files
-        if constraint_lines:
-            outputs["MergeContraints"] = processing.run(
-                "native:mergevectorlayers",
-                {
-                    "LAYERS": parameters[self.CONSTRAINT_LINES],
-                    "CRS": sections.sourceCrs(),
-                    "OUTPUT": QgsProcessingUtils.generateTempFilename(
-                        "constraint_lines.shp"
-                    ),
-                },
-            )
-            constraint_lines = outputs["MergeContraints"]["OUTPUT"]
 
         command = [
             PYTHON_INTERPRETER,
@@ -195,7 +260,7 @@ class InterpolatePointsAlgorithm(QgsProcessingAlgorithm):
             "--attr_cross_sections",
             attr_cross_sections,
             axis_path,
-            tatooine_input,
+            sections_prepared,
             output_path,
         ]
 
@@ -222,6 +287,7 @@ class InterpolatePointsAlgorithm(QgsProcessingAlgorithm):
                     "Failed to execute command {}".format(" ".join(command))
                 )
 
+        sections = self.parameterAsSource(parameters, self.SECTIONS, context)
         processing.run(
             "qgis:definecurrentprojection",
             {"INPUT": output_path, "CRS": sections.sourceCrs()},

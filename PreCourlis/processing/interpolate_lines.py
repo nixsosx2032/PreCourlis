@@ -162,7 +162,7 @@ class InterpolateLinesAlgorithm(QgsProcessingAlgorithm):
             "AXIS": parameters[self.AXIS],
             "FIRST_SECTION_ABS_LONG": first_abs_long,
             "GROUP_FIELD": "abs_long",
-            "ORDER_FIELD": "xt",
+            "ORDER_FIELD": "p_id",
             "OUTPUT": parameters[self.OUTPUT],
         }
         outputs["PointsToLines"] = processing.run(
