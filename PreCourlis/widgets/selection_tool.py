@@ -62,7 +62,7 @@ class SelectionTool:
                 xdata.append(section.distances[index.row()])
                 ydata.append(section.layers_elev[index.column() - 2][index.row()] + dy)
 
-        (self.line,) = self.graph.plot(xdata, ydata, "bo", zorder=0, picker=True)
+        (self.line,) = self.graph.plot(xdata, ydata, "bo", markersize=10, zorder=0, picker=10)
 
         if draw:
             self.canvas.draw()
