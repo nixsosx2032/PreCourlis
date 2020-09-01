@@ -51,7 +51,6 @@ processing.run(
     }
 )
 
-''' Manually added one point
 processing.run(
     "qgis:assignprojection", {
         'INPUT': os.path.join(EXAMPLES_FOLDER, "cas1/riveDroiteBief1.shp"),
@@ -59,7 +58,6 @@ processing.run(
         "OUTPUT": os.path.join(DATA_PATH, "input", "riveDroiteBief1.shp"),
     }
 )
-'''
 
 processing.run(
     "qgis:assignprojection", {
