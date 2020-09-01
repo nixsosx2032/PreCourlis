@@ -145,3 +145,4 @@ class SelectionTool:
                     model.index(model.rowCount() - 1, self.column),
                 )
             self.editing = False
+            self.canvas.editing_finished.emit()
