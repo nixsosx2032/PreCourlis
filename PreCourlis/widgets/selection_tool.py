@@ -62,7 +62,9 @@ class SelectionTool:
                 xdata.append(section.distances[index.row()])
                 ydata.append(section.layers_elev[index.column() - 2][index.row()] + dy)
 
-        (self.line,) = self.graph.plot(xdata, ydata, "bo", zorder=0, picker=True)
+        (self.line,) = self.graph.plot(
+            xdata, ydata, "bo", markersize=10, zorder=0, picker=10
+        )
 
         if draw:
             self.canvas.draw()
@@ -80,6 +82,12 @@ class SelectionTool:
             if ok:
                 self.editing = True
                 self.editing_start = event.xdata, event.ydata
+
+                self.canvas.draw()
+                self.line.set_animated(True)
+                self.background = self.canvas.copy_from_bbox(self.graph.bbox)
+                self.graph.draw_artist(self.line)
+                self.canvas.blit(self.graph.bbox)
                 return
 
         # Search for the closest point
@@ -123,7 +131,11 @@ class SelectionTool:
 
         if self.editing:
             dy = event.ydata - self.editing_start[1]
-            self.refresh_selection(dy)
+
+            self.refresh_selection(dy, False)
+            self.canvas.restore_region(self.background)
+            self.graph.draw_artist(self.line)
+            self.canvas.blit(self.graph.bbox)
 
     def on_release(self, event):
         if event.button != 1:
@@ -134,6 +146,11 @@ class SelectionTool:
 
         if self.editing:
             dy = event.ydata - self.editing_start[1]
+
+            self.line.set_animated(True)
+            self.background = None
+            self.refresh_selection(dy, True)
+
             for index in self.selection_model.selection().indexes():
                 if index.column() == 1:
                     self.section.z[index.row()] += dy
@@ -145,3 +162,4 @@ class SelectionTool:
                     model.index(model.rowCount() - 1, self.column),
                 )
             self.editing = False
+            self.canvas.editing_finished.emit()

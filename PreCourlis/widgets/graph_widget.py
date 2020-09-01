@@ -14,7 +14,7 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 
 class GraphWidget(FigureCanvas):
 
-    point_selected = QtCore.pyqtSignal(int)  # index
+    editing_finished = QtCore.pyqtSignal()
 
     def __init__(self, parent=None):
         self.figure = plt.figure(figsize=(15, 7))

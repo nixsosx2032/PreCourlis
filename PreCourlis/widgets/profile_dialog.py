@@ -134,6 +134,7 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
 
     def init_graph_widget(self):
         self.graphWidget.set_selection_model(self.pointsTableView.selectionModel())
+        self.graphWidget.editing_finished.connect(self.graph_editing_finished)
 
     def init_edition_panel(self):
         self.sedimentalLayerComboBox.setModel(self.sedimentalLayerModel)
@@ -216,13 +217,15 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         self.sectionComboBox.setCurrentIndex(self.sectionComboBox.currentIndex() + 1)
 
     def data_changed(self, topLeft, bottomRight, roles):
-        self.graphWidget.refresh_current_section()
         if self.graphWidget.selection_tool.editing:
-            self.update_feature("Profile dialog graph translation")
+            return
         elif self.interpolation:
-            self.update_feature("Profile dialog interpolation")
+            return
         else:
             self.update_feature("Profile dialog table edit")
+
+    def graph_editing_finished(self):
+        self.update_feature("Profile dialog graph translation")
 
     def update_feature(self, title):
         self.layer().startEditing()
@@ -233,6 +236,7 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
             title,
         )
         self.editing = False
+        self.graphWidget.refresh_current_section()
 
     def sedimental_layer(self):
         return self.sedimentalLayerComboBox.currentText()
@@ -332,3 +336,5 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
             model.index(model.rowCount() - 1, max(columns)),
         )
         self.interpolation = False
+
+        self.update_feature("Profile dialog interpolation")

@@ -66,14 +66,12 @@ class TestProfileDialog(unittest.TestCase):
         with patch.object(self.dialog, "update_feature") as update_feature_mock:
             with patch.object(self.dialog.graphWidget.selection_tool, "editing", True):
                 self.dialog.data_changed(None, None, None)
-            update_feature_mock.assert_called_once_with(
-                "Profile dialog graph translation"
-            )
+            update_feature_mock.assert_not_called()
 
         with patch.object(self.dialog, "update_feature") as update_feature_mock:
             with patch.object(self.dialog, "interpolation", True):
                 self.dialog.data_changed(None, None, None)
-            update_feature_mock.assert_called_once_with("Profile dialog interpolation")
+            update_feature_mock.assert_not_called()
 
         with patch.object(self.dialog, "update_feature") as update_feature_mock:
             self.dialog.data_changed(None, None, None)
