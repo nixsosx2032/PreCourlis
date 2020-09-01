@@ -4,6 +4,8 @@ from qgis.PyQt import QtCore, QtWidgets
 class FloatDelegate(QtWidgets.QStyledItemDelegate):
     def createEditor(self, parent, option, index):
         editor = QtWidgets.QDoubleSpinBox(parent)
+        editor.setMaximum(100000)
+        editor.setMinimum(-100000)
         editor.setDecimals(3)
         editor.setSingleStep(0.001)
         editor.setAccelerated(True)
