@@ -76,10 +76,16 @@ class SelectionTool:
         if event.xdata is None or event.ydata is None:
             return
 
-        if self.line is not None:
+        modifiers = QtWidgets.QApplication.keyboardModifiers()
+        if (
+            not modifiers & QtCore.Qt.ShiftModifier
+            and not modifiers & QtCore.Qt.ControlModifier
+            and self.line is not None
+        ):
             ok, points = self.line.contains(event)
             del points
             if ok:
+                # Start editing by translation
                 self.editing = True
                 self.editing_start = event.xdata, event.ydata
 
@@ -90,7 +96,7 @@ class SelectionTool:
                 self.canvas.blit(self.graph.bbox)
                 return
 
-        # Search for the closest point
+        # Search for the closest
         d = np.sqrt(
             (self.xdata - event.xdata) ** 2.0 + (self.ydata - event.ydata) ** 2.0
         )
@@ -98,8 +104,10 @@ class SelectionTool:
         if ind is None:
             return
 
+        # Define considered points
         if (
-            QtWidgets.QApplication.keyboardModifiers() & QtCore.Qt.ShiftModifier
+            modifiers & QtCore.Qt.ShiftModifier
+            and not modifiers & QtCore.Qt.ControlModifier
             and self.previous_point_index is not None
         ):
             selection = QtCore.QItemSelection(
@@ -110,10 +118,11 @@ class SelectionTool:
             )
         else:
             selection = self.selection_model.model().index(ind, self.column)
+            self.previous_point_index = ind
 
-        self.previous_point_index = ind
-
+        # Alter selection
         if QtWidgets.QApplication.keyboardModifiers() & QtCore.Qt.ControlModifier:
+            selection = self.selection_model.model().index(ind, self.column)
             self.selection_model.select(selection, QtCore.QItemSelectionModel.Toggle)
         else:
             self.selection_model.select(
