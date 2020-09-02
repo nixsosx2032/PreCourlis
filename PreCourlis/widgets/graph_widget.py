@@ -36,7 +36,6 @@ class GraphWidget(FigureCanvas):
 
         self.position = None
         self.pointing_line = None
-        self.current_section_line = None
         self.layers_lines = []
         self.layers_fills = []
         self.current_layer_name = None
@@ -96,39 +95,9 @@ class GraphWidget(FigureCanvas):
             **kwargs,
         )
 
-    def draw_layer(self, section, layer, **kwargs):
-        if section.distances[0] is None:
-            return
-        layer_index = section.layer_names.index(layer)
-
-        if layer_index == 0:
-            previous_values = self.current_section.z
-        else:
-            previous_values = section.layers_elev[layer_index - 1]
-        current_values = section.layers_elev[layer_index]
-
-        self.layers_fills.append(
-            self.graph.fill_between(
-                section.distances,
-                previous_values,
-                current_values,
-                where=current_values <= previous_values,
-                facecolor=kwargs.get("color"),
-                alpha=0.3,
-            )
-        )
-
-        return self.graph.plot(
-            section.distances,
-            current_values,
-            label=layer,
-            **kwargs,
-        )
-
     def clear(self):
         self.graph.clear()
         self.pointing_line = None
-        self.current_section_line = None
         self.layers_lines = []
         self.layers_fills = []
 
@@ -176,31 +145,45 @@ class GraphWidget(FigureCanvas):
         self.draw()
 
     def refresh_current_section(self, draw=True):
-        if self.current_section_line is not None:
-            self.current_section_line.remove()
-            self.current_section_line = None
+        [line.remove() for line in self.layers_lines]
+        self.layers_lines = []
 
-            [line.remove() for line in self.layers_lines]
-            self.layers_lines = []
+        [poly.remove() for poly in self.layers_fills]
+        self.layers_fills = []
 
-            [poly.remove() for poly in self.layers_fills]
-            self.layers_fills = []
-
-        if self.current_section is None:
+        section = self.current_section
+        if section is None:
             return
-        (self.current_section_line,) = self.draw_section(
-            self.current_section,
-            0,
-            color="red",
-            marker="." if self.current_layer_name == "zfond" else None,
-            zorder=10 if self.current_layer_name == "zfond" else 1,
-        )
+        if section.distances[0] is None:
+            return
 
-        for layer in self.file.layers():
-            (line,) = self.draw_layer(
-                self.current_section,
-                layer,
-                color=self.file.layer_color(layer),
+        previous_values = None
+        for i, layer in enumerate(["zfond"] + self.file.layers()):
+            if layer == "zfond":
+                values = self.current_section.z
+            else:
+                values = section.layers_elev[i - 1]
+
+            color = self.file.layer_color(layer)
+
+            if previous_values is not None:
+                self.layers_fills.append(
+                    self.graph.fill_between(
+                        section.distances,
+                        previous_values,
+                        values,
+                        where=values <= previous_values,
+                        facecolor=color,
+                        alpha=0.3,
+                    )
+                )
+            previous_values = values
+
+            (line,) = self.graph.plot(
+                section.distances,
+                values,
+                label=layer,
+                color=color,
                 marker="." if self.current_layer_name == layer else None,
                 zorder=10 if self.current_layer_name == layer else 1,
             )

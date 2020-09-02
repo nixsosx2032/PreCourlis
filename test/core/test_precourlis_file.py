@@ -24,7 +24,7 @@ class TestPreCourlisFileLine(unittest.TestCase):
 
         file = self.create_file()
         file.layer().startEditing()
-        file.add_sedimental_layer("Layer2", 1)
+        file.add_sedimental_layer("Layer2", "Layer1", -1)
 
         output = utils.save_as_gml(file.layer(), output_path)
         expected = QgsVectorLayer(expected_path, "expected", "ogr")
