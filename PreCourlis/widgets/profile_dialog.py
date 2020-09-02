@@ -1,6 +1,7 @@
 from pkg_resources import resource_filename
 
 from qgis.core import (
+    QgsApplication,
     QgsFeatureRequest,
     QgsMapLayer,
     QgsProject,
@@ -83,8 +84,22 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         self.selected_color = None
         self.splitter.setSizes([200, 400])
 
+        self.undoButton.setIcon(QgsApplication.getThemeIcon("/mActionUndo.svg"))
+        self.undoButton.clicked.connect(self.undo)
+        undo_shortcut = QtWidgets.QShortcut(
+            QtGui.QKeySequence(QtGui.QKeySequence.Undo), self
+        )
+        undo_shortcut.activated.connect(self.undo)
+
+        self.redoButton.setIcon(QgsApplication.getThemeIcon("/mActionRedo.svg"))
+        self.redoButton.clicked.connect(self.redo)
+        redo_shortcut = QtWidgets.QShortcut(
+            QtGui.QKeySequence(QtGui.QKeySequence.Redo), self
+        )
+        redo_shortcut.activated.connect(self.redo)
+
         self.nav_toolbar = NavigationToolbar(self.graphWidget, self)
-        self.sectionSelectionLayout.insertWidget(4, self.nav_toolbar)
+        self.sectionSelectionLayout.insertWidget(6, self.nav_toolbar)
 
         self.sectionItemModel = SectionItemModel(self)
         self.pointsTableModel = PointsTableModel(self)
@@ -237,6 +252,12 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         )
         self.editing = False
         self.graphWidget.refresh_current_section()
+
+    def undo(self):
+        self.layer().undoStack().undo()
+
+    def redo(self):
+        self.layer().undoStack().redo()
 
     def sedimental_layer(self):
         return self.sedimentalLayerComboBox.currentText()
