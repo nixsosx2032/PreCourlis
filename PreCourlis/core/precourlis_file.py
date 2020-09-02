@@ -173,34 +173,40 @@ class PreCourlisFileLine(PreCourlisFileBase):
             "PreCoulis_{}_Color".format(layer), color_to_hex(color)
         )
 
-    def add_sedimental_layer(self, name, thickness=0):
+    def add_sedimental_layer(self, name, from_layer, deltaz=0):
         layers = self.layers()
-        if name in layers + ["zfond"]:
+        if name in ["zfond"] + layers:
             raise KeyError("Layer {} already exists".format(name))
 
-        field_name = name
         self._layer.beginEditCommand("Add sedimental layer {}".format(name))
 
         # Add new attribute
-        self._layer.addAttribute(QgsField(field_name, QVariant.String))
+        self._layer.addAttribute(QgsField(name, QVariant.String))
         self._layer.updateFields()
 
-        # Update layers list and set value of new attribute
-        source_field_name = "zfond"
-        if len(layers) > 0:
-            source_field_name = layers[-1]
-        layers.append(name)
+        # Update layers list and set value of new attributes
+        if from_layer == "zfond":
+            from_layer_index = -1
+            if deltaz > 0:
+                raise Exception("Impossible to add layer on top of zfond")
+        else:
+            from_layer_index = layers.index(from_layer)
+        new_layer_index = from_layer_index if deltaz > 0 else from_layer_index + 1
+
+        layers.insert(new_layer_index, name)
         layers_list = ",".join(layers)
+
         layers_field_index = self._layer.fields().indexFromName("layers")
-        source_field_index = self._layer.fields().indexFromName(source_field_name)
-        dest_field_index = self._layer.fields().indexFromName(field_name)
+        source_field_index = self._layer.fields().indexFromName(from_layer)
+        dest_field_index = self._layer.fields().indexFromName(name)
+
         for f in self._layer.getFeatures():
             self._layer.changeAttributeValue(f.id(), layers_field_index, layers_list)
             value = f.attribute(source_field_index)
             if not is_null(value):
                 values = value.split(",")
                 value = ",".join(
-                    [str(v if v == "NULL" else float(v) - thickness) for v in values]
+                    [str(v if v == "NULL" else float(v) + deltaz) for v in values]
                 )
             self._layer.changeAttributeValue(f.id(), dest_field_index, value)
 
@@ -215,9 +221,7 @@ class PreCourlisFileLine(PreCourlisFileBase):
 
         # Update layers list
         layers = self.layers()
-        print(layers)
         layers.pop(layers.index(name))
-        print(layers)
         layers_list = ",".join(layers)
         layers_field_index = self._layer.fields().indexFromName("layers")
         for f in self._layer.getFeatures():

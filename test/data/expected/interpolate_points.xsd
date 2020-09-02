@@ -39,6 +39,13 @@
             </xs:restriction>
           </xs:simpleType>
         </xs:element>
+        <xs:element name="layers" nillable="true" minOccurs="0" maxOccurs="1">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="50"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
         <xs:element name="p_id" nillable="true" minOccurs="0" maxOccurs="1">
           <xs:simpleType>
             <xs:restriction base="xs:decimal">
@@ -52,13 +59,6 @@
             <xs:restriction base="xs:decimal">
               <xs:totalDigits value="50"/>
               <xs:fractionDigits value="6"/>
-            </xs:restriction>
-          </xs:simpleType>
-        </xs:element>
-        <xs:element name="layers" nillable="true" minOccurs="0" maxOccurs="1">
-          <xs:simpleType>
-            <xs:restriction base="xs:string">
-              <xs:maxLength value="50"/>
             </xs:restriction>
           </xs:simpleType>
         </xs:element>

@@ -84,9 +84,7 @@ processing.run(
 layer = QgsVectorLayer(PROFILE_LINES_PATH, "profile_lines", "ogr")
 assert layer.isValid()
 layer.startEditing()
-PreCourlisFileLine(layer).add_sedimental_layer(
-    "Layer1", 1
-)
+PreCourlisFileLine(layer).add_sedimental_layer("Layer1", "zfond", -1)
 layer.commitChanges()
 
 processing.run(

@@ -271,7 +271,11 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         name = self.addLayerNameLineEdit.text()
 
         self.layer().startEditing()
-        self.file.add_sedimental_layer(name)
+        self.file.add_sedimental_layer(
+            name,
+            self.sedimental_layer(),
+            self.addLayerDeltaBox.value(),
+        )
         self.file.set_layer_color(name, self.selected_color)
 
         self.sedimentalLayerModel.setLayer(self.layer())
