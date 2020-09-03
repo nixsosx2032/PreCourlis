@@ -25,6 +25,8 @@ def is_null(v):
         return True
     if isinstance(v, QVariant) and v.isNull():
         return True
+    if isinstance(v, str) and v == "NULL":
+        return True
     return False
 
 
@@ -85,11 +87,14 @@ class Section(SectionBase):
         return self
 
     def set_layers(self, layer_names, layers_elev):
+        self.nlayers = len(layer_names)
         self.layer_names = layer_names
-        self.layers_elev = [
-            np.array([np.nan if is_null(v) else to_float(v) for v in values])
-            for values in layers_elev
-        ]
+        self.layers_elev = np.array(
+            [
+                np.array([np.nan if is_null(v) else to_float(v) for v in values])
+                for values in layers_elev
+            ]
+        )
 
     def get_layer(self, name):
         if name == "zfond":
