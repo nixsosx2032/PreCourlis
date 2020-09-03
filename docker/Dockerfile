@@ -4,7 +4,6 @@ FROM qgis/qgis:release-3_10 as test
 RUN apt update \
      && apt remove -y python3-coverage \
      && apt install -y \
-        python3-matplotlib \
         python3-venv \
         vim
 
@@ -12,11 +11,13 @@ RUN pip3 install \
     black \
     coverage \
     flake8 \
+    matplotlib==3.1.3 \
     nose \
+    numpy==1.18.3 \
     pydevd \
     pytest \
     pytest-cov \
-    scipy
+    scipy==1.4.1
 
 RUN mkdir -p /app /home/user && chmod 777 /home/user
 

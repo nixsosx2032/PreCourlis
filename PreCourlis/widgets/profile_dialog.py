@@ -202,6 +202,11 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
             self.update_feature("Profile dialog table edit")
 
     def graph_editing_finished(self):
+        model = self.pointsTableModel
+        model.dataChanged.emit(
+            model.index(0, 1),
+            model.index(model.rowCount() - 1, model.columnCount() - 1),
+        )
         self.update_feature("Profile dialog graph translation")
 
     def update_feature(self, title):

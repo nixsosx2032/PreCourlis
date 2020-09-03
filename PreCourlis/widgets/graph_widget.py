@@ -17,7 +17,7 @@ class GraphWidget(FigureCanvas):
     editing_finished = QtCore.pyqtSignal()
 
     def __init__(self, parent=None):
-        self.figure = plt.figure(figsize=(15, 7))
+        self.figure = plt.figure(figsize=(15, 7), constrained_layout=True)
         super().__init__(self.figure)
 
         self.graph = plt.subplot(111)
@@ -54,26 +54,12 @@ class GraphWidget(FigureCanvas):
         self.feature = feature
         self.previous_section = previous_section
         self.current_section = current_section
-        self.selection_tool.set_section(current_section)
         self.next_section = next_section
         self.refresh()
 
     def set_current_layer(self, layer_name):
         self.current_layer_name = layer_name
         self.refresh_current_section()
-
-        if layer_name == "":
-            ydata = None
-            column = None
-        elif layer_name == "zfond":
-            ydata = self.current_section.z
-            column = 1
-        else:
-            layer_index = self.current_section.layer_names.index(layer_name)
-            ydata = self.current_section.layers_elev[layer_index]
-            column = layer_index + 2
-
-        self.selection_tool.set_data(self.current_section.distances, ydata, column)
 
     def axis_position(self, section):
         """
@@ -135,10 +121,10 @@ class GraphWidget(FigureCanvas):
         self.graph.legend(
             lines,
             labels,
-            loc="upper center",
+            bbox_to_anchor=(1, 0.5),
+            loc="center left",
             fancybox=True,
             shadow=True,
-            ncol=4,
             prop={"size": 10},
         )
 
@@ -189,7 +175,8 @@ class GraphWidget(FigureCanvas):
             )
             self.layers_lines.append(line)
 
-        self.selection_tool.refresh_selection(draw=False)
+            if self.current_layer_name == layer:
+                self.selection_tool.set_data(section.distances, values, i + 1)
 
         if draw:
             self.draw()
