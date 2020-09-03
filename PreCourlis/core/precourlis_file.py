@@ -9,9 +9,12 @@ from qgis.core import (
     QgsVectorLayer,
 )
 from qgis.PyQt.QtCore import QVariant
+from qgis.PyQt.QtGui import QColor
 
 from PreCourlis.core import is_null, Point, Reach, Section
 from PreCourlis.core.utils import color_to_hex
+
+DEFAULT_LAYER_COLOR = QColor("#7f7f7f")
 
 
 class PreCourlisFileBase:
@@ -162,22 +165,28 @@ class PreCourlisFileLine(PreCourlisFileBase):
         return value.split(",")
 
     def layer_color(self, layer):
-        if self._layer is None:
-            return "#7f7f7f"
+        default_color = "#7f7f7f"
         if layer == "zfond":
-            return "#ff0000"
-        return self._layer.customProperty("PreCoulis_{}_Color".format(layer))
+            default_color = "#ff0000"
+        if self._layer is None:
+            return default_color
+        return self._layer.customProperty(
+            "PreCoulis_{}_Color".format(layer), default_color
+        )
 
     def set_layer_color(self, layer, color):
-        self._layer.setCustomProperty(
-            "PreCoulis_{}_Color".format(layer), color_to_hex(color)
-        )
+        key = "PreCoulis_{}_Color".format(layer)
+        if color is None:
+            self._layer.removeCustomProperty(key)
+        else:
+            self._layer.setCustomProperty(key, color_to_hex(color))
 
     def add_sedimental_layer(self, name, from_layer, deltaz=0):
         layers = self.layers()
-        if name in ["zfond"] + layers:
-            raise KeyError("Layer {} already exists".format(name))
+        if self._layer.fields().indexFromName(name) != -1:
+            raise KeyError("Field {} already exists".format(name))
 
+        self.layer().startEditing()
         self._layer.beginEditCommand("Add sedimental layer {}".format(name))
 
         # Add new attribute

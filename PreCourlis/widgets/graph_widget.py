@@ -158,7 +158,7 @@ class GraphWidget(FigureCanvas):
             return
 
         previous_values = None
-        for i, layer in enumerate(["zfond"] + self.file.layers()):
+        for i, layer in enumerate(["zfond"] + section.layer_names):
             if layer == "zfond":
                 values = self.current_section.z
             else:

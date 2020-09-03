@@ -25,6 +25,8 @@ class SedimentalLayerModel(QtCore.QAbstractListModel):
             if index.row() == 0:
                 if index.column() == 0:
                     return "zfond"
-            layer = self.file.layers()[index.row() - 1]
-            if index.column() == 0:
-                return layer
+            layers = self.file.layers()
+            if index.row() - 1 < len(layers):
+                layer = self.file.layers()[index.row() - 1]
+                if index.column() == 0:
+                    return layer
