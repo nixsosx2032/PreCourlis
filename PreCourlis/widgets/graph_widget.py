@@ -17,7 +17,7 @@ class GraphWidget(FigureCanvas):
     editing_finished = QtCore.pyqtSignal()
 
     def __init__(self, parent=None):
-        self.figure = plt.figure(figsize=(15, 7))
+        self.figure = plt.figure(figsize=(15, 7), constrained_layout=True)
         super().__init__(self.figure)
 
         self.graph = plt.subplot(111)
@@ -135,10 +135,10 @@ class GraphWidget(FigureCanvas):
         self.graph.legend(
             lines,
             labels,
-            loc="upper center",
+            bbox_to_anchor=(1, 0.5),
+            loc="center left",
             fancybox=True,
             shadow=True,
-            ncol=4,
             prop={"size": 10},
         )
 
