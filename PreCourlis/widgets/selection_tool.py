@@ -8,7 +8,6 @@ class SelectionTool:
         self.canvas = canvas
         self.graph = graph
         self.selection_model = None
-        self.section = None
         self.xdata = None
         self.ydata = None
         self.column = None
@@ -33,13 +32,11 @@ class SelectionTool:
         self.selection_model = model
         self.selection_model.selectionChanged.connect(self.selection_changed)
 
-    def set_section(self, section):
-        self.section = section
-
     def set_data(self, xdata, ydata, column):
         self.xdata = xdata
         self.ydata = ydata
         self.column = column
+        self.refresh_selection(draw=False)
 
     def selection_changed(self, selected, deselected):
         self.refresh_selection()
@@ -53,23 +50,65 @@ class SelectionTool:
 
         xdata = []
         ydata = []
-        section = self.section
         for index in self.selection_model.selection().indexes():
-            if index.column() == 1:
-                xdata.append(section.distances[index.row()])
-                ydata.append(section.z[index.row()] + dy)
-            if index.column() > 1:
-                xdata.append(section.distances[index.row()])
-                ydata.append(section.layers_elev[index.column() - 2][index.row()] + dy)
+            xdata.append(self.xdata[index.row()])
+            ydata.append(self.ydata[index.row()] + dy)
 
-        (self.line,) = self.graph.plot(
-            xdata, ydata, "bo", markersize=10, zorder=0, picker=10
-        )
+        if self.line is None:
+            (self.line,) = self.graph.plot(
+                xdata,
+                ydata,
+                marker="o",
+                markerfacecolor=None,
+                markeredgecolor="tab:blue",
+                fillstyle="none",
+                linestyle="none",
+                markersize=10,
+                zorder=0,
+                picker=10,
+            )
+        else:
+            self.line.set_xdata(xdata)
+            self.line.set_ydata(ydata)
 
         if draw:
             self.canvas.draw()
 
+    def start_edit(self, x, y):
+        # Start editing by translation
+        self.editing = True
+        self.editing_start = x, y
+        self.motion_refresh(True)
+
+    def motion_refresh(self, draw=True):
+        if draw:
+            self.line.set_animated(True)
+            self.canvas.draw()
+            self.background = self.canvas.copy_from_bbox(self.graph.bbox)
+            self.graph.draw_artist(self.line)
+            self.canvas.blit(self.graph.bbox)
+        else:
+            self.canvas.restore_region(self.background)
+            self.graph.draw_artist(self.line)
+            self.canvas.blit(self.graph.bbox)
+
+    def finish_edit(self, x, y):
+        dy = y - self.editing_start[1]
+        for index in self.selection_model.selection().indexes():
+            self.ydata[index.row()] += dy
+        self.canvas.editing_finished.emit()
+        self.stop_editing()
+
+    def stop_editing(self):
+        self.editing = False
+        self.line.set_animated(False)
+        self.background = None
+        self.refresh_selection()
+
     def on_press(self, event):
+        if self.editing:
+            self.stop_editing()
+
         if event.button != 1:
             return
 
@@ -85,15 +124,7 @@ class SelectionTool:
             ok, points = self.line.contains(event)
             del points
             if ok:
-                # Start editing by translation
-                self.editing = True
-                self.editing_start = event.xdata, event.ydata
-
-                self.canvas.draw()
-                self.line.set_animated(True)
-                self.background = self.canvas.copy_from_bbox(self.graph.bbox)
-                self.graph.draw_artist(self.line)
-                self.canvas.blit(self.graph.bbox)
+                self.start_edit(event.xdata, event.ydata)
                 return
 
         # Search for the closest
@@ -140,11 +171,9 @@ class SelectionTool:
 
         if self.editing:
             dy = event.ydata - self.editing_start[1]
-
+            bounds = self.graph.dataLim.bounds
             self.refresh_selection(dy, False)
-            self.canvas.restore_region(self.background)
-            self.graph.draw_artist(self.line)
-            self.canvas.blit(self.graph.bbox)
+            self.motion_refresh(self.graph.dataLim.bounds != bounds)
 
     def on_release(self, event):
         if event.button != 1:
@@ -154,21 +183,4 @@ class SelectionTool:
             return
 
         if self.editing:
-            dy = event.ydata - self.editing_start[1]
-
-            self.line.set_animated(True)
-            self.background = None
-            self.refresh_selection(dy, True)
-
-            for index in self.selection_model.selection().indexes():
-                if index.column() == 1:
-                    self.section.z[index.row()] += dy
-                if index.column() > 1:
-                    self.section.layers_elev[index.column() - 2][index.row()] += dy
-                model = self.selection_model.model()
-                model.dataChanged.emit(
-                    model.index(0, self.column),
-                    model.index(model.rowCount() - 1, self.column),
-                )
-            self.editing = False
-            self.canvas.editing_finished.emit()
+            self.finish_edit(event.xdata, event.ydata)
