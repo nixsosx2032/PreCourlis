@@ -48,6 +48,7 @@ class ExportCourlisAlgorithm(QgsProcessingAlgorithm):
         output_file = MascaretGeoFile(output_path, mode="write")
         output_file.has_ref = "ref" in os.path.splitext(output_path)[1][1:]
         output_file.add_reach(reach)
+        output_file.nlayers = len(precourlis_file.layers())
         output_file.save(output_path)
 
         return {self.OUTPUT: output_path}
