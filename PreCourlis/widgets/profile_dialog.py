@@ -6,12 +6,13 @@ from qgis.core import (
     QgsProject,
     QgsWkbTypes,
 )
+from qgis.gui import QgsMessageBar
 from qgis.PyQt import QtCore, QtGui, QtWidgets, uic
 from qgis.utils import iface
 
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 
-from PreCourlis.core.precourlis_file import PreCourlisFileLine
+from PreCourlis.core.precourlis_file import PreCourlisFileLine, DEFAULT_LAYER_COLOR
 from PreCourlis.widgets.delegates import FloatDelegate
 from PreCourlis.widgets.points_table_model import PointsTableModel
 from PreCourlis.widgets.section_item_model import SectionItemModel
@@ -57,6 +58,9 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
 
         self.nav_toolbar = NavigationToolbar(self.graphWidget, self)
         self.sectionSelectionLayout.insertWidget(6, self.nav_toolbar)
+
+        self.message_bar = QgsMessageBar(self)
+        self.layout().insertWidget(1, self.message_bar)
 
         self.sectionItemModel = SectionItemModel(self)
         self.pointsTableModel = PointsTableModel(self)
@@ -113,7 +117,7 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         self.sedimentalLayerComboBox.currentIndexChanged.connect(
             self.sedimental_layer_changed
         )
-        self.addLayerColorButton.clicked.connect(self.add_layer_select_color)
+        self.addLayerColorButton.clicked.connect(self.addLayerColorButton_clicked)
         self.addLayerButton.clicked.connect(self.add_layer)
         self.applyLayerButton.clicked.connect(self.apply_layer)
         self.deleteLayerButton.clicked.connect(self.delete_layer)
@@ -138,6 +142,7 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
 
     def layer_modified(self):
         if not self.editing:
+            self.sedimental_layers_update()
             self.section_changed(self.sectionComboBox.currentIndex())
 
     def section_from_feature_id(self, f_id):
@@ -216,23 +221,27 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
     def redo(self):
         self.layer().undoStack().redo()
 
+    def sedimental_layers_update(self, name=None):
+        if name is None:
+            name = self.sedimental_layer()
+        self.sedimentalLayerModel.setLayer(self.layer())
+        self.sedimentalLayerComboBox.setCurrentText(name)
+
     def sedimental_layer(self):
         return self.sedimentalLayerComboBox.currentText()
 
     def sedimental_layer_changed(self, index):
         layer = self.sedimental_layer()
         self.addLayerNameLineEdit.setText(layer)
-        self.set_new_layer_color(self.file.layer_color(layer))
+        self.set_layer_color_button_color(self.file.layer_color(layer))
         self.graphWidget.set_current_layer(layer)
 
-    def add_layer_select_color(self):
-        self.set_new_layer_color(
-            QtWidgets.QColorDialog.getColor(
-                self.selected_color or QtGui.QColor("#7f7f7f")
-            )
+    def addLayerColorButton_clicked(self):
+        self.set_layer_color_button_color(
+            QtWidgets.QColorDialog.getColor(self.selected_color or DEFAULT_LAYER_COLOR)
         )
 
-    def set_new_layer_color(self, color):
+    def set_layer_color_button_color(self, color):
         stylesheet = ""
         if color is not None:
             if isinstance(color, str):
@@ -247,19 +256,17 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
 
     def add_layer(self):
         name = self.addLayerNameLineEdit.text()
-
-        self.layer().startEditing()
-        self.file.add_sedimental_layer(
-            name,
-            self.sedimental_layer(),
-            self.addLayerDeltaBox.value(),
-        )
+        try:
+            self.file.add_sedimental_layer(
+                name,
+                self.sedimental_layer(),
+                self.addLayerDeltaBox.value(),
+            )
+        except KeyError as e:
+            self.message_bar.pushCritical("Impossible to add layer", str(e))
+            return
         self.file.set_layer_color(name, self.selected_color)
-
-        self.sedimentalLayerModel.setLayer(self.layer())
         self.sedimentalLayerComboBox.setCurrentText(name)
-
-        self.section_changed(self.sectionComboBox.currentIndex())
 
     def apply_layer(self):
         self.file.set_layer_color(self.sedimental_layer(), self.selected_color)
@@ -272,7 +279,6 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
             self.sedimentalLayerComboBox.currentIndex() - 1
         )
         self.file.delete_sedimental_layer(layer)
-        self.section_changed(self.sectionComboBox.currentIndex())
 
     def apply_interpolation(self):
         section = self.current_section
