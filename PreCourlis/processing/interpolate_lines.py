@@ -118,7 +118,7 @@ class InterpolateLinesAlgorithm(QgsProcessingAlgorithm):
         alg_params = {
             "SECTIONS": current,
             "AXIS": parameters[self.AXIS],
-            "CONSTRAINT_LINES": parameters[self.CONSTRAINT_LINES],
+            "CONSTRAINT_LINES": parameters.get(self.CONSTRAINT_LINES),
             "LONG_STEP": parameters[self.LONG_STEP],
             "LAT_STEP": parameters[self.LAT_STEP],
             "ATTR_CROSS_SECTION": "sec_id",

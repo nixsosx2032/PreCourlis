@@ -5,9 +5,7 @@ from qgis.core import (
     QgsVectorLayer,
 )
 
-import processing
-
-from .. import DATA_PATH, EXPECTED_PATH, TEMP_PATH, OVERWRITE_EXPECTED, utils
+from .. import DATA_PATH, TEMP_PATH, utils
 from . import TestCase
 
 SECTIONS_PATH = os.path.join(DATA_PATH, "input", "profiles_points.gml")
@@ -19,33 +17,34 @@ CONSTRAINT_LINES = [
 
 
 class TestInterpolatePointsAlgorithm(TestCase):
-    def test_algorithm(self):
+
+    ALGORITHM_ID = "precourlis:interpolate_points"
+    DEFAULT_PARAMS = {
+        "SECTIONS": SECTIONS_PATH,
+        "AXIS": AXIS_PATH,
+        "CONSTRAINT_LINES": CONSTRAINT_LINES,
+        "LONG_STEP": 200,
+        "LAT_STEP": 50,
+        "ATTR_CROSS_SECTION": "sec_id",
+        "OUTPUT": QgsProcessingUtils.generateTempFilename("interpolate_points.shp"),
+    }
+
+    def compare_output(self, key, output, expected):
+        output = QgsVectorLayer(output, "output", "ogr")
+        assert output.isValid()
+
         output_path = os.path.join(TEMP_PATH, "interpolate_points.gml")
-        expected_path = os.path.join(EXPECTED_PATH, "interpolate_points.gml")
+        output = utils.save_as_gml(output, output_path)
+        self.compare_layers(output_path, expected)
 
-        if OVERWRITE_EXPECTED:
-            output_path = expected_path
-
-        outputs = processing.run(
-            "precourlis:interpolate_points",
+    def test_algorithm(self):
+        self.check_algorithm(
             {
-                "SECTIONS": SECTIONS_PATH,
-                "AXIS": AXIS_PATH,
-                "CONSTRAINT_LINES": CONSTRAINT_LINES,
-                "LONG_STEP": 200,
-                "LAT_STEP": 50,
-                "ATTR_CROSS_SECTION": "sec_id",
                 "OUTPUT": QgsProcessingUtils.generateTempFilename(
                     "interpolate_points.shp"
                 ),
             },
+            {
+                "OUTPUT": "interpolate_points.gml",
+            },
         )
-        output = QgsVectorLayer(outputs["OUTPUT"], "output", "ogr")
-        assert output.isValid()
-
-        output = utils.save_as_gml(output, output_path)
-
-        expected = QgsVectorLayer(expected_path, "expected", "ogr")
-        assert expected.isValid()
-
-        self.assertLayersEqual(expected, output)
