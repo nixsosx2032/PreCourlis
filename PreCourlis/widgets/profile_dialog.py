@@ -289,7 +289,7 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         section = self.current_section
 
         dz0 = self.leftSpinBox.value()
-        dz1 = self.leftSpinBox.value()
+        dz1 = self.rightSpinBox.value()
 
         index0 = None
         index1 = None
