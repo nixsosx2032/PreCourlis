@@ -1,6 +1,7 @@
 import os
 
 from qgis.core import (
+    Qgis,
     QgsProcessing,
     QgsProcessingAlgorithm,
     QgsProcessingParameterFileDestination,
@@ -34,13 +35,23 @@ class ExportCourlisAlgorithm(QgsProcessingAlgorithm):
             QgsProcessingParameterFileDestination(
                 self.OUTPUT,
                 self.tr("Output file"),
-                fileFilter="GeorefC file (*.georefC);;GeoC file (*.geoC)",
+                # Processing GUI does not correctly handle uppercase characters in file extensions
+                # before QGIS 3.14
+                fileFilter="GeorefC file (*.georefc);;GeoC file (*.geoc)"
+                if Qgis.QGIS_VERSION_INT < 31400
+                else "GeorefC file (*.georefC);;GeoC file (*.geoC)",
             )
         )
 
     def processAlgorithm(self, parameters, context, feedback):
         input_layer = self.parameterAsVectorLayer(parameters, self.INPUT, context)
         output_path = self.parameterAsString(parameters, self.OUTPUT, context)
+
+        # Processing GUI does not correctly handle uppercase characters in file extensions before
+        # QGIS 3.14
+        if Qgis.QGIS_VERSION_INT < 31400:
+            output_path = output_path.replace(".georefc", ".georefC")
+            output_path = output_path.replace(".geoc", ".geoC")
 
         precourlis_file = PreCourlisFileLine(input_layer)
         reach = precourlis_file.get_reach()
