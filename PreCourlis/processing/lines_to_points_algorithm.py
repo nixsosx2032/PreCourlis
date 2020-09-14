@@ -73,7 +73,7 @@ class LinesToPointsAlgorithm(QgsProcessingAlgorithm):
                 line_feature.attribute("p_id").split(","),
                 line_feature.attribute("abs_lat").split(","),
                 line_feature.attribute("zfond").split(","),
-                zip(*line_layers_values),
+                list(zip(*line_layers_values)) or [[]] * line.numPoints(),
             ):
                 point_feature = QgsFeature()
                 point_feature.setAttributes(
