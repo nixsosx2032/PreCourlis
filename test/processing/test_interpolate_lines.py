@@ -1,15 +1,8 @@
 import os
 
-from qgis.core import QgsVectorLayer
-
-import processing
-
 from .. import (
     DATA_PATH,
     PROFILE_LINES_PATH,
-    EXPECTED_PATH,
-    TEMP_PATH,
-    OVERWRITE_EXPECTED,
 )
 from . import TestCase
 
@@ -21,29 +14,26 @@ CONSTRAINT_LINES = [
 
 
 class TestInterpolateLinesAlgorithm(TestCase):
-    def test_algorithm(self):
-        output_path = os.path.join(TEMP_PATH, "interpolate_lines.gml")
-        expected_path = os.path.join(EXPECTED_PATH, "interpolate_lines.gml")
 
-        if OVERWRITE_EXPECTED:
-            output_path = expected_path
+    ALGORITHM_ID = "precourlis:interpolate_lines"
+    DEFAULT_PARAMS = {
+        "SECTIONS": PROFILE_LINES_PATH,
+        "AXIS": AXIS_PATH,
+        "LONG_STEP": 200,
+        "LAT_STEP": 20,
+        "ATTR_CROSS_SECTION": "sec_id",
+    }
 
-        outputs = processing.run(
-            "precourlis:interpolate_lines",
-            {
-                "SECTIONS": PROFILE_LINES_PATH,
-                "AXIS": AXIS_PATH,
-                "CONSTRAINT_LINES": CONSTRAINT_LINES,
-                "LONG_STEP": 200,
-                "LAT_STEP": 50,
-                "ATTR_CROSS_SECTION": "sec_id",
-                "OUTPUT": output_path,
-            },
+    def test_interpolate_lines(self):
+        self.check_algorithm(
+            {},
+            {"OUTPUT": "interpolate_lines.gml"},
         )
-        output = QgsVectorLayer(outputs["OUTPUT"], "output", "ogr")
-        assert output.isValid()
 
-        expected = QgsVectorLayer(expected_path, "expected", "ogr")
-        assert expected.isValid()
-
-        self.assertLayersEqual(expected, output)
+    def test_interpolate_lines_with_constraints(self):
+        self.check_algorithm(
+            {
+                "CONSTRAINT_LINES": CONSTRAINT_LINES,
+            },
+            {"OUTPUT": "interpolate_lines_with_constraints.gml"},
+        )

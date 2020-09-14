@@ -1,30 +1,17 @@
-import os
-import filecmp
-
-import processing
-
-from .. import PROFILE_LINES_PATH, EXPECTED_PATH, TEMP_PATH, OVERWRITE_EXPECTED
+from .. import PROFILE_LINES_PATH
 from . import TestCase
 
 
 class TestExportGeorefAlgorithm(TestCase):
-    def _test_export(self, ext):
-        output_path = os.path.join(TEMP_PATH, "export_georef.{}".format(ext))
-        expected_path = os.path.join(EXPECTED_PATH, "export_georef.{}".format(ext))
 
-        if OVERWRITE_EXPECTED:
-            output_path = expected_path
+    ALGORITHM_ID = "precourlis:export_courlis"
+    DEFAULT_PARAMS = {"INPUT": PROFILE_LINES_PATH}
 
-        outputs = processing.run(
-            "precourlis:export_courlis",
-            {"INPUT": PROFILE_LINES_PATH, "OUTPUT": output_path},
-        )
-        assert os.path.isfile(outputs["OUTPUT"])
-
-        assert filecmp.cmp(expected_path, output_path)
+    def compare_output(self, key, output, expected):
+        self.compare_files(output, expected)
 
     def test_export_georefc(self):
-        self._test_export("georefC")
+        self.check_algorithm({}, {"OUTPUT": "export_georef.georefC"})
 
     def test_export_geoc(self):
-        self._test_export("geoC")
+        self.check_algorithm({}, {"OUTPUT": "export_georef.geoC"})
