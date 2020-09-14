@@ -144,6 +144,7 @@ class GraphWidget(FigureCanvas):
             return
 
         previous_values = None
+        current_column = None
         for i, layer in enumerate(["zfond"] + section.layer_names):
             if layer == "zfond":
                 values = self.current_section.z
@@ -176,7 +177,13 @@ class GraphWidget(FigureCanvas):
             self.layers_lines.append(line)
 
             if self.current_layer_name == layer:
-                self.selection_tool.set_data(section.distances, values, i + 1)
+                current_column = i + 1
+
+        self.selection_tool.set_data(
+            section.distances,
+            [section.z] + list(section.layers_elev),
+            current_column,
+        )
 
         if draw:
             self.draw()
