@@ -9,7 +9,7 @@ class SelectionTool:
         self.graph = graph
         self.selection_model = None
         self.xdata = None
-        self.ydata = None
+        self.ydatas = None
         self.column = None
         self.line = None
         self.previous_point_index = None
@@ -32,9 +32,9 @@ class SelectionTool:
         self.selection_model = model
         self.selection_model.selectionChanged.connect(self.selection_changed)
 
-    def set_data(self, xdata, ydata, column):
+    def set_data(self, xdata, ydatas, column):
         self.xdata = xdata
-        self.ydata = ydata
+        self.ydatas = ydatas
         self.column = column
         self.refresh_selection(draw=False)
 
@@ -52,7 +52,7 @@ class SelectionTool:
         ydata = []
         for index in self.selection_model.selection().indexes():
             xdata.append(self.xdata[index.row()])
-            ydata.append(self.ydata[index.row()] + dy)
+            ydata.append(self.ydatas[index.column() - 1][index.row()] + dy)
 
         if self.line is None:
             (self.line,) = self.graph.plot(
@@ -95,7 +95,7 @@ class SelectionTool:
     def finish_edit(self, x, y):
         dy = y - self.editing_start[1]
         for index in self.selection_model.selection().indexes():
-            self.ydata[index.row()] += dy
+            self.ydatas[index.column() - 1][index.row()] += dy
         self.canvas.editing_finished.emit()
         self.stop_editing()
 
@@ -129,7 +129,8 @@ class SelectionTool:
 
         # Search for the closest
         d = np.sqrt(
-            (self.xdata - event.xdata) ** 2.0 + (self.ydata - event.ydata) ** 2.0
+            (self.xdata - event.xdata) ** 2.0
+            + (self.ydatas[self.column - 1] - event.ydata) ** 2.0
         )
         ind = np.argmin(d)
         if ind is None:

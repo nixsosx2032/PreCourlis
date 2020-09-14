@@ -17,7 +17,11 @@ class TestSelectionTool(TestGraphWidgetBase):
         self.model.set_section(self.section)
         tool.set_selection_model(QtCore.QItemSelectionModel(self.model, self.widget))
 
-        tool.set_data(self.section.distances, self.section.z, 1)
+        tool.set_data(
+            self.section.distances,
+            [self.section.z] + list(self.section.layers_elev),
+            1,
+        )
 
         return tool
 
@@ -67,7 +71,7 @@ class TestSelectionTool(TestGraphWidgetBase):
 
     def test_on_press_layer(self):
         tool = self.create_tool()
-        tool.set_data(self.section.distances, self.section.z, 2)
+        tool.column = 2
         tool.on_press(self.event(2))
         indexes = tool.selection_model.selection().indexes()
         assert len(indexes) == 1
