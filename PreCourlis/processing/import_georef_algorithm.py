@@ -30,7 +30,7 @@ class ImportGeorefAlgorithm(QgsProcessingAlgorithm):
         )
 
         self.addParameter(
-            QgsProcessingParameterFeatureSink(self.OUTPUT, self.tr("Output layer"))
+            QgsProcessingParameterFeatureSink(self.OUTPUT, self.tr("GeorefMascaret"))
         )
 
     def processAlgorithm(self, parameters, context, feedback):

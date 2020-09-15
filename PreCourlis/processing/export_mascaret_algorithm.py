@@ -4,6 +4,7 @@ from qgis.core import (
     QgsProcessing,
     QgsProcessingAlgorithm,
     QgsProcessingParameterFileDestination,
+    QgsProcessingParameterString,
     QgsProcessingParameterVectorLayer,
 )
 from qgis.PyQt.QtCore import QCoreApplication
@@ -18,6 +19,7 @@ class ExportMascaretAlgorithm(QgsProcessingAlgorithm):
     """
 
     INPUT = "INPUT"
+    REACH_NAME = "REACH_NAME"
     OUTPUT = "OUTPUT"
 
     def initAlgorithm(self, config):
@@ -31,6 +33,14 @@ class ExportMascaretAlgorithm(QgsProcessingAlgorithm):
         )
 
         self.addParameter(
+            QgsProcessingParameterString(
+                self.REACH_NAME,
+                self.tr("Reach name (default to input layer name)"),
+                optional=True,
+            )
+        )
+
+        self.addParameter(
             QgsProcessingParameterFileDestination(
                 self.OUTPUT,
                 self.tr("Output file"),
@@ -38,12 +48,28 @@ class ExportMascaretAlgorithm(QgsProcessingAlgorithm):
             )
         )
 
+    def checkParameterValues(self, parameters, context):
+        ok, msg = QgsProcessingAlgorithm.checkParameterValues(self, parameters, context)
+        if ok:
+            input_layer = self.parameterAsVectorLayer(parameters, self.INPUT, context)
+            reach_name = (
+                self.parameterAsString(parameters, self.REACH_NAME, context)
+                or input_layer.name()
+            )
+            if " " in reach_name:
+                return False, self.tr("Reach name cannot contain spaces")
+        return ok, msg
+
     def processAlgorithm(self, parameters, context, feedback):
         input_layer = self.parameterAsVectorLayer(parameters, self.INPUT, context)
+        reach_name = (
+            self.parameterAsString(parameters, self.REACH_NAME, context)
+            or input_layer.name()
+        )
         output_path = self.parameterAsString(parameters, self.OUTPUT, context)
 
         precourlis_file = PreCourlisFileLine(input_layer)
-        reach = precourlis_file.get_reach()
+        reach = precourlis_file.get_reach(reach_name)
 
         output_file = MascaretGeoFile(output_path, mode="write")
         output_file.has_ref = "ref" in os.path.splitext(output_path)[1][1:]
