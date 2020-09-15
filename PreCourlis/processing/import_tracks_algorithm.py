@@ -302,7 +302,7 @@ class ImportTracksAlgorithm(QgsProcessingAlgorithm):
             ),
             "GROUP_FIELD": "sec_id",
             "ORDER_FIELD": points_order_field,
-            "OUTPUT": parameters[self.OUTPUT],
+            "OUTPUT": self.parameterAsOutputLayer(parameters, self.OUTPUT, context),
         }
         outputs["PointsToLines"] = processing.run(
             "precourlis:points_to_lines",

@@ -115,7 +115,7 @@ class PrepareTracksAlgorithm(QgsProcessingAlgorithm):
                     # sec_name
                     feature.attribute(self.name_field_index)
                     if self.name_field
-                    else "P_{:04.3f}".format(abs_long),
+                    else None,
                     # abs_long
                     abs_long,
                     # axis_x

@@ -115,7 +115,7 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
                 point_features[0].attribute("sec_id") or sec_id,
                 # sec_name
                 point_features[0].attribute("sec_name")
-                or "P_{:04.3f}".format(abs_long),
+                or "{}_{:04.3f}".format("P" if abs_long >= 0 else "N", abs_long),
                 # abs_long
                 abs_long,
                 # axis_x
