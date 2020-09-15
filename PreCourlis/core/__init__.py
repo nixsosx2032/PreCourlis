@@ -282,7 +282,7 @@ class Reach(ReachBase):
             )
 
             # Take only the first parts (QgsMultiLineString => QgsLineString)
-            line = next(f.geometry().constParts())
+            line = next(f.geometry().constParts()).clone()
 
             section.set_points(
                 [

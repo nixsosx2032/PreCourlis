@@ -65,7 +65,7 @@ class PreCourlisFileLine(PreCourlisFileBase):
             return v.split(",")
 
         # Take only the first parts (QgsMultiLineString => QgsLineString)
-        line = next(f.geometry().constParts())
+        line = next(f.geometry().constParts()).clone()
         points = line.points()
         section.set_points(
             [
