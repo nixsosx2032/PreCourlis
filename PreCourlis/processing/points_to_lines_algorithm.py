@@ -89,7 +89,7 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
             )
         )
         self.addParameter(
-            QgsProcessingParameterFeatureSink(self.OUTPUT, self.tr("Output layer")),
+            QgsProcessingParameterFeatureSink(self.OUTPUT, self.tr("Lines")),
             True,
         )
 

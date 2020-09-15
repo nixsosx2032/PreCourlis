@@ -37,7 +37,7 @@ class TestCase(TestCaseBase):
         super(TestCase, cls).tearDownClass()
         QgsApplication.processingRegistry().removeProvider(cls.precourlis_provider)
 
-    def check_algorithm(self, inputs, output_filenames):
+    def check_algorithm(self, inputs={}, output_filenames={}):
         outputs = {}
         expected = {}
         for key, filename in output_filenames.items():

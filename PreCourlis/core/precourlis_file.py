@@ -142,10 +142,10 @@ class PreCourlisFileLine(PreCourlisFileBase):
         self._layer.changeGeometry(fid, self.geometry_from_section(section))
         self._layer.endEditCommand()
 
-    def get_reach(self):
+    def get_reach(self, name=None):
         reach = Reach(
             my_id=0,
-            name=self._layer.name(),
+            name=name or self._layer.name(),
             crs_id=self._layer.crs().authid(),
         )
         for section in self.get_sections():

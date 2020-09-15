@@ -112,7 +112,9 @@ class InterpolatePointsAlgorithm(QgsProcessingAlgorithm):
                 defaultValue=None,
             )
         )
-        self.addParameter(ParameterShapefileDestination(self.OUTPUT, self.tr("Output")))
+        self.addParameter(
+            ParameterShapefileDestination(self.OUTPUT, self.tr("Interpolated"))
+        )
 
     def prepare_sections(self, parameters, context, feedback):
         sections = self.parameterAsSource(parameters, self.SECTIONS, context)

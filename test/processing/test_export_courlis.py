@@ -1,3 +1,5 @@
+from qgis.core import QgsProcessingException
+
 from .. import PROFILE_LINES_PATH
 from . import TestCase
 
@@ -15,3 +17,11 @@ class TestExportGeorefAlgorithm(TestCase):
 
     def test_export_geoc(self):
         self.check_algorithm({}, {"OUTPUT": "export_georef.geoC"})
+
+    def test_reach_name_validation(self):
+        with self.assertRaises(
+            QgsProcessingException, msg="Reach name cannot contain spaces"
+        ):
+            self.check_algorithm(
+                {"REACH_NAME": "A name with spaces", "OUTPUT": "test.georefC"},
+            )

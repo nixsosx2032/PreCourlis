@@ -59,7 +59,7 @@ class PrepareTracksAlgorithm(QgsProcessingAlgorithm):
             )
         )
         self.addParameter(
-            QgsProcessingParameterFeatureSink(self.OUTPUT, self.tr("Prepared tracks")),
+            QgsProcessingParameterFeatureSink(self.OUTPUT, self.tr("Prepared")),
             True,
         )
 
