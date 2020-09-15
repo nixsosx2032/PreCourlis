@@ -56,8 +56,15 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         )
         redo_shortcut.activated.connect(self.redo)
 
+        self.saveButton.setIcon(QgsApplication.getThemeIcon("/mActionSaveAllEdits.svg"))
+        self.saveButton.clicked.connect(self.save)
+        save_shortcut = QtWidgets.QShortcut(
+            QtGui.QKeySequence(QtGui.QKeySequence.Save), self
+        )
+        save_shortcut.activated.connect(self.save)
+
         self.nav_toolbar = NavigationToolbar(self.graphWidget, self)
-        self.sectionSelectionLayout.insertWidget(6, self.nav_toolbar)
+        self.sectionSelectionLayout.insertWidget(7, self.nav_toolbar)
 
         self.message_bar = QgsMessageBar(self)
         self.layout().insertWidget(1, self.message_bar)
@@ -225,6 +232,17 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
 
     def redo(self):
         self.layer().undoStack().redo()
+
+    def save(self):
+        layer = self.layer()
+        ok = layer.commitChanges()
+        if not ok:
+            self.message_bar.pushCritical(
+                self.tr("Save Layer Edits"),
+                self.tr("Could not commit changes to layer {}\n\nErrors: {}\n").format(
+                    layer.name(), "\n".join(layer.commitErrors())
+                ),
+            )
 
     def sedimental_layers_update(self, name=None):
         if name is None:

@@ -365,6 +365,24 @@
     </message>
 </context>
 <context>
+    <name>ProfileDialog</name>
+    <message>
+        <location filename="../widgets/profile_dialog.py" line="240"/>
+        <source>Save Layer Edits</source>
+        <translation>Enregistrer les modifications</translation>
+    </message>
+    <message>
+        <location filename="../widgets/profile_dialog.py" line="240"/>
+        <source>Could not commit changes to layer {}
+
+Errors: {}
+</source>
+        <translation>Impossible d&apos;enregistrer les modifications à la couche {}
+
+Erreurs: {}</translation>
+    </message>
+</context>
+<context>
     <name>ProfileDialogBase</name>
     <message>
         <location filename="../ui/profile_dialog_base.ui" line="14"/>
