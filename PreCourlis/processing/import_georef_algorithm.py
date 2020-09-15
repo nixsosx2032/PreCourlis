@@ -1,19 +1,18 @@
 from qgis.core import (
     QgsFeatureSink,
-    QgsProcessingAlgorithm,
     QgsProcessingException,
     QgsProcessingParameterCrs,
     QgsProcessingParameterFeatureSink,
     QgsProcessingParameterFile,
     QgsWkbTypes,
 )
-from qgis.PyQt.QtCore import QCoreApplication
 
 from PreCourlis.core.precourlis_file import PreCourlisFileLine
 from PreCourlis.lib.mascaret.mascaretgeo_file import MascaretGeoFile
+from PreCourlis.processing.precourlis_algorithm import PreCourlisAlgorithm
 
 
-class ImportGeorefAlgorithm(QgsProcessingAlgorithm):
+class ImportGeorefAlgorithm(PreCourlisAlgorithm):
     """
     This algorithm construct a PreCourlis structured line layer from a .geo or
     .georef file.
@@ -26,7 +25,9 @@ class ImportGeorefAlgorithm(QgsProcessingAlgorithm):
     def initAlgorithm(self, config):
         self.addParameter(QgsProcessingParameterFile(self.INPUT, self.tr("Input file")))
         self.addParameter(
-            QgsProcessingParameterCrs(self.CRS, self.tr("CRS"), "EPSG:4326")
+            QgsProcessingParameterCrs(
+                self.CRS, self.tr("Coordinates projection system"), "EPSG:4326"
+            )
         )
 
         self.addParameter(
@@ -84,9 +85,6 @@ class ImportGeorefAlgorithm(QgsProcessingAlgorithm):
 
     def groupId(self):
         return "Import"
-
-    def tr(self, string):
-        return QCoreApplication.translate("Processing", string)
 
     def createInstance(self):
         return ImportGeorefAlgorithm()

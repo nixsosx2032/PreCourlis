@@ -4,11 +4,7 @@ LOCALES = fr
 TS_FILES = $(addprefix $(PLUGINNAME)/i18n/, $(addsuffix .ts, $(LOCALES)))
 QM_FILES = $(addprefix $(PLUGINNAME)/i18n/, $(addsuffix .qm, $(LOCALES)))
 
-PACKAGES_NO_UI = $(PLUGINNAME)/widgets
-PACKAGES = $(PACKAGES_NO_UI) $(PLUGINNAME)/ui
-
-PACKAGES_SOURCES := $(shell find $(PACKAGES) -name "*.py")
-SOURCES := $(PLUGINNAME)/PreCourlis.py $(PACKAGES_SOURCES)
+SOURCES := $(shell find $(PLUGINNAME) -path $(PLUGINNAME)/lib -prune -false -o -name "*.py" -o -name "*.ui")
 
 default: help
 
@@ -38,8 +34,8 @@ transcompile: $(QM_FILES)
 transup: ## Update translation files with any new strings.
 transup: $(TS_FILES)
 
-$(PLUGINNAME)/i18n/%.ts:
-	pylupdate5 -noobsolete $(SOURCES) -ts $@
+$(PLUGINNAME)/i18n/%.ts: $(SOURCES)
+	pylupdate5 -verbose -noobsolete $(SOURCES) -ts $@
 
 $(PLUGINNAME)/i18n/%.qm: $(PLUGINNAME)/i18n/%.ts
 	lrelease $<

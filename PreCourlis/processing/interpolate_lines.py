@@ -1,6 +1,5 @@
 from qgis.core import (
     QgsProcessing,
-    QgsProcessingAlgorithm,
     QgsFeatureRequest,
     QgsProcessingMultiStepFeedback,
     QgsProcessingParameterFeatureSink,
@@ -10,11 +9,12 @@ from qgis.core import (
     QgsProcessingParameterNumber,
     QgsProcessingUtils,
 )
-from qgis.PyQt.QtCore import QCoreApplication
 import processing
 
+from PreCourlis.processing.precourlis_algorithm import PreCourlisAlgorithm
 
-class InterpolateLinesAlgorithm(QgsProcessingAlgorithm):
+
+class InterpolateLinesAlgorithm(PreCourlisAlgorithm):
 
     SECTIONS = "SECTIONS"
     AXIS = "AXIS"
@@ -184,13 +184,10 @@ class InterpolateLinesAlgorithm(QgsProcessingAlgorithm):
         return self.tr("Interpolate lines")
 
     def group(self):
-        return self.tr(self.groupId())
+        return self.tr("Interpolate")
 
     def groupId(self):
         return "Interpolate"
-
-    def tr(self, string):
-        return QCoreApplication.translate("Processing", string)
 
     def createInstance(self):
         return InterpolateLinesAlgorithm()

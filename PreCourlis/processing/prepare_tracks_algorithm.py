@@ -2,7 +2,6 @@ import math
 
 from qgis.core import (
     QgsProcessing,
-    QgsProcessingAlgorithm,
     QgsFeature,
     QgsFeatureSink,
     QgsGeometry,
@@ -12,13 +11,14 @@ from qgis.core import (
     QgsProcessingParameterField,
     QgsWkbTypes,
 )
-from qgis.PyQt.QtCore import QCoreApplication, QVariant
+from qgis.PyQt.QtCore import QVariant
 
 from PreCourlis.core.precourlis_file import PreCourlisFileLine
 from PreCourlis.core.utils import qgslinestring_angle
+from PreCourlis.processing.precourlis_algorithm import PreCourlisAlgorithm
 
 
-class PrepareTracksAlgorithm(QgsProcessingAlgorithm):
+class PrepareTracksAlgorithm(PreCourlisAlgorithm):
     """
     This algorithm construct a PreCourlis structured line layer from any line layer:
         - Construct line layer with "PreCourlis" fields.
@@ -152,13 +152,10 @@ class PrepareTracksAlgorithm(QgsProcessingAlgorithm):
         return self.tr("Prepare tracks")
 
     def group(self):
-        return self.tr(self.groupId())
+        return self.tr("Import")
 
     def groupId(self):
         return "Import"
-
-    def tr(self, string):
-        return QCoreApplication.translate("Processing", string)
 
     def createInstance(self):
         return PrepareTracksAlgorithm()

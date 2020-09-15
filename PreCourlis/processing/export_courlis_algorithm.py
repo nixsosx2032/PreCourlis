@@ -3,18 +3,17 @@ import os
 from qgis.core import (
     Qgis,
     QgsProcessing,
-    QgsProcessingAlgorithm,
     QgsProcessingParameterFileDestination,
     QgsProcessingParameterString,
     QgsProcessingParameterVectorLayer,
 )
-from qgis.PyQt.QtCore import QCoreApplication
 
 from PreCourlis.core.precourlis_file import PreCourlisFileLine
 from PreCourlis.lib.mascaret.mascaretgeo_file import MascaretGeoFile
+from PreCourlis.processing.precourlis_algorithm import PreCourlisAlgorithm
 
 
-class ExportCourlisAlgorithm(QgsProcessingAlgorithm):
+class ExportCourlisAlgorithm(PreCourlisAlgorithm):
     """
     This algorithm export a PreCourlis structured line layer to a .georefC or .geoC file.
     """
@@ -54,7 +53,7 @@ class ExportCourlisAlgorithm(QgsProcessingAlgorithm):
         )
 
     def checkParameterValues(self, parameters, context):
-        ok, msg = QgsProcessingAlgorithm.checkParameterValues(self, parameters, context)
+        ok, msg = super().checkParameterValues(parameters, context)
         if ok:
             input_layer = self.parameterAsVectorLayer(parameters, self.INPUT, context)
             reach_name = (
@@ -97,13 +96,10 @@ class ExportCourlisAlgorithm(QgsProcessingAlgorithm):
         return self.tr("Export Courlis")
 
     def group(self):
-        return self.tr(self.groupId())
+        return self.tr("Export")
 
     def groupId(self):
         return "Export"
-
-    def tr(self, string):
-        return QCoreApplication.translate("Processing", string)
 
     def createInstance(self):
         return ExportCourlisAlgorithm()

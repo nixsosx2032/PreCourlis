@@ -61,10 +61,7 @@ class PreCourlisPlugin:
         self.plugin_dir = os.path.dirname(__file__)
         # initialize locale
         locale = QSettings().value("locale/userLocale", QLocale().name())[0:2]
-        locale_path = os.path.join(
-            self.plugin_dir, "i18n", "PreCourlisPlugin_{}.qm".format(locale)
-        )
-
+        locale_path = os.path.join(self.plugin_dir, "i18n", "{}.qm".format(locale))
         if os.path.exists(locale_path):
             self.translator = QTranslator()
             self.translator.load(locale_path)
