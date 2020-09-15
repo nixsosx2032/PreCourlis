@@ -112,8 +112,10 @@ class PreCourlisPlugin:
         # self.add_action("Projeter les berges", self.projAxeBerge)
         self.add_action("Interpoler des profils", self.interpolate_profiles)
         # self.add_action("A propos", slot, QIcon(":/plugins/precourlis/icon.png"))
-        self.add_action("Exporter un fichier Courlis", self.export_courlis)
-        self.add_action("Exporter un fichier Mascaret", self.export_mascaret)
+        self.add_action("Exporter un fichier de géométrie Courlis", self.export_courlis)
+        self.add_action(
+            "Exporter un fichier de géométrie Mascaret", self.export_mascaret
+        )
 
         """
         self.actionBief = QAction("&Bief", self.iface.mainWindow())
