@@ -1,20 +1,20 @@
 from qgis.core import (
     QgsApplication,
     QgsProcessing,
-    QgsProcessingAlgorithm,
     QgsProcessingMultiStepFeedback,
+    QgsProcessingParameterBoolean,
     QgsProcessingParameterFeatureSource,
     QgsProcessingParameterNumber,
     QgsProcessingParameterField,
     QgsProcessingParameterRasterLayer,
     QgsProcessingParameterVectorDestination,
 )
-from qgis.PyQt.QtCore import QCoreApplication
 import processing
-from qgis._core import QgsProcessingParameterBoolean
+
+from PreCourlis.processing.precourlis_algorithm import PreCourlisAlgorithm
 
 
-class ImportTracksAlgorithm(QgsProcessingAlgorithm):
+class ImportTracksAlgorithm(PreCourlisAlgorithm):
 
     TRACKS = "TRACKS"
     AXIS = "AXIS"
@@ -323,13 +323,10 @@ class ImportTracksAlgorithm(QgsProcessingAlgorithm):
         return self.tr("Import tracks")
 
     def group(self):
-        return self.tr(self.groupId())
+        return self.tr("Import")
 
     def groupId(self):
         return "Import"
-
-    def tr(self, string):
-        return QCoreApplication.translate("Processing", string)
 
     def createInstance(self):
         return ImportTracksAlgorithm()

@@ -27,6 +27,9 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="toolTip">
+        <string>Select layer</string>
+       </property>
        <property name="sizeAdjustPolicy">
         <enum>QComboBox::AdjustToContents</enum>
        </property>
@@ -34,6 +37,9 @@
      </item>
      <item>
       <widget class="QToolButton" name="previousSectionButton">
+       <property name="toolTip">
+        <string>Previous profile</string>
+       </property>
        <property name="text">
         <string>&lt;&lt;</string>
        </property>
@@ -54,6 +60,9 @@
      </item>
      <item>
       <widget class="QToolButton" name="nextSectionButton">
+       <property name="toolTip">
+        <string>Next profile</string>
+       </property>
        <property name="text">
         <string>&gt;&gt;</string>
        </property>
@@ -61,6 +70,9 @@
      </item>
      <item>
       <widget class="QToolButton" name="undoButton">
+       <property name="toolTip">
+        <string>Undo</string>
+       </property>
        <property name="text">
         <string>...</string>
        </property>
@@ -68,6 +80,9 @@
      </item>
      <item>
       <widget class="QToolButton" name="redoButton">
+       <property name="toolTip">
+        <string>Redo</string>
+       </property>
        <property name="text">
         <string>...</string>
        </property>
@@ -180,6 +195,9 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="toolTip">
+             <string>Select sedimental layer</string>
+            </property>
            </widget>
           </item>
          </layout>
@@ -187,10 +205,17 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_4">
           <item>
-           <widget class="QLineEdit" name="addLayerNameLineEdit"/>
+           <widget class="QLineEdit" name="addLayerNameLineEdit">
+            <property name="toolTip">
+             <string>Sedimental layer name</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QToolButton" name="addLayerColorButton">
+            <property name="toolTip">
+             <string>Sedimental layer color</string>
+            </property>
             <property name="text">
              <string/>
             </property>
@@ -215,6 +240,9 @@
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
            <widget class="QPushButton" name="addLayerButton">
+            <property name="toolTip">
+             <string>Add new sedimental layer</string>
+            </property>
             <property name="text">
              <string>Add</string>
             </property>
@@ -222,6 +250,9 @@
           </item>
           <item>
            <widget class="QPushButton" name="applyLayerButton">
+            <property name="toolTip">
+             <string>Apply settings to current sedimental layer</string>
+            </property>
             <property name="text">
              <string>Apply</string>
             </property>
@@ -229,6 +260,9 @@
           </item>
           <item>
            <widget class="QPushButton" name="deleteLayerButton">
+            <property name="toolTip">
+             <string>Delete current sedimental layer</string>
+            </property>
             <property name="text">
              <string>Delete</string>
             </property>
@@ -296,6 +330,9 @@
         </item>
         <item>
          <widget class="QPushButton" name="applyInterpolationButton">
+          <property name="toolTip">
+           <string>Apply interpolation</string>
+          </property>
           <property name="text">
            <string>Apply</string>
           </property>
@@ -303,6 +340,9 @@
         </item>
         <item>
          <widget class="QPushButton" name="clearInterpolationButton">
+          <property name="toolTip">
+           <string>Clear values</string>
+          </property>
           <property name="text">
            <string>Clear</string>
           </property>

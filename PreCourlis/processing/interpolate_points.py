@@ -8,7 +8,6 @@ from qgis.core import (
     QgsGeometry,
     QgsLineString,
     QgsProcessing,
-    QgsProcessingAlgorithm,
     QgsProcessingException,
     QgsProcessingMultiStepFeedback,
     QgsProcessingParameterFeatureSource,
@@ -19,11 +18,12 @@ from qgis.core import (
     QgsProcessingUtils,
     QgsVectorLayer,
 )
-from qgis.PyQt.QtCore import QCoreApplication, QVariant
+from qgis.PyQt.QtCore import QVariant
 
 import processing
 
 from PreCourlis.core.precourlis_file import PreCourlisFileLine
+from PreCourlis.processing.precourlis_algorithm import PreCourlisAlgorithm
 
 PYTHON_INTERPRETER = "python3"
 ENCODING = "utf-8"
@@ -54,7 +54,7 @@ class ParameterShapefileDestination(QgsProcessingParameterVectorDestination):
         return "shp"
 
 
-class InterpolatePointsAlgorithm(QgsProcessingAlgorithm):
+class InterpolatePointsAlgorithm(PreCourlisAlgorithm):
 
     SECTIONS = "SECTIONS"
     AXIS = "AXIS"
@@ -304,13 +304,10 @@ class InterpolatePointsAlgorithm(QgsProcessingAlgorithm):
         return self.tr("Interpolate points")
 
     def group(self):
-        return self.tr(self.groupId())
+        return self.tr("Interpolate")
 
     def groupId(self):
         return "Interpolate"
-
-    def tr(self, string):
-        return QCoreApplication.translate("Processing", string)
 
     def createInstance(self):
         return InterpolatePointsAlgorithm()

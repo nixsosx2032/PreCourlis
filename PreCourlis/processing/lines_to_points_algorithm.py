@@ -1,6 +1,5 @@
 from qgis.core import (
     QgsProcessing,
-    QgsProcessingAlgorithm,
     QgsFeature,
     QgsFeatureSink,
     QgsField,
@@ -10,12 +9,13 @@ from qgis.core import (
     QgsProcessingParameterFeatureSource,
     QgsWkbTypes,
 )
-from qgis.PyQt.QtCore import QCoreApplication, QVariant
+from qgis.PyQt.QtCore import QVariant
 
 from PreCourlis.core.precourlis_file import PreCourlisFileLine, PreCourlisFilePoint
+from PreCourlis.processing.precourlis_algorithm import PreCourlisAlgorithm
 
 
-class LinesToPointsAlgorithm(QgsProcessingAlgorithm):
+class LinesToPointsAlgorithm(PreCourlisAlgorithm):
 
     INPUT = "INPUT"
     OUTPUT = "OUTPUT"
@@ -110,13 +110,10 @@ class LinesToPointsAlgorithm(QgsProcessingAlgorithm):
         return self.tr("Lines to points")
 
     def group(self):
-        return self.tr(self.groupId())
+        return self.tr("Convert")
 
     def groupId(self):
         return "Convert"
-
-    def tr(self, string):
-        return QCoreApplication.translate("Processing", string)
 
     def createInstance(self):
         return LinesToPointsAlgorithm()

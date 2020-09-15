@@ -48,9 +48,6 @@ LOCALES = fr
 
 DOCKER_RUN_CMD = docker-compose run --rm --user `id -u` builder
 
-toto:
-	@echo $(SOURCES)
-
 default: help
 
 .PHONY: help
