@@ -104,7 +104,7 @@ class PointsToLinesAlgorithm(QgsProcessingAlgorithm):
         if self.axis:
             intersection = line.intersection(self.axis.geometry())
             # Take only the first parts (QgsMultiPoint => QgsPoint)
-            intersection_point = next(intersection.constParts())
+            intersection_point = next(intersection.constParts()).clone()
 
         layers = PreCourlisFileLine(None).layers(point_features[0])
 

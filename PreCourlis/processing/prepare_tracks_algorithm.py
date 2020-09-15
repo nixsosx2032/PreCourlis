@@ -95,8 +95,8 @@ class PrepareTracksAlgorithm(QgsProcessingAlgorithm):
             abs_long = self.axis.geometry().lineLocatePoint(intersection)
 
             # Take only the first parts (QgsMultiLineString => QgsLineString)
-            axis_line = next(self.axis.geometry().constParts())
-            track_line = next(feature.geometry().constParts())
+            axis_line = next(self.axis.geometry().constParts()).clone()
+            track_line = next(feature.geometry().constParts()).clone()
 
             intersection_point = intersection.constGet()
             track_angle = qgslinestring_angle(track_line, intersection_point) * (

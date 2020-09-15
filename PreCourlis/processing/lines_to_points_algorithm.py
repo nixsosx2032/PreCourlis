@@ -64,10 +64,11 @@ class LinesToPointsAlgorithm(QgsProcessingAlgorithm):
         for current, line_feature in enumerate(features):
 
             # Take only the first parts (QgsMultiLineString => QgsLineString)
-            line = next(line_feature.geometry().constParts())
+            line = next(line_feature.geometry().constParts()).clone()
             line_layers_values = [
                 line_feature.attribute(layer).split(",") for layer in layers
             ]
+
             for point, p_id, abs_lat, zfond, point_layers_values, in zip(
                 line.points(),
                 line_feature.attribute("p_id").split(","),
