@@ -130,6 +130,8 @@ class PointsToLinesAlgorithm(PreCourlisAlgorithm):
                 point_features[0].attribute("layers") or "",
                 # p_id
                 ",".join([str(id_ + 1) for id_ in range(0, len(points))]),
+                # topo_bat
+                ",".join([f.attribute("topo_bat") for f in point_features]),
                 # abs_lat
                 ",".join(
                     [str(line.lineLocatePoint(f.geometry())) for f in point_features]

@@ -66,7 +66,7 @@ class MascaretGeoFile:
             section_id = 0
             section_name = ''
             section_pk = -1.0
-            dist, x_list, y_list, z_list = [], [], [], []
+            dist, x_list, y_list, z_list, topo_bats = [], [], [], [], []
             xa, ya = None, None
 
             for line in filein:
@@ -83,6 +83,7 @@ class MascaretGeoFile:
                             section.set_points_from_xyz(x_list, y_list, z_list)
                         else:
                             section.set_points_from_trans(dist, z_list)
+                        section.topo_bats = topo_bats
                         reach.add_section(section)
 
                     if self.has_ref:
@@ -106,19 +107,20 @@ class MascaretGeoFile:
 
                     # Reset variables to store section
                     section_pk = float(pk_str)
-                    dist, x_list, y_list, z_list = [], [], [], []
+                    dist, x_list, y_list, z_list, topo_bats = [], [], [], [], []
                     section_id += 1
                 else:
                     if self.has_ref:
-                        dist_str, z_str, _, x1, y1 = line.split()
+                        dist_str, z_str, topo_bat, x1, y1 = line.split()
                         x_list.append(float(x1))
                         y_list.append(float(y1))
                     else:
-                        dist_str, z_str, _ = line.split()
+                        dist_str, z_str, topo_bat = line.split()
 
                     # Add new point to current section
                     dist.append(float(dist_str))
                     z_list.append(float(z_str))
+                    topo_bats.append(topo_bat)
 
             # Add last section
             section = Section(section_id, section_pk, section_name)
@@ -128,6 +130,7 @@ class MascaretGeoFile:
                 section.set_points_from_xyz(x_list, y_list, z_list)
             else:
                 section.set_points_from_trans(dist, z_list)
+            section.topo_bats = topo_bats
             reach.add_section(section)
 
     def save(self, output_file_name):
@@ -164,30 +167,30 @@ class MascaretGeoFile:
 
                     # Write points and layers if necessary
                     if not ref and not layers:
-                        for dist, z in zip(sec.distances, sec.z):
-                            fileout.write('%f %f B\n' % (dist, z))
+                        for dist, z, topo_bat in zip(sec.distances, sec.z, sec.topo_bats):
+                            fileout.write('%f %f %s\n' % (dist, z, topo_bat))
 
                     elif ref and not layers:
-                        for dist, x, y, z in zip(sec.distances, sec.x, sec.y, sec.z):
-                            fileout.write('%f %f B %f %f\n' % (dist, z, x, y))
+                        for dist, x, y, z, topo_bat in zip(sec.distances, sec.x, sec.y, sec.z, sec.topo_bats):
+                            fileout.write('%f %f %s %f %f\n' % (dist, z, topo_bat, x, y))
 
                     elif not ref and layers:
-                        for i, (dist, z) in enumerate(zip(sec.distances, sec.z)):
+                        for i, (dist, z, topo_bat) in enumerate(zip(sec.distances, sec.z, sec.topo_bats)):
                             if self.nlayers == 0:
                                 layers_str = ''
                             else:
                                 layers_str = ' ' + ' '.join([MascaretGeoFile.OUTPUT_FLOAT_FMT % zl
                                                              for zl in sec.layers_elev[:, i]])
-                            fileout.write('%f %f%s B\n' % (dist, z, layers_str))
+                            fileout.write('%f %f%s %s\n' % (dist, z, layers_str, topo_bat))
 
                     elif ref and layers:
-                        for i, (dist, x, y, z) in enumerate(zip(sec.distances, sec.x, sec.y, sec.z)):
+                        for i, (dist, x, y, z, topo_bat) in enumerate(zip(sec.distances, sec.x, sec.y, sec.z, sec.topo_bats)):
                             if self.nlayers == 0:
                                 layers_str = ''
                             else:
                                 layers_str = ' ' + ' '.join([MascaretGeoFile.OUTPUT_FLOAT_FMT % zl
                                                              for zl in sec.layers_elev[:, i]])
-                            fileout.write('%f %f%s B %f %f\n' % (dist, z, layers_str, x, y))
+                            fileout.write('%f %f%s %s %f %f\n' % (dist, z, layers_str, topo_bat, x, y))
 
     def __repr__(self):
         return 'MascaretGeoFile: %s' % self.file_name

@@ -69,9 +69,10 @@ class LinesToPointsAlgorithm(PreCourlisAlgorithm):
                 line_feature.attribute(layer).split(",") for layer in layers
             ]
 
-            for point, p_id, abs_lat, zfond, point_layers_values, in zip(
+            for point, p_id, topo_bat, abs_lat, zfond, point_layers_values, in zip(
                 line.points(),
                 line_feature.attribute("p_id").split(","),
+                line_feature.attribute("topo_bat").split(","),
                 line_feature.attribute("abs_lat").split(","),
                 line_feature.attribute("zfond").split(","),
                 list(zip(*line_layers_values)) or [[]] * line.numPoints(),
@@ -86,6 +87,7 @@ class LinesToPointsAlgorithm(PreCourlisAlgorithm):
                         line_feature.attribute("axis_y"),
                         line_feature.attribute("layers"),
                         int(p_id),
+                        topo_bat,
                         self.to_float(abs_lat),
                         self.to_float(point.x()),
                         self.to_float(point.y()),

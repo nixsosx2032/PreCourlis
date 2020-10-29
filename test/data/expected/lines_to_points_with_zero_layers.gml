@@ -19,8 +19,9 @@
       <ogr:abs_long>0</ogr:abs_long>
       <ogr:axis_x>427858.100665553</ogr:axis_x>
       <ogr:axis_y>245061.876468527</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>1</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>0</ogr:abs_lat>
       <ogr:x>427843.745398773</ogr:x>
       <ogr:y>244648.444785276</ogr:y>
@@ -35,8 +36,9 @@
       <ogr:abs_long>0</ogr:abs_long>
       <ogr:axis_x>427858.100665553</ogr:axis_x>
       <ogr:axis_y>245061.876468527</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>2</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>97.0707329059944</ogr:abs_lat>
       <ogr:x>427847.113880368</ogr:x>
       <ogr:y>244745.457055215</ogr:y>
@@ -51,8 +53,9 @@
       <ogr:abs_long>0</ogr:abs_long>
       <ogr:axis_x>427858.100665553</ogr:axis_x>
       <ogr:axis_y>245061.876468527</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>3</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>194.141465811991</ogr:abs_lat>
       <ogr:x>427850.482361963</ogr:x>
       <ogr:y>244842.469325153</ogr:y>
@@ -67,8 +70,9 @@
       <ogr:abs_long>0</ogr:abs_long>
       <ogr:axis_x>427858.100665553</ogr:axis_x>
       <ogr:axis_y>245061.876468527</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>4</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>291.212198717985</ogr:abs_lat>
       <ogr:x>427853.850843558</ogr:x>
       <ogr:y>244939.481595092</ogr:y>
@@ -83,8 +87,9 @@
       <ogr:abs_long>0</ogr:abs_long>
       <ogr:axis_x>427858.100665553</ogr:axis_x>
       <ogr:axis_y>245061.876468527</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>5</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>388.282931623951</ogr:abs_lat>
       <ogr:x>427857.219325153</ogr:x>
       <ogr:y>245036.493865031</ogr:y>
@@ -99,8 +104,9 @@
       <ogr:abs_long>0</ogr:abs_long>
       <ogr:axis_x>427858.100665553</ogr:axis_x>
       <ogr:axis_y>245061.876468527</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>6</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>485.353664529947</ogr:abs_lat>
       <ogr:x>427860.587806749</ogr:x>
       <ogr:y>245133.506134969</ogr:y>
@@ -115,8 +121,9 @@
       <ogr:abs_long>0</ogr:abs_long>
       <ogr:axis_x>427858.100665553</ogr:axis_x>
       <ogr:axis_y>245061.876468527</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>7</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>582.424397435942</ogr:abs_lat>
       <ogr:x>427863.956288344</ogr:x>
       <ogr:y>245230.518404908</ogr:y>
@@ -131,8 +138,9 @@
       <ogr:abs_long>0</ogr:abs_long>
       <ogr:axis_x>427858.100665553</ogr:axis_x>
       <ogr:axis_y>245061.876468527</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>8</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>679.495130341938</ogr:abs_lat>
       <ogr:x>427867.324769939</ogr:x>
       <ogr:y>245327.530674847</ogr:y>
@@ -147,8 +155,9 @@
       <ogr:abs_long>0</ogr:abs_long>
       <ogr:axis_x>427858.100665553</ogr:axis_x>
       <ogr:axis_y>245061.876468527</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>9</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>776.565863247932</ogr:abs_lat>
       <ogr:x>427870.693251534</ogr:x>
       <ogr:y>245424.542944785</ogr:y>
@@ -163,8 +172,9 @@
       <ogr:abs_long>451.308571519184</ogr:abs_long>
       <ogr:axis_x>427409.701837606</ogr:axis_x>
       <ogr:axis_y>245013.889115853</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>1</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>0</ogr:abs_lat>
       <ogr:x>427353.294478528</ogr:x>
       <ogr:y>244691.561349693</ogr:y>
@@ -179,8 +189,9 @@
       <ogr:abs_long>451.308571519184</ogr:abs_long>
       <ogr:axis_x>427409.701837606</ogr:axis_x>
       <ogr:axis_y>245013.889115853</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>2</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>93.7967312864825</ogr:abs_lat>
       <ogr:x>427369.463190184</ogr:x>
       <ogr:y>244783.95398773</ogr:y>
@@ -195,8 +206,9 @@
       <ogr:abs_long>451.308571519184</ogr:abs_long>
       <ogr:axis_x>427409.701837606</ogr:axis_x>
       <ogr:axis_y>245013.889115853</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>3</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>187.593462572975</ogr:abs_lat>
       <ogr:x>427385.631901841</ogr:x>
       <ogr:y>244876.346625767</ogr:y>
@@ -211,8 +223,9 @@
       <ogr:abs_long>451.308571519184</ogr:abs_long>
       <ogr:axis_x>427409.701837606</ogr:axis_x>
       <ogr:axis_y>245013.889115853</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>4</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>281.390193859458</ogr:abs_lat>
       <ogr:x>427401.800613497</ogr:x>
       <ogr:y>244968.739263804</ogr:y>
@@ -227,8 +240,9 @@
       <ogr:abs_long>451.308571519184</ogr:abs_long>
       <ogr:axis_x>427409.701837606</ogr:axis_x>
       <ogr:axis_y>245013.889115853</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>5</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>375.18692514595</ogr:abs_lat>
       <ogr:x>427417.969325153</ogr:x>
       <ogr:y>245061.13190184</ogr:y>
@@ -243,8 +257,9 @@
       <ogr:abs_long>451.308571519184</ogr:abs_long>
       <ogr:axis_x>427409.701837606</ogr:axis_x>
       <ogr:axis_y>245013.889115853</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>6</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>468.983656432433</ogr:abs_lat>
       <ogr:x>427434.13803681</ogr:x>
       <ogr:y>245153.524539877</ogr:y>
@@ -259,8 +274,9 @@
       <ogr:abs_long>451.308571519184</ogr:abs_long>
       <ogr:axis_x>427409.701837606</ogr:axis_x>
       <ogr:axis_y>245013.889115853</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>7</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>562.780387718925</ogr:abs_lat>
       <ogr:x>427450.306748466</ogr:x>
       <ogr:y>245245.917177914</ogr:y>
@@ -275,8 +291,9 @@
       <ogr:abs_long>451.308571519184</ogr:abs_long>
       <ogr:axis_x>427409.701837606</ogr:axis_x>
       <ogr:axis_y>245013.889115853</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>8</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>656.577119005408</ogr:abs_lat>
       <ogr:x>427466.475460123</ogr:x>
       <ogr:y>245338.309815951</ogr:y>
@@ -291,8 +308,9 @@
       <ogr:abs_long>1063.86595130483</ogr:abs_long>
       <ogr:axis_x>426836.804290604</ogr:axis_x>
       <ogr:axis_y>245160.350730384</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>1</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>0</ogr:abs_lat>
       <ogr:x>426641.871165644</ogr:x>
       <ogr:y>244934.09202454</ogr:y>
@@ -307,8 +325,9 @@
       <ogr:abs_long>1063.86595130483</ogr:abs_long>
       <ogr:axis_x>426836.804290604</ogr:axis_x>
       <ogr:axis_y>245160.350730384</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>2</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>98.0217211658168</ogr:abs_lat>
       <ogr:x>426706.54601227</ogr:x>
       <ogr:y>245007.749488753</ogr:y>
@@ -323,8 +342,9 @@
       <ogr:abs_long>1063.86595130483</ogr:abs_long>
       <ogr:axis_x>426836.804290604</ogr:axis_x>
       <ogr:axis_y>245160.350730384</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>3</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>196.043442331634</ogr:abs_lat>
       <ogr:x>426771.220858896</ogr:x>
       <ogr:y>245081.406952965</ogr:y>
@@ -339,8 +359,9 @@
       <ogr:abs_long>1063.86595130483</ogr:abs_long>
       <ogr:axis_x>426836.804290604</ogr:axis_x>
       <ogr:axis_y>245160.350730384</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>4</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>294.06516349745</ogr:abs_lat>
       <ogr:x>426835.895705522</ogr:x>
       <ogr:y>245155.064417178</ogr:y>
@@ -355,8 +376,9 @@
       <ogr:abs_long>1063.86595130483</ogr:abs_long>
       <ogr:axis_x>426836.804290604</ogr:axis_x>
       <ogr:axis_y>245160.350730384</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>5</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>381.562729212225</ogr:abs_lat>
       <ogr:x>426850.71702454</ogr:x>
       <ogr:y>245241.297546012</ogr:y>
@@ -371,8 +393,9 @@
       <ogr:abs_long>1063.86595130483</ogr:abs_long>
       <ogr:axis_x>426836.804290604</ogr:axis_x>
       <ogr:axis_y>245160.350730384</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>6</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>469.06029492696</ogr:abs_lat>
       <ogr:x>426865.538343558</ogr:x>
       <ogr:y>245327.530674847</ogr:y>
@@ -387,8 +410,9 @@
       <ogr:abs_long>1063.86595130483</ogr:abs_long>
       <ogr:axis_x>426836.804290604</ogr:axis_x>
       <ogr:axis_y>245160.350730384</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>7</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>556.557860641696</ogr:abs_lat>
       <ogr:x>426880.359662577</ogr:x>
       <ogr:y>245413.763803681</ogr:y>
@@ -403,8 +427,9 @@
       <ogr:abs_long>1063.86595130483</ogr:abs_long>
       <ogr:axis_x>426836.804290604</ogr:axis_x>
       <ogr:axis_y>245160.350730384</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>8</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>644.05542635647</ogr:abs_lat>
       <ogr:x>426895.180981595</ogr:x>
       <ogr:y>245499.996932515</ogr:y>
@@ -419,8 +444,9 @@
       <ogr:abs_long>1840.74453316491</ogr:abs_long>
       <ogr:axis_x>426505.77541644</ogr:axis_x>
       <ogr:axis_y>245812.88488748</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>1</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>0</ogr:abs_lat>
       <ogr:x>425952.006134969</ogr:x>
       <ogr:y>245607.788343558</ogr:y>
@@ -435,8 +461,9 @@
       <ogr:abs_long>1840.74453316491</ogr:abs_long>
       <ogr:axis_x>426505.77541644</ogr:axis_x>
       <ogr:axis_y>245812.88488748</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>2</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>80.1217263467249</ogr:abs_lat>
       <ogr:x>426018.836809816</ogr:x>
       <ogr:y>245651.982822086</ogr:y>
@@ -451,8 +478,9 @@
       <ogr:abs_long>1840.74453316491</ogr:abs_long>
       <ogr:axis_x>426505.77541644</ogr:axis_x>
       <ogr:axis_y>245812.88488748</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>3</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>160.243452693498</ogr:abs_lat>
       <ogr:x>426085.667484663</ogr:x>
       <ogr:y>245696.177300613</ogr:y>
@@ -467,8 +495,9 @@
       <ogr:abs_long>1840.74453316491</ogr:abs_long>
       <ogr:axis_x>426505.77541644</ogr:axis_x>
       <ogr:axis_y>245812.88488748</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>4</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>240.365179040207</ogr:abs_lat>
       <ogr:x>426152.498159509</ogr:x>
       <ogr:y>245740.371779141</ogr:y>
@@ -483,8 +512,9 @@
       <ogr:abs_long>1840.74453316491</ogr:abs_long>
       <ogr:axis_x>426505.77541644</ogr:axis_x>
       <ogr:axis_y>245812.88488748</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>5</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>320.486905386981</ogr:abs_lat>
       <ogr:x>426219.328834356</ogr:x>
       <ogr:y>245784.566257669</ogr:y>
@@ -499,8 +529,9 @@
       <ogr:abs_long>1840.74453316491</ogr:abs_long>
       <ogr:axis_x>426505.77541644</ogr:axis_x>
       <ogr:axis_y>245812.88488748</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>6</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>400.608631733706</ogr:abs_lat>
       <ogr:x>426286.159509202</ogr:x>
       <ogr:y>245828.760736196</ogr:y>
@@ -515,8 +546,9 @@
       <ogr:abs_long>1840.74453316491</ogr:abs_long>
       <ogr:axis_x>426505.77541644</ogr:axis_x>
       <ogr:axis_y>245812.88488748</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>7</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>490.308962803525</ogr:abs_lat>
       <ogr:x>426375.626380368</ogr:x>
       <ogr:y>245822.293251534</ogr:y>
@@ -531,8 +563,9 @@
       <ogr:abs_long>1840.74453316491</ogr:abs_long>
       <ogr:axis_x>426505.77541644</ogr:axis_x>
       <ogr:axis_y>245812.88488748</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>8</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>580.009293873287</ogr:abs_lat>
       <ogr:x>426465.093251534</ogr:x>
       <ogr:y>245815.825766871</ogr:y>
@@ -547,8 +580,9 @@
       <ogr:abs_long>1840.74453316491</ogr:abs_long>
       <ogr:axis_x>426505.77541644</ogr:axis_x>
       <ogr:axis_y>245812.88488748</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>9</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>669.709624943109</ogr:abs_lat>
       <ogr:x>426554.560122699</ogr:x>
       <ogr:y>245809.358282209</ogr:y>
@@ -563,8 +597,9 @@
       <ogr:abs_long>1840.74453316491</ogr:abs_long>
       <ogr:axis_x>426505.77541644</ogr:axis_x>
       <ogr:axis_y>245812.88488748</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>10</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>759.40995601287</ogr:abs_lat>
       <ogr:x>426644.026993865</ogr:x>
       <ogr:y>245802.890797546</ogr:y>
@@ -579,8 +614,9 @@
       <ogr:abs_long>1840.74453316491</ogr:abs_long>
       <ogr:axis_x>426505.77541644</ogr:axis_x>
       <ogr:axis_y>245812.88488748</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>11</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>849.11028708269</ogr:abs_lat>
       <ogr:x>426733.493865031</ogr:x>
       <ogr:y>245796.423312883</ogr:y>
@@ -595,8 +631,9 @@
       <ogr:abs_long>1840.74453316491</ogr:abs_long>
       <ogr:axis_x>426505.77541644</ogr:axis_x>
       <ogr:axis_y>245812.88488748</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>12</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>929.164007990926</ogr:abs_lat>
       <ogr:x>426788.73696319</ogr:x>
       <ogr:y>245854.361196319</ogr:y>
@@ -611,8 +648,9 @@
       <ogr:abs_long>1840.74453316491</ogr:abs_long>
       <ogr:axis_x>426505.77541644</ogr:axis_x>
       <ogr:axis_y>245812.88488748</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>13</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>1009.21772889916</ogr:abs_lat>
       <ogr:x>426843.98006135</ogr:x>
       <ogr:y>245912.299079755</ogr:y>
@@ -627,8 +665,9 @@
       <ogr:abs_long>1840.74453316491</ogr:abs_long>
       <ogr:axis_x>426505.77541644</ogr:axis_x>
       <ogr:axis_y>245812.88488748</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>14</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>1089.27144980746</ogr:abs_lat>
       <ogr:x>426899.223159509</ogr:x>
       <ogr:y>245970.23696319</ogr:y>
@@ -643,8 +682,9 @@
       <ogr:abs_long>1840.74453316491</ogr:abs_long>
       <ogr:axis_x>426505.77541644</ogr:axis_x>
       <ogr:axis_y>245812.88488748</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>15</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>1169.3251707157</ogr:abs_lat>
       <ogr:x>426954.466257669</ogr:x>
       <ogr:y>246028.174846626</ogr:y>
@@ -659,8 +699,9 @@
       <ogr:abs_long>2826.74680044045</ogr:abs_long>
       <ogr:axis_x>426473.273606768</ogr:axis_x>
       <ogr:axis_y>246725.243670677</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>1</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>0</ogr:abs_lat>
       <ogr:x>425993.233373578</ogr:x>
       <ogr:y>246286.349743189</ogr:y>
@@ -675,8 +716,9 @@
       <ogr:abs_long>2826.74680044045</ogr:abs_long>
       <ogr:axis_x>426473.273606768</ogr:axis_x>
       <ogr:axis_y>246725.243670677</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>2</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>98.7009930795988</ogr:abs_lat>
       <ogr:x>426066.077550244</ogr:x>
       <ogr:y>246352.950133284</ogr:y>
@@ -691,8 +733,9 @@
       <ogr:abs_long>2826.74680044045</ogr:abs_long>
       <ogr:axis_x>426473.273606768</ogr:axis_x>
       <ogr:axis_y>246725.243670677</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>3</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>197.401986159174</ogr:abs_lat>
       <ogr:x>426138.92172691</ogr:x>
       <ogr:y>246419.550523378</ogr:y>
@@ -707,8 +750,9 @@
       <ogr:abs_long>2826.74680044045</ogr:abs_long>
       <ogr:axis_x>426473.273606768</ogr:axis_x>
       <ogr:axis_y>246725.243670677</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>4</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>296.102979238773</ogr:abs_lat>
       <ogr:x>426211.765903576</ogr:x>
       <ogr:y>246486.150913473</ogr:y>
@@ -723,8 +767,9 @@
       <ogr:abs_long>2826.74680044045</ogr:abs_long>
       <ogr:axis_x>426473.273606768</ogr:axis_x>
       <ogr:axis_y>246725.243670677</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>5</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>394.803972318329</ogr:abs_lat>
       <ogr:x>426284.610080242</ogr:x>
       <ogr:y>246552.751303568</ogr:y>
@@ -739,8 +784,9 @@
       <ogr:abs_long>2826.74680044045</ogr:abs_long>
       <ogr:axis_x>426473.273606768</ogr:axis_x>
       <ogr:axis_y>246725.243670677</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>6</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>493.504965397928</ogr:abs_lat>
       <ogr:x>426357.454256908</ogr:x>
       <ogr:y>246619.351693662</ogr:y>
@@ -755,8 +801,9 @@
       <ogr:abs_long>2826.74680044045</ogr:abs_long>
       <ogr:axis_x>426473.273606768</ogr:axis_x>
       <ogr:axis_y>246725.243670677</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>7</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>592.205958477483</ogr:abs_lat>
       <ogr:x>426430.298433574</ogr:x>
       <ogr:y>246685.952083757</ogr:y>
@@ -771,8 +818,9 @@
       <ogr:abs_long>2826.74680044045</ogr:abs_long>
       <ogr:axis_x>426473.273606768</ogr:axis_x>
       <ogr:axis_y>246725.243670677</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>8</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>690.906951557102</ogr:abs_lat>
       <ogr:x>426503.14261024</ogr:x>
       <ogr:y>246752.552473851</ogr:y>
@@ -787,8 +835,9 @@
       <ogr:abs_long>2826.74680044045</ogr:abs_long>
       <ogr:axis_x>426473.273606768</ogr:axis_x>
       <ogr:axis_y>246725.243670677</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>9</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>789.607944636701</ogr:abs_lat>
       <ogr:x>426575.986786906</ogr:x>
       <ogr:y>246819.152863946</ogr:y>
@@ -803,8 +852,9 @@
       <ogr:abs_long>2826.74680044045</ogr:abs_long>
       <ogr:axis_x>426473.273606768</ogr:axis_x>
       <ogr:axis_y>246725.243670677</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>10</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>888.308937716256</ogr:abs_lat>
       <ogr:x>426648.830963572</ogr:x>
       <ogr:y>246885.753254041</ogr:y>
@@ -819,8 +869,9 @@
       <ogr:abs_long>2826.74680044045</ogr:abs_long>
       <ogr:axis_x>426473.273606768</ogr:axis_x>
       <ogr:axis_y>246725.243670677</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>11</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>987.009930795875</ogr:abs_lat>
       <ogr:x>426721.675140238</ogr:x>
       <ogr:y>246952.353644135</ogr:y>
@@ -835,8 +886,9 @@
       <ogr:abs_long>2826.74680044045</ogr:abs_long>
       <ogr:axis_x>426473.273606768</ogr:axis_x>
       <ogr:axis_y>246725.243670677</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>12</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>1085.71092387543</ogr:abs_lat>
       <ogr:x>426794.519316904</ogr:x>
       <ogr:y>247018.95403423</ogr:y>
@@ -851,8 +903,9 @@
       <ogr:abs_long>2826.74680044045</ogr:abs_long>
       <ogr:axis_x>426473.273606768</ogr:axis_x>
       <ogr:axis_y>246725.243670677</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>13</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>1184.41191695503</ogr:abs_lat>
       <ogr:x>426867.36349357</ogr:x>
       <ogr:y>247085.554424324</ogr:y>
@@ -867,8 +920,9 @@
       <ogr:abs_long>2826.74680044045</ogr:abs_long>
       <ogr:axis_x>426473.273606768</ogr:axis_x>
       <ogr:axis_y>246725.243670677</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>14</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>1283.11291003459</ogr:abs_lat>
       <ogr:x>426940.207670236</ogr:x>
       <ogr:y>247152.154814419</ogr:y>
@@ -883,8 +937,9 @@
       <ogr:abs_long>2826.74680044045</ogr:abs_long>
       <ogr:axis_x>426473.273606768</ogr:axis_x>
       <ogr:axis_y>246725.243670677</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>15</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>1381.81390311418</ogr:abs_lat>
       <ogr:x>427013.051846902</ogr:x>
       <ogr:y>247218.755204514</ogr:y>
@@ -899,8 +954,9 @@
       <ogr:abs_long>2826.74680044045</ogr:abs_long>
       <ogr:axis_x>426473.273606768</ogr:axis_x>
       <ogr:axis_y>246725.243670677</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>16</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>1480.51489619376</ogr:abs_lat>
       <ogr:x>427085.896023568</ogr:x>
       <ogr:y>247285.355594608</ogr:y>
@@ -915,8 +971,9 @@
       <ogr:abs_long>2826.74680044045</ogr:abs_long>
       <ogr:axis_x>426473.273606768</ogr:axis_x>
       <ogr:axis_y>246725.243670677</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>17</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>1579.21588927336</ogr:abs_lat>
       <ogr:x>427158.740200234</ogr:x>
       <ogr:y>247351.955984703</ogr:y>
@@ -931,8 +988,9 @@
       <ogr:abs_long>3045.15513690845</ogr:abs_long>
       <ogr:axis_x>426296.882707939</ogr:axis_x>
       <ogr:axis_y>246854.039836183</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>1</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>0</ogr:abs_lat>
       <ogr:x>426109.784056244</ogr:x>
       <ogr:y>246611.0266449</ogr:y>
@@ -947,8 +1005,9 @@
       <ogr:abs_long>3045.15513690845</ogr:abs_long>
       <ogr:axis_x>426296.882707939</ogr:axis_x>
       <ogr:axis_y>246854.039836183</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>2</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>98.9372104966446</ogr:abs_lat>
       <ogr:x>426170.140659767</ogr:x>
       <ogr:y>246689.420854074</ogr:y>
@@ -963,8 +1022,9 @@
       <ogr:abs_long>3045.15513690845</ogr:abs_long>
       <ogr:axis_x>426296.882707939</ogr:axis_x>
       <ogr:axis_y>246854.039836183</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>3</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>197.874420993254</ogr:abs_lat>
       <ogr:x>426230.49726329</ogr:x>
       <ogr:y>246767.815063248</ogr:y>
@@ -979,8 +1039,9 @@
       <ogr:abs_long>3045.15513690845</ogr:abs_long>
       <ogr:axis_x>426296.882707939</ogr:axis_x>
       <ogr:axis_y>246854.039836183</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>4</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>296.811631489875</ogr:abs_lat>
       <ogr:x>426290.853866813</ogr:x>
       <ogr:y>246846.209272422</ogr:y>
@@ -995,8 +1056,9 @@
       <ogr:abs_long>3045.15513690845</ogr:abs_long>
       <ogr:axis_x>426296.882707939</ogr:axis_x>
       <ogr:axis_y>246854.039836183</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>5</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>395.74884198652</ogr:abs_lat>
       <ogr:x>426351.210470337</ogr:x>
       <ogr:y>246924.603481596</ogr:y>
@@ -1011,8 +1073,9 @@
       <ogr:abs_long>3045.15513690845</ogr:abs_long>
       <ogr:axis_x>426296.882707939</ogr:axis_x>
       <ogr:axis_y>246854.039836183</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>6</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>494.686052483129</ogr:abs_lat>
       <ogr:x>426411.56707386</ogr:x>
       <ogr:y>247002.99769077</ogr:y>
@@ -1027,8 +1090,9 @@
       <ogr:abs_long>3045.15513690845</ogr:abs_long>
       <ogr:axis_x>426296.882707939</ogr:axis_x>
       <ogr:axis_y>246854.039836183</ogr:axis_y>
-      <ogr:layers xsi:nil="true"/>
+      <ogr:layers></ogr:layers>
       <ogr:p_id>7</ogr:p_id>
+      <ogr:topo_bat>B</ogr:topo_bat>
       <ogr:abs_lat>593.623262979773</ogr:abs_lat>
       <ogr:x>426471.923677383</ogr:x>
       <ogr:y>247081.391899944</ogr:y>

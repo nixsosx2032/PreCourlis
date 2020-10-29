@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="fr_FR">
+<!DOCTYPE TS><TS version="2.0" language="fr_FR" sourcelanguage="">
 <context>
     <name>ExportCourlisAlgorithm</name>
     <message>
@@ -257,12 +256,12 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../processing/lines_to_points_algorithm.py" line="110"/>
+        <location filename="../processing/lines_to_points_algorithm.py" line="112"/>
         <source>Lines to points</source>
         <translation>Lignes vers points</translation>
     </message>
     <message>
-        <location filename="../processing/lines_to_points_algorithm.py" line="113"/>
+        <location filename="../processing/lines_to_points_algorithm.py" line="115"/>
         <source>Convert</source>
         <translation>Conversion</translation>
     </message>
@@ -305,12 +304,12 @@
         <translation>Lignes</translation>
     </message>
     <message>
-        <location filename="../processing/points_to_lines_algorithm.py" line="242"/>
+        <location filename="../processing/points_to_lines_algorithm.py" line="244"/>
         <source>Points to lines</source>
         <translation>Points vers lignes</translation>
     </message>
     <message>
-        <location filename="../processing/points_to_lines_algorithm.py" line="245"/>
+        <location filename="../processing/points_to_lines_algorithm.py" line="247"/>
         <source>Convert</source>
         <translation>Conversion</translation>
     </message>
@@ -354,12 +353,12 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../processing/prepare_tracks_algorithm.py" line="152"/>
+        <location filename="../processing/prepare_tracks_algorithm.py" line="154"/>
         <source>Prepare tracks</source>
         <translation>Préparer les traces</translation>
     </message>
     <message>
-        <location filename="../processing/prepare_tracks_algorithm.py" line="155"/>
+        <location filename="../processing/prepare_tracks_algorithm.py" line="157"/>
         <source>Import</source>
         <translation></translation>
     </message>

@@ -43,6 +43,7 @@ class PreCourlisFileLine(PreCourlisFileBase):
         fields = PreCourlisFileBase.section_fields()
         # Point fields
         fields.append(QgsField("p_id", QVariant.String, len=100000))
+        fields.append(QgsField("topo_bat", QVariant.String, len=100000))
         fields.append(QgsField("abs_lat", QVariant.String, len=100000))
         fields.append(QgsField("zfond", QVariant.String, len=100000))
         return fields
@@ -82,6 +83,7 @@ class PreCourlisFileLine(PreCourlisFileBase):
                 )
             ]
         )
+        section.topo_bats = split_attribute(f.attribute("topo_bat"), len(points))
         section.set_layers(
             self.layers(),
             [
@@ -127,6 +129,7 @@ class PreCourlisFileLine(PreCourlisFileBase):
             "axis_y": section.axis[1],
             "layers": ",".join(section.layer_names),
             "p_id": ",".join([str(i) for i in range(0, len(section.distances))]),
+            "topo_bat": ",".join(section.topo_bats),
             "abs_lat": ",".join([str(d) for d in section.distances]),
             "zfond": ",".join([str(z) for z in section.z]),
         }
@@ -245,6 +248,7 @@ class PreCourlisFilePoint(PreCourlisFileBase):
         fields = PreCourlisFileBase.section_fields()
         # Point fields
         fields.append(QgsField("p_id", QVariant.Int))
+        fields.append(QgsField("topo_bat", QVariant.String, len=1))
         fields.append(QgsField("abs_lat", QVariant.Double))
         fields.append(QgsField("x", QVariant.Double))
         fields.append(QgsField("y", QVariant.Double))
