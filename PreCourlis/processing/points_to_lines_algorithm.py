@@ -127,7 +127,7 @@ class PointsToLinesAlgorithm(PreCourlisAlgorithm):
                 if self.axis
                 else point_features[0].attribute("axis_y"),
                 # layers
-                point_features[0].attribute("layers"),
+                point_features[0].attribute("layers") or "",
                 # p_id
                 ",".join([str(id_ + 1) for id_ in range(0, len(points))]),
                 # abs_lat

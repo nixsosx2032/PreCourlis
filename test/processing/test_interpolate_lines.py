@@ -1,5 +1,8 @@
 import os
 
+from qgis.core import QgsVectorLayer
+
+from PreCourlis.core.precourlis_file import PreCourlisFileLine
 from .. import (
     DATA_PATH,
     PROFILE_LINES_PATH,
@@ -32,8 +35,15 @@ class TestInterpolateLinesAlgorithm(TestCase):
 
     def test_interpolate_lines_with_constraints(self):
         self.check_algorithm(
-            {
-                "CONSTRAINT_LINES": CONSTRAINT_LINES,
-            },
+            {"CONSTRAINT_LINES": CONSTRAINT_LINES},
             {"OUTPUT": "interpolate_lines_with_constraints.gml"},
+        )
+
+    def test_interpolate_lines_multiple_layers(self):
+        layer = QgsVectorLayer(PROFILE_LINES_PATH, "multiple_layers", "ogr")
+        file = PreCourlisFileLine(layer)
+        file.add_sedimental_layer("Layer2", "Layer1", -1.0)
+        self.check_algorithm(
+            {"SECTIONS": layer},
+            {"OUTPUT": "interpolate_lines_multiple_layers.gml"},
         )

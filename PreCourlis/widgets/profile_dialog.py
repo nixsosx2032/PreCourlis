@@ -285,7 +285,7 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
                 self.sedimental_layer(),
                 self.addLayerDeltaBox.value(),
             )
-        except KeyError as e:
+        except (KeyError, ValueError) as e:
             self.message_bar.pushCritical("Impossible to add layer", str(e))
             return
         self.file.set_layer_color(name, self.selected_color)

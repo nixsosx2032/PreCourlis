@@ -31,7 +31,7 @@ tags=python Courlis
 
 homepage=https://github.com/msecher/PreCourlis
 category=Plugins
-icon=icon.png
+icon=resources/icon.png
 # experimental flag
 experimental=False
 

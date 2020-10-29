@@ -197,7 +197,7 @@ class PreCourlisFileLine(PreCourlisFileBase):
         if from_layer == "zfond":
             from_layer_index = -1
             if deltaz > 0:
-                raise Exception("Impossible to add layer on top of zfond")
+                raise ValueError("Impossible to add layer on top of zfond")
         else:
             from_layer_index = layers.index(from_layer)
         new_layer_index = from_layer_index if deltaz > 0 else from_layer_index + 1
