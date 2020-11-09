@@ -126,6 +126,8 @@ class PrepareTracksAlgorithm(PreCourlisAlgorithm):
                     "",
                     # p_id
                     QVariant(),
+                    # topo_bat
+                    "B",
                     # abs_lat
                     QVariant(),
                     # zfond

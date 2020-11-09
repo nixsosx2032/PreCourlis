@@ -59,6 +59,12 @@
             </xs:restriction>
           </xs:simpleType>
         </xs:element>
+        <xs:element name="topo_bat" nillable="true" minOccurs="0" maxOccurs="1">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
         <xs:element name="abs_lat" nillable="true" minOccurs="0" maxOccurs="1">
           <xs:simpleType>
             <xs:restriction base="xs:string">

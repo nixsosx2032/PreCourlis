@@ -55,6 +55,10 @@ class Point:
 
 
 class Section(SectionBase):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.topo_bats = np.array([])  # 'B' or 'T' for bathymetry or topography
+
     def __eq__(self, other):
         if len(other.__dict__) != len(self.__dict__):
             return False
