@@ -230,50 +230,6 @@ class ImportTracksAlgorithm(PreCourlisAlgorithm):
         if feedback.isCanceled():
             return {}
 
-        # rastersampling
-        alg_params = {
-            "INPUT": current,
-            "RASTERCOPY": parameters[self.DEM],
-            "COLUMN_PREFIX": "z",
-            "OUTPUT": QgsProcessing.TEMPORARY_OUTPUT,
-        }
-        outputs["RasterSampling"] = processing.run(
-            "qgis:rastersampling",
-            alg_params,
-            context=context,
-            feedback=feedback,
-            is_child_algorithm=True,
-        )
-        current = outputs["RasterSampling"]["OUTPUT"]
-
-        feedback.setCurrentStep(5)
-        if feedback.isCanceled():
-            return {}
-
-        # fieldcalculator
-        alg_params = {
-            "INPUT": current,
-            "FIELD_NAME": "zfond",
-            "FIELD_TYPE": 0,
-            "FIELD_LENGTH": 10,
-            "FIELD_PRECISION": 3,
-            "NEW_FIELD": False,
-            "FORMULA": ' "z_1" ',
-            "OUTPUT": QgsProcessing.TEMPORARY_OUTPUT,
-        }
-        outputs["FieldCalculator"] = processing.run(
-            "qgis:fieldcalculator",
-            alg_params,
-            context=context,
-            feedback=feedback,
-            is_child_algorithm=True,
-        )
-        current = outputs["FieldCalculator"]["OUTPUT"]
-
-        feedback.setCurrentStep(6)
-        if feedback.isCanceled():
-            return {}
-
         # assignprojection
         alg_params = {
             "INPUT": current,
@@ -289,7 +245,7 @@ class ImportTracksAlgorithm(PreCourlisAlgorithm):
         )
         current = outputs["AssignProjection"]["OUTPUT"]
 
-        feedback.setCurrentStep(7)
+        feedback.setCurrentStep(5)
         if feedback.isCanceled():
             return {}
 
@@ -302,7 +258,7 @@ class ImportTracksAlgorithm(PreCourlisAlgorithm):
             ),
             "GROUP_FIELD": "sec_id",
             "ORDER_FIELD": points_order_field,
-            "OUTPUT": self.parameterAsOutputLayer(parameters, self.OUTPUT, context),
+            "OUTPUT": QgsProcessing.TEMPORARY_OUTPUT,
         }
         outputs["PointsToLines"] = processing.run(
             "precourlis:points_to_lines",
@@ -312,6 +268,48 @@ class ImportTracksAlgorithm(PreCourlisAlgorithm):
             is_child_algorithm=True,
         )
         current = outputs["PointsToLines"]["OUTPUT"]
+
+        feedback.setCurrentStep(6)
+        if feedback.isCanceled():
+            return {}
+
+        # import_layer_from_dem (edit layer in place with edit buffer)
+        layer = context.getMapLayer(current)
+        alg_params = {
+            "INPUT": layer,
+            "LAYER_NAME": "zfond",
+            "DEM": parameters[self.DEM],
+            "BAND": 1,
+        }
+        outputs["ImportLayerFromDem"] = processing.run(
+            "precourlis:import_layer_from_dem",
+            alg_params,
+            context=context,
+            feedback=feedback,
+            is_child_algorithm=True,
+        )
+
+        feedback.setCurrentStep(7)
+        if feedback.isCanceled():
+            return {}
+
+        # orderbyexpression (dump layer with changes from edit buffer)
+        layer.selectAll()
+        alg_params = {
+            "INPUT": layer,
+            "EXPRESSION": '"sec_id"',
+            "ASCENDING": True,
+            "NULLS_FIRST": False,
+            "OUTPUT": self.parameterAsOutputLayer(parameters, self.OUTPUT, context),
+        }
+        outputs["OrderByExpression"] = processing.run(
+            "native:orderbyexpression",
+            alg_params,
+            context=context,
+            feedback=feedback,
+            is_child_algorithm=True,
+        )
+        current = outputs["OrderByExpression"]["OUTPUT"]
 
         results["OUTPUT"] = current
         return results
