@@ -93,37 +93,32 @@
 <context>
     <name>ImportLayerFromDemAlgorithm</name>
     <message>
-        <location filename="../processing/import_layer_from_dem_algorithm.py" line="33"/>
+        <location filename="../processing/import_layer_from_dem_algorithm.py" line="34"/>
         <source>Layer name</source>
         <translation>Nom de la couche</translation>
     </message>
     <message>
-        <location filename="../processing/import_layer_from_dem_algorithm.py" line="38"/>
+        <location filename="../processing/import_layer_from_dem_algorithm.py" line="39"/>
         <source>Digital Elevation Model</source>
         <translation>Modèle numérique de terrain</translation>
     </message>
     <message>
-        <location filename="../processing/import_layer_from_dem_algorithm.py" line="43"/>
+        <location filename="../processing/import_layer_from_dem_algorithm.py" line="44"/>
         <source>Band number</source>
         <translation>Numéro de la bande</translation>
     </message>
     <message>
-        <location filename="../processing/import_layer_from_dem_algorithm.py" line="51"/>
-        <source>Layer added</source>
-        <translation>Coouche ajoutée</translation>
-    </message>
-    <message>
-        <location filename="../processing/import_layer_from_dem_algorithm.py" line="119"/>
+        <location filename="../processing/import_layer_from_dem_algorithm.py" line="113"/>
         <source>Import layer from DEM</source>
         <translation>Importer une couche depuis un MNT</translation>
     </message>
     <message>
-        <location filename="../processing/import_layer_from_dem_algorithm.py" line="122"/>
+        <location filename="../processing/import_layer_from_dem_algorithm.py" line="116"/>
         <source>Import</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../processing/import_layer_from_dem_algorithm.py" line="25"/>
+        <location filename="../processing/import_layer_from_dem_algorithm.py" line="26"/>
         <source>Input</source>
         <translation>Entrée</translation>
     </message>
@@ -176,12 +171,12 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../processing/import_tracks_algorithm.py" line="323"/>
+        <location filename="../processing/import_tracks_algorithm.py" line="319"/>
         <source>Import tracks</source>
         <translation>Import de traces</translation>
     </message>
     <message>
-        <location filename="../processing/import_tracks_algorithm.py" line="326"/>
+        <location filename="../processing/import_tracks_algorithm.py" line="322"/>
         <source>Import</source>
         <translation></translation>
     </message>
@@ -189,47 +184,47 @@
 <context>
     <name>InterpolateLinesAlgorithm</name>
     <message>
-        <location filename="../processing/interpolate_lines.py" line="28"/>
+        <location filename="../processing/interpolate_lines.py" line="29"/>
         <source>Sections</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../processing/interpolate_lines.py" line="36"/>
+        <location filename="../processing/interpolate_lines.py" line="37"/>
         <source>Axis</source>
         <translation>Axe</translation>
     </message>
     <message>
-        <location filename="../processing/interpolate_lines.py" line="44"/>
+        <location filename="../processing/interpolate_lines.py" line="45"/>
         <source>Contraint lines</source>
         <translation>Lignes de contraintes</translation>
     </message>
     <message>
-        <location filename="../processing/interpolate_lines.py" line="53"/>
+        <location filename="../processing/interpolate_lines.py" line="54"/>
         <source>Longitudinal space step (in m)</source>
         <translation>Pas longitudinal (en mètres)</translation>
     </message>
     <message>
-        <location filename="../processing/interpolate_lines.py" line="60"/>
+        <location filename="../processing/interpolate_lines.py" line="61"/>
         <source>Lateral space step (in m)</source>
         <translation>Pas latéral (en mètres)</translation>
     </message>
     <message>
-        <location filename="../processing/interpolate_lines.py" line="67"/>
+        <location filename="../processing/interpolate_lines.py" line="68"/>
         <source>Attribute to identify cross-sections</source>
         <translation>Attribut identifiant des sections</translation>
     </message>
     <message>
-        <location filename="../processing/interpolate_lines.py" line="75"/>
+        <location filename="../processing/interpolate_lines.py" line="161"/>
         <source>Interpolated</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../processing/interpolate_lines.py" line="184"/>
+        <location filename="../processing/interpolate_lines.py" line="188"/>
         <source>Interpolate lines</source>
         <translation>Interpoler des lignes</translation>
     </message>
     <message>
-        <location filename="../processing/interpolate_lines.py" line="187"/>
+        <location filename="../processing/interpolate_lines.py" line="191"/>
         <source>Interpolate</source>
         <translation>Interpolation</translation>
     </message>
@@ -306,6 +301,29 @@
     </message>
 </context>
 <context>
+    <name>PointsAlongLinesAlgorithm</name>
+    <message>
+        <location filename="../processing/points_along_lines_algorithm.py" line="24"/>
+        <source>Distance</source>
+        <translation>Distance</translation>
+    </message>
+    <message>
+        <location filename="../processing/points_along_lines_algorithm.py" line="36"/>
+        <source>Interpolated points</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../processing/points_along_lines_algorithm.py" line="96"/>
+        <source>Points along lines</source>
+        <translation>Points le long d&apos;une ligne</translation>
+    </message>
+    <message>
+        <location filename="../processing/points_along_lines_algorithm.py" line="99"/>
+        <source>Interpolate</source>
+        <translation>Interpolation</translation>
+    </message>
+</context>
+<context>
     <name>PointsToLinesAlgorithm</name>
     <message>
         <location filename="../processing/points_to_lines_algorithm.py" line="33"/>
@@ -364,7 +382,7 @@
 <context>
     <name>PreCourlisProvider</name>
     <message>
-        <location filename="../processing/precourlis_provider.py" line="88"/>
+        <location filename="../processing/precourlis_provider.py" line="90"/>
         <source>PreCourlis</source>
         <translation></translation>
     </message>
@@ -405,12 +423,12 @@
 <context>
     <name>ProfileDialog</name>
     <message>
-        <location filename="../widgets/profile_dialog.py" line="240"/>
+        <location filename="../widgets/profile_dialog.py" line="242"/>
         <source>Save Layer Edits</source>
         <translation>Enregistrer les modifications</translation>
     </message>
     <message>
-        <location filename="../widgets/profile_dialog.py" line="240"/>
+        <location filename="../widgets/profile_dialog.py" line="242"/>
         <source>Could not commit changes to layer {}
 
 Errors: {}
@@ -449,37 +467,37 @@ Erreurs: {}
         <translation>Couches sédimentaires</translation>
     </message>
     <message>
-        <location filename="../ui/profile_dialog_base.ui" line="257"/>
+        <location filename="../ui/profile_dialog_base.ui" line="260"/>
         <source>Add</source>
         <translation>Ajouter</translation>
     </message>
     <message>
-        <location filename="../ui/profile_dialog_base.ui" line="347"/>
+        <location filename="../ui/profile_dialog_base.ui" line="360"/>
         <source>Apply</source>
         <translation>Appliquer</translation>
     </message>
     <message>
-        <location filename="../ui/profile_dialog_base.ui" line="277"/>
+        <location filename="../ui/profile_dialog_base.ui" line="290"/>
         <source>Delete</source>
         <translation>Supprimer</translation>
     </message>
     <message>
-        <location filename="../ui/profile_dialog_base.ui" line="289"/>
+        <location filename="../ui/profile_dialog_base.ui" line="302"/>
         <source>Interpolation</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/profile_dialog_base.ui" line="295"/>
+        <location filename="../ui/profile_dialog_base.ui" line="308"/>
         <source>Left</source>
         <translation>Gauche</translation>
     </message>
     <message>
-        <location filename="../ui/profile_dialog_base.ui" line="318"/>
+        <location filename="../ui/profile_dialog_base.ui" line="331"/>
         <source>Right</source>
         <translation>Droite</translation>
     </message>
     <message>
-        <location filename="../ui/profile_dialog_base.ui" line="357"/>
+        <location filename="../ui/profile_dialog_base.ui" line="370"/>
         <source>Clear</source>
         <translation>RAZ</translation>
     </message>
@@ -514,22 +532,17 @@ Erreurs: {}
         <translation>Sélectionner la couche sédimentaire</translation>
     </message>
     <message>
-        <location filename="../ui/profile_dialog_base.ui" line="220"/>
-        <source>Sedimental layer name</source>
-        <translation>Nom de la couche sédimentaire</translation>
-    </message>
-    <message>
-        <location filename="../ui/profile_dialog_base.ui" line="227"/>
+        <location filename="../ui/profile_dialog_base.ui" line="230"/>
         <source>Sedimental layer color</source>
         <translation>Couleur de la couche sédimentaire</translation>
     </message>
     <message>
-        <location filename="../ui/profile_dialog_base.ui" line="344"/>
+        <location filename="../ui/profile_dialog_base.ui" line="357"/>
         <source>Apply interpolation</source>
         <translation>Appliquer l&apos;interpolation</translation>
     </message>
     <message>
-        <location filename="../ui/profile_dialog_base.ui" line="354"/>
+        <location filename="../ui/profile_dialog_base.ui" line="367"/>
         <source>Clear values</source>
         <translation>Remettre les valeurs à zéro</translation>
     </message>
@@ -539,19 +552,34 @@ Erreurs: {}
         <translation>Enregistrer les modifications</translation>
     </message>
     <message>
-        <location filename="../ui/profile_dialog_base.ui" line="254"/>
+        <location filename="../ui/profile_dialog_base.ui" line="257"/>
         <source>Add new sedimental layer</source>
         <translation>Ajouter une nouvelle couche sédimentaire</translation>
     </message>
     <message>
-        <location filename="../ui/profile_dialog_base.ui" line="264"/>
+        <location filename="../ui/profile_dialog_base.ui" line="267"/>
         <source>Apply settings to current sedimental layer</source>
         <translation>Appliquer les réglages à la couche sédimentaire courante</translation>
     </message>
     <message>
-        <location filename="../ui/profile_dialog_base.ui" line="274"/>
+        <location filename="../ui/profile_dialog_base.ui" line="287"/>
         <source>Delete current sedimental layer</source>
         <translation>Supprimer la couche sédimentaire courante</translation>
+    </message>
+    <message>
+        <location filename="../ui/profile_dialog_base.ui" line="220"/>
+        <source>Sedimental layer name (limited to 7 characters)</source>
+        <translation>Nom de la couche sédimentaire (limité à 7 caractères)</translation>
+    </message>
+    <message>
+        <location filename="../ui/profile_dialog_base.ui" line="277"/>
+        <source>Import layer values from DEM</source>
+        <translation>Import les valeurs d&apos;une couche depuis un MNT</translation>
+    </message>
+    <message>
+        <location filename="../ui/profile_dialog_base.ui" line="280"/>
+        <source>Import</source>
+        <translation>Import</translation>
     </message>
 </context>
 </TS>
