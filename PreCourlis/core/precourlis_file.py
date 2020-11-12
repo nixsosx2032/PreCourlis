@@ -185,6 +185,11 @@ class PreCourlisFileLine(PreCourlisFileBase):
             self._layer.setCustomProperty(key, color_to_hex(color))
 
     def add_sedimental_layer(self, name, from_layer, deltaz=0):
+        """
+        Add new sedimental layer:
+            - new layer value = from_layer value + delta
+            - new layer is inserted before or after from_layer depending on delta
+        """
         layers = self.layers()
         if self._layer.fields().indexFromName(name) != -1:
             raise KeyError("Field {} already exists".format(name))

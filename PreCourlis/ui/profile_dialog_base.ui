@@ -269,6 +269,16 @@
            </widget>
           </item>
           <item>
+           <widget class="QPushButton" name="importLayerValuesButton">
+            <property name="toolTip">
+             <string>Import layer values from DEM</string>
+            </property>
+            <property name="text">
+             <string>Import</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QPushButton" name="deleteLayerButton">
             <property name="toolTip">
              <string>Delete current sedimental layer</string>

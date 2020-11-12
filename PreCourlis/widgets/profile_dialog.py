@@ -9,6 +9,7 @@ from qgis.core import (
 from qgis.gui import QgsMessageBar
 from qgis.PyQt import QtCore, QtGui, QtWidgets, uic
 from qgis.utils import iface
+from processing import execAlgorithmDialog
 
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 
@@ -127,6 +128,7 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         self.addLayerColorButton.clicked.connect(self.addLayerColorButton_clicked)
         self.addLayerButton.clicked.connect(self.add_layer)
         self.applyLayerButton.clicked.connect(self.apply_layer)
+        self.importLayerValuesButton.clicked.connect(self.import_layer_values)
         self.deleteLayerButton.clicked.connect(self.delete_layer)
 
         self.applyInterpolationButton.clicked.connect(self.apply_interpolation)
@@ -294,6 +296,15 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
     def apply_layer(self):
         self.file.set_layer_color(self.sedimental_layer(), self.selected_color)
         self.graphWidget.refresh()
+
+    def import_layer_values(self):
+        execAlgorithmDialog(
+            "precourlis:import_layer_from_dem",
+            {
+                "INPUT": self.layer(),
+                "LAYER_NAME": self.sedimental_layer(),
+            },
+        )
 
     def delete_layer(self):
         self.layer().startEditing()
