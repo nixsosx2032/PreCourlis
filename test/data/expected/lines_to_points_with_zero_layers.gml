@@ -7,7 +7,7 @@
   <gml:boundedBy>
     <gml:Box>
       <gml:coord><gml:X>425952.0061349694</gml:X><gml:Y>244648.444785276</gml:Y><gml:Z>0</gml:Z></gml:coord>
-      <gml:coord><gml:X>427870.6932515338</gml:X><gml:Y>247351.9559847028</gml:Y><gml:Z>28.55094528198242</gml:Z></gml:coord>
+      <gml:coord><gml:X>427870.6932515338</gml:X><gml:Y>247351.9559847028</gml:Y><gml:Z>28.71127319335938</gml:Z></gml:coord>
     </gml:Box>
   </gml:boundedBy>
                                                  
@@ -30,7 +30,7 @@
   </gml:featureMember>
   <gml:featureMember>
     <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.1">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>427847.113880368,244745.457055215,22.0043601989746</gml:coordinates></gml:Point></ogr:geometryProperty>
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>427847.215529774,244748.384558094,22.0043601989746</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>1</ogr:sec_id>
       <ogr:sec_name>P1</ogr:sec_name>
       <ogr:abs_long>0</ogr:abs_long>
@@ -39,15 +39,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>2</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>97.0707329059944</ogr:abs_lat>
-      <ogr:x>427847.113880368</ogr:x>
-      <ogr:y>244745.457055215</ogr:y>
+      <ogr:abs_lat>100.000000000001</ogr:abs_lat>
+      <ogr:x>427847.215529774</ogr:x>
+      <ogr:y>244748.384558094</ogr:y>
       <ogr:zfond>22.0043601989746</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
     <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.2">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>427850.482361963,244842.469325153,21.6008014678955</gml:coordinates></gml:Point></ogr:geometryProperty>
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>427850.685660774,244848.324330911,21.560754776001</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>1</ogr:sec_id>
       <ogr:sec_name>P1</ogr:sec_name>
       <ogr:abs_long>0</ogr:abs_long>
@@ -56,15 +56,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>3</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>194.141465811991</ogr:abs_lat>
-      <ogr:x>427850.482361963</ogr:x>
-      <ogr:y>244842.469325153</ogr:y>
-      <ogr:zfond>21.6008014678955</ogr:zfond>
+      <ogr:abs_lat>200.000000000002</ogr:abs_lat>
+      <ogr:x>427850.685660774</ogr:x>
+      <ogr:y>244848.324330911</ogr:y>
+      <ogr:zfond>21.560754776001</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
     <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.3">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>427853.850843558,244939.481595092,21.2532844543457</gml:coordinates></gml:Point></ogr:geometryProperty>
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>427854.155791775,244948.264103729,20.6494731903076</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>1</ogr:sec_id>
       <ogr:sec_name>P1</ogr:sec_name>
       <ogr:abs_long>0</ogr:abs_long>
@@ -73,15 +73,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>4</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>291.212198717985</ogr:abs_lat>
-      <ogr:x>427853.850843558</ogr:x>
-      <ogr:y>244939.481595092</ogr:y>
-      <ogr:zfond>21.2532844543457</ogr:zfond>
+      <ogr:abs_lat>300.000000000004</ogr:abs_lat>
+      <ogr:x>427854.155791775</ogr:x>
+      <ogr:y>244948.264103729</ogr:y>
+      <ogr:zfond>20.6494731903076</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
     <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.4">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>427857.219325153,245036.493865031,11.600076675415</gml:coordinates></gml:Point></ogr:geometryProperty>
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>427857.625922775,245048.203876547,10.9746856689453</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>1</ogr:sec_id>
       <ogr:sec_name>P1</ogr:sec_name>
       <ogr:abs_long>0</ogr:abs_long>
@@ -90,15 +90,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>5</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>388.282931623951</ogr:abs_lat>
-      <ogr:x>427857.219325153</ogr:x>
-      <ogr:y>245036.493865031</ogr:y>
-      <ogr:zfond>11.600076675415</ogr:zfond>
+      <ogr:abs_lat>400.000000000003</ogr:abs_lat>
+      <ogr:x>427857.625922775</ogr:x>
+      <ogr:y>245048.203876547</ogr:y>
+      <ogr:zfond>10.9746856689453</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
     <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.5">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>427860.587806749,245133.506134969,11.143404006958</gml:coordinates></gml:Point></ogr:geometryProperty>
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>427861.096053776,245148.143649364,10.9805374145508</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>1</ogr:sec_id>
       <ogr:sec_name>P1</ogr:sec_name>
       <ogr:abs_long>0</ogr:abs_long>
@@ -107,15 +107,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>6</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>485.353664529947</ogr:abs_lat>
-      <ogr:x>427860.587806749</ogr:x>
-      <ogr:y>245133.506134969</ogr:y>
-      <ogr:zfond>11.143404006958</ogr:zfond>
+      <ogr:abs_lat>500.000000000004</ogr:abs_lat>
+      <ogr:x>427861.096053776</ogr:x>
+      <ogr:y>245148.143649364</ogr:y>
+      <ogr:zfond>10.9805374145508</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
     <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.6">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>427863.956288344,245230.518404908,17.2182998657227</gml:coordinates></gml:Point></ogr:geometryProperty>
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>427864.566184777,245248.083422182,20.3064193725586</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>1</ogr:sec_id>
       <ogr:sec_name>P1</ogr:sec_name>
       <ogr:abs_long>0</ogr:abs_long>
@@ -124,15 +124,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>7</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>582.424397435942</ogr:abs_lat>
-      <ogr:x>427863.956288344</ogr:x>
-      <ogr:y>245230.518404908</ogr:y>
-      <ogr:zfond>17.2182998657227</ogr:zfond>
+      <ogr:abs_lat>600.000000000005</ogr:abs_lat>
+      <ogr:x>427864.566184777</ogr:x>
+      <ogr:y>245248.083422182</ogr:y>
+      <ogr:zfond>20.3064193725586</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
     <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.7">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>427867.324769939,245327.530674847,17.0419750213623</gml:coordinates></gml:Point></ogr:geometryProperty>
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>427868.036315777,245348.023194999,16.124340057373</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>1</ogr:sec_id>
       <ogr:sec_name>P1</ogr:sec_name>
       <ogr:abs_long>0</ogr:abs_long>
@@ -141,10 +141,10 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>8</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>679.495130341938</ogr:abs_lat>
-      <ogr:x>427867.324769939</ogr:x>
-      <ogr:y>245327.530674847</ogr:y>
-      <ogr:zfond>17.0419750213623</ogr:zfond>
+      <ogr:abs_lat>700.000000000006</ogr:abs_lat>
+      <ogr:x>427868.036315777</ogr:x>
+      <ogr:y>245348.023194999</ogr:y>
+      <ogr:zfond>16.124340057373</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
@@ -183,7 +183,7 @@
   </gml:featureMember>
   <gml:featureMember>
     <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.10">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>427369.463190184,244783.95398773,19.4982223510742</gml:coordinates></gml:Point></ogr:geometryProperty>
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>427370.532511703,244790.064396409,19.4968681335449</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>2</ogr:sec_id>
       <ogr:sec_name>P2</ogr:sec_name>
       <ogr:abs_long>451.308571519184</ogr:abs_long>
@@ -192,15 +192,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>2</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>93.7967312864825</ogr:abs_lat>
-      <ogr:x>427369.463190184</ogr:x>
-      <ogr:y>244783.95398773</ogr:y>
-      <ogr:zfond>19.4982223510742</ogr:zfond>
+      <ogr:abs_lat>100.000000000005</ogr:abs_lat>
+      <ogr:x>427370.532511703</ogr:x>
+      <ogr:y>244790.064396409</ogr:y>
+      <ogr:zfond>19.4968681335449</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
     <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.11">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>427385.631901841,244876.346625767,19.554515838623</gml:coordinates></gml:Point></ogr:geometryProperty>
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>427387.770544878,244888.567443124,16.0671882629395</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>2</ogr:sec_id>
       <ogr:sec_name>P2</ogr:sec_name>
       <ogr:abs_long>451.308571519184</ogr:abs_long>
@@ -209,15 +209,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>3</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>187.593462572975</ogr:abs_lat>
-      <ogr:x>427385.631901841</ogr:x>
-      <ogr:y>244876.346625767</ogr:y>
-      <ogr:zfond>19.554515838623</ogr:zfond>
+      <ogr:abs_lat>200.000000000011</ogr:abs_lat>
+      <ogr:x>427387.770544878</ogr:x>
+      <ogr:y>244888.567443124</ogr:y>
+      <ogr:zfond>16.0671882629395</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
     <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.12">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>427401.800613497,244968.739263804,11.5093402862549</gml:coordinates></gml:Point></ogr:geometryProperty>
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>427405.008578053,244987.07048984,11.5357942581177</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>2</ogr:sec_id>
       <ogr:sec_name>P2</ogr:sec_name>
       <ogr:abs_long>451.308571519184</ogr:abs_long>
@@ -226,15 +226,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>4</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>281.390193859458</ogr:abs_lat>
-      <ogr:x>427401.800613497</ogr:x>
-      <ogr:y>244968.739263804</ogr:y>
-      <ogr:zfond>11.5093402862549</ogr:zfond>
+      <ogr:abs_lat>300.000000000006</ogr:abs_lat>
+      <ogr:x>427405.008578053</ogr:x>
+      <ogr:y>244987.07048984</ogr:y>
+      <ogr:zfond>11.5357942581177</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
     <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.13">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>427417.969325153,245061.13190184,11.6000442504883</gml:coordinates></gml:Point></ogr:geometryProperty>
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>427422.246611229,245085.573536556,11.90403175354</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>2</ogr:sec_id>
       <ogr:sec_name>P2</ogr:sec_name>
       <ogr:abs_long>451.308571519184</ogr:abs_long>
@@ -243,15 +243,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>5</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>375.18692514595</ogr:abs_lat>
-      <ogr:x>427417.969325153</ogr:x>
-      <ogr:y>245061.13190184</ogr:y>
-      <ogr:zfond>11.6000442504883</ogr:zfond>
+      <ogr:abs_lat>400.000000000011</ogr:abs_lat>
+      <ogr:x>427422.246611229</ogr:x>
+      <ogr:y>245085.573536556</ogr:y>
+      <ogr:zfond>11.90403175354</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
     <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.14">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>427434.13803681,245153.524539877,14.0178060531616</gml:coordinates></gml:Point></ogr:geometryProperty>
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>427439.484644404,245184.076583271,17.5627117156982</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>2</ogr:sec_id>
       <ogr:sec_name>P2</ogr:sec_name>
       <ogr:abs_long>451.308571519184</ogr:abs_long>
@@ -260,15 +260,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>6</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>468.983656432433</ogr:abs_lat>
-      <ogr:x>427434.13803681</ogr:x>
-      <ogr:y>245153.524539877</ogr:y>
-      <ogr:zfond>14.0178060531616</ogr:zfond>
+      <ogr:abs_lat>499.999999999988</ogr:abs_lat>
+      <ogr:x>427439.484644404</ogr:x>
+      <ogr:y>245184.076583271</ogr:y>
+      <ogr:zfond>17.5627117156982</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
     <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.15">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>427450.306748466,245245.917177914,14.5559692382812</gml:coordinates></gml:Point></ogr:geometryProperty>
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>427456.722677579,245282.579629987,12.6137723922729</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>2</ogr:sec_id>
       <ogr:sec_name>P2</ogr:sec_name>
       <ogr:abs_long>451.308571519184</ogr:abs_long>
@@ -277,10 +277,10 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>7</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>562.780387718925</ogr:abs_lat>
-      <ogr:x>427450.306748466</ogr:x>
-      <ogr:y>245245.917177914</ogr:y>
-      <ogr:zfond>14.5559692382812</ogr:zfond>
+      <ogr:abs_lat>599.999999999993</ogr:abs_lat>
+      <ogr:x>427456.722677579</ogr:x>
+      <ogr:y>245282.579629987</ogr:y>
+      <ogr:zfond>12.6137723922729</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
@@ -319,7 +319,7 @@
   </gml:featureMember>
   <gml:featureMember>
     <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.18">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426706.54601227,245007.749488753,21.0386238098145</gml:coordinates></gml:Point></ogr:geometryProperty>
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426707.851282966,245009.236047045,21.0386238098145</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>3</ogr:sec_id>
       <ogr:sec_name>P3</ogr:sec_name>
       <ogr:abs_long>1063.86595130483</ogr:abs_long>
@@ -328,15 +328,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>2</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>98.0217211658168</ogr:abs_lat>
-      <ogr:x>426706.54601227</ogr:x>
-      <ogr:y>245007.749488753</ogr:y>
+      <ogr:abs_lat>100.000000000025</ogr:abs_lat>
+      <ogr:x>426707.851282966</ogr:x>
+      <ogr:y>245009.236047045</ogr:y>
       <ogr:zfond>21.0386238098145</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
     <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.19">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426771.220858896,245081.406952965,20.0380458831787</gml:coordinates></gml:Point></ogr:geometryProperty>
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426773.831400287,245084.38006955,17.5536117553711</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>3</ogr:sec_id>
       <ogr:sec_name>P3</ogr:sec_name>
       <ogr:abs_long>1063.86595130483</ogr:abs_long>
@@ -345,15 +345,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>3</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>196.043442331634</ogr:abs_lat>
-      <ogr:x>426771.220858896</ogr:x>
-      <ogr:y>245081.406952965</ogr:y>
-      <ogr:zfond>20.0380458831787</ogr:zfond>
+      <ogr:abs_lat>199.99999999999</ogr:abs_lat>
+      <ogr:x>426773.831400287</ogr:x>
+      <ogr:y>245084.38006955</ogr:y>
+      <ogr:zfond>17.5536117553711</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
     <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.20">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426835.895705522,245155.064417178,11.4290409088135</gml:coordinates></gml:Point></ogr:geometryProperty>
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426836.901014691,245160.91348871,11.4290409088135</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>3</ogr:sec_id>
       <ogr:sec_name>P3</ogr:sec_name>
       <ogr:abs_long>1063.86595130483</ogr:abs_long>
@@ -362,15 +362,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>4</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>294.06516349745</ogr:abs_lat>
-      <ogr:x>426835.895705522</ogr:x>
-      <ogr:y>245155.064417178</ogr:y>
+      <ogr:abs_lat>299.172276919243</ogr:abs_lat>
+      <ogr:x>426836.901014691</ogr:x>
+      <ogr:y>245160.91348871</ogr:y>
       <ogr:zfond>11.4290409088135</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
     <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.21">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426850.71702454,245241.297546012,18.1597900390625</gml:coordinates></gml:Point></ogr:geometryProperty>
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426853.840136251,245259.468377786,20.847526550293</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>3</ogr:sec_id>
       <ogr:sec_name>P3</ogr:sec_name>
       <ogr:abs_long>1063.86595130483</ogr:abs_long>
@@ -379,15 +379,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>5</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>381.562729212225</ogr:abs_lat>
-      <ogr:x>426850.71702454</ogr:x>
-      <ogr:y>245241.297546012</ogr:y>
-      <ogr:zfond>18.1597900390625</ogr:zfond>
+      <ogr:abs_lat>399.172276919255</ogr:abs_lat>
+      <ogr:x>426853.840136251</ogr:x>
+      <ogr:y>245259.468377786</ogr:y>
+      <ogr:zfond>20.847526550293</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
     <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.22">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426865.538343558,245327.530674847,19.3317260742188</gml:coordinates></gml:Point></ogr:geometryProperty>
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426870.779257811,245358.023266862,19.4287872314453</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>3</ogr:sec_id>
       <ogr:sec_name>P3</ogr:sec_name>
       <ogr:abs_long>1063.86595130483</ogr:abs_long>
@@ -396,15 +396,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>6</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>469.06029492696</ogr:abs_lat>
-      <ogr:x>426865.538343558</ogr:x>
-      <ogr:y>245327.530674847</ogr:y>
-      <ogr:zfond>19.3317260742188</ogr:zfond>
+      <ogr:abs_lat>499.172276919227</ogr:abs_lat>
+      <ogr:x>426870.779257811</ogr:x>
+      <ogr:y>245358.023266862</ogr:y>
+      <ogr:zfond>19.4287872314453</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
     <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.23">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426880.359662577,245413.763803681,18.6849765777588</gml:coordinates></gml:Point></ogr:geometryProperty>
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426887.718379371,245456.578155938,18.0647659301758</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>3</ogr:sec_id>
       <ogr:sec_name>P3</ogr:sec_name>
       <ogr:abs_long>1063.86595130483</ogr:abs_long>
@@ -413,10 +413,10 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>7</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>556.557860641696</ogr:abs_lat>
-      <ogr:x>426880.359662577</ogr:x>
-      <ogr:y>245413.763803681</ogr:y>
-      <ogr:zfond>18.6849765777588</ogr:zfond>
+      <ogr:abs_lat>599.172276919238</ogr:abs_lat>
+      <ogr:x>426887.718379371</ogr:x>
+      <ogr:y>245456.578155938</ogr:y>
+      <ogr:zfond>18.0647659301758</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
@@ -430,7 +430,7 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>8</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>644.05542635647</ogr:abs_lat>
+      <ogr:abs_lat>643.227703275711</ogr:abs_lat>
       <ogr:x>426895.180981595</ogr:x>
       <ogr:y>245499.996932515</ogr:y>
       <ogr:zfond>17.5910263061523</ogr:zfond>
@@ -455,7 +455,7 @@
   </gml:featureMember>
   <gml:featureMember>
     <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.26">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426018.836809816,245651.982822086,20</gml:coordinates></gml:Point></ogr:geometryProperty>
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426035.417561425,245662.947512666,20</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>4</ogr:sec_id>
       <ogr:sec_name>P4</ogr:sec_name>
       <ogr:abs_long>1840.74453316491</ogr:abs_long>
@@ -464,15 +464,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>2</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>80.1217263467249</ogr:abs_lat>
-      <ogr:x>426018.836809816</ogr:x>
-      <ogr:y>245651.982822086</ogr:y>
+      <ogr:abs_lat>100.000000000001</ogr:abs_lat>
+      <ogr:x>426035.417561425</ogr:x>
+      <ogr:y>245662.947512666</ogr:y>
       <ogr:zfond>20</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
     <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.27">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426085.667484663,245696.177300613,20.8007736206055</gml:coordinates></gml:Point></ogr:geometryProperty>
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426118.82898788,245718.106681774,21.2919139862061</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>4</ogr:sec_id>
       <ogr:sec_name>P4</ogr:sec_name>
       <ogr:abs_long>1840.74453316491</ogr:abs_long>
@@ -481,15 +481,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>3</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>160.243452693498</ogr:abs_lat>
-      <ogr:x>426085.667484663</ogr:x>
-      <ogr:y>245696.177300613</ogr:y>
-      <ogr:zfond>20.8007736206055</ogr:zfond>
+      <ogr:abs_lat>200.000000000002</ogr:abs_lat>
+      <ogr:x>426118.82898788</ogr:x>
+      <ogr:y>245718.106681774</ogr:y>
+      <ogr:zfond>21.2919139862061</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
     <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.28">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426152.498159509,245740.371779141,21.8434524536133</gml:coordinates></gml:Point></ogr:geometryProperty>
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426202.240414336,245773.265850881,22.1784381866455</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>4</ogr:sec_id>
       <ogr:sec_name>P4</ogr:sec_name>
       <ogr:abs_long>1840.74453316491</ogr:abs_long>
@@ -498,15 +498,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>4</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>240.365179040207</ogr:abs_lat>
-      <ogr:x>426152.498159509</ogr:x>
-      <ogr:y>245740.371779141</ogr:y>
-      <ogr:zfond>21.8434524536133</ogr:zfond>
+      <ogr:abs_lat>300.000000000003</ogr:abs_lat>
+      <ogr:x>426202.240414336</ogr:x>
+      <ogr:y>245773.265850881</ogr:y>
+      <ogr:zfond>22.1784381866455</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
     <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.29">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426219.328834356,245784.566257669,22.2000064849854</gml:coordinates></gml:Point></ogr:geometryProperty>
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426285.651840792,245828.425019989,22.1594505310059</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>4</ogr:sec_id>
       <ogr:sec_name>P4</ogr:sec_name>
       <ogr:abs_long>1840.74453316491</ogr:abs_long>
@@ -515,15 +515,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>5</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>320.486905386981</ogr:abs_lat>
-      <ogr:x>426219.328834356</ogr:x>
-      <ogr:y>245784.566257669</ogr:y>
-      <ogr:zfond>22.2000064849854</ogr:zfond>
+      <ogr:abs_lat>399.999999999988</ogr:abs_lat>
+      <ogr:x>426285.651840792</ogr:x>
+      <ogr:y>245828.425019989</ogr:y>
+      <ogr:zfond>22.1594505310059</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
     <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.30">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426286.159509202,245828.760736196,22.1594505310059</gml:coordinates></gml:Point></ogr:geometryProperty>
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426385.292195042,245821.594517943,21.1553554534912</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>4</ogr:sec_id>
       <ogr:sec_name>P4</ogr:sec_name>
       <ogr:abs_long>1840.74453316491</ogr:abs_long>
@@ -532,15 +532,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>6</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>400.608631733706</ogr:abs_lat>
-      <ogr:x>426286.159509202</ogr:x>
-      <ogr:y>245828.760736196</ogr:y>
-      <ogr:zfond>22.1594505310059</ogr:zfond>
+      <ogr:abs_lat>499.87420063955</ogr:abs_lat>
+      <ogr:x>426385.292195042</ogr:x>
+      <ogr:y>245821.594517943</ogr:y>
+      <ogr:zfond>21.1553554534912</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
     <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.31">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426375.626380368,245822.293251534,21.2831058502197</gml:coordinates></gml:Point></ogr:geometryProperty>
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426485.031928551,245814.384416725,10.0677881240845</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>4</ogr:sec_id>
       <ogr:sec_name>P4</ogr:sec_name>
       <ogr:abs_long>1840.74453316491</ogr:abs_long>
@@ -549,15 +549,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>7</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>490.308962803525</ogr:abs_lat>
-      <ogr:x>426375.626380368</ogr:x>
-      <ogr:y>245822.293251534</ogr:y>
-      <ogr:zfond>21.2831058502197</ogr:zfond>
+      <ogr:abs_lat>599.874200639579</ogr:abs_lat>
+      <ogr:x>426485.031928551</ogr:x>
+      <ogr:y>245814.384416725</ogr:y>
+      <ogr:zfond>10.0677881240845</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
     <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.32">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426465.093251534,245815.825766871,9.47635841369629</gml:coordinates></gml:Point></ogr:geometryProperty>
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426584.77166206,245807.174315508,20.8935146331787</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>4</ogr:sec_id>
       <ogr:sec_name>P4</ogr:sec_name>
       <ogr:abs_long>1840.74453316491</ogr:abs_long>
@@ -566,15 +566,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>8</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>580.009293873287</ogr:abs_lat>
-      <ogr:x>426465.093251534</ogr:x>
-      <ogr:y>245815.825766871</ogr:y>
-      <ogr:zfond>9.47635841369629</ogr:zfond>
+      <ogr:abs_lat>699.874200639549</ogr:abs_lat>
+      <ogr:x>426584.77166206</ogr:x>
+      <ogr:y>245807.174315508</ogr:y>
+      <ogr:zfond>20.8935146331787</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
     <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.33">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426554.560122699,245809.358282209,12.558611869812</gml:coordinates></gml:Point></ogr:geometryProperty>
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426684.511395569,245799.96421429,19.4691734313965</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>4</ogr:sec_id>
       <ogr:sec_name>P4</ogr:sec_name>
       <ogr:abs_long>1840.74453316491</ogr:abs_long>
@@ -583,15 +583,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>9</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>669.709624943109</ogr:abs_lat>
-      <ogr:x>426554.560122699</ogr:x>
-      <ogr:y>245809.358282209</ogr:y>
-      <ogr:zfond>12.558611869812</ogr:zfond>
+      <ogr:abs_lat>799.874200639578</ogr:abs_lat>
+      <ogr:x>426684.511395569</ogr:x>
+      <ogr:y>245799.96421429</ogr:y>
+      <ogr:zfond>19.4691734313965</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
     <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.34">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426644.026993865,245802.890797546,20.0598659515381</gml:coordinates></gml:Point></ogr:geometryProperty>
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426768.611600648,245833.254108774,18.1945037841797</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>4</ogr:sec_id>
       <ogr:sec_name>P4</ogr:sec_name>
       <ogr:abs_long>1840.74453316491</ogr:abs_long>
@@ -600,15 +600,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>10</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>759.40995601287</ogr:abs_lat>
-      <ogr:x>426644.026993865</ogr:x>
-      <ogr:y>245802.890797546</ogr:y>
-      <ogr:zfond>20.0598659515381</ogr:zfond>
+      <ogr:abs_lat>890.323421581586</ogr:abs_lat>
+      <ogr:x>426768.611600648</ogr:x>
+      <ogr:y>245833.254108774</ogr:y>
+      <ogr:zfond>18.1945037841797</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
     <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.35">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426733.493865031,245796.423312883,18.7307224273682</gml:coordinates></gml:Point></ogr:geometryProperty>
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426837.619134005,245905.627863271,17.4051685333252</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>4</ogr:sec_id>
       <ogr:sec_name>P4</ogr:sec_name>
       <ogr:abs_long>1840.74453316491</ogr:abs_long>
@@ -617,15 +617,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>11</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>849.11028708269</ogr:abs_lat>
-      <ogr:x>426733.493865031</ogr:x>
-      <ogr:y>245796.423312883</ogr:y>
-      <ogr:zfond>18.7307224273682</ogr:zfond>
+      <ogr:abs_lat>990.323421581555</ogr:abs_lat>
+      <ogr:x>426837.619134005</ogr:x>
+      <ogr:y>245905.627863271</ogr:y>
+      <ogr:zfond>17.4051685333252</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
     <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.36">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426788.73696319,245854.361196319,17.8370246887207</gml:coordinates></gml:Point></ogr:geometryProperty>
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426906.626667362,245978.001617768,16.6070117950439</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>4</ogr:sec_id>
       <ogr:sec_name>P4</ogr:sec_name>
       <ogr:abs_long>1840.74453316491</ogr:abs_long>
@@ -634,15 +634,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>12</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>929.164007990926</ogr:abs_lat>
-      <ogr:x>426788.73696319</ogr:x>
-      <ogr:y>245854.361196319</ogr:y>
-      <ogr:zfond>17.8370246887207</ogr:zfond>
+      <ogr:abs_lat>1090.32342158156</ogr:abs_lat>
+      <ogr:x>426906.626667362</ogr:x>
+      <ogr:y>245978.001617768</ogr:y>
+      <ogr:zfond>16.6070117950439</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
     <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.37">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426843.98006135,245912.299079755,17.2751560211182</gml:coordinates></gml:Point></ogr:geometryProperty>
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426954.466257669,246028.174846626,17.0295658111572</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>4</ogr:sec_id>
       <ogr:sec_name>P4</ogr:sec_name>
       <ogr:abs_long>1840.74453316491</ogr:abs_long>
@@ -651,48 +651,14 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>13</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>1009.21772889916</ogr:abs_lat>
-      <ogr:x>426843.98006135</ogr:x>
-      <ogr:y>245912.299079755</ogr:y>
-      <ogr:zfond>17.2751560211182</ogr:zfond>
-    </ogr:lines_to_points_with_zero_layers>
-  </gml:featureMember>
-  <gml:featureMember>
-    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.38">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426899.223159509,245970.23696319,16.7658405303955</gml:coordinates></gml:Point></ogr:geometryProperty>
-      <ogr:sec_id>4</ogr:sec_id>
-      <ogr:sec_name>P4</ogr:sec_name>
-      <ogr:abs_long>1840.74453316491</ogr:abs_long>
-      <ogr:axis_x>426505.77541644</ogr:axis_x>
-      <ogr:axis_y>245812.88488748</ogr:axis_y>
-      <ogr:layers></ogr:layers>
-      <ogr:p_id>14</ogr:p_id>
-      <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>1089.27144980746</ogr:abs_lat>
-      <ogr:x>426899.223159509</ogr:x>
-      <ogr:y>245970.23696319</ogr:y>
-      <ogr:zfond>16.7658405303955</ogr:zfond>
-    </ogr:lines_to_points_with_zero_layers>
-  </gml:featureMember>
-  <gml:featureMember>
-    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.39">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426954.466257669,246028.174846626,17.0295658111572</gml:coordinates></gml:Point></ogr:geometryProperty>
-      <ogr:sec_id>4</ogr:sec_id>
-      <ogr:sec_name>P4</ogr:sec_name>
-      <ogr:abs_long>1840.74453316491</ogr:abs_long>
-      <ogr:axis_x>426505.77541644</ogr:axis_x>
-      <ogr:axis_y>245812.88488748</ogr:axis_y>
-      <ogr:layers></ogr:layers>
-      <ogr:p_id>15</ogr:p_id>
-      <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>1169.3251707157</ogr:abs_lat>
+      <ogr:abs_lat>1159.64859229727</ogr:abs_lat>
       <ogr:x>426954.466257669</ogr:x>
       <ogr:y>246028.174846626</ogr:y>
       <ogr:zfond>17.0295658111572</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
-    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.40">
+    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.38">
       <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>425993.233373578,246286.349743189,21.3598308563232</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>5</ogr:sec_id>
       <ogr:sec_name>P5</ogr:sec_name>
@@ -709,8 +675,8 @@
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
-    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.41">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426066.077550244,246352.950133284,20.9186058044434</gml:coordinates></gml:Point></ogr:geometryProperty>
+    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.39">
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426067.036254778,246353.826663144,20.9186058044434</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>5</ogr:sec_id>
       <ogr:sec_name>P5</ogr:sec_name>
       <ogr:abs_long>2826.74680044045</ogr:abs_long>
@@ -719,15 +685,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>2</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>98.7009930795988</ogr:abs_lat>
-      <ogr:x>426066.077550244</ogr:x>
-      <ogr:y>246352.950133284</ogr:y>
+      <ogr:abs_lat>99.9999999999939</ogr:abs_lat>
+      <ogr:x>426067.036254778</ogr:x>
+      <ogr:y>246353.826663144</ogr:y>
       <ogr:zfond>20.9186058044434</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
-    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.42">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426138.92172691,246419.550523378,21.0887336730957</gml:coordinates></gml:Point></ogr:geometryProperty>
+    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.40">
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426140.839135979,246421.303583098,21.0887336730957</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>5</ogr:sec_id>
       <ogr:sec_name>P5</ogr:sec_name>
       <ogr:abs_long>2826.74680044045</ogr:abs_long>
@@ -736,15 +702,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>3</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>197.401986159174</ogr:abs_lat>
-      <ogr:x>426138.92172691</ogr:x>
-      <ogr:y>246419.550523378</ogr:y>
+      <ogr:abs_lat>199.999999999988</ogr:abs_lat>
+      <ogr:x>426140.839135979</ogr:x>
+      <ogr:y>246421.303583098</ogr:y>
       <ogr:zfond>21.0887336730957</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
-    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.43">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426211.765903576,246486.150913473,21.4499168395996</gml:coordinates></gml:Point></ogr:geometryProperty>
+    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.41">
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426214.642017179,246488.780503053,21.4957141876221</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>5</ogr:sec_id>
       <ogr:sec_name>P5</ogr:sec_name>
       <ogr:abs_long>2826.74680044045</ogr:abs_long>
@@ -753,15 +719,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>4</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>296.102979238773</ogr:abs_lat>
-      <ogr:x>426211.765903576</ogr:x>
-      <ogr:y>246486.150913473</ogr:y>
-      <ogr:zfond>21.4499168395996</ogr:zfond>
+      <ogr:abs_lat>300.000000000025</ogr:abs_lat>
+      <ogr:x>426214.642017179</ogr:x>
+      <ogr:y>246488.780503053</ogr:y>
+      <ogr:zfond>21.4957141876221</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
-    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.44">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426284.610080242,246552.751303568,20.8497676849365</gml:coordinates></gml:Point></ogr:geometryProperty>
+    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.42">
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426288.444898379,246556.257423007,20.779390335083</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>5</ogr:sec_id>
       <ogr:sec_name>P5</ogr:sec_name>
       <ogr:abs_long>2826.74680044045</ogr:abs_long>
@@ -770,15 +736,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>5</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>394.803972318329</ogr:abs_lat>
-      <ogr:x>426284.610080242</ogr:x>
-      <ogr:y>246552.751303568</ogr:y>
-      <ogr:zfond>20.8497676849365</ogr:zfond>
+      <ogr:abs_lat>399.999999999999</ogr:abs_lat>
+      <ogr:x>426288.444898379</ogr:x>
+      <ogr:y>246556.257423007</ogr:y>
+      <ogr:zfond>20.779390335083</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
-    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.45">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426357.454256908,246619.351693662,19.9836940765381</gml:coordinates></gml:Point></ogr:geometryProperty>
+    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.43">
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426362.247779579,246623.734342962,19.9289627075195</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>5</ogr:sec_id>
       <ogr:sec_name>P5</ogr:sec_name>
       <ogr:abs_long>2826.74680044045</ogr:abs_long>
@@ -787,15 +753,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>6</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>493.504965397928</ogr:abs_lat>
-      <ogr:x>426357.454256908</ogr:x>
-      <ogr:y>246619.351693662</ogr:y>
-      <ogr:zfond>19.9836940765381</ogr:zfond>
+      <ogr:abs_lat>499.999999999993</ogr:abs_lat>
+      <ogr:x>426362.247779579</ogr:x>
+      <ogr:y>246623.734342962</ogr:y>
+      <ogr:zfond>19.9289627075195</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
-    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.46">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426430.298433574,246685.952083757,15.7775392532349</gml:coordinates></gml:Point></ogr:geometryProperty>
+    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.44">
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426436.05066078,246691.211262916,14.0237836837769</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>5</ogr:sec_id>
       <ogr:sec_name>P5</ogr:sec_name>
       <ogr:abs_long>2826.74680044045</ogr:abs_long>
@@ -804,15 +770,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>7</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>592.205958477483</ogr:abs_lat>
-      <ogr:x>426430.298433574</ogr:x>
-      <ogr:y>246685.952083757</ogr:y>
-      <ogr:zfond>15.7775392532349</ogr:zfond>
+      <ogr:abs_lat>599.999999999987</ogr:abs_lat>
+      <ogr:x>426436.05066078</ogr:x>
+      <ogr:y>246691.211262916</ogr:y>
+      <ogr:zfond>14.0237836837769</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
-    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.47">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426503.14261024,246752.552473851,7.9006929397583</gml:coordinates></gml:Point></ogr:geometryProperty>
+    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.45">
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426509.85354198,246758.688182871,7.39428186416626</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>5</ogr:sec_id>
       <ogr:sec_name>P5</ogr:sec_name>
       <ogr:abs_long>2826.74680044045</ogr:abs_long>
@@ -821,15 +787,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>8</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>690.906951557102</ogr:abs_lat>
-      <ogr:x>426503.14261024</ogr:x>
-      <ogr:y>246752.552473851</ogr:y>
-      <ogr:zfond>7.9006929397583</ogr:zfond>
+      <ogr:abs_lat>699.99999999998</ogr:abs_lat>
+      <ogr:x>426509.85354198</ogr:x>
+      <ogr:y>246758.688182871</ogr:y>
+      <ogr:zfond>7.39428186416626</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
-    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.48">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426575.986786906,246819.152863946,19.9889278411865</gml:coordinates></gml:Point></ogr:geometryProperty>
+    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.46">
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426583.65642318,246826.165102825,20.3215141296387</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>5</ogr:sec_id>
       <ogr:sec_name>P5</ogr:sec_name>
       <ogr:abs_long>2826.74680044045</ogr:abs_long>
@@ -838,15 +804,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>9</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>789.607944636701</ogr:abs_lat>
-      <ogr:x>426575.986786906</ogr:x>
-      <ogr:y>246819.152863946</ogr:y>
-      <ogr:zfond>19.9889278411865</ogr:zfond>
+      <ogr:abs_lat>800.000000000017</ogr:abs_lat>
+      <ogr:x>426583.65642318</ogr:x>
+      <ogr:y>246826.165102825</ogr:y>
+      <ogr:zfond>20.3215141296387</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
-    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.49">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426648.830963572,246885.753254041,22.7705020904541</gml:coordinates></gml:Point></ogr:geometryProperty>
+    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.47">
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426657.45930438,246893.64202278,22.8879566192627</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>5</ogr:sec_id>
       <ogr:sec_name>P5</ogr:sec_name>
       <ogr:abs_long>2826.74680044045</ogr:abs_long>
@@ -855,15 +821,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>10</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>888.308937716256</ogr:abs_lat>
-      <ogr:x>426648.830963572</ogr:x>
-      <ogr:y>246885.753254041</ogr:y>
-      <ogr:zfond>22.7705020904541</ogr:zfond>
+      <ogr:abs_lat>900.000000000011</ogr:abs_lat>
+      <ogr:x>426657.45930438</ogr:x>
+      <ogr:y>246893.64202278</ogr:y>
+      <ogr:zfond>22.8879566192627</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
-    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.50">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426721.675140238,246952.353644135,24.1362380981445</gml:coordinates></gml:Point></ogr:geometryProperty>
+    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.48">
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426731.262185581,246961.118942734,24.1281719207764</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>5</ogr:sec_id>
       <ogr:sec_name>P5</ogr:sec_name>
       <ogr:abs_long>2826.74680044045</ogr:abs_long>
@@ -872,15 +838,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>11</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>987.009930795875</ogr:abs_lat>
-      <ogr:x>426721.675140238</ogr:x>
-      <ogr:y>246952.353644135</ogr:y>
-      <ogr:zfond>24.1362380981445</ogr:zfond>
+      <ogr:abs_lat>1000.00000000001</ogr:abs_lat>
+      <ogr:x>426731.262185581</ogr:x>
+      <ogr:y>246961.118942734</ogr:y>
+      <ogr:zfond>24.1281719207764</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
-    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.51">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426794.519316904,247018.95403423,25.1037940979004</gml:coordinates></gml:Point></ogr:geometryProperty>
+    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.49">
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426805.065066781,247028.595862689,25.3883209228516</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>5</ogr:sec_id>
       <ogr:sec_name>P5</ogr:sec_name>
       <ogr:abs_long>2826.74680044045</ogr:abs_long>
@@ -889,15 +855,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>12</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>1085.71092387543</ogr:abs_lat>
-      <ogr:x>426794.519316904</ogr:x>
-      <ogr:y>247018.95403423</ogr:y>
-      <ogr:zfond>25.1037940979004</ogr:zfond>
+      <ogr:abs_lat>1100</ogr:abs_lat>
+      <ogr:x>426805.065066781</ogr:x>
+      <ogr:y>247028.595862689</ogr:y>
+      <ogr:zfond>25.3883209228516</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
-    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.52">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426867.36349357,247085.554424324,27.0954704284668</gml:coordinates></gml:Point></ogr:geometryProperty>
+    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.50">
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426878.867947981,247096.072782643,27.4571151733398</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>5</ogr:sec_id>
       <ogr:sec_name>P5</ogr:sec_name>
       <ogr:abs_long>2826.74680044045</ogr:abs_long>
@@ -906,15 +872,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>13</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>1184.41191695503</ogr:abs_lat>
-      <ogr:x>426867.36349357</ogr:x>
-      <ogr:y>247085.554424324</ogr:y>
-      <ogr:zfond>27.0954704284668</ogr:zfond>
+      <ogr:abs_lat>1199.99999999997</ogr:abs_lat>
+      <ogr:x>426878.867947981</ogr:x>
+      <ogr:y>247096.072782643</ogr:y>
+      <ogr:zfond>27.4571151733398</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
-    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.53">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426940.207670236,247152.154814419,28.5509452819824</gml:coordinates></gml:Point></ogr:geometryProperty>
+    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.51">
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426952.670829181,247163.549702598,28.7112731933594</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>5</ogr:sec_id>
       <ogr:sec_name>P5</ogr:sec_name>
       <ogr:abs_long>2826.74680044045</ogr:abs_long>
@@ -923,15 +889,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>14</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>1283.11291003459</ogr:abs_lat>
-      <ogr:x>426940.207670236</ogr:x>
-      <ogr:y>247152.154814419</ogr:y>
-      <ogr:zfond>28.5509452819824</ogr:zfond>
+      <ogr:abs_lat>1300.00000000001</ogr:abs_lat>
+      <ogr:x>426952.670829181</ogr:x>
+      <ogr:y>247163.549702598</ogr:y>
+      <ogr:zfond>28.7112731933594</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
-    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.54">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>427013.051846902,247218.755204514,0</gml:coordinates></gml:Point></ogr:geometryProperty>
+    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.52">
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>427026.473710381,247231.026622552,0</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>5</ogr:sec_id>
       <ogr:sec_name>P5</ogr:sec_name>
       <ogr:abs_long>2826.74680044045</ogr:abs_long>
@@ -940,15 +906,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>15</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>1381.81390311418</ogr:abs_lat>
-      <ogr:x>427013.051846902</ogr:x>
-      <ogr:y>247218.755204514</ogr:y>
+      <ogr:abs_lat>1400</ogr:abs_lat>
+      <ogr:x>427026.473710381</ogr:x>
+      <ogr:y>247231.026622552</ogr:y>
       <ogr:zfond xsi:nil="true"/>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
-    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.55">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>427085.896023568,247285.355594608,0</gml:coordinates></gml:Point></ogr:geometryProperty>
+    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.53">
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>427100.276591582,247298.503542507,0</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>5</ogr:sec_id>
       <ogr:sec_name>P5</ogr:sec_name>
       <ogr:abs_long>2826.74680044045</ogr:abs_long>
@@ -957,14 +923,14 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>16</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>1480.51489619376</ogr:abs_lat>
-      <ogr:x>427085.896023568</ogr:x>
-      <ogr:y>247285.355594608</ogr:y>
+      <ogr:abs_lat>1500</ogr:abs_lat>
+      <ogr:x>427100.276591582</ogr:x>
+      <ogr:y>247298.503542507</ogr:y>
       <ogr:zfond xsi:nil="true"/>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
-    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.56">
+    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.54">
       <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>427158.740200234,247351.955984703,0</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>5</ogr:sec_id>
       <ogr:sec_name>P5</ogr:sec_name>
@@ -981,7 +947,7 @@
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
-    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.57">
+    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.55">
       <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426109.784056244,246611.0266449,21.0615005493164</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>6</ogr:sec_id>
       <ogr:sec_name>P6</ogr:sec_name>
@@ -998,8 +964,8 @@
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
-    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.58">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426170.140659767,246689.420854074,20.745626449585</gml:coordinates></gml:Point></ogr:geometryProperty>
+    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.56">
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426170.789014055,246690.262969414,20.745626449585</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>6</ogr:sec_id>
       <ogr:sec_name>P6</ogr:sec_name>
       <ogr:abs_long>3045.15513690845</ogr:abs_long>
@@ -1008,15 +974,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>2</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>98.9372104966446</ogr:abs_lat>
-      <ogr:x>426170.140659767</ogr:x>
-      <ogr:y>246689.420854074</ogr:y>
+      <ogr:abs_lat>100.000000000006</ogr:abs_lat>
+      <ogr:x>426170.789014055</ogr:x>
+      <ogr:y>246690.262969414</ogr:y>
       <ogr:zfond>20.745626449585</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
-    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.59">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426230.49726329,246767.815063248,19.6539516448975</gml:coordinates></gml:Point></ogr:geometryProperty>
+    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.57">
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426231.793971867,246769.499293928,19.6539516448975</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>6</ogr:sec_id>
       <ogr:sec_name>P6</ogr:sec_name>
       <ogr:abs_long>3045.15513690845</ogr:abs_long>
@@ -1025,15 +991,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>3</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>197.874420993254</ogr:abs_lat>
-      <ogr:x>426230.49726329</ogr:x>
-      <ogr:y>246767.815063248</ogr:y>
+      <ogr:abs_lat>199.99999999999</ogr:abs_lat>
+      <ogr:x>426231.793971867</ogr:x>
+      <ogr:y>246769.499293928</ogr:y>
       <ogr:zfond>19.6539516448975</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
-    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.60">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426290.853866813,246846.209272422,8.63309192657471</gml:coordinates></gml:Point></ogr:geometryProperty>
+    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.58">
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426292.798929678,246848.735618441,8.56353664398193</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>6</ogr:sec_id>
       <ogr:sec_name>P6</ogr:sec_name>
       <ogr:abs_long>3045.15513690845</ogr:abs_long>
@@ -1042,15 +1008,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>4</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>296.811631489875</ogr:abs_lat>
-      <ogr:x>426290.853866813</ogr:x>
-      <ogr:y>246846.209272422</ogr:y>
-      <ogr:zfond>8.63309192657471</ogr:zfond>
+      <ogr:abs_lat>299.999999999996</ogr:abs_lat>
+      <ogr:x>426292.798929678</ogr:x>
+      <ogr:y>246848.735618441</ogr:y>
+      <ogr:zfond>8.56353664398193</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
-    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.61">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426351.210470337,246924.603481596,10.2650547027588</gml:coordinates></gml:Point></ogr:geometryProperty>
+    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.59">
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426353.803887489,246927.971942955,12.5781478881836</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>6</ogr:sec_id>
       <ogr:sec_name>P6</ogr:sec_name>
       <ogr:abs_long>3045.15513690845</ogr:abs_long>
@@ -1059,15 +1025,15 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>5</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>395.74884198652</ogr:abs_lat>
-      <ogr:x>426351.210470337</ogr:x>
-      <ogr:y>246924.603481596</ogr:y>
-      <ogr:zfond>10.2650547027588</ogr:zfond>
+      <ogr:abs_lat>400.000000000002</ogr:abs_lat>
+      <ogr:x>426353.803887489</ogr:x>
+      <ogr:y>246927.971942955</ogr:y>
+      <ogr:zfond>12.5781478881836</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
-    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.62">
-      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426411.56707386,247002.99769077,22.9713706970215</gml:coordinates></gml:Point></ogr:geometryProperty>
+    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.60">
+      <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426414.808845301,247007.208267469,23.255895614624</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>6</ogr:sec_id>
       <ogr:sec_name>P6</ogr:sec_name>
       <ogr:abs_long>3045.15513690845</ogr:abs_long>
@@ -1076,14 +1042,14 @@
       <ogr:layers></ogr:layers>
       <ogr:p_id>6</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:abs_lat>494.686052483129</ogr:abs_lat>
-      <ogr:x>426411.56707386</ogr:x>
-      <ogr:y>247002.99769077</ogr:y>
-      <ogr:zfond>22.9713706970215</ogr:zfond>
+      <ogr:abs_lat>499.999999999986</ogr:abs_lat>
+      <ogr:x>426414.808845301</ogr:x>
+      <ogr:y>247007.208267469</ogr:y>
+      <ogr:zfond>23.255895614624</ogr:zfond>
     </ogr:lines_to_points_with_zero_layers>
   </gml:featureMember>
   <gml:featureMember>
-    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.63">
+    <ogr:lines_to_points_with_zero_layers fid="lines_to_points_with_zero_layers.61">
       <ogr:geometryProperty><gml:Point srsName="EPSG:27563"><gml:coordinates>426471.923677383,247081.391899944,25.1982536315918</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:sec_id>6</ogr:sec_id>
       <ogr:sec_name>P6</ogr:sec_name>

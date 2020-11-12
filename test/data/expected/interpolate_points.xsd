@@ -54,6 +54,13 @@
             </xs:restriction>
           </xs:simpleType>
         </xs:element>
+        <xs:element name="topo_bat" nillable="true" minOccurs="0" maxOccurs="1">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="1"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
         <xs:element name="zfond" nillable="true" minOccurs="0" maxOccurs="1">
           <xs:simpleType>
             <xs:restriction base="xs:decimal">
