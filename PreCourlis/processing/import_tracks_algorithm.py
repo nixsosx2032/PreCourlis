@@ -86,7 +86,7 @@ class ImportTracksAlgorithm(PreCourlisAlgorithm):
             QgsProcessingParameterBoolean(
                 self.STRICT_DISTANCE,
                 self.tr("Apply strict distance (do not keep initial points)"),
-                defaultValue=False,
+                defaultValue=True,
             )
         )
         self.addParameter(

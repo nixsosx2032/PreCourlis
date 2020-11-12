@@ -23,10 +23,10 @@ class TestImportTracksAlgorithm(TestCase):
     def test_algorithm(self):
         self.check_algorithm({}, {"OUTPUT": "import_tracks.gml"})
 
-    def test_strict_distance(self):
+    def test_no_strict_distance(self):
         self.check_algorithm(
-            {"STRICT_DISTANCE": True},
-            {"OUTPUT": "import_tracks_strict_distance.gml"},
+            {"STRICT_DISTANCE": False},
+            {"OUTPUT": "import_tracks_no_strict_distance.gml"},
         )
 
     def test_first_axis_point_abs_long(self):

@@ -5,7 +5,8 @@ from qgis.core import (
     QgsVectorLayer,
 )
 
-from .. import DATA_PATH, TEMP_PATH, utils
+from .. import DATA_PATH, EXPECTED_PATH, OVERWRITE_EXPECTED, TEMP_PATH
+from ..utils import save_as_gml
 from . import TestCase
 
 SECTIONS_PATH = os.path.join(DATA_PATH, "input", "profiles_points.gml")
@@ -29,22 +30,18 @@ class TestInterpolatePointsAlgorithm(TestCase):
         "OUTPUT": QgsProcessingUtils.generateTempFilename("interpolate_points.shp"),
     }
 
-    def compare_output(self, key, output, expected):
-        output = QgsVectorLayer(output, "output", "ogr")
-        assert output.isValid()
-
-        output_path = os.path.join(TEMP_PATH, "interpolate_points.gml")
-        output = utils.save_as_gml(output, output_path)
-        self.compare_layers(output_path, expected)
-
     def test_algorithm(self):
+        tmp_output = QgsProcessingUtils.generateTempFilename("interpolate_points.shp")
         self.check_algorithm(
-            {
-                "OUTPUT": QgsProcessingUtils.generateTempFilename(
-                    "interpolate_points.shp"
-                ),
-            },
-            {
-                "OUTPUT": "interpolate_points.gml",
-            },
+            {"OUTPUT": tmp_output},
         )
+
+        # Copy temporary layer to output
+        expected = os.path.join(EXPECTED_PATH, "interpolate_points.gml")
+        if OVERWRITE_EXPECTED:
+            output = expected
+        else:
+            output = os.path.join(TEMP_PATH, "interpolate_points.gml")
+        save_as_gml(QgsVectorLayer(tmp_output, "output", "ogr"), output)
+
+        self.compare_layers(output, expected)
