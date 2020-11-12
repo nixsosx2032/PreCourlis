@@ -187,12 +187,10 @@ class ImportTracksAlgorithm(PreCourlisAlgorithm):
             alg_params = {
                 "INPUT": current,
                 "DISTANCE": parameters[self.DISTANCE],
-                "START_OFFSET": 0,
-                "END_OFFSET": 0,
                 "OUTPUT": QgsProcessing.TEMPORARY_OUTPUT,
             }
             outputs["PointsAlongLines"] = processing.run(
-                "native:pointsalonglines",
+                "precourlis:pointsalonglines",
                 alg_params,
                 context=context,
                 feedback=feedback,

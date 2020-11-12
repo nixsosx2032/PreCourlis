@@ -14,6 +14,7 @@ from PreCourlis.processing.import_tracks_algorithm import ImportTracksAlgorithm
 from PreCourlis.processing.interpolate_lines import InterpolateLinesAlgorithm
 from PreCourlis.processing.interpolate_points import InterpolatePointsAlgorithm
 from PreCourlis.processing.lines_to_points_algorithm import LinesToPointsAlgorithm
+from PreCourlis.processing.points_along_lines_algorithm import PointsAlongLinesAlgorithm
 from PreCourlis.processing.points_to_lines_algorithm import PointsToLinesAlgorithm
 from PreCourlis.processing.prepare_tracks_algorithm import PrepareTracksAlgorithm
 
@@ -48,6 +49,7 @@ class PreCourlisProvider(QgsProcessingProvider):
         self.addAlgorithm(InterpolateLinesAlgorithm())
         self.addAlgorithm(InterpolatePointsAlgorithm())
         self.addAlgorithm(LinesToPointsAlgorithm())
+        self.addAlgorithm(PointsAlongLinesAlgorithm())
         self.addAlgorithm(PointsToLinesAlgorithm())
         self.addAlgorithm(PrepareTracksAlgorithm())
 
