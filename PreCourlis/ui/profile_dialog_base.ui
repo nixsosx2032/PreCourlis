@@ -217,7 +217,10 @@
           <item>
            <widget class="QLineEdit" name="addLayerNameLineEdit">
             <property name="toolTip">
-             <string>Sedimental layer name</string>
+             <string>Sedimental layer name (limited to 7 characters)</string>
+            </property>
+            <property name="maxLength">
+             <number>7</number>
             </property>
            </widget>
           </item>
