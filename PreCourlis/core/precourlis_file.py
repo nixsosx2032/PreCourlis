@@ -194,13 +194,6 @@ class PreCourlisFileLine(PreCourlisFileBase):
         if self._layer.fields().indexFromName(name) != -1:
             raise KeyError("Field {} already exists".format(name))
 
-        self.layer().startEditing()
-        self._layer.beginEditCommand("Add sedimental layer {}".format(name))
-
-        # Add new attribute
-        self._layer.addAttribute(QgsField(name, QVariant.String))
-        self._layer.updateFields()
-
         # Update layers list and set value of new attributes
         if from_layer == "zfond":
             from_layer_index = -1
@@ -209,9 +202,15 @@ class PreCourlisFileLine(PreCourlisFileBase):
         else:
             from_layer_index = layers.index(from_layer)
         new_layer_index = from_layer_index if deltaz > 0 else from_layer_index + 1
-
         layers.insert(new_layer_index, name)
         layers_list = ",".join(layers)
+
+        self.layer().startEditing()
+        self._layer.beginEditCommand("Add sedimental layer {}".format(name))
+
+        # Add new attribute
+        self._layer.addAttribute(QgsField(name, QVariant.String))
+        self._layer.updateFields()
 
         layers_field_index = self._layer.fields().indexFromName("layers")
         source_field_index = self._layer.fields().indexFromName(from_layer)
