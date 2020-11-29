@@ -193,6 +193,9 @@ class PreCourlisFileLine(PreCourlisFileBase):
         layers = self.layers()
         if self._layer.fields().indexFromName(name) != -1:
             raise KeyError("Field {} already exists".format(name))
+        for field in self._layer.fields():
+            if field.name().lower() == name.lower():
+                raise KeyError("Field {} already exists".format(field.name()))
 
         # Update layers list and set value of new attributes
         if from_layer == "zfond":
