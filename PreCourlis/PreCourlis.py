@@ -103,7 +103,7 @@ class PreCourlisPlugin:
 
         self.menuToolBar = QMenu(self.iface.mainWindow())
         self.add_action("Importer un fichier .georef", self.import_georef)
-        self.add_action("Inverser le sens de l'axe hydrolique", self.reverse_axe)
+        self.add_action("Inverser le sens de l'axe hydraulique", self.reverse_axe)
         self.add_action("Convertir les traces en profils", self.import_tracks)
         self.add_action("Visualiser les profils", self.open_editor)
         # self.add_action("Projeter un semis de point sur les profils", self.projZProfil)
