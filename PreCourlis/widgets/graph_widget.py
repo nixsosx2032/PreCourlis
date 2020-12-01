@@ -38,6 +38,7 @@ class GraphWidget(FigureCanvas):
         self.pointing_line = None
         self.layers_lines = []
         self.layers_fills = []
+        self.legend = None
         self.current_layer_name = None
 
     def close_figure(self):
@@ -60,6 +61,8 @@ class GraphWidget(FigureCanvas):
     def set_current_layer(self, layer_name):
         self.current_layer_name = layer_name
         self.refresh_current_section()
+        self.refresh_legend()
+        self.draw()
 
     def axis_position(self, section):
         """
@@ -86,6 +89,7 @@ class GraphWidget(FigureCanvas):
         self.pointing_line = None
         self.layers_lines = []
         self.layers_fills = []
+        self._legend = None
 
     def refresh(self):
         self.clear()
@@ -117,8 +121,15 @@ class GraphWidget(FigureCanvas):
         self.graph.set_ylabel("Z (m)")
         self.graph.set_xlabel("Abscisse en travers (m)")
 
+        self.refresh_legend()
+
+        self.draw()
+
+    def refresh_legend(self):
+        if self.legend is not None:
+            self.legend.remove()
         lines, labels = self.graph.get_legend_handles_labels()
-        self.graph.legend(
+        self.legend = self.graph.legend(
             lines,
             labels,
             bbox_to_anchor=(1, 0.5),
@@ -127,8 +138,6 @@ class GraphWidget(FigureCanvas):
             shadow=True,
             prop={"size": 10},
         )
-
-        self.draw()
 
     def refresh_current_section(self, draw=True):
         [line.remove() for line in self.layers_lines]
