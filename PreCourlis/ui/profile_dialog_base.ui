@@ -272,22 +272,29 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="importLayerValuesButton">
-            <property name="toolTip">
-             <string>Import layer values from DEM</string>
-            </property>
-            <property name="text">
-             <string>Import</string>
-            </property>
-           </widget>
-          </item>
-          <item>
            <widget class="QPushButton" name="deleteLayerButton">
             <property name="toolTip">
              <string>Delete current sedimental layer</string>
             </property>
             <property name="text">
              <string>Delete</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="QgsMapLayerComboBox" name="extractLayerZDEMComboBox"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="extractLayerZButton">
+            <property name="toolTip">
+             <string>Extract layer values from DEM</string>
+            </property>
+            <property name="text">
+             <string>Extract Z</string>
             </property>
            </widget>
           </item>

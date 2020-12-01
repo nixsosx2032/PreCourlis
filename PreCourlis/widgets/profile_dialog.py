@@ -1,17 +1,17 @@
 from pkg_resources import resource_filename
 
+from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 from qgis.core import (
     QgsApplication,
     QgsMapLayer,
+    QgsMapLayerProxyModel,
     QgsProject,
     QgsWkbTypes,
 )
 from qgis.gui import QgsMessageBar
 from qgis.PyQt import QtCore, QtGui, QtWidgets, uic
 from qgis.utils import iface
-from processing import execAlgorithmDialog
-
-from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
+import processing
 
 from PreCourlis.core.precourlis_file import PreCourlisFileLine, DEFAULT_LAYER_COLOR
 from PreCourlis.widgets.delegates import FloatDelegate
@@ -128,8 +128,9 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         self.addLayerColorButton.clicked.connect(self.addLayerColorButton_clicked)
         self.addLayerButton.clicked.connect(self.add_layer)
         self.applyLayerButton.clicked.connect(self.apply_layer)
-        self.importLayerValuesButton.clicked.connect(self.import_layer_values)
         self.deleteLayerButton.clicked.connect(self.delete_layer)
+        self.extractLayerZDEMComboBox.setFilters(QgsMapLayerProxyModel.RasterLayer)
+        self.extractLayerZButton.clicked.connect(self.extract_layer_z)
 
         self.applyInterpolationButton.clicked.connect(self.apply_interpolation)
 
@@ -297,14 +298,17 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         self.file.set_layer_color(self.sedimental_layer(), self.selected_color)
         self.graphWidget.refresh()
 
-    def import_layer_values(self):
-        execAlgorithmDialog(
+    def extract_layer_z(self):
+        processing.run(
             "precourlis:import_layer_from_dem",
             {
                 "INPUT": self.layer(),
                 "LAYER_NAME": self.sedimental_layer(),
+                "DEM": self.extractLayerZDEMComboBox.currentLayer(),
+                "BAND": 1,
             },
         )
+        self.section_changed(self.sectionComboBox.currentIndex())
 
     def delete_layer(self):
         self.layer().startEditing()
