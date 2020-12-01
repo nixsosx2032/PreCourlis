@@ -210,6 +210,20 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QToolButton" name="moveLayerUpButton">
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="moveLayerDownButton">
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
         <item>

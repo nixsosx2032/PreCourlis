@@ -248,6 +248,50 @@ class PreCourlisFileLine(PreCourlisFileBase):
 
         self._layer.endEditCommand()
 
+    def move_layer_up(self, name):
+        if name == "zfond":
+            raise ValueError("Impossible to move layer zfond")
+
+        layers = self.layers()
+        index = layers.index(name)
+
+        if index == 0:
+            raise ValueError("Impossible to move layer on top of zfond")
+
+        self._layer.beginEditCommand("Move sedimental layer {}".format(name))
+
+        layers.pop(layers.index(name))
+        layers.insert(index - 1, name)
+
+        layers_list = ",".join(layers)
+        layers_field_index = self._layer.fields().indexFromName("layers")
+        for f in self._layer.getFeatures():
+            self._layer.changeAttributeValue(f.id(), layers_field_index, layers_list)
+
+        self._layer.endEditCommand()
+
+    def move_layer_down(self, name):
+        if name == "zfond":
+            raise ValueError("Impossible to move layer zfond")
+
+        layers = self.layers()
+        index = layers.index(name)
+
+        if index == len(layers) - 1:
+            raise ValueError("Impossible to move last layer down")
+
+        self._layer.beginEditCommand("Move sedimental layer {}".format(name))
+
+        layers.pop(layers.index(name))
+        layers.insert(index + 1, name)
+
+        layers_list = ",".join(layers)
+        layers_field_index = self._layer.fields().indexFromName("layers")
+        for f in self._layer.getFeatures():
+            self._layer.changeAttributeValue(f.id(), layers_field_index, layers_list)
+
+        self._layer.endEditCommand()
+
 
 class PreCourlisFilePoint(PreCourlisFileBase):
     @staticmethod

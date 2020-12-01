@@ -52,3 +52,37 @@ class TestPreCourlisFileLine(unittest.TestCase):
         assert file.layer_color("zfond") == "#ff0000"
         file.set_layer_color("Layer1", QtGui.QColor("#7f7f7f"))
         assert file.layer_color("Layer1") == "#7f7f7f"
+
+    def test_move_layer_up(self):
+        output_path = os.path.join(TEMP_PATH, "move_layer_up.gml")
+        expected_path = os.path.join(EXPECTED_PATH, "move_layer_up.gml")
+
+        if OVERWRITE_EXPECTED:
+            output_path = expected_path
+
+        file = self.create_file()
+        file.layer().startEditing()
+        file.add_sedimental_layer("Layer2", "Layer1", -1)
+        file.move_layer_up("Layer2")
+
+        output = utils.save_as_gml(file.layer(), output_path)
+        expected = QgsVectorLayer(expected_path, "expected", "ogr")
+        assert expected.isValid()
+        self.assertLayersEqual(output, expected)
+
+    def test_move_layer_down(self):
+        output_path = os.path.join(TEMP_PATH, "move_layer_down.gml")
+        expected_path = os.path.join(EXPECTED_PATH, "move_layer_down.gml")
+
+        if OVERWRITE_EXPECTED:
+            output_path = expected_path
+
+        file = self.create_file()
+        file.layer().startEditing()
+        file.add_sedimental_layer("Layer2", "Layer1", 1)
+        file.move_layer_down("Layer2")
+
+        output = utils.save_as_gml(file.layer(), output_path)
+        expected = QgsVectorLayer(expected_path, "expected", "ogr")
+        assert expected.isValid()
+        self.assertLayersEqual(output, expected)

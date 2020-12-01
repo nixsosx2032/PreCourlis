@@ -126,6 +126,14 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
             self.sedimental_layer_changed
         )
         self.addLayerColorButton.clicked.connect(self.addLayerColorButton_clicked)
+        self.moveLayerUpButton.setIcon(
+            QgsApplication.getThemeIcon("/mActionArrowUp.svg")
+        )
+        self.moveLayerUpButton.clicked.connect(self.move_layer_up)
+        self.moveLayerDownButton.setIcon(
+            QgsApplication.getThemeIcon("/mActionArrowDown.svg")
+        )
+        self.moveLayerDownButton.clicked.connect(self.move_layer_down)
         self.addLayerButton.clicked.connect(self.add_layer)
         self.applyLayerButton.clicked.connect(self.apply_layer)
         self.deleteLayerButton.clicked.connect(self.delete_layer)
@@ -279,6 +287,24 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
             )
         self.selected_color = color
         self.addLayerColorButton.setStyleSheet(stylesheet)
+
+    def move_layer_up(self):
+        name = self.sedimental_layer()
+        try:
+            self.file.move_layer_up(name)
+        except (KeyError, ValueError) as e:
+            self.message_bar.pushCritical("Impossible to move layer", str(e))
+            return
+        self.sedimentalLayerComboBox.setCurrentText(name)
+
+    def move_layer_down(self):
+        name = self.sedimental_layer()
+        try:
+            self.file.move_layer_down(name)
+        except (KeyError, ValueError) as e:
+            self.message_bar.pushCritical("Impossible to move layer", str(e))
+            return
+        self.sedimentalLayerComboBox.setCurrentText(name)
 
     def add_layer(self):
         name = self.addLayerNameLineEdit.text()
