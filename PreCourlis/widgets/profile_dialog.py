@@ -308,6 +308,7 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
 
     def add_layer(self):
         name = self.addLayerNameLineEdit.text()
+        color = self.selected_color
         try:
             self.file.add_sedimental_layer(
                 name,
@@ -317,7 +318,7 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         except (KeyError, ValueError) as e:
             self.message_bar.pushCritical("Impossible to add layer", str(e))
             return
-        self.file.set_layer_color(name, self.selected_color)
+        self.file.set_layer_color(name, color)
         self.sedimentalLayerComboBox.setCurrentText(name)
 
     def apply_layer(self):
