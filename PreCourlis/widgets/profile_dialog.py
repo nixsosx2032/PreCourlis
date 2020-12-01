@@ -1,17 +1,17 @@
 from pkg_resources import resource_filename
 
+from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 from qgis.core import (
     QgsApplication,
     QgsMapLayer,
+    QgsMapLayerProxyModel,
     QgsProject,
     QgsWkbTypes,
 )
 from qgis.gui import QgsMessageBar
 from qgis.PyQt import QtCore, QtGui, QtWidgets, uic
 from qgis.utils import iface
-from processing import execAlgorithmDialog
-
-from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
+import processing
 
 from PreCourlis.core.precourlis_file import PreCourlisFileLine, DEFAULT_LAYER_COLOR
 from PreCourlis.widgets.delegates import FloatDelegate
@@ -126,10 +126,19 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
             self.sedimental_layer_changed
         )
         self.addLayerColorButton.clicked.connect(self.addLayerColorButton_clicked)
+        self.moveLayerUpButton.setIcon(
+            QgsApplication.getThemeIcon("/mActionArrowUp.svg")
+        )
+        self.moveLayerUpButton.clicked.connect(self.move_layer_up)
+        self.moveLayerDownButton.setIcon(
+            QgsApplication.getThemeIcon("/mActionArrowDown.svg")
+        )
+        self.moveLayerDownButton.clicked.connect(self.move_layer_down)
         self.addLayerButton.clicked.connect(self.add_layer)
         self.applyLayerButton.clicked.connect(self.apply_layer)
-        self.importLayerValuesButton.clicked.connect(self.import_layer_values)
         self.deleteLayerButton.clicked.connect(self.delete_layer)
+        self.extractLayerZDEMComboBox.setFilters(QgsMapLayerProxyModel.RasterLayer)
+        self.extractLayerZButton.clicked.connect(self.extract_layer_z)
 
         self.applyInterpolationButton.clicked.connect(self.apply_interpolation)
 
@@ -279,8 +288,27 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         self.selected_color = color
         self.addLayerColorButton.setStyleSheet(stylesheet)
 
+    def move_layer_up(self):
+        name = self.sedimental_layer()
+        try:
+            self.file.move_layer_up(name)
+        except (KeyError, ValueError) as e:
+            self.message_bar.pushCritical("Impossible to move layer", str(e))
+            return
+        self.sedimentalLayerComboBox.setCurrentText(name)
+
+    def move_layer_down(self):
+        name = self.sedimental_layer()
+        try:
+            self.file.move_layer_down(name)
+        except (KeyError, ValueError) as e:
+            self.message_bar.pushCritical("Impossible to move layer", str(e))
+            return
+        self.sedimentalLayerComboBox.setCurrentText(name)
+
     def add_layer(self):
         name = self.addLayerNameLineEdit.text()
+        color = self.selected_color
         try:
             self.file.add_sedimental_layer(
                 name,
@@ -290,21 +318,24 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         except (KeyError, ValueError) as e:
             self.message_bar.pushCritical("Impossible to add layer", str(e))
             return
-        self.file.set_layer_color(name, self.selected_color)
+        self.file.set_layer_color(name, color)
         self.sedimentalLayerComboBox.setCurrentText(name)
 
     def apply_layer(self):
         self.file.set_layer_color(self.sedimental_layer(), self.selected_color)
         self.graphWidget.refresh()
 
-    def import_layer_values(self):
-        execAlgorithmDialog(
+    def extract_layer_z(self):
+        processing.run(
             "precourlis:import_layer_from_dem",
             {
                 "INPUT": self.layer(),
                 "LAYER_NAME": self.sedimental_layer(),
+                "DEM": self.extractLayerZDEMComboBox.currentLayer(),
+                "BAND": 1,
             },
         )
+        self.section_changed(self.sectionComboBox.currentIndex())
 
     def delete_layer(self):
         self.layer().startEditing()

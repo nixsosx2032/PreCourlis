@@ -423,12 +423,12 @@
 <context>
     <name>ProfileDialog</name>
     <message>
-        <location filename="../widgets/profile_dialog.py" line="242"/>
+        <location filename="../widgets/profile_dialog.py" line="243"/>
         <source>Save Layer Edits</source>
         <translation>Enregistrer les modifications</translation>
     </message>
     <message>
-        <location filename="../widgets/profile_dialog.py" line="242"/>
+        <location filename="../widgets/profile_dialog.py" line="243"/>
         <source>Could not commit changes to layer {}
 
 Errors: {}
@@ -472,32 +472,32 @@ Erreurs: {}
         <translation>Ajouter</translation>
     </message>
     <message>
-        <location filename="../ui/profile_dialog_base.ui" line="360"/>
+        <location filename="../ui/profile_dialog_base.ui" line="367"/>
         <source>Apply</source>
         <translation>Appliquer</translation>
     </message>
     <message>
-        <location filename="../ui/profile_dialog_base.ui" line="290"/>
+        <location filename="../ui/profile_dialog_base.ui" line="280"/>
         <source>Delete</source>
         <translation>Supprimer</translation>
     </message>
     <message>
-        <location filename="../ui/profile_dialog_base.ui" line="302"/>
+        <location filename="../ui/profile_dialog_base.ui" line="309"/>
         <source>Interpolation</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/profile_dialog_base.ui" line="308"/>
+        <location filename="../ui/profile_dialog_base.ui" line="315"/>
         <source>Left</source>
         <translation>Gauche</translation>
     </message>
     <message>
-        <location filename="../ui/profile_dialog_base.ui" line="331"/>
+        <location filename="../ui/profile_dialog_base.ui" line="338"/>
         <source>Right</source>
         <translation>Droite</translation>
     </message>
     <message>
-        <location filename="../ui/profile_dialog_base.ui" line="370"/>
+        <location filename="../ui/profile_dialog_base.ui" line="377"/>
         <source>Clear</source>
         <translation>RAZ</translation>
     </message>
@@ -537,12 +537,12 @@ Erreurs: {}
         <translation>Couleur de la couche sédimentaire</translation>
     </message>
     <message>
-        <location filename="../ui/profile_dialog_base.ui" line="357"/>
+        <location filename="../ui/profile_dialog_base.ui" line="364"/>
         <source>Apply interpolation</source>
         <translation>Appliquer l&apos;interpolation</translation>
     </message>
     <message>
-        <location filename="../ui/profile_dialog_base.ui" line="367"/>
+        <location filename="../ui/profile_dialog_base.ui" line="374"/>
         <source>Clear values</source>
         <translation>Remettre les valeurs à zéro</translation>
     </message>
@@ -562,7 +562,7 @@ Erreurs: {}
         <translation>Appliquer les réglages à la couche sédimentaire courante</translation>
     </message>
     <message>
-        <location filename="../ui/profile_dialog_base.ui" line="287"/>
+        <location filename="../ui/profile_dialog_base.ui" line="277"/>
         <source>Delete current sedimental layer</source>
         <translation>Supprimer la couche sédimentaire courante</translation>
     </message>
@@ -572,14 +572,14 @@ Erreurs: {}
         <translation>Nom de la couche sédimentaire (limité à 7 caractères)</translation>
     </message>
     <message>
-        <location filename="../ui/profile_dialog_base.ui" line="277"/>
-        <source>Import layer values from DEM</source>
-        <translation>Import les valeurs d&apos;une couche depuis un MNT</translation>
+        <location filename="../ui/profile_dialog_base.ui" line="294"/>
+        <source>Extract layer values from DEM</source>
+        <translation>Extraire les valeurs de la couche depuis un MNT</translation>
     </message>
     <message>
-        <location filename="../ui/profile_dialog_base.ui" line="280"/>
-        <source>Import</source>
-        <translation>Import</translation>
+        <location filename="../ui/profile_dialog_base.ui" line="297"/>
+        <source>Extract Z</source>
+        <translation>Extraire le Z</translation>
     </message>
 </context>
 </TS>
