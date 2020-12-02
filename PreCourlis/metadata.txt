@@ -11,7 +11,7 @@ name=PreCourlis
 qgisMinimumVersion=3.0
 qgisMaximumVersion=3.99
 description=Creation de profils pour Courlis
-version=1.99.6
+version=1.99.7
 author=EDF Hydro, DeltaCAD, Camptocamp
 email=matthieu.secher@edf.fr
 
