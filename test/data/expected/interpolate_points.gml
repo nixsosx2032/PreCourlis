@@ -1359,7 +1359,7 @@
       <ogr:layers>Layer1</ogr:layers>
       <ogr:p_id>103</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:zfond>16.901451</ogr:zfond>
+      <ogr:zfond xsi:nil="true"/>
       <ogr:Layer1>16.312781</ogr:Layer1>
     </ogr:interpolate_points>
   </gml:featureMember>
@@ -1372,7 +1372,7 @@
       <ogr:layers>Layer1</ogr:layers>
       <ogr:p_id>104</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:zfond>3.230128</ogr:zfond>
+      <ogr:zfond xsi:nil="true"/>
       <ogr:Layer1>3.117624</ogr:Layer1>
     </ogr:interpolate_points>
   </gml:featureMember>
@@ -1385,7 +1385,7 @@
       <ogr:layers>Layer1</ogr:layers>
       <ogr:p_id>105</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:zfond>0.000000</ogr:zfond>
+      <ogr:zfond xsi:nil="true"/>
       <ogr:Layer1>0.000000</ogr:Layer1>
     </ogr:interpolate_points>
   </gml:featureMember>
@@ -1398,7 +1398,7 @@
       <ogr:layers>Layer1</ogr:layers>
       <ogr:p_id>106</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:zfond>0.000000</ogr:zfond>
+      <ogr:zfond xsi:nil="true"/>
       <ogr:Layer1>0.000000</ogr:Layer1>
     </ogr:interpolate_points>
   </gml:featureMember>
@@ -1411,7 +1411,7 @@
       <ogr:layers>Layer1</ogr:layers>
       <ogr:p_id>107</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:zfond>0.000000</ogr:zfond>
+      <ogr:zfond xsi:nil="true"/>
       <ogr:Layer1>0.000000</ogr:Layer1>
     </ogr:interpolate_points>
   </gml:featureMember>
@@ -1424,7 +1424,7 @@
       <ogr:layers>Layer1</ogr:layers>
       <ogr:p_id>108</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:zfond>0.000000</ogr:zfond>
+      <ogr:zfond xsi:nil="true"/>
       <ogr:Layer1>0.000000</ogr:Layer1>
     </ogr:interpolate_points>
   </gml:featureMember>
@@ -3244,7 +3244,7 @@
       <ogr:layers>Layer1</ogr:layers>
       <ogr:p_id>248</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:zfond>15.352601</ogr:zfond>
+      <ogr:zfond xsi:nil="true"/>
       <ogr:Layer1>14.547429</ogr:Layer1>
     </ogr:interpolate_points>
   </gml:featureMember>
@@ -3257,7 +3257,7 @@
       <ogr:layers>Layer1</ogr:layers>
       <ogr:p_id>249</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:zfond>11.151429</ogr:zfond>
+      <ogr:zfond xsi:nil="true"/>
       <ogr:Layer1>10.484763</ogr:Layer1>
     </ogr:interpolate_points>
   </gml:featureMember>
@@ -3270,7 +3270,7 @@
       <ogr:layers>Layer1</ogr:layers>
       <ogr:p_id>250</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:zfond>11.181612</ogr:zfond>
+      <ogr:zfond xsi:nil="true"/>
       <ogr:Layer1>10.514946</ogr:Layer1>
     </ogr:interpolate_points>
   </gml:featureMember>
@@ -3283,7 +3283,7 @@
       <ogr:layers>Layer1</ogr:layers>
       <ogr:p_id>251</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:zfond>11.353044</ogr:zfond>
+      <ogr:zfond xsi:nil="true"/>
       <ogr:Layer1>10.686377</ogr:Layer1>
     </ogr:interpolate_points>
   </gml:featureMember>
@@ -3387,7 +3387,7 @@
       <ogr:layers>Layer1</ogr:layers>
       <ogr:p_id>259</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:zfond>23.106563</ogr:zfond>
+      <ogr:zfond xsi:nil="true"/>
       <ogr:Layer1>22.169154</ogr:Layer1>
     </ogr:interpolate_points>
   </gml:featureMember>
@@ -3400,7 +3400,7 @@
       <ogr:layers>Layer1</ogr:layers>
       <ogr:p_id>260</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:zfond>10.091869</ogr:zfond>
+      <ogr:zfond xsi:nil="true"/>
       <ogr:Layer1>9.604172</ogr:Layer1>
     </ogr:interpolate_points>
   </gml:featureMember>
@@ -3413,7 +3413,7 @@
       <ogr:layers>Layer1</ogr:layers>
       <ogr:p_id>261</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:zfond>5.557008</ogr:zfond>
+      <ogr:zfond xsi:nil="true"/>
       <ogr:Layer1>5.223674</ogr:Layer1>
     </ogr:interpolate_points>
   </gml:featureMember>
@@ -3426,7 +3426,7 @@
       <ogr:layers>Layer1</ogr:layers>
       <ogr:p_id>262</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:zfond>5.597949</ogr:zfond>
+      <ogr:zfond xsi:nil="true"/>
       <ogr:Layer1>5.264616</ogr:Layer1>
     </ogr:interpolate_points>
   </gml:featureMember>
@@ -3439,7 +3439,7 @@
       <ogr:layers>Layer1</ogr:layers>
       <ogr:p_id>263</ogr:p_id>
       <ogr:topo_bat>B</ogr:topo_bat>
-      <ogr:zfond>5.676522</ogr:zfond>
+      <ogr:zfond xsi:nil="true"/>
       <ogr:Layer1>5.343189</ogr:Layer1>
     </ogr:interpolate_points>
   </gml:featureMember>

@@ -93,6 +93,11 @@ class PointsToLinesAlgorithm(PreCourlisAlgorithm):
             True,
         )
 
+    def to_float(self, value):
+        if value is None:
+            return QVariant()
+        return value
+
     def line_feature_from_points(self, point_features, sec_id, abs_long):
         points = [
             point_feature.geometry().constGet().clone()
@@ -137,10 +142,14 @@ class PointsToLinesAlgorithm(PreCourlisAlgorithm):
                     [str(line.lineLocatePoint(f.geometry())) for f in point_features]
                 ),
                 # zfond
-                ",".join([str(f.attribute("zfond")) for f in point_features]),
+                ",".join(
+                    [str(self.to_float(f.attribute("zfond"))) for f in point_features]
+                ),
             ]
             + [
-                ",".join([str(f.attribute(layer)) for f in point_features])
+                ",".join(
+                    [str(self.to_float(f.attribute(layer))) for f in point_features]
+                )
                 for layer in layers
             ]
         )

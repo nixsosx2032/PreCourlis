@@ -1,9 +1,10 @@
 from qgis.core import (
-    QgsProcessing,
     QgsFeature,
     QgsFeatureSink,
     QgsField,
     QgsGeometry,
+    QgsPoint,
+    QgsProcessing,
     QgsProcessingException,
     QgsProcessingParameterFeatureSink,
     QgsProcessingParameterFeatureSource,
@@ -93,11 +94,11 @@ class LinesToPointsAlgorithm(PreCourlisAlgorithm):
                         self.to_float(point.y()),
                         self.to_float(zfond),
                     ]
-                    + list(point_layers_values)
+                    + [self.to_float(v) for v in point_layers_values]
                 )
-                if zfond != "NULL":
-                    point.addZValue(float(zfond))
-                point_feature.setGeometry(QgsGeometry(point))
+                point_feature.setGeometry(
+                    QgsGeometry(QgsPoint(point.x(), point.y(), 0.0))
+                )
                 sink.addFeature(point_feature, QgsFeatureSink.FastInsert)
 
             # Update the progress bar

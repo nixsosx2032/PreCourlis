@@ -126,6 +126,7 @@ class InterpolatePointsAlgorithm(PreCourlisAlgorithm):
             "FIELDS_MAPPING": [
                 {"name": "sec_id", "type": QVariant.Int, "expression": '"sec_id"'},
                 {"name": "p_id", "type": QVariant.Int, "expression": '"p_id"'},
+                {"name": "Zzfond", "type": QVariant.Double, "expression": '"zfond"'},
             ]
             + [
                 {
