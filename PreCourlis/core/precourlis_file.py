@@ -258,6 +258,7 @@ class PreCourlisFileLine(PreCourlisFileBase):
         if index == 0:
             raise ValueError("Impossible to move layer on top of zfond")
 
+        self.layer().startEditing()
         self._layer.beginEditCommand("Move sedimental layer {}".format(name))
 
         layers.pop(layers.index(name))
@@ -280,6 +281,7 @@ class PreCourlisFileLine(PreCourlisFileBase):
         if index == len(layers) - 1:
             raise ValueError("Impossible to move last layer down")
 
+        self.layer().startEditing()
         self._layer.beginEditCommand("Move sedimental layer {}".format(name))
 
         layers.pop(layers.index(name))
