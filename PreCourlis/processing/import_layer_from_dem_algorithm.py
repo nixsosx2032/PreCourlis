@@ -104,6 +104,8 @@ class ImportLayerFromDemAlgorithm(PreCourlisAlgorithm):
             # Update the progress bar
             feedback.setProgress(int(current * total))
 
+        layer.endEditCommand()
+
         return {}
 
     def name(self):
