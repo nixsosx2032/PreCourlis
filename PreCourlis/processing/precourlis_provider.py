@@ -66,7 +66,7 @@ class PreCourlisProvider(QgsProcessingProvider):
             "OUTPUT": PROFILE_LINE_STYLE,
         }
         RenderingStyles.styles[
-            "{}:{}".format(self.id(), InterpolatePointsAlgorithm().id())
+            "{}:{}".format(self.id(), InterpolateLinesAlgorithm().id())
         ] = {
             "OUTPUT": PROFILE_LINE_STYLE,
         }
