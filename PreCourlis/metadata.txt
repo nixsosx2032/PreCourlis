@@ -10,12 +10,12 @@
 name=PreCourlis
 qgisMinimumVersion=3.0
 qgisMaximumVersion=3.99
-description=Creation de profils pour Courlis
+description=Create layered cross sections of rivers for Courlis
 version=2.0
 author=EDF Hydro, DeltaCAD, Camptocamp
 email=matthieu.secher@edf.fr
 
-about=Creation de profils pour Courlis
+about=This plugin allows you to model the bed of rivers and export data for the Courlis module of Telemac-Mascaret
 
 tracker=https://github.com/msecher/PreCourlis/issues
 repository=https://github.com/msecher/PreCourlis
