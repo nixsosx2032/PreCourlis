@@ -10,12 +10,23 @@
 name=PreCourlis
 qgisMinimumVersion=3.0
 qgisMaximumVersion=3.99
-description=Creation de profils pour Courlis
+description=Create geometry - sediment layered 1D cross-sections - of rivers for COURLIS which is the sediment transport module for MASCARET, the 1D free surface flow code of the Open TELEMAC-MASCARET platform (http://www.opentelemac.org/)
 version=2.0
 author=EDF Hydro, DeltaCAD, Camptocamp
 email=matthieu.secher@edf.fr
 
-about=Creation de profils pour Courlis
+# about=This plugin allows you to model the bed of rivers and export data for the Courlis module of Telemac-Mascaret
+about=This plugin allows you to:
+    - import georeferenced MASCARET geometry,
+    - extract geometric information from a DEM (raster) on polylines representing the cross-sections of the MASCARET-COURLIS model in respect with a user defined discretization,
+    - interpolate cross sections along an hydraulic axis in respect with user defined longitudinal (number of cross-sections) and lateral (number of points on each profile) discretization,
+    - visualize the cross-sections in a graphical view,
+    - add sediment layers and bed rock to the cross-sections from river bed geometry (identical or with a Z shift) or from another DEM (raster),
+    - modify manually or with some functionality more automatic the river bed geometry, sediment layers geometry or bedrock geometry,
+    - and export data for the COURLIS module
+    PRECOURLIS is using :
+    - A fork of TatooineMesher (courtesy of CNR Engineering, https://github.com/CNR-Engineering/TatooineMesher)
+    - Modified version of Python classes of the TELEMAC-MASCARET system
 
 tracker=https://github.com/msecher/PreCourlis/issues
 repository=https://github.com/msecher/PreCourlis
