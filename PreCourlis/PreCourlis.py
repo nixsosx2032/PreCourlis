@@ -39,6 +39,7 @@ from processing import execAlgorithmDialog
 
 from PreCourlis.processing.precourlis_provider import PreCourlisProvider
 from PreCourlis.widgets.profile_dialog import ProfileDialog
+from PreCourlis.widgets.settings_dialog import SettingsDialog
 
 # Initialize Qt resources from file resources.py
 from PreCourlis.ui import resources_rc  # noqa
@@ -74,6 +75,7 @@ class PreCourlisPlugin:
         self.actions = []
         self.menu = self.tr(u"&PreCourlis")
         self.profile_dialog = None
+        self.settings_dialog = None
         self.provider = None
 
     # noinspection PyMethodMayBeStatic
@@ -114,6 +116,7 @@ class PreCourlisPlugin:
         self.add_action(
             "Exporter un fichier de géométrie Mascaret", self.export_mascaret
         )
+        self.add_action("Réglages", self.open_settings)
 
         """
         self.actionBief = QAction("&Bief", self.iface.mainWindow())
@@ -199,3 +202,13 @@ class PreCourlisPlugin:
 
     def export_mascaret(self):
         execAlgorithmDialog("precourlis:export_mascaret")
+
+    def open_settings(self):
+        if self.settings_dialog is None:
+            self.settings_dialog = SettingsDialog(self.iface.mainWindow())
+            self.settings_dialog.setAttribute(Qt.WA_DeleteOnClose)
+            self.settings_dialog.destroyed.connect(self.settings_dialog_destroyed)
+        self.settings_dialog.show()
+
+    def settings_dialog_destroyed(self):
+        self.settings_dialog = None
