@@ -24,6 +24,7 @@ class ImportTracksAlgorithm(PreCourlisAlgorithm):
     DISTANCE = "DISTANCE"
     STRICT_DISTANCE = "STRICT_DISTANCE"
     DEM = "DEM"
+    DEFAULT_ELEVATION = "DEFAULT_ELEVATION"
     OUTPUT = "OUTPUT"
 
     def initAlgorithm(self, config=None):
@@ -92,6 +93,14 @@ class ImportTracksAlgorithm(PreCourlisAlgorithm):
         self.addParameter(
             QgsProcessingParameterRasterLayer(
                 self.DEM, self.tr("Digital Elevation Model"), defaultValue=None
+            )
+        )
+        self.addParameter(
+            QgsProcessingParameterNumber(
+                self.DEFAULT_ELEVATION,
+                self.tr("Default elevation"),
+                QgsProcessingParameterNumber.Double,
+                optional=True
             )
         )
         self.addParameter(
@@ -278,6 +287,7 @@ class ImportTracksAlgorithm(PreCourlisAlgorithm):
             "LAYER_NAME": "zfond",
             "DEM": parameters[self.DEM],
             "BAND": 1,
+            "DEFAULT_ELEVATION": parameters.get(self.DEFAULT_ELEVATION, None),
         }
         outputs["ImportLayerFromDem"] = processing.run(
             "precourlis:import_layer_from_dem",

@@ -37,6 +37,7 @@ from qgis.PyQt.QtWidgets import QAction, QMenu
 
 from processing import execAlgorithmDialog
 
+from PreCourlis.core.settings import settings
 from PreCourlis.processing.precourlis_provider import PreCourlisProvider
 from PreCourlis.widgets.profile_dialog import ProfileDialog
 from PreCourlis.widgets.settings_dialog import SettingsDialog
@@ -181,7 +182,10 @@ class PreCourlisPlugin:
         execAlgorithmDialog("native:reverselinedirection", {})
 
     def import_tracks(self):
-        execAlgorithmDialog("precourlis:import_tracks", {})
+        params = {
+            "DEFAULT_ELEVATION": settings.default_elevation
+        } if settings.default_elevation != settings.get_spin_box_min() else {}
+        execAlgorithmDialog("precourlis:import_tracks", params)
 
     def open_editor(self):
         if self.profile_dialog is None:
