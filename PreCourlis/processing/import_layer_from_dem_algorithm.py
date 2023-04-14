@@ -6,6 +6,7 @@ from qgis.core import (
     QgsPointXY,
     QgsProcessing,
     QgsProcessingParameterBand,
+    QgsProcessingParameterNumber,
     QgsProcessingParameterVectorLayer,
     QgsProcessingParameterRasterLayer,
     QgsProcessingParameterString,
@@ -20,6 +21,7 @@ class ImportLayerFromDemAlgorithm(PreCourlisAlgorithm):
     LAYER_NAME = "LAYER_NAME"
     DEM = "DEM"
     BAND = "BAND"
+    DEFAULT_ELEVATION = "DEFAULT_ELEVATION"
     OUTPUT = "OUTPUT"
 
     def initAlgorithm(self, config=None):
@@ -42,6 +44,14 @@ class ImportLayerFromDemAlgorithm(PreCourlisAlgorithm):
             )
         )
         self.addParameter(
+            QgsProcessingParameterNumber(
+                self.DEFAULT_ELEVATION,
+                self.tr("Default elevation"),
+                QgsProcessingParameterNumber.Double,
+                optional=True
+            )
+        )
+        self.addParameter(
             QgsProcessingParameterBand(
                 self.BAND,
                 self.tr("Band number"),
@@ -50,7 +60,7 @@ class ImportLayerFromDemAlgorithm(PreCourlisAlgorithm):
             )
         )
 
-    def sample_raster(self, raster, point, band):
+    def sample_raster(self, raster, point, band, default_elevation):
         value, ok = raster.dataProvider().sample(point, band)
 
         if math.isnan(value):
@@ -68,7 +78,10 @@ class ImportLayerFromDemAlgorithm(PreCourlisAlgorithm):
                 value = math.fsum(values) / len(values)
 
         if math.isnan(value):
-            value = "NULL"
+            if default_elevation is not None:
+                value = default_elevation
+            else:
+                value = "NULL"
 
         return value
 
@@ -77,6 +90,10 @@ class ImportLayerFromDemAlgorithm(PreCourlisAlgorithm):
         layer_name = self.parameterAsString(parameters, self.LAYER_NAME, context)
         raster = self.parameterAsRasterLayer(parameters, self.DEM, context)
         band = self.parameterAsInt(parameters, self.BAND, context)
+        if parameters.get(self.DEFAULT_ELEVATION, None) is not None:
+            default_elevation = self.parameterAsDouble(parameters, self.DEFAULT_ELEVATION, context)
+        else:
+            default_elevation = None
 
         dest_field_index = layer.fields().indexFromName(layer_name)
 
@@ -97,7 +114,7 @@ class ImportLayerFromDemAlgorithm(PreCourlisAlgorithm):
             values = []
             for point in line.points():
                 tr_point = transform.transform(QgsPointXY(point))
-                values.append(self.sample_raster(raster, tr_point, band))
+                values.append(self.sample_raster(raster, tr_point, band, default_elevation))
             value = ",".join([str(v) for v in values])
             layer.changeAttributeValue(f.id(), dest_field_index, value)
 

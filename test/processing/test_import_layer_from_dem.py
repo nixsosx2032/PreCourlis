@@ -15,7 +15,7 @@ from . import TestCase
 DEM_PATH = os.path.join(DATA_PATH, "input", "cas2Mnt.asc")
 
 
-class TestImportTracksAlgorithm(TestCase):
+class TestImportLayerFromDemAlgorithm(TestCase):
 
     ALGORITHM_ID = "precourlis:import_layer_from_dem"
     DEFAULT_PARAMS = {
@@ -31,6 +31,26 @@ class TestImportTracksAlgorithm(TestCase):
         self.check_algorithm(
             {
                 "INPUT": layer,
+            }
+        )
+
+        # Copy temporary layer to output
+        expected = os.path.join(EXPECTED_PATH, "import_layer_from_dem.gml")
+        if OVERWRITE_EXPECTED:
+            output = expected
+        else:
+            output = os.path.join(TEMP_PATH, "import_layer_from_dem.gml")
+        save_as_gml(layer, output)
+
+        self.compare_layers(output, expected)
+
+    def test_import_layer_from_dem_with_default_elevation(self):
+        layer = QgsVectorLayer(PROFILE_LINES_PATH)
+
+        self.check_algorithm(
+            {
+                "INPUT": layer,
+                "DEFAULT_ELEVATION": 100.0,
             }
         )
 
