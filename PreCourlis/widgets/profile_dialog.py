@@ -14,6 +14,7 @@ from qgis.utils import iface
 import processing
 
 from PreCourlis.core.precourlis_file import PreCourlisFileLine, DEFAULT_LAYER_COLOR
+from PreCourlis.core.settings import settings
 from PreCourlis.widgets.delegates import FloatDelegate
 from PreCourlis.widgets.points_table_model import PointsTableModel
 from PreCourlis.widgets.section_item_model import SectionItemModel
@@ -80,6 +81,7 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         self.init_points_table_view()
         self.init_graph_widget()
         self.init_edition_panel()
+        self.init_default_elevation_spin_box()
 
         self.layer_changed(self.layer())
 
@@ -141,6 +143,25 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
         self.extractLayerZButton.clicked.connect(self.extract_layer_z)
 
         self.applyInterpolationButton.clicked.connect(self.apply_interpolation)
+
+    def init_default_elevation_spin_box(self):
+        self.defaultElevationQgsDoubleSpinBox.setMinimum(
+            settings.get_spin_box_min()
+        )
+        self.defaultElevationQgsDoubleSpinBox.setClearValue(
+            settings.get_spin_box_min(),
+            self.tr('Not set')
+        )
+        self.setDefaultElevation(settings.default_elevation)
+
+    def defaultElevation(self):
+        if self.defaultElevationQgsDoubleSpinBox.value() != settings.get_spin_box_min():
+            return self.defaultElevationQgsDoubleSpinBox.value()
+        else:
+            return None
+    
+    def setDefaultElevation(self, value):
+        self.defaultElevationQgsDoubleSpinBox.setValue(value)
 
     def layer(self):
         return self.layerComboBox.currentLayer()
@@ -333,6 +354,7 @@ class ProfileDialog(QtWidgets.QDialog, FORM_CLASS):
                 "LAYER_NAME": self.sedimental_layer(),
                 "DEM": self.extractLayerZDEMComboBox.currentLayer(),
                 "BAND": 1,
+                "DEFAULT_ELEVATION": self.defaultElevation()
             },
         )
         self.section_changed(self.sectionComboBox.currentIndex())

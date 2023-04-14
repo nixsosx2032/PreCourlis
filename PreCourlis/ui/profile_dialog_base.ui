@@ -314,6 +314,36 @@
           </item>
          </layout>
         </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <item>
+           <widget class="QLabel" name="defaultElevationLabel">
+            <property name="text">
+             <string>Default elevation</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QgsDoubleSpinBox" name="defaultElevationQgsDoubleSpinBox">
+            <property name="minimum">
+             <double>-999999.000000000000000</double>
+            </property>
+            <property name="maximum">
+             <double>999999.000000000000000</double>
+            </property>
+            <property name="showClearButton">
+             <bool>true</bool>
+            </property>
+            <property name="clearValue">
+             <bool>true</bool>
+            </property>
+            <property name="expressionsEnabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
        </layout>
       </widget>
      </item>
@@ -413,6 +443,11 @@
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>QgsDoubleSpinBox</class>
+   <extends>QDoubleSpinBox</extends>
+   <header>qgsdoublespinbox.h</header>
+  </customwidget>
   <customwidget>
    <class>QgsMapLayerComboBox</class>
    <extends>QComboBox</extends>
